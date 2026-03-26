@@ -43,14 +43,18 @@
 
   <h1 class="toc-header">{{ .Title }}</h1>
 
+  {{- $section := .CurrentSection }}
+  {{- $posts := where $section.Pages "File.BaseFileName" "!=" "print" }}
+  {{- $posts = $posts.ByDate }}
+
   <h2>목차</h2>
   <ol class="toc-list">
-    {{- range .Pages.ByDate }}
+    {{- range $posts }}
     <li><a href="#{{ .File.BaseFileName }}">{{ .Title }}</a></li>
     {{- end }}
   </ol>
 
-  {{- range .Pages.ByDate }}
+  {{- range $posts }}
   <div class="page-break" id="{{ .File.BaseFileName }}">
     <h1>{{ .Title }}</h1>
     {{ .Content }}
