@@ -52,3 +52,95 @@ code {
 .profile .buttons a:hover {
   transform: translateY(-2px);
 }
+
+/* ---- Floating Sidebar TOC ---- */
+
+/* Mobile: show inline TOC */
+.toc-mobile {
+  display: block;
+}
+
+/* Desktop: hide inline, show sidebar */
+@media (min-width: 1280px) {
+  .toc-mobile {
+    display: none;
+  }
+
+  .post-body-wrapper {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+  }
+
+  .post-body-wrapper .post-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .toc-sidebar {
+    position: sticky;
+    top: 5rem;
+    width: 240px;
+    flex-shrink: 0;
+    max-height: calc(100vh - 6rem);
+    overflow-y: auto;
+  }
+
+  .toc-sidebar-inner {
+    padding: 1rem;
+    border-left: 2px solid var(--border);
+    font-size: 0.8rem;
+    line-height: 1.6;
+  }
+
+  .toc-sidebar-inner h4 {
+    margin: 0 0 0.75rem 0;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--secondary);
+  }
+
+  .toc-sidebar-inner ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .toc-sidebar-inner li {
+    margin: 0;
+    padding: 0.2rem 0;
+  }
+
+  .toc-sidebar-inner li li {
+    padding-left: 0.75rem;
+  }
+
+  .toc-sidebar-inner a {
+    color: var(--secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .toc-sidebar-inner a:hover,
+  .toc-sidebar-inner a.active {
+    color: var(--primary);
+  }
+
+  /* Scrollbar */
+  .toc-sidebar::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  .toc-sidebar::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 3px;
+  }
+}
+
+/* Hide sidebar on smaller screens */
+@media (max-width: 1279px) {
+  .toc-sidebar {
+    display: none;
+  }
+}
