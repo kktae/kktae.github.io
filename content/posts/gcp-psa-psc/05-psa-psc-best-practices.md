@@ -87,15 +87,47 @@ PSC의 주요 장점:
 
 Google Cloud 공식 문서에서 정의하는 PSC 배포 패턴: [[3]](#references)
 
-| 패턴 | 설명 | 아키텍처 다이어그램 |
-|------|------|-------------------|
-| **Single-Tenant** | 전용 서비스 인스턴스 + consumer accept list로 선택적 접근 | ![Single-Tenant](https://docs.cloud.google.com/static/vpc/images/psc-single-tenant.svg) |
-| **Multi-Tenant** | 하나의 서비스에 여러 소비자 접근 + 연결 제한 및 PROXY protocol | ![Multi-Tenant](https://docs.cloud.google.com/static/vpc/images/psc-multi-tenant.svg) |
-| **Multi-Region** | Global Access로 모든 리전에서 endpoint 접근 | ![Multi-Region](https://docs.cloud.google.com/static/vpc/images/psc-multi-region.svg) |
-| **Hybrid/On-Premises** | VPN/Interconnect 통합으로 크로스 프레미스 연결 | ![Hybrid Access](https://docs.cloud.google.com/static/vpc/images/hybrid-access.svg) |
-| **Bidirectional** | PSC Interface를 통한 프로듀서→소비자 방향 연결 | ![Reverse PSC](https://docs.cloud.google.com/static/vpc/images/psc-reverse.svg) |
-| **Hybrid Services** | 하이브리드 서비스 아키텍처 | ![Hybrid](https://docs.cloud.google.com/static/vpc/images/psc-hybrid.svg) |
-| **Shared VPC** | Host/Service 프로젝트 전반에 endpoint, backend, attachment 배포 | ![Shared VPC](https://docs.cloud.google.com/static/vpc/images/psc-shared-vpc.svg) |
+### 5.1 Single-Tenant
+
+전용 서비스 인스턴스 + consumer accept list로 선택적 접근
+
+![Single-Tenant](https://docs.cloud.google.com/static/vpc/images/psc-single-tenant.svg)
+
+### 5.2 Multi-Tenant
+
+하나의 서비스에 여러 소비자 접근 + 연결 제한 및 PROXY protocol
+
+![Multi-Tenant](https://docs.cloud.google.com/static/vpc/images/psc-multi-tenant.svg)
+
+### 5.3 Multi-Region
+
+Global Access로 모든 리전에서 endpoint 접근
+
+![Multi-Region](https://docs.cloud.google.com/static/vpc/images/psc-multi-region.svg)
+
+### 5.4 Hybrid / On-Premises
+
+VPN/Interconnect 통합으로 크로스 프레미스 연결
+
+![Hybrid Access](https://docs.cloud.google.com/static/vpc/images/hybrid-access.svg)
+
+### 5.5 Bidirectional
+
+PSC Interface를 통한 프로듀서 → 소비자 방향 연결
+
+![Reverse PSC](https://docs.cloud.google.com/static/vpc/images/psc-reverse.svg)
+
+### 5.6 Hybrid Services
+
+하이브리드 서비스 아키텍처
+
+![Hybrid](https://docs.cloud.google.com/static/vpc/images/psc-hybrid.svg)
+
+### 5.7 Shared VPC
+
+Host/Service 프로젝트 전반에 endpoint, backend, attachment 배포
+
+![Shared VPC](https://docs.cloud.google.com/static/vpc/images/psc-shared-vpc.svg)
 
 ---
 
