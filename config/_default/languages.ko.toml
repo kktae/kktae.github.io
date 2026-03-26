@@ -1,0 +1,15 @@
+languageCode = "ko"
+languageName = "한국어"
+weight = 1
+
+[params]
+  displayName = "KO"
+  isoCode = "ko"
+
+[params.author]
+  name = "kktae"
+  headline = "Cloud & Infrastructure Engineer"
+  bio = "GCP, Kubernetes, SRE에 관심이 많은 엔지니어입니다."
+  links = [
+    { github = "https://github.com/kktae" },
+  ]

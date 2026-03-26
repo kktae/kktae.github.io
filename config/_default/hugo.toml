@@ -1,0 +1,13 @@
+theme = "blowfish"
+baseURL = "https://kktae.github.io/"
+languageCode = "ko"
+defaultContentLanguage = "ko"
+title = "kktae.io"
+enableRobotsTXT = true
+paginate = 10
+summaryLength = 30
+
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+  series = "series"
