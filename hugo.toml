@@ -88,6 +88,12 @@ summaryLength = 30
   weight = 30
 
 [[menu.main]]
+  identifier = "archives"
+  name = "Archives"
+  url = "/archives/"
+  weight = 35
+
+[[menu.main]]
   identifier = "search"
   name = "Search"
   url = "/search/"
