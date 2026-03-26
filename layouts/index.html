@@ -6,7 +6,6 @@
 
 {{- $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
 {{- $pages = where $pages "Params.hiddenInHomeList" "!=" true }}
-{{- $pages = where $pages "Layout" "!=" "print" }}
 
 {{/* Group by Year/Month */}}
 {{- $grouped := $pages.GroupByDate "2006" }}

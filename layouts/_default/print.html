@@ -43,9 +43,9 @@
 
   <h1 class="toc-header">{{ .Title }}</h1>
 
-  {{- $section := .CurrentSection }}
-  {{- $posts := where $section.Pages "File.BaseFileName" "!=" "print" }}
-  {{- $posts = $posts.ByDate }}
+  {{- $sectionPath := replace .File.Dir "print/" "posts/" }}
+  {{- $section := site.GetPage $sectionPath }}
+  {{- $posts := $section.RegularPages.ByDate }}
 
   <h2>목차</h2>
   <ol class="toc-list">
