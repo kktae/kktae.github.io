@@ -53,6 +53,55 @@ code {
   transform: translateY(-2px);
 }
 
+/* ---- Export Buttons ---- */
+.export-buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin: 0.75rem 0 1.5rem;
+}
+
+.export-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.78rem;
+  font-family: inherit;
+  color: var(--secondary);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.export-btn:hover {
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+.export-btn svg {
+  flex-shrink: 0;
+}
+
+/* ---- Print Styles ---- */
+@media print {
+  .nav, .footer, .toc-sidebar, .toc-mobile, .timeline-toc,
+  .export-buttons, .post-tags, .paginav, .post-nav-links,
+  .breadcrumbs, #top-link {
+    display: none !important;
+  }
+
+  .post-content {
+    font-size: 11pt;
+    max-width: 100%;
+  }
+
+  table { font-size: 9pt; }
+  pre { font-size: 9pt; white-space: pre-wrap; }
+}
+
 /* ---- Post Navigation (Prev/Next) ---- */
 .paginav .title {
   font-size: 0.9rem;
