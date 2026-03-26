@@ -75,24 +75,15 @@ code {
     display: none;
   }
 
-  .post-single {
-    max-width: none;
-  }
-
   .post-body-wrapper {
-    display: grid;
-    grid-template-columns: minmax(0, 720px) 220px;
-    gap: 6rem;
-    align-items: flex-start;
-  }
-
-  .post-body-wrapper .post-content {
-    min-width: 0;
+    position: relative;
   }
 
   .toc-sidebar {
-    position: sticky;
+    position: fixed;
     top: 5rem;
+    right: max(1rem, calc((100vw - 720px) / 2 - 320px));
+    width: 220px;
     max-height: calc(100vh - 6rem);
     overflow-y: auto;
   }
