@@ -37,26 +37,6 @@ summaryLength = 30
     name = "github"
     url = "https://github.com/kktae"
 
-  [params.profileMode]
-    enabled = true
-    title = "kktae"
-    subtitle = "Cloud & Infrastructure Engineer"
-    imageUrl = ""
-    imageWidth = 120
-    imageHeight = 120
-
-    [[params.profileMode.buttons]]
-      name = "Posts"
-      url = "/posts/"
-
-    [[params.profileMode.buttons]]
-      name = "Tags"
-      url = "/tags/"
-
-    [[params.profileMode.buttons]]
-      name = "Series"
-      url = "/series/"
-
   [params.assets]
     disableFingerprinting = false
 
@@ -68,6 +48,12 @@ summaryLength = 30
     threshold = 0.4
     minMatchCharLength = 0
     keys = ["title", "permalink", "summary", "content"]
+
+[[menu.main]]
+  identifier = "archives"
+  name = "Archives"
+  url = "/archives/"
+  weight = 5
 
 [[menu.main]]
   identifier = "posts"
@@ -86,12 +72,6 @@ summaryLength = 30
   name = "Series"
   url = "/series/"
   weight = 30
-
-[[menu.main]]
-  identifier = "archives"
-  name = "Archives"
-  url = "/archives/"
-  weight = 35
 
 [[menu.main]]
   identifier = "search"
