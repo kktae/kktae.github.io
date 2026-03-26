@@ -1,0 +1,73 @@
+{{- define "main" }}
+
+{{- if and site.Params.homeInfoParams }}
+{{- partial "home_info.html" . }}
+{{- end }}
+
+{{- $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
+{{- $pages = where $pages "Params.hiddenInHomeList" "!=" "true" }}
+
+{{/* Group by Year/Month */}}
+{{- $grouped := $pages.GroupByDate "2006" }}
+
+<div class="home-timeline-wrapper">
+  <div class="home-posts">
+    {{- range $yearGroup := $grouped }}
+    <h2 class="timeline-year" id="year-{{ $yearGroup.Key }}">{{ $yearGroup.Key }}</h2>
+
+    {{- $monthGroups := $yearGroup.Pages.GroupByDate "January" }}
+    {{- range $monthGroup := $monthGroups }}
+    <h3 class="timeline-month" id="month-{{ $yearGroup.Key }}-{{ $monthGroup.Key }}">{{ $monthGroup.Key }}</h3>
+
+    {{- range $monthGroup.Pages }}
+    <article class="post-entry">
+      {{- $isHidden := (.Param "cover.hiddenInList") | default (.Param "cover.hidden") | default false }}
+      {{- partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" $isHidden) }}
+      <header class="entry-header">
+        <h2 class="entry-hint-parent">
+          {{- .Title }}
+        </h2>
+      </header>
+      {{- if (ne (.Param "hideSummary") true) }}
+      <div class="entry-content">
+        <p>{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}...{{ end }}</p>
+      </div>
+      {{- end }}
+      {{- if not (.Param "hideMeta") }}
+      <footer class="entry-footer">
+        {{- partial "post_meta.html" . -}}
+      </footer>
+      {{- end }}
+      <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
+    </article>
+    {{- end }}
+    {{- end }}
+    {{- end }}
+  </div>
+
+  {{/* Timeline ToC Sidebar */}}
+  <aside class="timeline-toc">
+    <div class="timeline-toc-inner">
+      <h4>Timeline</h4>
+      <ul>
+        {{- range $yearGroup := $grouped }}
+        <li>
+          <a href="#year-{{ $yearGroup.Key }}">{{ $yearGroup.Key }}</a>
+          <ul>
+            {{- $monthGroups := $yearGroup.Pages.GroupByDate "January" }}
+            {{- range $monthGroup := $monthGroups }}
+            <li>
+              <a href="#month-{{ $yearGroup.Key }}-{{ $monthGroup.Key }}">
+                {{ $monthGroup.Key }} <span class="toc-count">{{ len $monthGroup.Pages }}</span>
+              </a>
+            </li>
+            {{- end }}
+          </ul>
+        </li>
+        {{- end }}
+      </ul>
+    </div>
+  </aside>
+</div>
+
+{{- end }}{{- /* end main */ -}}

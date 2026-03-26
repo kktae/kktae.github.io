@@ -41,4 +41,34 @@
 
     headings.forEach(h => observer.observe(h.el));
   })();
+
+  // Timeline TOC — highlight current year/month
+  (() => {
+    const toc = document.querySelector('.timeline-toc-inner');
+    if (!toc) return;
+
+    const links = toc.querySelectorAll('a');
+    if (!links.length) return;
+
+    const anchors = [];
+    links.forEach(link => {
+      const id = decodeURIComponent(link.getAttribute('href')?.replace('#', '') || '');
+      const el = document.getElementById(id);
+      if (el) anchors.push({ el, link });
+    });
+
+    if (!anchors.length) return;
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          links.forEach(l => l.classList.remove('active'));
+          const match = anchors.find(a => a.el === entry.target);
+          if (match) match.link.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-80px 0px -70% 0px' });
+
+    anchors.forEach(a => observer.observe(a.el));
+  })();
 </script>
