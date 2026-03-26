@@ -75,30 +75,32 @@ code {
     display: none;
   }
 
+  .post-single {
+    max-width: none;
+  }
+
   .post-body-wrapper {
-    display: flex;
-    gap: 4rem;
+    display: grid;
+    grid-template-columns: minmax(0, 720px) 220px;
+    gap: 6rem;
     align-items: flex-start;
   }
 
   .post-body-wrapper .post-content {
-    flex: 1;
     min-width: 0;
   }
 
   .toc-sidebar {
     position: sticky;
     top: 5rem;
-    width: 240px;
-    flex-shrink: 0;
     max-height: calc(100vh - 6rem);
     overflow-y: auto;
   }
 
   .toc-sidebar-inner {
-    padding: 1rem;
+    padding: 1rem 0 1rem 1.25rem;
     border-left: 2px solid var(--border);
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     line-height: 1.6;
   }
 
