@@ -1,0 +1,107 @@
+baseURL = "https://kktae.github.io/"
+languageCode = "ko"
+title = "kktae.io"
+theme = "PaperMod"
+enableRobotsTXT = true
+summaryLength = 30
+
+[pagination]
+  pagerSize = 10
+
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+  series = "series"
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+[params]
+  defaultTheme = "dark"
+  ShowShareButtons = false
+  ShowReadingTime = true
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+  ShowWordCount = true
+  ShowToc = true
+  TocOpen = true
+  ShowRssButtonInSectionTermList = false
+  description = "Cloud & Infrastructure Engineer"
+
+  [params.homeInfoParams]
+    Title = "kktae"
+    Content = "Cloud & Infrastructure Engineer — GCP, Kubernetes, SRE"
+
+  [[params.socialIcons]]
+    name = "github"
+    url = "https://github.com/kktae"
+
+  [params.profileMode]
+    enabled = true
+    title = "kktae"
+    subtitle = "Cloud & Infrastructure Engineer"
+    imageUrl = ""
+    imageWidth = 120
+    imageHeight = 120
+
+    [[params.profileMode.buttons]]
+      name = "Posts"
+      url = "/posts/"
+
+    [[params.profileMode.buttons]]
+      name = "Tags"
+      url = "/tags/"
+
+    [[params.profileMode.buttons]]
+      name = "Series"
+      url = "/series/"
+
+  [params.assets]
+    disableFingerprinting = false
+
+  [params.fuseOpts]
+    isCaseSensitive = false
+    shouldSort = true
+    location = 0
+    distance = 1000
+    threshold = 0.4
+    minMatchCharLength = 0
+    keys = ["title", "permalink", "summary", "content"]
+
+[[menu.main]]
+  identifier = "posts"
+  name = "Posts"
+  url = "/posts/"
+  weight = 10
+
+[[menu.main]]
+  identifier = "tags"
+  name = "Tags"
+  url = "/tags/"
+  weight = 20
+
+[[menu.main]]
+  identifier = "series"
+  name = "Series"
+  url = "/series/"
+  weight = 30
+
+[[menu.main]]
+  identifier = "search"
+  name = "Search"
+  url = "/search/"
+  weight = 40
+
+[[menu.main]]
+  identifier = "about"
+  name = "About"
+  url = "/about/"
+  weight = 50
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    noClasses = false

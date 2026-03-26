@@ -1,0 +1,140 @@
+/* =============================================
+   PaperMod + Glassmorphism
+   ============================================= */
+
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.06);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  --glass-blur: 12px;
+}
+
+.light {
+  --glass-bg: rgba(255, 255, 255, 0.6);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --glass-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* ---- Post List Cards ---- */
+.post-entry {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: 14px;
+  box-shadow: var(--glass-shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.post-entry:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.18);
+}
+
+/* ---- Header ---- */
+.nav {
+  backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+}
+
+/* ---- Tables ---- */
+table {
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  box-shadow: var(--glass-shadow);
+  width: 100% !important;
+}
+
+table thead {
+  background: var(--glass-bg) !important;
+}
+
+table thead th {
+  border-bottom: 1px solid var(--glass-border) !important;
+  padding: 0.7rem 1rem !important;
+  font-weight: 600 !important;
+}
+
+table tbody td {
+  border-bottom: 1px solid var(--glass-border) !important;
+  padding: 0.6rem 1rem !important;
+}
+
+table tbody tr:last-child td {
+  border-bottom: none !important;
+}
+
+table tbody tr:hover td {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.light table tbody tr:hover td {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+/* ---- Code Blocks ---- */
+.highlight pre {
+  border: 1px solid var(--glass-border) !important;
+  border-radius: 12px !important;
+  box-shadow: var(--glass-shadow);
+}
+
+/* ---- Blockquote ---- */
+blockquote {
+  background: var(--glass-bg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-left: 3px solid rgba(99, 179, 237, 0.5);
+  border-radius: 0 12px 12px 0;
+  padding: 0.8rem 1.2rem;
+}
+
+/* ---- TOC ---- */
+.toc {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+/* ---- Search ---- */
+#searchbox input {
+  background: var(--glass-bg) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: 12px !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* ---- Profile Mode Buttons ---- */
+.profile .buttons a {
+  background: var(--glass-bg) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--glass-border) !important;
+  border-radius: 10px !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.profile .buttons a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* ---- Subtle Background ---- */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(99, 179, 237, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(129, 140, 248, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 80%, rgba(52, 211, 153, 0.04) 0%, transparent 50%);
+}

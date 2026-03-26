@@ -1,6 +1,7 @@
 ---
 title: "About"
-layout: "simple"
+ShowToc: false
+ShowBreadCrumbs: false
 ---
 
 ## kktae
