@@ -1,9 +1,9 @@
 <script type="module">
   if (document.querySelector('pre.mermaid')) {
-    import('https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs')
+    import('https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs')
       .then(m => {
         m.default.initialize({
-          startOnLoad: true,
+          startOnLoad: false,
           theme: document.body.className.includes('dark') ? 'dark' : 'default'
         });
         m.default.run();
@@ -12,63 +12,40 @@
 </script>
 
 <script>
-  // Sidebar TOC — highlight current section
-  (() => {
-    const sidebar = document.querySelector('.toc-sidebar-inner');
-    if (!sidebar) return;
+  // TOC sidebar — highlight current section on scroll
+  function initTocHighlight(containerSelector) {
+    const container = document.querySelector(containerSelector);
+    if (!container) return;
 
-    const links = sidebar.querySelectorAll('a');
+    const links = container.querySelectorAll('a');
     if (!links.length) return;
 
-    const headings = [];
+    const targets = [];
     links.forEach(link => {
       const id = decodeURIComponent(link.getAttribute('href')?.replace('#', '') || '');
       const el = document.getElementById(id);
-      if (el) headings.push({ el, link });
+      if (el) targets.push({ el, link });
     });
 
-    if (!headings.length) return;
+    if (!targets.length) return;
 
+    let current = null;
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          links.forEach(l => l.classList.remove('active'));
-          const match = headings.find(h => h.el === entry.target);
-          if (match) match.link.classList.add('active');
+          const match = targets.find(t => t.el === entry.target);
+          if (match && match.link !== current) {
+            if (current) current.classList.remove('active');
+            match.link.classList.add('active');
+            current = match.link;
+          }
         }
       });
     }, { rootMargin: '-80px 0px -70% 0px' });
 
-    headings.forEach(h => observer.observe(h.el));
-  })();
+    targets.forEach(t => observer.observe(t.el));
+  }
 
-  // Timeline TOC — highlight current year/month
-  (() => {
-    const toc = document.querySelector('.timeline-toc-inner');
-    if (!toc) return;
-
-    const links = toc.querySelectorAll('a');
-    if (!links.length) return;
-
-    const anchors = [];
-    links.forEach(link => {
-      const id = decodeURIComponent(link.getAttribute('href')?.replace('#', '') || '');
-      const el = document.getElementById(id);
-      if (el) anchors.push({ el, link });
-    });
-
-    if (!anchors.length) return;
-
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          links.forEach(l => l.classList.remove('active'));
-          const match = anchors.find(a => a.el === entry.target);
-          if (match) match.link.classList.add('active');
-        }
-      });
-    }, { rootMargin: '-80px 0px -70% 0px' });
-
-    anchors.forEach(a => observer.observe(a.el));
-  })();
+  initTocHighlight('.toc-sidebar-inner');
+  initTocHighlight('.timeline-toc-inner');
 </script>

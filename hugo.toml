@@ -28,6 +28,7 @@ summaryLength = 30
   TocOpen = true
   ShowRssButtonInSectionTermList = false
   description = "Cloud & Infrastructure Engineer"
+  githubRepo = "kktae/kktae.github.io"
 
   [params.homeInfoParams]
     Title = "kktae"

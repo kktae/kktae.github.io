@@ -18,24 +18,22 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Install Hugo (latest)
-        run: |
-          HUGO_VERSION=$(curl -s https://api.github.com/repos/gohugoio/hugo/releases/latest | jq -r '.tag_name' | sed 's/^v//')
-          echo "Installing Hugo v${HUGO_VERSION}"
-          wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb
-          sudo dpkg -i ${{ runner.temp }}/hugo.deb
-
       - name: Checkout
         uses: actions/checkout@v4
         with:
           submodules: recursive
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.147.5'
+          extended: true
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
       - name: Build with Hugo
         env:
-          HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
           HUGO_ENVIRONMENT: production
           TZ: Asia/Seoul
         run: hugo --minify --baseURL "https://kktae.github.io/"
