@@ -88,6 +88,12 @@ summaryLength = 30
 
 [markup]
   [markup.goldmark]
+    [markup.goldmark.extensions]
+      [markup.goldmark.extensions.cjk]
+        enable = true
+        eastAsianLineBreaks = true
+        eastAsianLineBreaksStyle = "simple"
+        escapedSpace = true
     [markup.goldmark.renderer]
       unsafe = true
   [markup.highlight]
