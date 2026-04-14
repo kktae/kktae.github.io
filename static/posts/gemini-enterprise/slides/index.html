@@ -1,0 +1,2378 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Gemini Enterprise — 엔터프라이즈를 위한 에이전틱 AI 플랫폼</title>
+
+<!-- Google Sans everywhere + Pretendard fallback for Korean glyphs -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans:400,500,700|Google+Sans+Display:400,500,700&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css">
+
+<style>
+/* ============================================================
+   VIEWPORT FITTING: MANDATORY BASE (from viewport-base.css)
+   ============================================================ */
+html, body { height: 100%; overflow-x: hidden; }
+html { scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+
+.slide {
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.slide-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-height: 100%;
+    overflow: hidden;
+    padding: var(--slide-padding);
+}
+
+:root {
+    --title-size: clamp(1.5rem, 5vw, 4rem);
+    --h2-size: clamp(1.25rem, 3.5vw, 2.5rem);
+    --h3-size: clamp(1rem, 2.5vw, 1.75rem);
+    --body-size: clamp(0.75rem, 1.3vw, 1.05rem);
+    --small-size: clamp(0.62rem, 0.95vw, 0.82rem);
+    --tiny-size: clamp(0.55rem, 0.8vw, 0.72rem);
+    --slide-padding: clamp(1rem, 3.5vw, 3.5rem);
+    --content-gap: clamp(0.5rem, 1.8vw, 1.6rem);
+    --element-gap: clamp(0.25rem, 1vw, 0.9rem);
+
+    /* Palette — Google + Gemini */
+    --bg: #fafbff;
+    --bg-2: #f1f4fb;
+    --ink: #1a1d2e;
+    --ink-soft: #3d4457;
+    --ink-mute: #6b7388;
+    --line: #e2e6f1;
+    --g-blue: #4285F4;
+    --g-red: #EA4335;
+    --g-yellow: #FBBC04;
+    --g-green: #34A853;
+    --gemini: #7C5CFC;
+    --mint: #24d6b0;
+    --grad-gemini: linear-gradient(135deg,#4285F4 0%,#7C5CFC 45%,#EA4335 90%);
+    --grad-soft: linear-gradient(135deg,#e8f0fe 0%,#efe8ff 50%,#fde8ec 100%);
+    --shadow-sm: 0 1px 3px rgba(20,24,48,.06), 0 1px 2px rgba(20,24,48,.04);
+    --shadow-md: 0 10px 30px rgba(26,31,60,.08), 0 3px 8px rgba(26,31,60,.05);
+    --shadow-lg: 0 30px 60px rgba(26,31,60,.12), 0 6px 16px rgba(26,31,60,.06);
+}
+
+img, .image-container { max-width: 100%; max-height: min(50vh, 400px); object-fit: contain; }
+
+/* Responsive breakpoints */
+@media (max-height: 700px) {
+    :root {
+        --slide-padding: clamp(0.75rem, 2.8vw, 2rem);
+        --content-gap: clamp(0.4rem, 1.4vw, 1rem);
+        --title-size: clamp(1.25rem, 4.5vw, 2.5rem);
+        --h2-size: clamp(1rem, 3vw, 1.6rem);
+        --body-size: clamp(0.7rem, 1.1vw, 0.92rem);
+    }
+}
+@media (max-height: 600px) {
+    :root {
+        --slide-padding: clamp(0.5rem, 2.2vw, 1.5rem);
+        --content-gap: clamp(0.3rem, 1vw, 0.7rem);
+        --title-size: clamp(1.1rem, 4vw, 2rem);
+        --body-size: clamp(0.66rem, 1vw, 0.85rem);
+    }
+    .nav-dots, .keyboard-hint, .decorative { display: none; }
+}
+@media (max-height: 500px) {
+    :root {
+        --slide-padding: clamp(0.4rem, 1.8vw, 1rem);
+        --title-size: clamp(1rem, 3.2vw, 1.4rem);
+        --body-size: clamp(0.6rem, 0.9vw, 0.78rem);
+    }
+}
+@media (max-width: 720px) {
+    :root { --title-size: clamp(1.25rem, 7vw, 2.5rem); }
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.2s !important;
+    }
+    html { scroll-behavior: auto; }
+}
+
+/* ============================================================
+   GLOBAL STYLING
+   ============================================================ */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: 'Google Sans','Google Sans Display','Pretendard Variable','Pretendard',system-ui,sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+}
+
+.eng, .num { font-family: 'Google Sans','Pretendard Variable',sans-serif; letter-spacing: -0.01em; }
+.display { font-family: 'Google Sans Display','Google Sans','Pretendard Variable',sans-serif; font-weight: 800; letter-spacing: -0.02em; }
+
+/* ============================================================
+   SHARED COMPONENTS
+   ============================================================ */
+
+/* phase/section label — top-left marker (like playbook) */
+.phase-tag {
+    display: inline-flex; align-items: center; gap: 0.5em;
+    font-size: var(--small-size); font-weight: 600;
+    padding: 0.35em 0.9em;
+    border-radius: 999px;
+    background: #eef2fe; color: var(--g-blue);
+    border: 1px solid #d7e1fb;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+.phase-tag.gemini { background: #f2ecff; color: var(--gemini); border-color: #e2d6ff; }
+.phase-tag.red { background: #fdeeee; color: var(--g-red); border-color: #f9d9d9; }
+.phase-tag.green { background: #e6f6ec; color: var(--g-green); border-color: #c8ebd5; }
+.phase-tag.yellow { background: #fff8de; color: #a87a03; border-color: #ffe8a3; }
+
+/* slide header pattern — clean, single hierarchy */
+.slide-header {
+    display: block;
+    margin-bottom: var(--element-gap);
+}
+.slide-header .idx, .slide-header .dot { display: none; } /* superseded by .brand */
+.slide-title { font-size: var(--h2-size); font-weight: 700; color: var(--ink); line-height: 1.15; }
+.slide-title .accent { background: var(--grad-gemini); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.slide-kicker {
+    font-family: 'Google Sans', sans-serif;
+    font-size: var(--small-size);
+    color: var(--gemini);
+    font-weight: 600;
+    margin-bottom: 0.35em;
+    letter-spacing: 0.01em;
+    text-transform: none;
+    display: inline-flex; align-items: center; gap: 0.5em;
+}
+.slide-kicker::before {
+    content: ''; width: 18px; height: 2px; border-radius: 2px;
+    background: var(--grad-gemini); display: inline-block;
+}
+
+/* persistent page numbering */
+.page-num {
+    position: absolute; right: calc(var(--slide-padding)); bottom: calc(var(--slide-padding) * 0.6);
+    font-size: var(--tiny-size); color: var(--ink-mute); font-weight: 500;
+    font-family: 'Google Sans', sans-serif;
+    letter-spacing: 0.15em;
+}
+.page-num .cur { color: var(--ink); font-weight: 700; }
+
+/* corner brand */
+.brand {
+    position: absolute; left: calc(var(--slide-padding)); top: calc(var(--slide-padding) * 0.6);
+    display: flex; align-items: center; gap: 0.55em;
+    font-size: var(--tiny-size); color: var(--ink-mute);
+    font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+}
+.brand::before {
+    content: ''; width: 16px; height: 16px;
+    background: url('assets/brand/gemini-brand-logo.png') center/contain no-repeat;
+    flex-shrink: 0;
+    filter: drop-shadow(0 1px 2px rgba(124,92,252,0.18));
+}
+
+/* nav dots */
+.nav-dots {
+    position: fixed; right: 18px; top: 50%; transform: translateY(-50%);
+    display: flex; flex-direction: column; gap: 6px; z-index: 100;
+}
+.nav-dots a {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--line); display: block; transition: all 0.25s ease;
+}
+.nav-dots a:hover, .nav-dots a.active { background: var(--gemini); transform: scale(1.6); }
+
+.keyboard-hint {
+    position: fixed; left: 50%; bottom: 12px; transform: translateX(-50%);
+    font-size: 10px; color: var(--ink-mute); font-family: 'Google Sans',sans-serif;
+    letter-spacing: 0.08em; opacity: 0.6; z-index: 50;
+    padding: 5px 10px; background: rgba(255,255,255,0.7); backdrop-filter: blur(8px);
+    border-radius: 12px; border: 1px solid var(--line);
+}
+
+/* reveal animation */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+.reveal.d1 { transition-delay: .12s; }
+.reveal.d2 { transition-delay: .24s; }
+.reveal.d3 { transition-delay: .36s; }
+.reveal.d4 { transition-delay: .48s; }
+.reveal.d5 { transition-delay: .6s; }
+.reveal.d6 { transition-delay: .72s; }
+
+/* gradient orb backgrounds */
+.orb {
+    position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.55;
+    pointer-events: none; z-index: 0;
+}
+
+/* =========================================
+   SLIDE 1 — HERO TITLE
+   ========================================= */
+.s-title { background: #fff; }
+.s-title::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+        radial-gradient(circle at 85% 20%, rgba(124,92,252,0.18), transparent 45%),
+        radial-gradient(circle at 15% 85%, rgba(66,133,244,0.18), transparent 45%),
+        radial-gradient(circle at 70% 90%, rgba(234,67,53,0.08), transparent 50%);
+}
+.s-title .slide-content { position: relative; z-index: 2; justify-content: flex-end; padding-bottom: 8vh;}
+.hero-rule {
+    width: clamp(60px, 15vw, 180px); height: 4px;
+    background: var(--grad-gemini); border-radius: 999px; margin-bottom: 1.5em;
+}
+.hero-sup { font-size: var(--small-size); color: var(--ink-mute); font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.9em; }
+.hero-title {
+    font-family: 'Google Sans Display','Google Sans','Pretendard Variable',sans-serif;
+    font-size: clamp(2.5rem, 8vw, 6.5rem);
+    font-weight: 800; line-height: 0.96; letter-spacing: -0.035em;
+    color: var(--ink);
+}
+.hero-title .gradient { background: var(--grad-gemini); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero-sub {
+    margin-top: 0.8em; font-size: var(--h3-size); color: var(--ink-soft); font-weight: 500;
+    max-width: 720px;
+}
+.hero-meta {
+    margin-top: 2.5em; display: flex; gap: 2em; flex-wrap: wrap;
+    font-size: var(--small-size); color: var(--ink-mute); font-weight: 500;
+}
+.hero-meta span b { color: var(--ink); font-weight: 700; }
+
+/* Gemini brand mark (replaces placeholder grid) */
+.brand-mark {
+    position: absolute; right: 6vw; top: 8vh;
+    width: clamp(110px, 18vw, 260px);
+    z-index: 2;
+    filter: drop-shadow(0 12px 40px rgba(124,92,252,0.28)) drop-shadow(0 4px 14px rgba(66,133,244,0.18));
+    animation: brand-float 6s ease-in-out infinite;
+}
+.brand-mark img { width: 100%; height: auto; display: block; }
+@keyframes brand-float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(-2deg); }
+}
+
+/* Google Cloud wordmark bottom-right */
+.gc-wordmark {
+    position: absolute; right: calc(var(--slide-padding));
+    bottom: calc(var(--slide-padding) * 0.55);
+    height: clamp(16px, 2vh, 22px); width: auto;
+    opacity: 0.55; z-index: 3;
+}
+
+/* =========================================
+   SLIDE 2 — Welcome (Playbook slides 3-4)
+   ========================================= */
+.s-welcome {
+    background: linear-gradient(180deg, #fff 0%, #fafbff 100%);
+    position: relative; overflow: hidden;
+}
+.welcome-banner {
+    position: absolute; left: 0; right: 0; top: 0;
+    width: 100%; height: clamp(4px, 0.6vh, 7px);
+    object-fit: cover; object-position: center;
+    max-height: none; max-width: none;
+    z-index: 5; opacity: 0.9;
+}
+.welcome-sparkle {
+    position: absolute;
+    right: clamp(-40px, -3vw, -20px);
+    bottom: clamp(-60px, -5vh, -30px);
+    width: clamp(180px, 30vw, 360px);
+    height: auto;
+    max-height: none; max-width: none;
+    opacity: 0.08;
+    pointer-events: none;
+    z-index: 0;
+    transform: rotate(-10deg);
+    filter: blur(0.5px);
+}
+.welcome-visual {
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    width: 100%;
+    padding: clamp(0.5rem, 1.5vw, 1.5rem);
+}
+.welcome-visual::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(124,92,252,0.12), transparent 65%);
+    filter: blur(30px); z-index: 0;
+}
+.welcome-visual img {
+    position: relative; z-index: 1;
+    width: 100%; height: auto;
+    max-width: min(100%, 520px);
+    max-height: min(62vh, 520px);
+    object-fit: contain;
+    border-radius: 16px;
+    filter: drop-shadow(0 20px 40px rgba(26,31,60,0.14)) drop-shadow(0 6px 14px rgba(124,92,252,0.12));
+}
+.welcome-tagline {
+    margin-top: clamp(0.8rem, 2vh, 1.5rem);
+    display: flex; align-items: center; justify-content: center;
+    gap: 0.6em;
+    padding: 0.7em 1.2em;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.7); backdrop-filter: blur(10px);
+    border: 1px solid var(--line);
+    font-family: 'Google Sans', sans-serif; font-size: var(--small-size);
+    color: var(--ink-soft); font-weight: 500; font-style: italic;
+    max-width: fit-content; margin-left: auto; margin-right: auto;
+    box-shadow: var(--shadow-sm);
+}
+.welcome-tagline .tl-icon { font-style: normal; font-size: 1em; }
+.principle .h-ko {
+    font-size: var(--tiny-size); font-weight: 500;
+    color: var(--ink-mute); letter-spacing: 0;
+}
+.split {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: var(--content-gap);
+    align-items: center;
+    height: 100%;
+}
+.split .left-copy h2 {
+    font-family: 'Google Sans Display','Google Sans',sans-serif;
+    font-size: clamp(2rem, 6vw, 4.5rem);
+    line-height: 1.02; font-weight: 800;
+    color: var(--ink); letter-spacing: -0.025em;
+}
+.split .left-copy h2 em { font-style: normal; background: var(--grad-gemini); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.split .left-copy p {
+    margin-top: 1.2em; font-size: var(--body-size);
+    color: var(--ink-soft); max-width: 42ch;
+}
+.split .right-card {
+    background: #fff; border: 1px solid var(--line); border-radius: 20px;
+    padding: clamp(1.25rem, 2.5vw, 2.2rem); box-shadow: var(--shadow-md);
+    position: relative; overflow: hidden;
+}
+.split .right-card::before {
+    content:''; position:absolute; inset: -30%;
+    background: conic-gradient(from 120deg, rgba(66,133,244,0.15), rgba(124,92,252,0.15), rgba(234,67,53,0.12), rgba(66,133,244,0.15));
+    filter: blur(40px); z-index: 0;
+}
+.split .right-card > * { position: relative; z-index: 2; }
+.principle-list { display: flex; flex-direction: column; gap: 0.9em; margin-top: 1em; }
+.principle {
+    display: flex; gap: 0.8em; align-items: flex-start;
+    background: rgba(255,255,255,0.6); border-radius: 12px;
+    padding: 0.8em 0.9em;
+    border: 1px solid var(--line);
+}
+.principle .icon {
+    flex: 0 0 auto;
+    width: clamp(28px, 3vw, 38px); height: clamp(28px, 3vw, 38px); border-radius: 10px;
+    display: grid; place-items: center; color: white; font-weight: 700;
+    font-family: 'Google Sans', sans-serif; font-size: var(--small-size);
+}
+.principle .icon.blue { background: var(--g-blue); }
+.principle .icon.purple { background: var(--gemini); }
+.principle .h { font-weight: 700; color: var(--ink); font-size: var(--body-size); }
+.principle .d { font-size: var(--small-size); color: var(--ink-mute); margin-top: 2px; }
+
+/* =========================================
+   SLIDE 3 — Product overview + UI image
+   ========================================= */
+.twocol {
+    display: grid; grid-template-columns: 1fr 1.15fr;
+    gap: var(--content-gap); align-items: center; height: 100%;
+}
+.feature-stack { display: flex; flex-direction: column; gap: clamp(0.5em, 1.2vh, 1em); }
+.feature-row {
+    display: flex; gap: 0.8em; align-items: flex-start;
+    padding: 0.7em 0.9em; border-left: 3px solid var(--g-blue);
+    background: #fff;
+    border-radius: 0 10px 10px 0;
+}
+.feature-row.red { border-color: var(--g-red); }
+.feature-row.yellow { border-color: var(--g-yellow); }
+.feature-row.green { border-color: var(--g-green); }
+.feature-row.purple { border-color: var(--gemini); }
+.feature-row .idx-num {
+    font-family: 'Google Sans',sans-serif; font-weight: 700;
+    font-size: var(--small-size); color: var(--ink-mute); min-width: 1.5em;
+}
+.feature-row .t { font-weight: 700; color: var(--ink); font-size: var(--body-size); line-height: 1.3; }
+.feature-row .s { font-size: var(--small-size); color: var(--ink-mute); margin-top: 0.15em; }
+.ui-frame {
+    border-radius: 16px; overflow: hidden;
+    border: 1px solid var(--line); box-shadow: var(--shadow-lg);
+    background: #fff; position: relative;
+}
+.ui-frame img { width: 100%; height: auto; display: block; max-height: min(55vh, 500px); object-fit: contain; }
+.ui-caption {
+    position: absolute; top: 12px; left: 12px;
+    background: rgba(26,29,46,0.9); color: #fff;
+    font-size: var(--tiny-size); padding: 4px 10px; border-radius: 999px;
+    font-weight: 600; letter-spacing: 0.08em;
+}
+
+/* =========================================
+   SLIDE 4 — Value growth timeline
+   ========================================= */
+.s-growth { background: linear-gradient(180deg,#fff 0%,#f4f7ff 100%); }
+.growth-track {
+    position: relative; margin-top: 2em;
+    height: clamp(220px, 38vh, 320px);
+    background: linear-gradient(180deg, transparent 0, rgba(124,92,252,0.06) 100%);
+    border-radius: 18px; padding: 1em 1.5em;
+}
+.growth-curve {
+    position: absolute; left: 1.5em; right: 1.5em; bottom: 1.5em; top: 3em;
+    background: linear-gradient(135deg, rgba(66,133,244,0.18), rgba(124,92,252,0.22), rgba(234,67,53,0.18));
+    clip-path: polygon(0 100%, 15% 78%, 45% 55%, 75% 30%, 100% 10%, 100% 100%);
+    border-radius: 12px;
+}
+.growth-stages {
+    position: relative; z-index: 2; display: grid; grid-template-columns: repeat(3,1fr);
+    gap: 1em; height: 100%;
+}
+.growth-col { display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 0.5em; }
+.growth-col .head {
+    font-family: 'Google Sans',sans-serif; font-weight: 700;
+    font-size: var(--small-size); letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--g-blue); margin-bottom: 0.5em;
+}
+.growth-col.mid .head { color: var(--gemini); }
+.growth-col.right .head { color: var(--g-red); }
+.growth-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.3em; }
+.growth-col li {
+    font-size: var(--small-size); color: var(--ink); font-weight: 500;
+    padding-left: 1em; position: relative;
+}
+.growth-col li::before {
+    content:''; position: absolute; left: 0; top: 0.5em;
+    width: 6px; height: 6px; border-radius: 50%; background: var(--g-blue);
+}
+.growth-col.mid li::before { background: var(--gemini); }
+.growth-col.right li::before { background: var(--g-red); }
+.phase-arrow {
+    display: flex; gap: 0.5em; align-items: center; margin-top: 1.5em;
+    font-family: 'Google Sans',sans-serif; font-size: var(--small-size);
+    font-weight: 600; color: var(--ink-mute);
+}
+.phase-arrow .p {
+    padding: 0.4em 0.9em; border: 1px solid var(--line); border-radius: 999px;
+    background: #fff;
+}
+.phase-arrow .p.active { background: var(--grad-gemini); color: #fff; border-color: transparent; }
+
+/* =========================================
+   SLIDE 5-8 — UI feature slides
+   ========================================= */
+.ui-hero {
+    display: grid; grid-template-columns: 0.9fr 1.1fr;
+    gap: clamp(1rem, 3vw, 2.5rem); align-items: center;
+    height: 100%;
+}
+.annot-list { display: flex; flex-direction: column; gap: 0.8em; }
+.annot {
+    display: flex; gap: 0.9em; align-items: flex-start;
+    padding: 0.8em 1em;
+    background: #fff; border-radius: 12px; border: 1px solid var(--line);
+    box-shadow: var(--shadow-sm);
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+.annot:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.annot .badge {
+    flex: 0 0 auto; width: 28px; height: 28px; border-radius: 8px;
+    display: grid; place-items: center; color: #fff; font-weight: 700;
+    font-family: 'Google Sans',sans-serif; font-size: 0.72rem;
+    background: var(--g-blue);
+}
+.annot.red .badge { background: var(--g-red); }
+.annot.yellow .badge { background: var(--g-yellow); color: #5c4300; }
+.annot.green .badge { background: var(--g-green); }
+.annot.purple .badge { background: var(--gemini); }
+.annot .t { font-weight: 700; color: var(--ink); font-size: var(--body-size); }
+.annot .d { font-size: var(--small-size); color: var(--ink-mute); margin-top: 2px; line-height: 1.4; }
+
+/* =========================================
+   SLIDE 9 — Agent types
+   ========================================= */
+.agent-types {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: clamp(0.8rem, 1.4vw, 1.2rem); margin-top: var(--content-gap);
+}
+.atype {
+    background: #fff; border-radius: 16px; padding: clamp(1rem, 1.8vw, 1.5rem);
+    border: 1px solid var(--line); position: relative; overflow: hidden;
+    transition: transform .3s, box-shadow .3s;
+}
+.atype:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.atype::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: var(--g-blue);
+}
+.atype h4 { font-size: var(--h3-size); font-weight: 700; color: var(--ink); margin-bottom: 0.5em; line-height: 1.2; }
+.atype p { font-size: var(--small-size); color: var(--ink-soft); line-height: 1.5; }
+.atype .label {
+    font-size: var(--tiny-size); font-weight: 600; color: var(--g-blue);
+    letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.6em;
+}
+.atype .pill {
+    display: inline-block; margin-top: 0.9em;
+    font-size: var(--tiny-size); padding: 0.3em 0.7em;
+    border-radius: 999px; background: #f5f7fd; color: var(--ink-mute);
+    font-weight: 600;
+}
+.atype.b::before { background: var(--g-red); }
+.atype.c::before { background: var(--gemini); }
+.atype.d::before { background: var(--g-green); }
+.atype.b .label { color: var(--g-red); }
+.atype.c .label { color: var(--gemini); }
+.atype.d .label { color: var(--g-green); }
+
+/* =========================================
+   Industry use cases — Maturity Journey (slides 17-19)
+   ========================================= */
+
+/* Top journey track — visual axis showing A→E→T */
+.ind-journey {
+    display: grid;
+    grid-template-columns: clamp(130px, 18%, 200px) 1fr 1fr 1fr;
+    gap: clamp(0.4rem, 1vw, 0.8rem);
+    margin-bottom: clamp(0.4rem, 1vh, 0.8rem);
+    align-items: center;
+}
+.ind-journey .jrn-axis {
+    display: flex; align-items: center; gap: 0.5em;
+    font-family: 'Google Sans',sans-serif; font-size: var(--tiny-size);
+    color: var(--ink-mute); font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+.ind-journey .jrn-axis .arr { flex: 1; height: 2px; background: linear-gradient(90deg, var(--g-blue), var(--gemini), var(--g-red)); border-radius: 2px; }
+.ind-stage-label {
+    display: flex; align-items: center; gap: 0.5em;
+    padding: 0.45em 0.8em; border-radius: 999px;
+    font-family: 'Google Sans',sans-serif; font-weight: 700;
+    font-size: var(--tiny-size); letter-spacing: 0.05em;
+}
+.ind-stage-label .dots { display: inline-flex; gap: 2px; }
+.ind-stage-label .dots i { width: 5px; height: 5px; border-radius: 50%; background: currentColor; display: inline-block; }
+.ind-stage-label.a { background: #e3efff; color: var(--g-blue); }
+.ind-stage-label.e { background: #f0e9ff; color: var(--gemini); }
+.ind-stage-label.t { background: #fde6e6; color: var(--g-red); }
+
+/* Use-case row — icon + title + 3 journey stages */
+.ind-row {
+    display: grid;
+    grid-template-columns: clamp(130px, 18%, 200px) 1fr 1fr 1fr;
+    gap: clamp(0.4rem, 1vw, 0.8rem);
+    margin-bottom: clamp(0.35rem, 0.8vh, 0.65rem);
+    align-items: stretch;
+}
+.ind-row:last-child { margin-bottom: 0; }
+
+.ind-usecase {
+    display: flex; align-items: center; gap: 0.6em;
+    padding: clamp(0.5rem, 1vw, 0.8rem) clamp(0.6rem, 1.2vw, 1rem);
+    background: linear-gradient(135deg, #fff 0%, #f5f7ff 100%);
+    border: 1px solid var(--line); border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+}
+.ind-usecase .ic {
+    width: clamp(28px, 4vw, 36px); height: clamp(28px, 4vw, 36px);
+    border-radius: 10px;
+    display: grid; place-items: center;
+    background: var(--grad-gemini);
+    color: #fff; font-size: 0.95rem;
+    flex: 0 0 auto;
+    box-shadow: 0 2px 8px rgba(124,92,252,0.22);
+}
+.ind-usecase .nm {
+    font-family: 'Google Sans', sans-serif; font-weight: 700;
+    color: var(--ink); font-size: var(--small-size);
+    line-height: 1.25;
+}
+
+/* Stage card — visualizes content at each maturity level */
+.ind-stage {
+    position: relative;
+    padding: clamp(0.5rem, 1vw, 0.8rem) clamp(0.55rem, 1.1vw, 0.9rem);
+    padding-left: clamp(0.9rem, 1.4vw, 1.2rem);
+    background: #fff; border: 1px solid var(--line); border-radius: 10px;
+    font-size: var(--tiny-size); color: var(--ink-soft);
+    line-height: 1.4; display: flex; flex-direction: column; gap: 0.25em;
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+.ind-stage:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
+.ind-stage::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 3px; border-radius: 10px 0 0 10px;
+    background: var(--g-blue);
+}
+.ind-stage.a::before { background: var(--g-blue); }
+.ind-stage.e::before { background: var(--gemini); }
+.ind-stage.t::before { background: var(--g-red); }
+.ind-stage.t { background: linear-gradient(135deg, #fff 0%, #fff4f4 100%); }
+.ind-stage .depth {
+    display: inline-flex; gap: 2px; margin-bottom: 0.15em;
+}
+.ind-stage .depth i {
+    width: 5px; height: 5px; border-radius: 50%;
+    display: inline-block; background: #d7dbe7;
+}
+.ind-stage.a .depth i:nth-child(1) { background: var(--g-blue); }
+.ind-stage.e .depth i:nth-child(1), .ind-stage.e .depth i:nth-child(2) { background: var(--gemini); }
+.ind-stage.t .depth i { background: var(--g-red); }
+
+/* Section divider for slide 18 (Retail + Finance) */
+.ind-section-label {
+    display: inline-flex; align-items: center; gap: 0.5em;
+    font-family: 'Google Sans',sans-serif; font-size: var(--tiny-size);
+    font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    margin: clamp(0.4rem, 0.8vh, 0.6rem) 0 clamp(0.3rem, 0.6vh, 0.45rem);
+}
+.ind-section-label::before {
+    content: ''; width: 14px; height: 2px; border-radius: 2px;
+    background: var(--grad-gemini);
+}
+.ind-section-label.retail { color: #a87a03; }
+.ind-section-label.fin { color: var(--g-green); }
+
+/* =========================================
+   SLIDE 20 — 4 phase roadmap
+   ========================================= */
+.roadmap {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: clamp(0.7rem, 1.2vw, 1rem); margin-top: var(--content-gap);
+    position: relative;
+}
+.roadmap::before {
+    content: ''; position: absolute;
+    top: clamp(32px, 4.5vh, 48px); left: 3%; right: 3%; height: 2px;
+    background: linear-gradient(90deg, var(--g-blue), var(--g-yellow), var(--g-green), var(--g-red));
+    z-index: 0;
+}
+.phase-card {
+    position: relative; z-index: 2;
+    background: #fff; border-radius: 16px;
+    padding: clamp(0.9rem, 1.6vw, 1.3rem);
+    border: 1px solid var(--line); box-shadow: var(--shadow-sm);
+}
+.phase-card .bullet {
+    width: clamp(28px, 4vh, 40px); height: clamp(28px, 4vh, 40px);
+    border-radius: 50%; background: var(--g-blue);
+    color: #fff; display: grid; place-items: center;
+    font-family: 'Google Sans',sans-serif; font-weight: 700;
+    margin-bottom: 0.6em; font-size: var(--small-size);
+}
+.phase-card.b .bullet { background: var(--g-yellow); color: #5c4300; }
+.phase-card.c .bullet { background: var(--g-green); }
+.phase-card.d .bullet { background: var(--g-red); }
+.phase-card h4 {
+    font-family: 'Google Sans',sans-serif; font-weight: 700;
+    font-size: var(--body-size); color: var(--ink);
+    margin-bottom: 0.4em;
+}
+.phase-card .ko { font-size: var(--small-size); font-weight: 600; color: var(--gemini); margin-bottom: 0.5em; }
+.phase-card ul { list-style: none; display: flex; flex-direction: column; gap: 0.25em; }
+.phase-card li {
+    font-size: var(--tiny-size); color: var(--ink-soft);
+    padding-left: 0.9em; position: relative; line-height: 1.4;
+}
+.phase-card li::before {
+    content: '•'; position: absolute; left: 0; color: var(--ink-mute);
+}
+
+/* =========================================
+   SLIDE 21 — KPI + learning
+   ========================================= */
+.kpi-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: clamp(0.6rem, 1.2vw, 1rem); margin-bottom: var(--content-gap);
+}
+.kpi {
+    background: #fff; border-radius: 14px;
+    padding: clamp(0.8rem, 1.5vw, 1.2rem);
+    border: 1px solid var(--line);
+}
+.kpi .big {
+    font-family: 'Google Sans Display','Google Sans',sans-serif;
+    font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+    font-weight: 800; line-height: 1;
+    background: var(--grad-gemini); -webkit-background-clip: text;
+    background-clip: text; color: transparent;
+}
+.kpi .lbl {
+    margin-top: 0.5em; font-size: var(--small-size);
+    font-weight: 700; color: var(--ink);
+}
+.kpi .desc { margin-top: 0.3em; font-size: var(--tiny-size); color: var(--ink-mute); line-height: 1.35; }
+
+.learn-path {
+    display: grid; grid-template-columns: 1.2fr 1fr;
+    gap: var(--content-gap); align-items: stretch;
+}
+.course-list {
+    background: #fff; border: 1px solid var(--line); border-radius: 14px;
+    padding: clamp(0.9rem, 1.6vw, 1.3rem);
+}
+.course-list h5 { font-family: 'Google Sans',sans-serif; font-weight:700; font-size: var(--body-size); margin-bottom: 0.6em; color: var(--ink); }
+.course-list ol { list-style: none; counter-reset: c; }
+.course-list li {
+    counter-increment: c;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0.5em 0; border-bottom: 1px dashed var(--line);
+    font-size: var(--small-size);
+}
+.course-list li:last-child { border-bottom: none; }
+.course-list li::before {
+    content: counter(c,decimal-leading-zero);
+    font-family: 'Google Sans',sans-serif; font-weight: 600;
+    color: var(--gemini); margin-right: 0.8em; font-size: var(--tiny-size);
+}
+.course-list li .time {
+    font-family: 'Google Sans',sans-serif; font-size: var(--tiny-size);
+    color: var(--ink-mute);
+}
+.cert-box {
+    background: var(--grad-gemini); color: #fff;
+    border-radius: 14px; padding: clamp(0.9rem, 1.6vw, 1.4rem);
+    display: flex; flex-direction: column; justify-content: center;
+}
+.cert-box h4 { font-family:'Google Sans Display','Google Sans',sans-serif; font-weight:800; font-size: clamp(1.2rem, 2.3vw, 1.8rem); margin-top: 0.4em; line-height: 1.15; }
+.cert-box p { margin-top: 0.8em; font-size: var(--small-size); opacity: 0.95; }
+.cert-box .lbl { font-size: var(--tiny-size); font-weight: 600; opacity: 0.85; letter-spacing: 0.1em; text-transform: uppercase; }
+
+/* =========================================
+   SLIDE 22 — Resource links
+   ========================================= */
+.link-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: clamp(0.7rem, 1.2vw, 1rem);
+    margin-top: var(--content-gap);
+}
+.link-card {
+    background: #fff; border: 1px solid var(--line);
+    border-radius: 14px; padding: clamp(0.8rem, 1.5vw, 1.2rem);
+    text-decoration: none; color: inherit;
+    transition: all .25s ease; display: flex; flex-direction: column;
+}
+.link-card:hover {
+    transform: translateY(-3px); box-shadow: var(--shadow-md);
+    border-color: var(--gemini);
+}
+.link-card h5 { font-size: var(--body-size); color: var(--ink); margin-top: 0.5em; font-weight: 700; line-height: 1.25; }
+.link-card p { font-size: var(--tiny-size); color: var(--ink-mute); margin-top: 0.4em; line-height: 1.4; flex: 1; }
+.link-card .cat { font-size: var(--tiny-size); font-weight: 700; color: var(--g-blue); text-transform: uppercase; letter-spacing: 0.08em; }
+.link-card .go {
+    margin-top: 0.8em; font-family: 'Google Sans',sans-serif;
+    font-size: var(--tiny-size); color: var(--gemini); font-weight: 600;
+    display: flex; align-items: center; gap: 0.4em;
+}
+
+/* =========================================
+   CLOSING MINI
+   ========================================= */
+.closing {
+    text-align: center; padding: 0 6vw;
+}
+.closing h2 {
+    font-family:'Google Sans Display','Google Sans',sans-serif; font-weight: 800;
+    font-size: clamp(1.8rem, 5vw, 3.5rem); line-height: 1.1;
+    margin-top: 0.5em;
+}
+.closing h2 .accent { background: var(--grad-gemini); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* common image wrappers for playbook screenshots */
+.screenshot {
+    border: 1px solid var(--line); border-radius: 14px; overflow: hidden;
+    background: #fff; box-shadow: var(--shadow-md);
+    position: relative;
+}
+.screenshot img {
+    width: 100%; height: auto; display: block;
+    max-height: min(58vh, 480px); object-fit: contain; padding: 10px;
+}
+.screenshot-cap {
+    position: absolute; left: 14px; top: 14px;
+    background: #fff; border: 1px solid var(--line);
+    padding: 4px 10px; border-radius: 999px;
+    font-size: var(--tiny-size); font-weight: 600; color: var(--ink);
+    font-family: 'Google Sans',sans-serif; box-shadow: var(--shadow-sm);
+    letter-spacing: 0.04em;
+}
+
+/* =========================================
+   AGENT ARCHITECTURE DIAGRAM (slide 10)
+   ========================================= */
+.arch-shell {
+    position: relative;
+    margin-top: var(--content-gap);
+    padding: clamp(1.2rem, 2.2vh, 1.6rem) clamp(0.8rem, 2vw, 1.5rem) clamp(0.8rem, 1.4vh, 1.1rem);
+    border-radius: 18px;
+    background: #fff;
+    border: 1.5px solid transparent;
+    background-image: linear-gradient(#fff,#fff),
+                      linear-gradient(135deg, rgba(66,133,244,0.55), rgba(124,92,252,0.55), rgba(234,67,53,0.55));
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    box-shadow: 0 30px 60px rgba(26,31,60,0.06), 0 4px 12px rgba(26,31,60,0.04);
+}
+.arch-shell::before {
+    content: 'Agent Registry · 중앙 등록 · 승인 · 버전 · 감사';
+    position: absolute; top: -0.85em; left: 50%; transform: translateX(-50%);
+    font-family: 'Google Sans', sans-serif; font-size: var(--tiny-size);
+    font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    background: var(--grad-gemini); color: #fff;
+    padding: 0.4em 1em; border-radius: 999px;
+    box-shadow: 0 8px 18px rgba(124,92,252,0.28);
+    white-space: nowrap;
+}
+.arch-legend {
+    display: flex; justify-content: center; gap: clamp(0.7rem, 1.8vw, 1.6rem);
+    margin-bottom: clamp(0.5rem, 1vh, 0.8rem);
+    font-family: 'Google Sans', sans-serif; font-size: var(--tiny-size);
+    color: var(--ink-soft);
+}
+.arch-legend span { display: inline-flex; align-items: center; gap: 0.35em; font-weight: 600; }
+.arch-legend .lg-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.arch-legend .lg-dot.hi { background: var(--g-blue); }
+.arch-legend .lg-dot.no { background: var(--gemini); }
+.arch-legend .lg-dot.ptr { background: var(--g-red); }
+
+.arch-layer {
+    position: relative;
+    display: grid; grid-template-columns: clamp(58px, 8vw, 92px) 1fr;
+    gap: clamp(0.6rem, 1.2vw, 1rem);
+    align-items: stretch;
+    margin-bottom: clamp(0.4rem, 0.9vh, 0.7rem);
+}
+.arch-layer:last-of-type { margin-bottom: 0; }
+.arch-layer .layer-label {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 0.6em 0.4em;
+    background: linear-gradient(180deg, #f6f8ff 0%, #eef1fb 100%);
+    border: 1px solid var(--line); border-radius: 10px;
+    text-align: center;
+}
+.arch-layer .layer-num {
+    font-family: 'Google Sans', sans-serif; font-weight: 800;
+    font-size: clamp(0.9rem, 1.6vw, 1.2rem);
+    background: var(--grad-gemini);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    line-height: 1;
+}
+.arch-layer .layer-tag {
+    font-family: 'Google Sans', sans-serif; font-weight: 700;
+    font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink-mute); margin-top: 0.3em;
+}
+.arch-layer .layer-body {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: clamp(0.5rem, 1vw, 0.9rem);
+}
+.arch-layer.runtime .layer-body { grid-template-columns: 1fr 1fr; }
+
+.arch-card {
+    background: #fff; border-radius: 12px;
+    padding: clamp(0.55rem, 1.1vw, 0.9rem) clamp(0.6rem, 1.2vw, 1rem);
+    position: relative;
+    border: 1px solid var(--line);
+    box-shadow: 0 2px 6px rgba(26,31,60,0.04);
+    transition: transform .25s ease, box-shadow .25s ease;
+    overflow: hidden;
+}
+.arch-card::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+    background: var(--g-blue);
+}
+.arch-card.hi::before { background: var(--g-blue); }
+.arch-card.no::before { background: var(--gemini); }
+.arch-card.ptr::before { background: var(--g-red); }
+.arch-card.pre::before { background: var(--g-green); }
+.arch-card.org::before { background: var(--g-yellow); }
+.arch-card.my::before { background: var(--mint); }
+.arch-card.rt::before { background: linear-gradient(180deg, var(--ink-soft), var(--ink-mute)); }
+.arch-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.arch-card .head {
+    font-family: 'Google Sans',sans-serif; font-size: var(--small-size);
+    font-weight: 700; color: var(--ink); margin-bottom: 0.3em;
+    display: flex; align-items: center; gap: 0.5em;
+}
+.arch-card .icon {
+    width: 22px; height: 22px; border-radius: 6px;
+    display: grid; place-items: center;
+    font-family: 'Google Sans',sans-serif; font-weight: 700;
+    font-size: 0.68rem; color: #fff;
+    flex: 0 0 auto;
+}
+.arch-card.hi .icon { background: var(--g-blue); }
+.arch-card.no .icon { background: var(--gemini); }
+.arch-card.ptr .icon { background: var(--g-red); }
+.arch-card.pre .icon { background: var(--g-green); }
+.arch-card.org .icon { background: var(--g-yellow); color: #5c4300; }
+.arch-card.my .icon { background: var(--mint); }
+.arch-card.rt .icon { background: var(--ink); }
+.arch-card ul { list-style: none; display: flex; flex-direction: column; gap: 0.15em; }
+.arch-card li {
+    font-size: var(--tiny-size); color: var(--ink-soft); line-height: 1.35;
+    padding-left: 0.75em; position: relative;
+}
+.arch-card li::before { content: '·'; position: absolute; left: 0; color: var(--ink-mute); font-weight: 700; }
+.arch-card .status {
+    position: absolute; top: 8px; right: 8px;
+    font-size: 0.55rem; font-family: 'Google Sans',sans-serif;
+    padding: 2px 7px; border-radius: 999px;
+    font-weight: 700; letter-spacing: 0.05em;
+    display: inline-flex; align-items: center; gap: 0.25em;
+}
+.arch-card .status.ok { background: #e6f6ec; color: var(--g-green); }
+.arch-card .status.plan { background: #fff4cc; color: #a87a03; }
+
+/* Flow connector — SVG-like lines rendered with gradients */
+.arch-flow-connector {
+    position: relative;
+    height: clamp(20px, 3vh, 32px);
+    margin-left: calc(clamp(58px, 8vw, 92px) + clamp(0.6rem, 1.2vw, 1rem));
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: clamp(0.5rem, 1vw, 0.9rem);
+    align-items: stretch;
+    pointer-events: none;
+}
+.arch-flow-connector .ln {
+    position: relative;
+}
+.arch-flow-connector .ln::before {
+    content: ''; position: absolute;
+    left: 50%; top: 0; bottom: 0;
+    width: 2px; transform: translateX(-50%);
+    background: linear-gradient(180deg, currentColor 0%, rgba(0,0,0,0) 100%);
+    opacity: 0.45;
+}
+.arch-flow-connector .ln::after {
+    content: '';
+    position: absolute; left: 50%; bottom: -2px;
+    transform: translateX(-50%);
+    width: 0; height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid currentColor;
+    opacity: 0.55;
+}
+.arch-flow-connector .ln.hi { color: var(--g-blue); }
+.arch-flow-connector .ln.no { color: var(--gemini); }
+.arch-flow-connector .ln.ptr { color: var(--g-red); }
+.arch-flow-connector .ln.down { color: var(--ink-mute); }
+
+/* Consumers hint (below gallery) */
+.arch-consumers {
+    display: flex; justify-content: center; gap: 0.5em; align-items: center;
+    margin-top: clamp(0.35rem, 0.7vh, 0.6rem);
+    font-family: 'Google Sans', sans-serif; font-size: var(--tiny-size);
+    color: var(--ink-soft); font-weight: 600;
+}
+.arch-consumers .chip {
+    padding: 3px 10px; border-radius: 999px;
+    background: #f2f4fb; border: 1px solid var(--line); color: var(--ink);
+}
+.arch-consumers .sparkle {
+    width: 14px; height: 14px;
+    background: conic-gradient(from 0deg, var(--g-blue), var(--gemini), var(--g-red), var(--g-yellow), var(--g-green), var(--g-blue));
+    clip-path: polygon(50% 0%, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0% 50%, 40% 40%);
+}
+
+/* =========================================
+   PROMPT GUIDE (slide 18)
+   ========================================= */
+.prompt-compare {
+    display: grid; grid-template-columns: 1fr auto 1fr;
+    gap: clamp(0.6rem, 1.5vw, 1.2rem);
+    align-items: stretch;
+    margin-top: var(--content-gap);
+}
+.prompt-card {
+    background: #fff; border-radius: 16px;
+    padding: clamp(0.9rem, 1.8vw, 1.3rem);
+    border: 1px solid var(--line); box-shadow: var(--shadow-sm);
+    display: flex; flex-direction: column; gap: 0.5em;
+}
+.prompt-card.bad {
+    background: #fafafc; border: 1px dashed #c8ccda;
+}
+.prompt-card.good {
+    background: linear-gradient(135deg,#fdfbff 0%,#f4edff 100%);
+    border-color: #d9c9ff;
+}
+.prompt-card .p-hd {
+    display: flex; align-items: center; gap: 0.5em;
+    font-family: 'Google Sans',sans-serif; font-size: var(--small-size);
+    font-weight: 700;
+}
+.prompt-card.bad .p-hd { color: var(--g-red); }
+.prompt-card.good .p-hd { color: var(--gemini); }
+.prompt-card .p-hd .mark {
+    width: 22px; height: 22px; border-radius: 50%;
+    display: grid; place-items: center; color: #fff;
+    font-size: 0.75rem; font-weight: 700;
+}
+.prompt-card.bad .p-hd .mark { background: var(--g-red); }
+.prompt-card.good .p-hd .mark { background: var(--g-green); }
+.prompt-example {
+    font-family: 'Google Sans',sans-serif; font-size: var(--body-size);
+    color: var(--ink); line-height: 1.55; font-weight: 500;
+    padding: 0.7em 0.9em; border-radius: 10px;
+    background: rgba(255,255,255,0.7);
+    border: 1px solid var(--line);
+}
+.prompt-example .tag {
+    display: inline-block; font-size: 0.65rem;
+    font-family: 'Google Sans',sans-serif; font-weight: 700;
+    padding: 1px 7px; border-radius: 4px; margin-right: 0.3em;
+    letter-spacing: 0.04em;
+    vertical-align: baseline;
+}
+.prompt-example .tag.persona { background: #e3efff; color: var(--g-blue); }
+.prompt-example .tag.context { background: #fff4cc; color: #a87a03; }
+.prompt-example .tag.task { background: #e6f6ec; color: var(--g-green); }
+.prompt-example .tag.spec { background: #f0e9ff; color: var(--gemini); }
+.prompt-card .notes {
+    display: flex; flex-direction: column; gap: 0.3em;
+    font-size: var(--tiny-size); color: var(--ink-mute);
+    margin-top: 0.2em;
+}
+.prompt-card .notes span { display: flex; align-items: center; gap: 0.4em; }
+.prompt-arrow {
+    display: flex; align-items: center; justify-content: center;
+    font-size: clamp(1.4rem, 2.8vw, 2rem);
+    font-family: 'Google Sans',sans-serif; font-weight: 800;
+    background: var(--grad-gemini); -webkit-background-clip: text;
+    background-clip: text; color: transparent;
+}
+.four-elements {
+    margin-top: clamp(0.5rem, 1vh, 1rem);
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: clamp(0.5rem, 1vw, 0.9rem);
+}
+.four-el {
+    background: #fff; border-radius: 12px; border: 1px solid var(--line);
+    padding: clamp(0.6rem, 1.3vw, 1rem);
+    text-align: left;
+}
+.four-el .el-tag {
+    font-size: var(--tiny-size); font-weight: 700;
+    font-family: 'Google Sans',sans-serif; letter-spacing: 0.06em;
+    text-transform: uppercase; margin-bottom: 0.3em;
+}
+.four-el.persona .el-tag { color: var(--g-blue); }
+.four-el.context .el-tag { color: #a87a03; }
+.four-el.task .el-tag { color: var(--g-green); }
+.four-el.spec .el-tag { color: var(--gemini); }
+.four-el .el-ko { font-size: var(--body-size); font-weight: 700; color: var(--ink); margin-bottom: 0.25em; }
+.four-el .el-desc { font-size: var(--tiny-size); color: var(--ink-mute); line-height: 1.4; }
+</style>
+</head>
+<body>
+
+<!-- nav dots -->
+<div class="nav-dots" id="navDots"></div>
+<div class="keyboard-hint">← → · SPACE · SCROLL</div>
+
+<!-- ==========================================================
+     SLIDE 1 — TITLE
+     ========================================================== -->
+<section class="slide s-title" id="s1">
+    <div class="brand">Google Cloud · Gemini Enterprise</div>
+    <div class="brand-mark reveal d2">
+        <img src="assets/brand/gemini-brand-logo.png" alt="Gemini Enterprise 브랜드 로고" />
+    </div>
+    <div class="slide-content">
+        <div class="hero-rule reveal"></div>
+        <div class="hero-sup reveal d1">엔터프라이즈를 위한 에이전틱 AI 플랫폼</div>
+        <h1 class="hero-title reveal d2">
+            <span class="gradient">Gemini</span><br>
+            Enterprise
+        </h1>
+        <p class="hero-sub reveal d3">
+            조직의 지식·애플리케이션·전문가·에이전트를 하나의 인터페이스에서 연결하여,
+            업무 방식을 근본적으로 재설계하는 통합 AI 플랫폼.
+        </p>
+    </div>
+    <img class="gc-wordmark reveal d5" src="assets/brand/google-cloud-wordmark.png" alt="Google Cloud" />
+    <div class="page-num" style="right: auto; left: calc(var(--slide-padding));"><span class="cur">01</span> / 25</div>
+</section>
+
+<!-- ==========================================================
+     SLIDE 2 — WELCOME (from Playbook slides 3-4)
+     ========================================================== -->
+<section class="slide s-welcome" id="s2">
+    <div class="brand">Welcome · 본 가이드에 대하여</div>
+
+    <!-- Google 4-color banner strip (Playbook slide 4 top accent) -->
+    <img class="welcome-banner" src="assets/brand/google-4color-banner.png" alt="Google 4-color accent banner" />
+
+    <!-- Decorative Gemini sparkle (Playbook slide 3 hero mark) -->
+    <img class="welcome-sparkle" src="assets/brand/gemini-brand-logo.png" alt="" aria-hidden="true" />
+
+    <div class="slide-content">
+        <div class="split">
+            <div class="left-copy">
+                <div class="phase-tag reveal">Welcome to Gemini Enterprise</div>
+                <h2 class="reveal d1" style="margin-top:0.65em;">
+                    첫 날부터 가치를 <br>
+                    극대화하는 <br>
+                    <em>Gemini Enterprise</em><br>
+                    도입 가이드
+                </h2>
+                <p class="reveal d2">
+                    본 가이드는 조직 비전 수립부터 전사 확산까지,
+                    Gemini Enterprise를 <b>성공적으로 도입</b>할 수 있도록 소개합니다.
+                </p>
+            </div>
+            <div class="welcome-visual reveal d3">
+                <img src="assets/brand/gemini-welcome-animation.gif" alt="Gemini Enterprise welcome animation" />
+            </div>
+        </div>
+
+        <!-- Subtle tagline anchor (Playbook slide 3 subtitle) -->
+        <div class="welcome-tagline reveal d4">
+            <span class="tl-icon">✨</span>
+            <span>Let's get your team up, running, and excelling on Gemini Enterprise.</span>
+        </div>
+    </div>
+
+    <div class="page-num"><span class="cur">02</span> / 25</div>
+</section>
+
+<!-- ==========================================================
+     SLIDE 3 — PRODUCT OVERVIEW
+     ========================================================== -->
+<section class="slide" id="s3" style="background: linear-gradient(180deg,#fff 0%,#f6f8ff 100%);">
+    <div class="brand">Product Overview</div>
+    <div class="slide-content">
+        <div class="slide-header reveal">
+            <span class="idx eng">01</span><span class="dot"></span>
+            <div>
+                <div class="slide-kicker">What is Gemini Enterprise</div>
+                <div class="slide-title">하나의 화면에서 연결되는 <span class="accent">엔터프라이즈 AI</span></div>
+            </div>
+        </div>
+        <div class="twocol">
+            <div class="feature-stack">
+                <div class="feature-row reveal d1">
+                    <div class="idx-num">01</div>
+                    <div>
+                        <div class="t">통합 AI 인터페이스</div>
+                        <div class="s">Chat · NotebookLM · 엔터프라이즈 검색 · Agent가 하나의 워크스페이스에.</div>
+                    </div>
+                </div>
+                <div class="feature-row red reveal d2">
+                    <div class="idx-num">02</div>
+                    <div>
+                        <div class="t">사내 데이터 기반 답변</div>
+                        <div class="s">Workspace·Drive·Gmail 및 Salesforce·Jira·SharePoint 등 외부 시스템을 커넥터로 연결.</div>
+                    </div>
+                </div>
+                <div class="feature-row yellow reveal d3">
+                    <div class="idx-num">03</div>
+                    <div>
+                        <div class="t">No-code Agent Designer</div>
+                        <div class="s">자연어 지시만으로 누구나 업무용 에이전트를 설계·배포.</div>
+                    </div>
+                </div>
+                <div class="feature-row green reveal d4">
+                    <div class="idx-num">04</div>
+                    <div>
+                        <div class="t">엔터프라이즈급 거버넌스</div>
+                        <div class="s">CMEK·VPC-SC·Access Transparency와 통합된 보안·감사 기반.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="ui-frame reveal d2">
+                <div class="ui-caption">Gemini Enterprise UI 개요</div>
+                <img src="assets/ui/gemini-enterprise-ui-overview.png" alt="Gemini Enterprise 통합 UI 개요" />
+            </div>
+        </div>
+    </div>
+    <div class="page-num"><span class="cur">03</span> / 25</div>
+</section>
+
+<!-- ==========================================================
+     SLIDE 4 — Value growth
+     ========================================================== -->
+<section class="slide s-growth" id="s4">
+    <div class="brand">Value Over Time</div>
+    <div class="slide-content">
+        <div class="slide-header reveal">
+            <span class="idx eng">02</span><span class="dot"></span>
+            <div>
+                <div class="slide-kicker">Value Growth</div>
+                <div class="slide-title">도입 첫 날부터, 확장과 변혁까지 <span class="accent">기하급수적 가치</span></div>
+            </div>
+        </div>
+
+        <div class="phase-arrow reveal d1">
+            <span class="p active">Excite</span>→
+            <span class="p">Activate</span>→
+            <span class="p">Expand</span>→
+            <span class="p">Transform</span>
+        </div>
+
+        <div class="growth-track reveal d2">
+            <div class="growth-curve"></div>
+            <div class="growth-stages">
+                <div class="growth-col">
+                    <div class="head">Day 1 · OOTB</div>
+                    <ul>
+                        <li>보안 기반 Chat</li>
+                        <li>NotebookLM</li>
+                        <li>Pre-built / No-code Agent</li>
+                        <li>Workspace 통합 검색</li>
+                    </ul>
+                </div>
+                <div class="growth-col mid">
+                    <div class="head">Early Months</div>
+                    <ul>
+                        <li>3rd-party 데이터 검색</li>
+                        <li>커넥티드 Agent</li>
+                        <li>부서별 시범 도입</li>
+                    </ul>
+                </div>
+                <div class="growth-col right">
+                    <div class="head">Ongoing</div>
+                    <ul>
+                        <li>복합 업무 자동화 Agent</li>
+                        <li>자율 액션 실행</li>
+                        <li>워크플로우 재설계</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-num"><span class="cur">04</span> / 25</div>
+</section>
+
+<!-- ==========================================================
+     SLIDE 5 — Unified interface
+     ========================================================== -->
+<section class="slide" id="s5">
+    <div class="brand">Unified Interface</div>
+    <div class="slide-content">
+        <div class="slide-header reveal">
+            <span class="idx eng">03</span><span class="dot"></span>
+            <div>
+                <div class="slide-kicker">Integrated Workspace</div>
+                <div class="slide-title">하나의 화면, <span class="accent">모든 AI 도구</span></div>
+            </div>
+        </div>
+        <div class="ui-hero">
+            <div class="annot-list">
+                <div class="annot reveal d1"><div class="badge">01</div>
+                    <div><div class="t">Live Chat</div><div class="d">자연어로 데이터 질의·지시·요약</div></div>
+                </div>
+                <div class="annot red reveal d2"><div class="badge">02</div>
+                    <div><div class="t">No-code Agent</div><div class="d">사이드바에서 직접 커스텀 에이전트 호출</div></div>
+                </div>
+                <div class="annot yellow reveal d3"><div class="badge">03</div>
+                    <div><div class="t">Connectors</div><div class="d">Drive·Mail·Salesforce·Jira 데이터 접근</div></div>
+                </div>
+                <div class="annot green reveal d4"><div class="badge">04</div>
+                    <div><div class="t">Tools</div><div class="d">코드 실행·검색·생성 도구 인라인 실행</div></div>
+                </div>
+                <div class="annot purple reveal d5"><div class="badge">05</div>
+                    <div><div class="t">Model Selection</div><div class="d">작업 성격에 따라 Pro/Flash 모델 자동·수동 전환</div></div>
+                </div>
+            </div>
+            <div class="ui-frame reveal d2">
+                <div class="ui-caption">통합 인터페이스</div>
+                <img src="assets/ui/gemini-enterprise-ui-overview.png" alt="Gemini Enterprise 통합 인터페이스" />
+            </div>
+        </div>
+    </div>
+    <div class="page-num"><span class="cur">05</span> / 25</div>
+</section>
+
+<!-- ==========================================================
+     SLIDE 6 — Model selection
+     ========================================================== -->
+<section class="slide" id="s6" style="background: linear-gradient(135deg,#fafbff 0%,#f0f3ff 100%);">
+    <div class="brand">Model Selection</div>
+    <div class="slide-content">
+        <div class="slide-header reveal">
+            <span class="idx eng">04</span><span class="dot"></span>
+            <div>
+                <div class="slide-kicker">Intelligent Routing</div>
+                <div class="slide-title">작업에 맞는 <span class="accent">최적 모델을 자동 선택</span></div>
+            </div>
+        </div>
+        <div class="ui-hero">
+            <div class="screenshot reveal d1">
+                <div class="screenshot-cap">Model Selection UI</div>
+                <img src="assets/ui/gemini-model-selection-ui.png" alt="Gemini 모델 선택 UI" />
+            </div>
+            <div class="annot-list">
+                <div class="annot purple reveal d2"><div class="badge">A</div>
+                    <div><div class="t">Auto · 지능형 라우팅</div><div class="d">Gemini가 질문을 분석해 최적 모델을 자동 지정</div></div>
+                </div>
+                <div class="annot reveal d3"><div class="badge">P+</div>
+                    <div><div class="t">Gemini 3.1 Pro · Preview</div><div class="d">최고 수준의 추론 능력. 복잡한 분석과 의사결정에 적합</div></div>
+                </div>
+                <div class="annot red reveal d4"><div class="badge">F</div>
+                    <div><div class="t">Gemini 3 Flash · Preview</div><div class="d">속도 중심의 프런티어 지능, 빠른 대화·요약에 최적</div></div>
+                </div>
+                <div class="annot yellow reveal d5"><div class="badge">2.5</div>
+                    <div><div class="t">2.5 Pro / 2.5 Flash</div><div class="d">성숙한 일반 모델. 안정적 답변과 저지연 요구 환경</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-num"><span class="cur">06</span> / 25</div>
+</section>
+
+<!-- ==========================================================
+     SLIDE 7 — Connectors
+     ========================================================== -->
+<section class="slide" id="s7">
+    <div class="brand">Connectors</div>
+    <div class="slide-content">
+        <div class="slide-header reveal">
+            <span class="idx eng">05</span><span class="dot"></span>
+            <div>
+                <div class="slide-kicker">Data Access</div>
+                <div class="slide-title">사내 데이터에 <span class="accent">안전하게 연결</span></div>
+            </div>
+        </div>
+        <div class="ui-hero">
+            <div class="annot-list">
+                <div class="annot reveal d1"><div class="badge">G</div>
+                    <div><div class="t">Google Search</div><div class="d">공개 웹 검색과 내부 답변 결합</div></div>
+                </div>
+                <div class="annot green reveal d2"><div class="badge">D</div>
+                    <div><div class="t">Google Drive</div><div class="d">문서·스프레드시트·슬라이드 의미 기반 검색</div></div>
+                </div>
+                <div class="annot red reveal d3"><div class="badge">M</div>
+                    <div><div class="t">Gmail</div><div class="d">메일 컨텍스트를 대화·작성에 활용</div></div>
+                </div>
+                <div class="annot yellow reveal d4"><div class="badge">3rd</div>
+                    <div><div class="t">Salesforce · Jira · Box · SharePoint</div><div class="d">Pre-built 커넥터로 외부 SaaS 연결, 권한·감사 기반 접근</div></div>
+                </div>
+                <div class="annot purple reveal d5"><div class="badge">RBAC</div>
+                    <div><div class="t">권한 기반 접근</div><div class="d">원본 권한을 존중하는 Row-level security 자동 적용</div></div>
+                </div>
+            </div>
+            <div class="screenshot reveal d2">
+                <div class="screenshot-cap">Connector Toggle</div>
+                <img src="assets/ui/gemini-connector-enable-disable-ui.png" alt="커넥터 활성화 UI" />
+            </div>
+        </div>
+    </div>
+    <div class="page-num"><span class="cur">07</span> / 25</div>
+</section>
+
+<!-- ==========================================================
+     SLIDE 8 — Data source selection
+     ========================================================== -->
+<section class="slide" id="s8" style="background: linear-gradient(180deg,#fff 0%,#f4f7ff 100%);">
+    <div class="brand">Tools & Sources</div>
+    <div class="slide-content">
+        <div class="slide-header reveal">
+            <span class="idx eng">06</span><span class="dot"></span>
+            <div>
+                <div class="slide-kicker">Multi-modal Actions</div>
+                <div class="slide-title">대화 창에서 <span class="accent">검색·생성·분석을 한 번에</span></div>
+            </div>
+        </div>
+        <div class="ui-hero">
+            <div class="screenshot reveal d1">
+                <div class="screenshot-cap">Data Source Selector</div>
+                <img src="assets/ui/gemini-data-source-selection-ui.png" alt="데이터 소스 선택 UI" />
+            </div>
+            <div class="annot-list">
+                <div class="annot reveal d2"><div class="badge">S</div>
+                    <div><div class="t">Search company data</div><div class="d">커넥터로 연결된 사내 데이터만을 대상으로 질의</div></div>
+                </div>
+                <div class="annot red reveal d3"><div class="badge">G</div>
+                    <div><div class="t">Search Google</div><div class="d">공개 웹 검색으로 최신 정보 확보</div></div>
+                </div>
+                <div class="annot yellow reveal d4"><div class="badge">IMG</div>
+                    <div><div class="t">Generate images</div><div class="d">프롬프트 기반 이미지 자산 생성</div></div>
+                </div>
+                <div class="annot purple reveal d5"><div class="badge">VEO</div>
+                    <div><div class="t">Create videos · Veo 3.1</div><div class="d">짧은 영상 생성까지 동일 인터페이스에서</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-num"><span class="cur">08</span> / 25</div>
+</section>
+
+<!-- ==========================================================
+     SLIDE 9 — Agent Types overview (No-code focus)
+     ========================================================== -->
+<section class="slide" id="s9">
+    <div class="brand">No-code Agent · 개요</div>
+    <div class="slide-content">
+        <div class="slide-header reveal">
+            <span class="idx eng">07</span><span class="dot"></span>
+            <div>
+                <div class="slide-kicker">Agent Taxonomy</div>
+                <div class="slide-title">Gemini Enterprise의 <span class="accent">4가지 Agent 유형</span></div>
+            </div>
+        </div>
+        <div class="agent-types">
+            <div class="atype reveal d1">
+                <div class="label">Pre-built</div>
+                <h4>Made by Google</h4>
+                <p>NotebookLM 등 Google이 검증·제공하는 에이전트. 설정 없이 즉시 사용.</p>
+                <span class="pill">Day 1 사용</span>
+            </div>
+            <div class="atype b reveal d2">
+                <div class="label">No-code / Low-code</div>
+                <h4>Agent Designer</h4>
+                <p>자연어 지시만으로 누구나 업무 에이전트를 생성·공유. 개발 지식 불필요.</p>
+                <span class="pill">가장 빠른 현업 확산</span>
+            </div>
+            <div class="atype c reveal d3">
+                <div class="label">Hi-code · Custom</div>
+                <h4>ADK · Conversational Agents</h4>
+                <p>Agent Developer Kit과 Vertex AI 기반으로 조직 전용 복합 에이전트 구축.</p>
+                <span class="pill">Transform 단계</span>
+            </div>
+            <div class="atype d reveal d4">
+                <div class="label">Partner / Marketplace</div>
+                <h4>Partner Agents</h4>
+                <p>Agent Garden·Marketplace에서 검증된 파트너 에이전트를 즉시 도입.</p>
+                <span class="pill">Q4 '25 확장</span>
+            </div>
+        </div>
+        <p class="reveal d5" style="margin-top: var(--content-gap); font-size: var(--small-size); color: var(--ink-mute); max-width: 70ch;">
+            모든 에이전트는 Agent Registry에 등록되어 관리되며, Agents gallery에서 조직 구성원이 검색·활용할 수 있습니다.
+        </p>
+    </div>
+    <div class="page-num"><span class="cur">09</span> / 25</div>
+</section>
+
+<!-- ==========================================================
+     SLIDE 10 — Agent Architecture (Playbook slide 22)
+     ========================================================== -->
+<section class="slide" id="s10a" style="background: linear-gradient(180deg,#fff 0%,#f4f7ff 100%);">
+    <div class="brand">Agent Architecture</div>
+    <div class="slide-content">
+        <div class="slide-header reveal">
+            <span class="idx eng">08</span><span class="dot"></span>
+            <div>
+                <div class="slide-kicker">Types of Agents in Gemini Enterprise</div>
+                <div class="slide-title">하나의 플랫폼, <span class="accent">세 가지 생산 경로</span></div>
+            </div>
+        </div>
+
+        <!-- Registry-wrapped architecture shell -->
+        <div class="arch-shell reveal d1">
+            <!-- Color legend -->
+            <div class="arch-legend">
+                <span><i class="lg-dot hi"></i>Hi-code</span>
+                <span><i class="lg-dot no"></i>No / Low-code</span>
+                <span><i class="lg-dot ptr"></i>Partner</span>
+            </div>
+
+            <!-- Layer 1: Produce -->
+            <div class="arch-layer reveal d2">
+                <div class="layer-label">
+                    <div class="layer-num">01</div>
+                    <div class="layer-tag">Produce</div>
+                </div>
+                <div class="layer-body">
+                    <div class="arch-card hi">
+                        <span class="status ok">✓ Approved</span>
+                        <div class="head"><span class="icon">&lt;/&gt;</span>Hi-code</div>
+                        <ul>
+                            <li>Agent Developer Kit (ADK)</li>
+                            <li>Conversational Agents</li>
+                            <li>Langgraph · CrewAI</li>
+                        </ul>
+                    </div>
+                    <div class="arch-card no">
+                        <span class="status ok">✓ Approved</span>
+                        <div class="head"><span class="icon">✨</span>No / Low-code</div>
+                        <ul>
+                            <li>Agent Designer (내장)</li>
+                            <li>Conversational Agents</li>
+                            <li>자연어 기반 생성</li>
+                        </ul>
+                    </div>
+                    <div class="arch-card ptr">
+                        <span class="status plan">◷ Q4 '25</span>
+                        <div class="head"><span class="icon">◎</span>Partner</div>
+                        <ul>
+                            <li>Marketplace 파트너 Agent</li>
+                            <li>검증된 외부 자산 도입</li>
+                            <li>빠른 산업별 템플릿</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flow connector: 3 colored lines merging down -->
+            <div class="arch-flow-connector reveal d3">
+                <div class="ln hi"></div>
+                <div class="ln no"></div>
+                <div class="ln ptr"></div>
+            </div>
+
+            <!-- Layer 2: Runtime -->
+            <div class="arch-layer runtime reveal d3">
+                <div class="layer-label">
+                    <div class="layer-num">02</div>
+                    <div class="layer-tag">Runtime</div>
+                </div>
+                <div class="layer-body">
+                    <div class="arch-card rt">
+                        <div class="head"><span class="icon">⚙</span>Agent Runtime Engine</div>
+                        <ul>
+                            <li>Vertex AI Agent Engine과 연결</li>
+                            <li>배포 · 모니터링 · 텔레메트리</li>
+                        </ul>
+                    </div>
+                    <div class="arch-card rt">
+                        <div class="head"><span class="icon">❀</span>Agent Garden</div>
+                        <ul>
+                            <li>샘플 Agent · 레퍼런스 코드</li>
+                            <li>Hi-code 팀의 빠른 시작점</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flow connector: single gray arrow down into gallery -->
+            <div class="arch-flow-connector reveal d4" style="grid-template-columns: 1fr 1fr 1fr;">
+                <div class="ln down"></div>
+                <div class="ln down"></div>
+                <div class="ln down"></div>
+            </div>
+
+            <!-- Layer 3: Gallery -->
+            <div class="arch-layer reveal d5">
+                <div class="layer-label">
+                    <div class="layer-num">03</div>
+                    <div class="layer-tag">Gallery</div>
+                </div>
+                <div class="layer-body">
+                    <div class="arch-card pre">
+                        <div class="head"><span class="icon">G</span>Pre-built Agents</div>
+                        <ul>
+                            <li>Google 공식 (예: NotebookLM)</li>
+                            <li>Day 1 즉시 사용 가능</li>
+                        </ul>
+                    </div>
+                    <div class="arch-card org">
+                        <div class="head"><span class="icon">O</span>Organization Agents</div>
+                        <ul>
+                            <li>조직 Custom (예: Salesforce)</li>
+                            <li>부서 · 기능별 공유 자산</li>
+                        </ul>
+                    </div>
+                    <div class="arch-card my">
+                        <div class="head"><span class="icon">M</span>My Agents</div>
+                        <ul>
+                            <li>개인이 생성한 Agent</li>
+                            <li>조직 자산으로 승격 가능</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Consumer hint -->
+            <div class="arch-consumers reveal d6">
+                <span class="sparkle"></span>
+                <span>사용자가 소비하는 지점</span>
+                <span class="chip">Gemini Enterprise UI</span>
+            </div>
+        </div>
+    </div>
+    <div class="page-num"><span class="cur">10</span> / 25</div>
+</section>
+
+<!-- ==========================================================
+     SLIDE 11 — Agent Designer
+     ========================================================== -->
+<section class="slide" id="s10" style="background: linear-gradient(135deg,#fdfbff 0%,#f1ecff 100%);">
+    <div class="brand">No-code Agent · Designer</div>
+    <div class="slide-content">
+        <div class="slide-header reveal">
+            <span class="idx eng">09</span><span class="dot"></span>
+            <div>
+                <div class="slide-kicker">Agent Designer</div>
+                <div class="slide-title"><span class="accent">자연어</span>로 에이전트를 설계하다</div>
+            </div>
+        </div>
+        <div class="ui-hero">
+            <div class="screenshot reveal d1">
+                <div class="screenshot-cap">Agent Designer</div>
+                <img src="assets/ui/gemini-agent-designer-ui.png" alt="Agent Designer UI" />
+            </div>
+            <div class="annot-list">
+                <div class="annot purple reveal d2"><div class="badge">01</div>
+                    <div><div class="t">목적을 문장으로 설명</div><div class="d">"이메일을 매일 오전 요약해 줘" 처럼 바로 입력</div></div>
+                </div>
+                <div class="annot reveal d3"><div class="badge">02</div>
+                    <div><div class="t">예제 템플릿 선택</div><div class="d">이메일 요약 · 캘린더 차단 · 문서 Q&A 등 프리셋 제공</div></div>
+                </div>
+                <div class="annot yellow reveal d4"><div class="badge">03</div>
+                    <div><div class="t">Proceed to Builder</div><div class="d">복잡한 로직이 필요하면 Builder에서 세부 튜닝</div></div>
+                </div>
+                <div class="annot green reveal d5"><div class="badge">✓</div>
+                    <div><div class="t">비개발자 친화적</div><div class="d">업무 담당자가 직접 소유·개선하는 "Citizen Developer" 모델</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-num"><span class="cur">11</span> / 25</div>
+</section>
+
+<!-- ==========================================================
+     SLIDE 11 — Agent Builder flow
+     ========================================================== -->
+<section class="slide" id="s11">
+    <div class="brand">No-code Agent · Builder</div>
+    <div class="slide-content">
+        <div class="slide-header reveal">
+            <span class="idx eng">10</span><span class="dot"></span>
+            <div>
+                <div class="slide-kicker">Multi-agent Orchestration</div>
+                <div class="slide-title">Root 에이전트 + 전문 <span class="accent">Sub-agent 구조</span></div>
+            </div>
+        </div>
+        <div class="ui-hero">
+            <div class="annot-list">
+                <div class="annot purple reveal d1"><div class="badge">F</div>
+                    <div><div class="t">Flow · 시각적 에이전트 설계</div><div class="d">Root Agent 아래에 Sub-agent를 드래그로 배치</div></div>
+                </div>
+                <div class="annot reveal d2"><div class="badge">M</div>
+                    <div><div class="t">Model</div><div class="d">Gemini 3.1 Pro 등 워크로드별 모델 지정</div></div>
+                </div>
+                <div class="annot green reveal d3"><div class="badge">C</div>
+                    <div><div class="t">Connectors</div><div class="d">Google Docs · Gmail · BigQuery · Jira · Notion 연결</div></div>
+                </div>
+                <div class="annot yellow reveal d4"><div class="badge">K</div>
+                    <div><div class="t">Knowledge</div><div class="d">참고 파일 업로드로 정확도 향상</div></div>
+                </div>
+                <div class="annot red reveal d5"><div class="badge">I</div>
+                    <div><div class="t">Instructions</div><div class="d">에이전트가 지켜야 할 정책·톤·절차를 문장으로 지시</div></div>
+                </div>
+            </div>
+            <div class="screenshot reveal d2">
+                <div class="screenshot-cap">Agent Builder Flow</div>
+                <img src="assets/ui/gemini-agent-builder-flow-ui.png" alt="Agent Builder Flow UI" />
+            </div>
+        </div>
+    </div>
+    <div class="page-num"><span class="cur">12</span> / 25</div>
+</section>
+
+<!-- ==========================================================
+     SLIDE 12 — Scheduling
+     ========================================================== -->
+<section class="slide" id="s12" style="background: linear-gradient(180deg,#fff 0%,#f0f7ff 100%);">
+    <div class="brand">No-code Agent · Schedule</div>
+    <div class="slide-content">
+        <div class="slide-header reveal">
+            <span class="idx eng">11</span><span class="dot"></span>
+            <div>
+                <div class="slide-kicker">Automation</div>
+                <div class="slide-title">에이전트를 <span class="accent">스케줄로 자동 실행</span></div>
+            </div>
+        </div>
+        <div class="ui-hero">
+            <div class="screenshot reveal d1">
+                <div class="screenshot-cap">Schedule · Cron Job</div>
+                <img src="assets/ui/gemini-agent-scheduling-ui.png" alt="Agent 스케줄링 UI" />
+            </div>
+            <div class="annot-list">
+                <div class="annot reveal d2"><div class="badge">R</div>
+                    <div><div class="t">Repeat Frequency</div><div class="d">분·시·일·주·월·연 단위 반복 실행 설정</div></div>
+                </div>
+                <div class="annot yellow reveal d3"><div class="badge">TZ</div>
+                    <div><div class="t">Timezone</div><div class="d">KST (GMT+09:00 Seoul) 지원, 글로벌 환경 대응</div></div>
+                </div>
+                <div class="annot green reveal d4"><div class="badge">P</div>
+                    <div><div class="t">Triggering Prompt</div><div class="d">스케줄 시점에 실행할 지시어를 사전에 저장</div></div>
+                </div>
+                <div class="annot purple reveal d5"><div class="badge">⚡</div>
+                    <div><div class="t">활용 예</div><div class="d">매일 9시 전날 이슈 요약 · 주간 영업 파이프라인 리포트 생성</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-num"><span class="cur">13</span> / 25</div>
+</section>
+
+<!-- ==========================================================
+     SLIDE 13 — Agent Management (list)
+     ========================================================== -->
+<section class="slide" id="s13">
+    <div class="brand">Agent Management</div>
+    <div class="slide-content">
+        <div class="slide-header reveal">
+            <span class="idx eng">12</span><span class="dot"></span>
+            <div>
+                <div class="slide-kicker">Agent Gallery</div>
+                <div class="slide-title">Agents Gallery로 <span class="accent">조직 자산 관리</span></div>
+            </div>
+        </div>
+        <div class="ui-hero">
+            <div class="annot-list">
+                <div class="annot reveal d1"><div class="badge">G</div>
+                    <div><div class="t">Made by Google</div><div class="d">NotebookLM 등 Google 공식 에이전트</div></div>
+                </div>
+                <div class="annot red reveal d2"><div class="badge">ORG</div>
+                    <div><div class="t">From your organization</div><div class="d">사내 Custom Agent — 예: Salesforce Agent (Sandbox)</div></div>
+                </div>
+                <div class="annot purple reveal d3"><div class="badge">ME</div>
+                    <div><div class="t">Your agents</div><div class="d">개인이 만든 에이전트를 같은 인터페이스에서 관리·공유</div></div>
+                </div>
+                <div class="annot yellow reveal d4"><div class="badge">+</div>
+                    <div><div class="t">New Agent</div><div class="d">우측 상단 한 번의 클릭으로 새 에이전트 생성</div></div>
+                </div>
+                <div class="annot green reveal d5"><div class="badge">R</div>
+                    <div><div class="t">Agent Registry</div><div class="d">모든 에이전트가 등록·승인·버전 관리됨</div></div>
+                </div>
+            </div>
+            <div class="screenshot reveal d2">
+                <div class="screenshot-cap">Agent List</div>
+                <img src="assets/ui/gemini-agent-list-ui.png" alt="Agent 목록 UI" />
+            </div>
+        </div>
+    </div>
+    <div class="page-num"><span class="cur">14</span> / 25</div>
+</section>
+
+<!-- ==========================================================
+     SLIDE 14 — Vertex AI Agent Engine
+     ========================================================== -->
+<section class="slide" id="s14" style="background: linear-gradient(135deg,#fafbff 0%,#eef2ff 100%);">
+    <div class="brand">Enterprise Ops</div>
+    <div class="slide-content">
+        <div class="slide-header reveal">
+            <span class="idx eng">13</span><span class="dot"></span>
+            <div>
+                <div class="slide-kicker">Vertex AI Agent Engine</div>
+                <div class="slide-title">배포·모니터링·거버넌스를 위한 <span class="accent">엔터프라이즈 관제</span></div>
+            </div>
+        </div>
+        <div class="ui-hero">
+            <div class="screenshot reveal d1">
+                <div class="screenshot-cap">Vertex AI Agent Engine</div>
+                <img src="assets/ui/vertex-ai-agent-engine-ui.png" alt="Vertex AI Agent Engine UI" />
+            </div>
+            <div class="annot-list">
+                <div class="annot reveal d2"><div class="badge">D</div>
+                    <div><div class="t">Develop · Deploy</div><div class="d">Agent 코드와 설정을 패키징하고 CI/CD로 배포</div></div>
+                </div>
+                <div class="annot red reveal d3"><div class="badge">R</div>
+                    <div><div class="t">Registry</div><div class="d">Salesforce Agent · GCP Docs Finder · jw_medicine_flow 등 조직 자산 중앙 관리</div></div>
+                </div>
+                <div class="annot yellow reveal d4"><div class="badge">T</div>
+                    <div><div class="t">Telemetry</div><div class="d">각 에이전트의 성능·오류율·지연 실시간 모니터링</div></div>
+                </div>
+                <div class="annot green reveal d5"><div class="badge">I</div>
+                    <div><div class="t">Identity & Access</div><div class="d">서비스 계정 기반 권한 관리, 감사 로그 연동</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-num"><span class="cur">15</span> / 25</div>
+</section>
+
+<!-- ==========================================================
+     SLIDE 15 — Salesforce Custom Agent example
+     ========================================================== -->
+<section class="slide" id="s15">
+    <div class="brand">Custom Agent · 사례</div>
+    <div class="slide-content">
+        <div class="slide-header reveal">
+            <span class="idx eng">14</span><span class="dot"></span>
+            <div>
+                <div class="slide-kicker">Use Case · Salesforce</div>
+                <div class="slide-title">영업 현장의 <span class="accent">세일즈포스 에이전트</span></div>
+            </div>
+        </div>
+        <div class="ui-hero" style="grid-template-columns: 0.8fr 1.2fr;">
+            <div>
+                <div class="phase-tag red reveal d1">Problem</div>
+                <p class="reveal d2" style="margin-top:0.6em; font-size: var(--body-size); color: var(--ink-soft);">
+                    영업 담당자는 CRM 조회·리포트 추출·파이프라인 요약에 하루 수시간을 소모합니다.
+                </p>
+                <div class="phase-tag gemini reveal d3" style="margin-top: 1.2em;">Solution</div>
+                <p class="reveal d4" style="margin-top:0.6em; font-size: var(--body-size); color: var(--ink-soft);">
+                    세일즈포스 커스텀 에이전트가 자연어 질문을 SOQL로 변환해 로그인 사용자·영업 기회·계약을 즉시 조회·요약합니다.
+                </p>
+                <div class="phase-tag green reveal d5" style="margin-top: 1.2em;">Impact</div>
+                <ul class="reveal d6" style="margin-top:0.5em; list-style:none; font-size: var(--small-size); color: var(--ink);">
+                    <li>✓ 파이프라인 조회 시간 <b>90% 단축</b></li>
+                    <li>✓ 담당자가 즉시 의사결정에 필요한 정보 확보</li>
+                    <li>✓ Multi-Currency(KRW) 정규화 자동 처리</li>
+                </ul>
+            </div>
+            <div class="screenshot reveal d2">
+                <div class="screenshot-cap">세일즈포스 에이전트 대화</div>
+                <img src="assets/ui/salesforce-agent-example.png" alt="세일즈포스 Agent 대화 예시" />
+            </div>
+        </div>
+    </div>
+    <div class="page-num"><span class="cur">16</span> / 25</div>
+</section>
+
+<!-- ==========================================================
+     SLIDE 16 — Custom Agent Prompt Instruction
+     ========================================================== -->
+<section class="slide" id="s16" style="background: linear-gradient(135deg,#fff 0%,#fff5f5 100%);">
+    <div class="brand">Custom Agent · Prompt</div>
+    <div class="slide-content">
+        <div class="slide-header reveal">
+            <span class="idx eng">15</span><span class="dot"></span>
+            <div>
+                <div class="slide-kicker">Instruction Design</div>
+                <div class="slide-title">Custom Agent의 <span class="accent">프롬프트 설계</span></div>
+            </div>
+        </div>
+        <div class="ui-hero" style="grid-template-columns: 1.2fr 0.8fr;">
+            <div class="screenshot reveal d1">
+                <div class="screenshot-cap">Prompt Instruction 예시</div>
+                <img src="assets/ui/custom-agent-prompt-instruction-example.png" alt="Custom Agent 프롬프트 지시문 예시" />
+            </div>
+            <div class="annot-list">
+                <div class="annot red reveal d2"><div class="badge">P</div>
+                    <div><div class="t">Persona</div><div class="d">"당신은 시니어 영업 관리자"처럼 역할 지정</div></div>
+                </div>
+                <div class="annot yellow reveal d3"><div class="badge">C</div>
+                    <div><div class="t">Context</div><div class="d">첨부 문서·SOQL 규칙 등 사전 맥락 제공</div></div>
+                </div>
+                <div class="annot purple reveal d4"><div class="badge">T</div>
+                    <div><div class="t">Task</div><div class="d">명확한 수행 과제와 결과 형식 지정</div></div>
+                </div>
+                <div class="annot green reveal d5"><div class="badge">S</div>
+                    <div><div class="t">Specificity</div><div class="d">SELECT 컬럼·LIMIT·date 필드 등 구체적 제약</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-num"><span class="cur">17</span> / 25</div>
+</section>
+
+<!-- ==========================================================
+     SLIDE 18 — Prompting Best Practices (Playbook slide 34)
+     ========================================================== -->
+<section class="slide" id="s16b" style="background: linear-gradient(180deg,#fff 0%,#f7f3ff 100%);">
+    <div class="brand">Prompting Best Practices</div>
+    <div class="slide-content">
+        <div class="slide-header reveal">
+            <span class="idx eng">16</span><span class="dot"></span>
+            <div>
+                <div class="slide-kicker">Prompting Best Practices · 모든 사용자 대상</div>
+                <div class="slide-title">좋은 프롬프트의 <span class="accent">4가지 조건</span></div>
+            </div>
+        </div>
+
+        <div class="prompt-compare">
+            <!-- Weak Prompt -->
+            <div class="prompt-card bad reveal d1">
+                <div class="p-hd"><span class="mark">✗</span>Weak Prompt</div>
+                <div class="prompt-example">
+                    "프로젝트 계획 만들어줘"
+                </div>
+                <div class="notes">
+                    <span>· 역할(Persona) 지정 없음</span>
+                    <span>· 참조할 맥락(Context) 누락</span>
+                    <span>· 산출물 형식(Specificity) 불명</span>
+                    <span>· 범위·기간이 모호</span>
+                </div>
+            </div>
+
+            <!-- Arrow -->
+            <div class="prompt-arrow reveal d2">→</div>
+
+            <!-- Powerful Prompt -->
+            <div class="prompt-card good reveal d3">
+                <div class="p-hd"><span class="mark">✓</span>Powerful Prompt</div>
+                <div class="prompt-example">
+                    <span class="tag persona">Persona</span>당신은 시니어 프로젝트 매니저입니다.
+                    <span class="tag context">Context</span>첨부 문서의 맥락을 사용하세요.
+                    <span class="tag task">Task</span>이번 분기 신규 앱 런칭을 위한 프로젝트 계획을 만들어 주세요.
+                    <span class="tag spec">Specificity</span><b>Task · Owner · Due Date</b> 컬럼을 가진 표 형식으로 출력하세요.
+                </div>
+                <div class="notes">
+                    <span style="color: var(--g-green); font-weight:600;">✓ 역할 · 맥락 · 과제 · 형식이 모두 명확</span>
+                    <span>· 출력 포맷이 일관되고 후속 활용 용이</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="four-elements">
+            <div class="four-el persona reveal d3">
+                <div class="el-tag">Persona</div>
+                <div class="el-ko">역할 지정</div>
+                <div class="el-desc">"당신은 ~ 전문가" — Gemini가 어떤 관점과 어조로 답할지 결정</div>
+            </div>
+            <div class="four-el context reveal d4">
+                <div class="el-tag">Context</div>
+                <div class="el-ko">맥락 제공</div>
+                <div class="el-desc">첨부 문서·이전 대화·업무 배경 — 정확도의 핵심 요소</div>
+            </div>
+            <div class="four-el task reveal d5">
+                <div class="el-tag">Task</div>
+                <div class="el-ko">과제 명확화</div>
+                <div class="el-desc">수행해야 할 동작을 하나의 문장으로 분명하게 기술</div>
+            </div>
+            <div class="four-el spec reveal d6">
+                <div class="el-tag">Specificity</div>
+                <div class="el-ko">구체적 제약</div>
+                <div class="el-desc">형식·길이·컬럼·톤·언어 등 세부 요건을 명시</div>
+            </div>
+        </div>
+    </div>
+    <div class="page-num"><span class="cur">18</span> / 25</div>
+</section>
+
+<!-- ==========================================================
+     SLIDE 19 — Industry: Telecommunications
+     ========================================================== -->
+<section class="slide" id="s17">
+    <div class="brand">Industry · Telecom</div>
+    <div class="slide-content">
+        <div class="slide-header reveal">
+            <span class="idx eng">17</span><span class="dot"></span>
+            <div>
+                <div class="slide-kicker">Industry · Telecom</div>
+                <div class="slide-title">산업별 사용 사례 ① <span class="accent">통신</span></div>
+            </div>
+        </div>
+        <!-- Journey axis header -->
+        <div class="ind-journey reveal d1">
+            <div class="jrn-axis"><span>성숙도</span><span class="arr"></span></div>
+            <div class="ind-stage-label a"><span class="dots"><i></i></span>Activate</div>
+            <div class="ind-stage-label e"><span class="dots"><i></i><i></i></span>Expand</div>
+            <div class="ind-stage-label t"><span class="dots"><i></i><i></i><i></i></span>Transform</div>
+        </div>
+
+        <div class="ind-row reveal d2">
+            <div class="ind-usecase"><div class="ic">🎧</div><div class="nm">고객센터 상담</div></div>
+            <div class="ind-stage a"><span class="depth"><i></i><i></i><i></i></span>리텐션 오퍼·정책·로열티 FAQ를 문서 기반으로 즉시 제공</div>
+            <div class="ind-stage e"><span class="depth"><i></i><i></i><i></i></span>CRM·티켓·통화 이력 실시간 요약, 고위험 프로파일 플래그</div>
+            <div class="ind-stage t"><span class="depth"><i></i><i></i><i></i></span>CRM·네트워크 품질 모니터링으로 이탈 예측 + 자동 리텐션 오퍼</div>
+        </div>
+
+        <div class="ind-row reveal d3">
+            <div class="ind-usecase"><div class="ic">💼</div><div class="nm">B2B Deal Desk</div></div>
+            <div class="ind-stage a"><span class="depth"><i></i><i></i><i></i></span>가격표·호환성·표준 계약 조항 자동 검색</div>
+            <div class="ind-stage e"><span class="depth"><i></i><i></i><i></i></span>표준 번들 구성·유효성 검증·가격 계산 자동화</div>
+            <div class="ind-stage t"><span class="depth"><i></i><i></i><i></i></span>멀티 에이전트가 맞춤형 기술·상업 제안서 실시간 생성</div>
+        </div>
+
+        <div class="ind-row reveal d4">
+            <div class="ind-usecase"><div class="ic">🔧</div><div class="nm">현장 엔지니어 지원</div></div>
+            <div class="ind-stage a"><span class="depth"><i></i><i></i><i></i></span>설치·안전·수리 체크리스트 음성/텍스트 호출</div>
+            <div class="ind-stage e"><span class="depth"><i></i><i></i><i></i></span>디스패치 정보 제공, 부품 주문·이슈 에스컬레이션</div>
+            <div class="ind-stage t"><span class="depth"><i></i><i></i><i></i></span>경로 최적화·AI 진단·부품 주문·완료 보고 자동화</div>
+        </div>
+
+        <div class="ind-row reveal d5">
+            <div class="ind-usecase"><div class="ic">⚡</div><div class="nm">서비스 프로비저닝</div></div>
+            <div class="ind-stage a"><span class="depth"><i></i><i></i><i></i></span>프로비저닝 단계·리드타임·문제 해결 가이드 탐색</div>
+            <div class="ind-stage e"><span class="depth"><i></i><i></i><i></i></span>OMS 상태 추적, 병목 식별, 다음 단계 제안</div>
+            <div class="ind-stage t"><span class="depth"><i></i><i></i><i></i></span>멀티 벤더·도메인 시스템 자율 오케스트레이션 + 테스트</div>
+        </div>
+    </div>
+    <div class="page-num"><span class="cur">19</span> / 25</div>
+</section>
+
+<!-- ==========================================================
+     SLIDE 18 — Industry: Retail & Financial Services
+     ========================================================== -->
+<section class="slide" id="s18" style="background: linear-gradient(180deg,#fff 0%,#fff9ee 100%);">
+    <div class="brand">Industry · Retail & Finance</div>
+    <div class="slide-content">
+        <div class="slide-header reveal">
+            <span class="idx eng">18</span><span class="dot"></span>
+            <div>
+                <div class="slide-kicker">Industry · Retail & Finance</div>
+                <div class="slide-title">산업별 사용 사례 ② <span class="accent">리테일 · 금융</span></div>
+            </div>
+        </div>
+
+        <!-- Journey axis header -->
+        <div class="ind-journey reveal d1">
+            <div class="jrn-axis"><span>성숙도</span><span class="arr"></span></div>
+            <div class="ind-stage-label a"><span class="dots"><i></i></span>Activate</div>
+            <div class="ind-stage-label e"><span class="dots"><i></i><i></i></span>Expand</div>
+            <div class="ind-stage-label t"><span class="dots"><i></i><i></i><i></i></span>Transform</div>
+        </div>
+
+        <div class="ind-section-label retail reveal d2">🏪 Retail</div>
+        <div class="ind-row reveal d2">
+            <div class="ind-usecase"><div class="ic">🏬</div><div class="nm">스토어 운영</div></div>
+            <div class="ind-stage a"><span class="depth"><i></i><i></i><i></i></span>매장 SOP·업데이트를 문서에서 즉시 조회</div>
+            <div class="ind-stage e"><span class="depth"><i></i><i></i><i></i></span>SharePoint 가이드라인 + Jira 이슈 통합 검색</div>
+            <div class="ind-stage t"><span class="depth"><i></i><i></i><i></i></span>매출 영향에 따라 일일 매장 작업 우선순위화</div>
+        </div>
+        <div class="ind-row reveal d3">
+            <div class="ind-usecase"><div class="ic">📦</div><div class="nm">재고 · 발주</div></div>
+            <div class="ind-stage a"><span class="depth"><i></i><i></i><i></i></span>현재 재고·일반적 이슈 대화형 조회</div>
+            <div class="ind-stage e"><span class="depth"><i></i><i></i><i></i></span>SharePoint·ServiceNow 발주 흐름 자동화</div>
+            <div class="ind-stage t"><span class="depth"><i></i><i></i><i></i></span>Jira·시장 데이터 연동 자동 조달 에이전트</div>
+        </div>
+
+        <div class="ind-section-label fin reveal d4">💰 Financial Services</div>
+        <div class="ind-row reveal d5">
+            <div class="ind-usecase"><div class="ic">📋</div><div class="nm">SOP 편차 탐지</div></div>
+            <div class="ind-stage a"><span class="depth"><i></i><i></i><i></i></span>SOP 문서 업로드해 표준 시나리오 대비 편차 식별</div>
+            <div class="ind-stage e"><span class="depth"><i></i><i></i><i></i></span>SOP와 실제 처리 내역 자동 비교·편차 리포트 생성</div>
+            <div class="ind-stage t"><span class="depth"><i></i><i></i><i></i></span>SOP 편차·불일치 지속 모니터링 에이전트</div>
+        </div>
+        <div class="ind-row reveal d6">
+            <div class="ind-usecase"><div class="ic">⚖️</div><div class="nm">규제 동반자</div></div>
+            <div class="ind-stage a"><span class="depth"><i></i><i></i><i></i></span>금감원·SEBI·RBI 신규 규제 요약</div>
+            <div class="ind-stage e"><span class="depth"><i></i><i></i><i></i></span>기존 운영과 신규 규제 차이 자동 비교</div>
+            <div class="ind-stage t"><span class="depth"><i></i><i></i><i></i></span>규제 영향 분석·대응 변경 제안 자율 에이전트</div>
+        </div>
+    </div>
+    <div class="page-num"><span class="cur">20</span> / 25</div>
+</section>
+
+<!-- ==========================================================
+     SLIDE 19 — Industry: Healthcare
+     ========================================================== -->
+<section class="slide" id="s19">
+    <div class="brand">Industry · Healthcare</div>
+    <div class="slide-content">
+        <div class="slide-header reveal">
+            <span class="idx eng">19</span><span class="dot"></span>
+            <div>
+                <div class="slide-kicker">Industry · Healthcare & Life Sciences</div>
+                <div class="slide-title">산업별 사용 사례 ③ <span class="accent">헬스케어 · 생명과학</span></div>
+            </div>
+        </div>
+        <!-- Journey axis header -->
+        <div class="ind-journey reveal d1">
+            <div class="jrn-axis"><span>성숙도</span><span class="arr"></span></div>
+            <div class="ind-stage-label a"><span class="dots"><i></i></span>Activate</div>
+            <div class="ind-stage-label e"><span class="dots"><i></i><i></i></span>Expand</div>
+            <div class="ind-stage-label t"><span class="dots"><i></i><i></i><i></i></span>Transform</div>
+        </div>
+
+        <div class="ind-row reveal d2">
+            <div class="ind-usecase"><div class="ic">🏥</div><div class="nm">환자 이력 요약</div></div>
+            <div class="ind-stage a"><span class="depth"><i></i><i></i><i></i></span>의료 이력 요약 + 주요 관심 영역 플래그</div>
+            <div class="ind-stage e"><span class="depth"><i></i><i></i><i></i></span>최근 방문·검사 기반 다음 단계 권고 생성</div>
+            <div class="ind-stage t"><span class="depth"><i></i><i></i><i></i></span>환자 데이터·분석·의사 인계 자동 처리 에이전트</div>
+        </div>
+
+        <div class="ind-row reveal d3">
+            <div class="ind-usecase"><div class="ic">💊</div><div class="nm">신약 개발 가속</div></div>
+            <div class="ind-stage a"><span class="depth"><i></i><i></i><i></i></span>개발 중 약물 관련 논문 자동 수집</div>
+            <div class="ind-stage e"><span class="depth"><i></i><i></i><i></i></span>기존 약물 데이터·연구 결과 비교 분석</div>
+            <div class="ind-stage t"><span class="depth"><i></i><i></i><i></i></span>신약 개발 수명주기 전반을 돕는 멀티 에이전트</div>
+        </div>
+
+        <div class="ind-row reveal d4">
+            <div class="ind-usecase"><div class="ic">📄</div><div class="nm">보험 청구 심사</div></div>
+            <div class="ind-stage a"><span class="depth"><i></i><i></i><i></i></span>청구서 검토·레드플래그·불일치 식별</div>
+            <div class="ind-stage e"><span class="depth"><i></i><i></i><i></i></span>수신 청구 요약·리스크 스코어 자동 부여</div>
+            <div class="ind-stage t"><span class="depth"><i></i><i></i><i></i></span>청구 처리 자동화 + 근거 기반 권고 생성</div>
+        </div>
+
+        <div class="ind-row reveal d5">
+            <div class="ind-usecase"><div class="ic">🧪</div><div class="nm">랩 업무 효율</div></div>
+            <div class="ind-stage a"><span class="depth"><i></i><i></i><i></i></span>실험실 운영 문서 요약·빠른 조회</div>
+            <div class="ind-stage e"><span class="depth"><i></i><i></i><i></i></span>랩 데이터 해석 + 종사자용 요약 제공</div>
+            <div class="ind-stage t"><span class="depth"><i></i><i></i><i></i></span>가설 제안·결과 해석·학습 피드백 에이전트</div>
+        </div>
+    </div>
+    <div class="page-num"><span class="cur">21</span> / 25</div>
+</section>
+
+<!-- ==========================================================
+     SLIDE 20 — 4-phase adoption roadmap
+     ========================================================== -->
+<section class="slide" id="s20" style="background: linear-gradient(180deg,#fff 0%,#f6f8ff 100%);">
+    <div class="brand">Adoption Framework</div>
+    <div class="slide-content">
+        <div class="slide-header reveal">
+            <span class="idx eng">20</span><span class="dot"></span>
+            <div>
+                <div class="slide-kicker">Proven Adoption Framework</div>
+                <div class="slide-title">4단계 <span class="accent">도입 프레임워크</span></div>
+            </div>
+        </div>
+        <div class="roadmap">
+            <div class="phase-card reveal d1">
+                <div class="bullet">0</div>
+                <h4>Excite</h4>
+                <div class="ko">도입 준비</div>
+                <ul>
+                    <li>비전·범위·롤아웃 전략 수립</li>
+                    <li>Adoption 팀 구성</li>
+                    <li>최소 배포 환경(MVD) 구축</li>
+                    <li>워크숍: 일·주 단위</li>
+                </ul>
+            </div>
+            <div class="phase-card b reveal d2">
+                <div class="bullet">1</div>
+                <h4>Activate</h4>
+                <div class="ko">초기 활성화</div>
+                <ul>
+                    <li>Chat·Pre-built·No-code Agent 활용</li>
+                    <li>스타터 키트·공지 배포</li>
+                    <li>IT·파트너 1차 통합</li>
+                    <li>초기 커뮤니티 구축</li>
+                </ul>
+            </div>
+            <div class="phase-card c reveal d3">
+                <div class="bullet">2</div>
+                <h4>Expand</h4>
+                <div class="ko">확장</div>
+                <ul>
+                    <li>신규 데이터 소스 통합</li>
+                    <li>복잡한 에이전트 롤아웃</li>
+                    <li>Agent 거버넌스 정비</li>
+                    <li>월 단위 정기 리뷰</li>
+                </ul>
+            </div>
+            <div class="phase-card d reveal d4">
+                <div class="bullet">3</div>
+                <h4>Transform</h4>
+                <div class="ko">변혁</div>
+                <ul>
+                    <li>인기 유스케이스를 정규 앱으로</li>
+                    <li>워크플로우·조직 재설계</li>
+                    <li>산업·직무별 Thought Leadership</li>
+                    <li>딥다이브 워크숍</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="page-num"><span class="cur">22</span> / 25</div>
+</section>
+
+<!-- ==========================================================
+     SLIDE 21 — Success metrics + Learning path
+     ========================================================== -->
+<section class="slide" id="s21">
+    <div class="brand">Success & Learning</div>
+    <div class="slide-content">
+        <div class="slide-header reveal">
+            <span class="idx eng">21</span><span class="dot"></span>
+            <div>
+                <div class="slide-kicker">Measure & Grow</div>
+                <div class="slide-title">성공 지표와 <span class="accent">학습 경로</span></div>
+            </div>
+        </div>
+        <div class="kpi-grid">
+            <div class="kpi reveal d1">
+                <div class="big">01</div>
+                <div class="lbl">Active Users</div>
+                <div class="desc">일·주 단위 활성 사용자 비율 — 도입 확산의 핵심 지표</div>
+            </div>
+            <div class="kpi reveal d2">
+                <div class="big">02</div>
+                <div class="lbl">Automation Rate</div>
+                <div class="desc">사람 개입 없이 완료된 작업 비율 — 자동화의 실제 효과</div>
+            </div>
+            <div class="kpi reveal d3">
+                <div class="big">03</div>
+                <div class="lbl">Cycle Time ↓</div>
+                <div class="desc">프로세스 시작~완료까지 시간 단축 — 효율성 가시화</div>
+            </div>
+            <div class="kpi reveal d4">
+                <div class="big">04</div>
+                <div class="lbl">Agent Velocity</div>
+                <div class="desc">분기당 생산 배포된 신규 에이전트 수 — 조직 역량</div>
+            </div>
+        </div>
+        <div class="learn-path">
+            <div class="course-list reveal d5">
+                <h5>Generative AI Leader 학습 경로</h5>
+                <ol>
+                    <li><span>Gen AI: Beyond the Chatbot</span><span class="time">1.5 H</span></li>
+                    <li><span>Gen AI: Unlock Foundational Concepts</span><span class="time">1.0 H</span></li>
+                    <li><span>Gen AI: Navigate the Landscape</span><span class="time">1.25 H</span></li>
+                    <li><span>Gen AI Apps: Transform Your Work</span><span class="time">1.75 H</span></li>
+                    <li><span>Gen AI Agents: Transform Your Organization</span><span class="time">2.25 H</span></li>
+                </ol>
+            </div>
+            <div class="cert-box reveal d6">
+                <div class="lbl">Certification</div>
+                <h4>Generative AI<br>Leader</h4>
+                <p>2일 집중 과정 수료 후 인증. Gemini Enterprise 핵심 사용자 및 리더 양성을 위한 Google 공식 인증입니다.</p>
+            </div>
+        </div>
+    </div>
+    <div class="page-num"><span class="cur">23</span> / 25</div>
+</section>
+
+<!-- ==========================================================
+     SLIDE 24 — Resources Part 1: Product & Features (6 cards, 3x2)
+     ========================================================== -->
+<section class="slide" id="s22" style="background: linear-gradient(180deg,#fff 0%,#f4f1ff 100%);">
+    <div class="brand">Resources · Product</div>
+    <div class="slide-content">
+        <div class="slide-header reveal">
+            <span class="idx eng">22</span><span class="dot"></span>
+            <div>
+                <div class="slide-kicker">Official Resources · 1 of 2</div>
+                <div class="slide-title">제품 · 기능 <span class="accent">공식 리소스</span></div>
+            </div>
+        </div>
+        <div class="link-grid">
+            <a class="link-card reveal d1" href="https://cloud.google.com/gemini-enterprise" target="_blank" rel="noopener">
+                <div class="cat">Overview</div>
+                <h5>Gemini Enterprise Product</h5>
+                <p>제품 개요·에디션 비교·FAQ</p>
+                <div class="go">방문 →</div>
+            </a>
+            <a class="link-card reveal d1" href="https://docs.cloud.google.com/gemini/enterprise/docs" target="_blank" rel="noopener">
+                <div class="cat">Docs</div>
+                <h5>What is Gemini Enterprise?</h5>
+                <p>사용 사례·주요 기능 · Standard/Plus 에디션 기술 문서</p>
+                <div class="go">방문 →</div>
+            </a>
+            <a class="link-card reveal d2" href="https://cloud.google.com/gemini-enterprise/agents" target="_blank" rel="noopener">
+                <div class="cat">Feature</div>
+                <h5>Gemini Enterprise Agents</h5>
+                <p>Google · 커스텀 · 파트너 Agent 소개</p>
+                <div class="go">방문 →</div>
+            </a>
+            <a class="link-card reveal d2" href="https://docs.cloud.google.com/gemini/enterprise/docs/agent-designer" target="_blank" rel="noopener">
+                <div class="cat">No-code</div>
+                <h5>Agent Designer</h5>
+                <p>No-code / Low-code 빌더 공식 가이드</p>
+                <div class="go">방문 →</div>
+            </a>
+            <a class="link-card reveal d3" href="https://docs.cloud.google.com/gemini/enterprise/docs/agents-overview" target="_blank" rel="noopener">
+                <div class="cat">No-code</div>
+                <h5>Agents Overview</h5>
+                <p>에이전트 타입·관리·상태</p>
+                <div class="go">방문 →</div>
+            </a>
+            <a class="link-card reveal d3" href="https://cloud.google.com/gemini-enterprise/resources" target="_blank" rel="noopener">
+                <div class="cat">Hub</div>
+                <h5>Resources Hub</h5>
+                <p>FAQ·문서·가이드 모음</p>
+                <div class="go">방문 →</div>
+            </a>
+        </div>
+    </div>
+    <div class="page-num"><span class="cur">24</span> / 25</div>
+</section>
+
+<!-- ==========================================================
+     SLIDE 25 — Resources Part 2: Guides & Support (3 cards + closing)
+     ========================================================== -->
+<section class="slide" id="s23" style="background: linear-gradient(135deg,#fdfbff 0%,#efe8ff 100%);">
+    <div class="brand">Resources · Guides & Support</div>
+    <div class="slide-content">
+        <div class="slide-header reveal">
+            <span class="idx eng">23</span><span class="dot"></span>
+            <div>
+                <div class="slide-kicker">Official Resources · 2 of 2</div>
+                <div class="slide-title">가이드 · 지원 <span class="accent">리소스</span></div>
+            </div>
+        </div>
+        <div class="link-grid">
+            <a class="link-card reveal d1" href="https://cloud.google.com/gemini-enterprise/resources/prompt-guide" target="_blank" rel="noopener">
+                <div class="cat">Prompting</div>
+                <h5>Prompt Guide</h5>
+                <p>역할·산업별 프롬프트 예시 — 사용자 대상 실전 가이드</p>
+                <div class="go">방문 →</div>
+            </a>
+            <a class="link-card reveal d2" href="https://support.google.com/g#topic=16539341" target="_blank" rel="noopener">
+                <div class="cat">Business</div>
+                <h5>Business Edition Help</h5>
+                <p>Business 에디션 사용자 지원 센터</p>
+                <div class="go">방문 →</div>
+            </a>
+            <a class="link-card reveal d3" href="https://cloud.google.com/learn/certification/generative-ai-leader" target="_blank" rel="noopener">
+                <div class="cat">Learning</div>
+                <h5>Generative AI Leader</h5>
+                <p>공식 인증 · 리더 및 핵심 사용자용 학습 경로</p>
+                <div class="go">방문 →</div>
+            </a>
+        </div>
+        <div class="closing reveal d5" style="margin-top: clamp(1rem, 3vh, 2rem);">
+            <h2>Your <span class="accent">AI Journey</span> Starts Now</h2>
+            <p style="margin-top: 0.8em; font-size: var(--body-size); color: var(--ink-soft);">
+                궁금한 점이 있으시면 담당자에게 문의하세요.
+            </p>
+            <p class="reveal d6" style="margin-top: clamp(0.8rem, 2vh, 1.5rem); font-size: var(--tiny-size); color: var(--ink-mute);">
+                © Google Cloud Gemini Enterprise · Customer Adoption Playbook 기반 한국어 소개 자료
+            </p>
+        </div>
+    </div>
+    <div class="page-num"><span class="cur">25</span> / 25</div>
+</section>
+
+<script>
+/* ===========================================================
+   NAV DOTS & REVEAL
+   =========================================================== */
+const slides = document.querySelectorAll('.slide');
+const nav = document.getElementById('navDots');
+for (const [i, s] of slides.entries()) {
+    const a = document.createElement('a');
+    a.href = `#${s.id}`;
+    a.title = `Slide ${i + 1}`;
+    nav.appendChild(a);
+}
+const dots = nav.querySelectorAll('a');
+
+/* Reveal + active-dot tracking via IntersectionObserver */
+const io = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+        if (!e.isIntersecting) continue;
+        const slide = e.target;
+        for (const el of slide.querySelectorAll('.reveal')) el.classList.add('visible');
+        const idx = Array.from(slides).indexOf(slide);
+        for (const [i, d] of dots.entries()) d.classList.toggle('active', i === idx);
+    }
+}, { threshold: 0.35 });
+for (const s of slides) io.observe(s);
+
+/* Keyboard navigation */
+function currentIndex() {
+    const y = window.scrollY + window.innerHeight / 2;
+    let best = 0;
+    let bestDist = Infinity;
+    for (const [i, s] of slides.entries()) {
+        const r = s.getBoundingClientRect();
+        const c = r.top + window.scrollY + r.height / 2;
+        const d = Math.abs(c - y);
+        if (d < bestDist) { bestDist = d; best = i; }
+    }
+    return best;
+}
+function go(i) {
+    i = Math.max(0, Math.min(slides.length - 1, i));
+    slides[i].scrollIntoView({ behavior: 'smooth' });
+}
+document.addEventListener('keydown', (e) => {
+    if (['ArrowDown','ArrowRight','PageDown',' '].includes(e.key)) { e.preventDefault(); go(currentIndex() + 1); }
+    else if (['ArrowUp','ArrowLeft','PageUp'].includes(e.key)) { e.preventDefault(); go(currentIndex() - 1); }
+    else if (e.key === 'Home') { go(0); }
+    else if (e.key === 'End') { go(slides.length - 1); }
+});
+</script>
+</body>
+</html>
