@@ -2,7 +2,6 @@
 title: "Vertex AI Agent Engine PSC Private 구성 가이드"
 date: 2026-04-13
 tags: ["GCP", "PSC", "Private Service Connect", "Vertex AI Agent Engine", "Vertex AI", "Network Attachment"]
-categories: ["GCP Deep Dive"]
 series: ["PSA/PSC Guide"]
 series_order: 8
 summary: "Private Service Connect의 세 가지 유형(Endpoints, Backends, Interfaces)과 Vertex AI Agent Engine의 PSC Interface 구성 방법 및 네트워크 아키텍처를 설명합니다."

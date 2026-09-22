@@ -2,7 +2,6 @@
 title: "PSA IP 할당 및 Cache 메커니즘"
 date: 2026-03-26
 tags: ["GCP", "PSA", "VPC", "IP Management"]
-categories: ["GCP Deep Dive"]
 series: ["PSA/PSC Guide"]
 series_order: 2
 summary: "PSA의 IP 할당, 재할당, 회수 메커니즘 Deep Dive — 삭제 지연(TTL), Allocation Ratio 모니터링"

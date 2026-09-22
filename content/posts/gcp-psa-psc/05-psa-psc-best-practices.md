@@ -2,7 +2,6 @@
 title: "PSA vs PSC Best Practice"
 date: 2026-03-26
 tags: ["GCP", "PSA", "PSC", "Private Service Connect", "Best Practice"]
-categories: ["GCP Deep Dive"]
 series: ["PSA/PSC Guide"]
 series_order: 5
 summary: "PSA와 PSC를 어떻게 구분하여 사용하는지에 대한 Best Practice — 의사결정 플로우 포함"

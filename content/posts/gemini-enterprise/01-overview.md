@@ -2,7 +2,6 @@
 title: "Gemini Enterprise 개요와 4가지 Agent 유형"
 date: 2026-04-14
 tags: ["GCP", "Gemini", "Gemini Enterprise", "AI Agent"]
-categories: ["GCP Deep Dive"]
 series: ["Gemini Enterprise"]
 series_order: 1
 summary: "Gemini Enterprise의 통합 엔터프라이즈 AI 화면, 4가지 Agent 유형, 그리고 No-Code Agent Builder의 핵심을 슬라이드와 함께 정리"

@@ -2,7 +2,6 @@
 title: "PSA Policy Release 메커니즘"
 date: 2026-04-13
 tags: ["GCP", "PSA", "Private Service Access", "VPC", "IP Allocation"]
-categories: ["GCP Deep Dive"]
 series: ["PSA/PSC Guide"]
 series_order: 9
 summary: "PSA 할당 IP 대역을 임의로 해제했을 때의 동작 메커니즘, Warning 상태의 의미, 그리고 대응 방안을 상세히 분석합니다."

@@ -2,7 +2,6 @@
 title: "PSA 서비스별 Prefix IP Range"
 date: 2026-03-26
 tags: ["GCP", "PSA", "Cloud SQL", "Memorystore", "Filestore", "AlloyDB"]
-categories: ["GCP Deep Dive"]
 series: ["PSA/PSC Guide"]
 series_order: 4
 summary: "Cloud SQL, Memorystore, Filestore, AlloyDB 등 GCP 관리형 서비스별 PSA IP 범위 요구 사항 정리"

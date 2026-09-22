@@ -137,6 +137,12 @@ class SiteTests(unittest.TestCase):
         self.assertTrue(refresh)
         self.assertIn("url=https://kktae.github.io/", refresh[0].attrs["content"].lower())
 
+        for relative in ["categories/index.html", "categories/gcp-deep-dive/index.html"]:
+            category_alias = Document((self.output / relative).read_text(encoding="utf-8"))
+            refresh = category_alias.find("meta", **{"http-equiv": "refresh"})
+            self.assertTrue(refresh, relative)
+            self.assertIn("url=https://kktae.github.io/posts/", refresh[0].attrs["content"].lower())
+
     def test_search_and_seo_descriptions_remain_available(self):
         home = self.page("/")
         self.assertFalse(home.find(cls="post-summary"))
@@ -164,11 +170,15 @@ class SiteTests(unittest.TestCase):
             description,
         )
 
+        search = self.page("/search/")
+        self.assertEqual(search.find("meta", name="robots")[0].attrs["content"], "noindex, follow")
+
     def test_metadata_and_rss_are_valid(self):
         for route in ["/", ARTICLE]:
             doc = self.page(route)
             self.assertTrue(doc.find("link", rel="canonical"))
             self.assertTrue(doc.find("meta", property="og:title"))
+            self.assertEqual(doc.find("meta", property="og:locale")[0].attrs["content"], "ko")
             for script in doc.find("script", type="application/ld+json"):
                 self.assertIsInstance(json.loads(script.text), (dict, list))
 
@@ -207,6 +217,7 @@ class SiteTests(unittest.TestCase):
         }
         self.assertEqual(actual, expected)
         self.assertFalse(any("/references/" in path for path in self.docs))
+        self.assertNotIn("/categories/", (self.output / "sitemap.xml").read_text(encoding="utf-8"))
 
         for relative, doc in self.docs.items():
             if (

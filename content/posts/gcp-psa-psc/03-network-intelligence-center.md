@@ -2,7 +2,6 @@
 title: "Network Intelligence Center와 PSA 모니터링"
 date: 2026-03-26
 tags: ["GCP", "Network Intelligence Center", "PSA", "Monitoring"]
-categories: ["GCP Deep Dive"]
 series: ["PSA/PSC Guide"]
 series_order: 3
 summary: "Network Intelligence Center의 PSA 관련 기능, 서브넷 가시성 제한 사항, 실무 활용 가이드"

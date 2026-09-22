@@ -2,7 +2,6 @@
 title: "Proxy-Only Subnet & Envoy Proxy Deep Dive"
 date: 2026-04-13
 tags: ["GCP", "Load Balancer", "Load Balancing", "Envoy Proxy", "Proxy-Only Subnet", "Internal Application Load Balancer"]
-categories: ["GCP Deep Dive"]
 series: ["PSA/PSC Guide"]
 series_order: 7
 summary: "GCP Envoy 기반 Load Balancer의 핵심인 Proxy-Only Subnet 메커니즘과 Envoy Proxy의 동작 원리, Scale Out 구조를 상세히 분석합니다."

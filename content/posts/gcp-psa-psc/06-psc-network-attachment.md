@@ -2,7 +2,6 @@
 title: "PSC Network Attachment 및 Connection Policy"
 date: 2026-03-26
 tags: ["GCP", "PSC", "Network Attachment", "Connection Policy"]
-categories: ["GCP Deep Dive"]
 series: ["PSA/PSC Guide"]
 series_order: 6
 summary: "PSC의 Network Attachment 개념과 Connection Policy의 관계 Deep Dive"

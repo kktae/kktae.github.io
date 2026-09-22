@@ -2,7 +2,6 @@
 title: "PSA 구성 시 주의 사항"
 date: 2026-03-26
 tags: ["GCP", "PSA", "VPC", "Private Service Access"]
-categories: ["GCP Deep Dive"]
 series: ["PSA/PSC Guide"]
 series_order: 1
 summary: "Private Service Access(PSA) 구성 시 IP Range 선택, 삭제 순서, Multi-producer 격리 등 반드시 확인할 주의 사항"
