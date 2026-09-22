@@ -1,3 +1,4 @@
 ---
 title: "Home"
+aliases: ["/about/"]
 ---

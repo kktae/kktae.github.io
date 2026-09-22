@@ -1,5 +1,5 @@
 <footer class="site-footer">
-  <span>© {{ now.Year }} {{ site.Params.homeInfoParams.Title }}</span>
+  <span>© {{ now.Year }} {{ site.Params.author }}</span>
   <nav aria-label="보조 메뉴">
     {{- range site.Menus.footer }}
     <a href="{{ .URL }}">{{ .Name }}</a>

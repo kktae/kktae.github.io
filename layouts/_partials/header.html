@@ -1,5 +1,8 @@
 <header class="site-header">
-  <a class="site-name" href="{{ site.Home.RelPermalink }}">{{ site.Title }}</a>
+  <a class="site-name" href="{{ site.Home.RelPermalink }}">
+    <img class="site-avatar" src="{{ "images/avatar-72.webp" | relURL }}" width="36" height="36" alt="" decoding="async" fetchpriority="high">
+    {{ site.Title }}
+  </a>
   <nav aria-label="주 메뉴">
     {{- range site.Menus.main }}
     {{- $active := or ($.IsMenuCurrent "main" .) ($.HasMenuCurrent "main" .) }}

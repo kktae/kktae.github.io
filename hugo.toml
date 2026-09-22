@@ -38,9 +38,6 @@ ignoreFiles = ['(^|/)references(/|$)']
 
   author = "kktae"
 
-  [params.homeInfoParams]
-    Title = "kktae"
-    Content = "Cloud & Infrastructure Engineer — GCP, Kubernetes, SRE"
 
   [params.fuseOpts]
     threshold = 0.35
@@ -58,11 +55,6 @@ ignoreFiles = ['(^|/)references(/|$)']
   name = "시리즈"
   pageRef = "/series"
   weight = 20
-[[menus.main]]
-  identifier = "about"
-  name = "소개"
-  pageRef = "/about"
-  weight = 30
 [[menus.main]]
   identifier = "search"
   name = "검색"

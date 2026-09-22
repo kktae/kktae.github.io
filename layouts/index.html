@@ -1,18 +1,13 @@
 {{ define "main" }}
 <div class="reading-width">
-  <header class="home-intro">
-    <h1>{{ site.Params.homeInfoParams.Title }}</h1>
-    <p class="intro-role">{{ site.Params.homeInfoParams.Content }}</p>
-    <p>{{ site.Params.description }}</p>
-  </header>
   <section aria-labelledby="recent-posts">
     <div class="section-heading">
-      <h2 id="recent-posts">최근 글</h2>
+      <h1 id="recent-posts">최근 글</h1>
       <a href="{{ (site.GetPage "/posts").RelPermalink }}">전체 글 →</a>
     </div>
     {{- $posts := where (partial "posts.html" .) "Params.hiddenInHomeList" "ne" true -}}
     {{- range first site.Params.homePostLimit $posts.ByDate.Reverse -}}
-      {{- partial "post-row.html" . -}}
+      {{- partial "post-row-compact.html" . -}}
     {{- end }}
   </section>
 </div>

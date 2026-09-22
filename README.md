@@ -58,6 +58,9 @@ series_order: 1
 ```
 
 홈에는 `params.homePostLimit`만큼 최신 글을 표시하며, 전체 글은 `/posts/`에서 페이지별로 탐색합니다. 기존 URL 회귀 테스트는 신규 글 수를 제한하지 않습니다.
+홈의 글 목록은 제목과 날짜·읽기 시간만 표시하는 compact row를 사용합니다. 게시글 `summary` 데이터는 삭제하지 않고 `/posts/`, 검색 index, RSS, 개별 글 `meta description`, Open Graph/Twitter description에 그대로 유지해 검색·공유용 설명 정보는 보존합니다.
+헤더의 사이트 브랜드는 36px(모바일 32px) 아바타와 `kktae.io`를 하나의 홈 링크로 묶습니다. 홈의 별도 프로필 블록은 두지 않고 바로 최신 글로 시작하며, `소개` 메뉴와 별도 소개 페이지도 제거했습니다. 기존 `/about/` URL은 외부 링크 호환을 위해 홈으로 리다이렉트합니다. 아바타는 72px WebP 한 장만 배포합니다.
+본문 목차는 저장된 선호가 없으면 기본 펼침으로 렌더링합니다. 사용자가 접거나 다시 펼치면 `localStorage`의 `pref-toc-open`에 저장해 같은 브라우저의 다음 방문과 새로고침에서도 상태를 유지합니다.
 태그 상세 URL은 기존 링크 호환을 위해 유지하되 `/tags/` 목록에는 `params.curatedTags`의 상위 주제만 표시합니다. 글이 하나뿐인 세부 태그 페이지는 `noindex`로 처리해 검색엔진의 thin taxonomy 노출을 줄입니다.
 
 `content/**/references/`는 작업 자료용입니다. `.gitignore`뿐 아니라 Hugo의 `ignoreFiles`에서도 제외하므로 페이지·RSS·검색 결과로 공개되지 않습니다. 게시용 이미지와 파일은 `static/` 또는 게시글의 page bundle에 둡니다.
@@ -98,6 +101,6 @@ GitHub Actions는 PR에서 테스트와 엄격 빌드를 실행하고, `main`에
 
 ## 검증 범위
 
-최종 리팩토링 검증에서 빌드 회귀 테스트 28개와 Fuse 경계 테스트 8개를 실행했습니다. Mac의 Ego Chromium에서는 19개 시나리오 그룹으로 반응형 화면(320/390/768/1440px), 44px 모바일 탐색 터치 영역, 검색과 한글 조합 입력, 네트워크 실패 및 재시도, 게시글 10개와 Mermaid 12개, 테마 전환, 클립보드 성공/실패 UI, 인쇄 스타일, 최적화된 슬라이드 video, ARIA slide navigation, reduced-motion, iframe 및 키보드 이동을 검증했습니다.
+최종 리팩토링 검증에서 빌드 회귀 테스트 32개와 Fuse 경계 테스트 8개를 실행했습니다. Mac의 Ego Chromium에서는 23개 시나리오 그룹으로 반응형 화면(320/390/768/1440px), 3개 주 메뉴, 헤더 브랜드 아바타(36px/32px), 프로필 중복 제거, 홈 summary 제거와 `/posts/` summary 유지, 기본 펼침 목차와 브라우저별 펼침/접힘 상태 저장, `/about/` 홈 리다이렉트, 44px 모바일 탐색 터치 영역, 검색과 한글 조합 입력, 네트워크 실패 및 재시도, 게시글 10개와 Mermaid 12개, 테마 전환, 클립보드 성공/실패 UI, 인쇄 스타일, 최적화된 슬라이드 video, ARIA slide navigation, reduced-motion, iframe 및 키보드 이동을 검증했습니다.
 
-인쇄 검증은 Chromium의 print 미디어 에뮬레이션이며, 실제 프린터/PDF 페이지 나눔과 Safari·Firefox·Windows 렌더링은 별도 확인 대상입니다. GitHub Actions와 dependency-audit workflow는 로컬과 동일한 고정 런타임·검증 명령을 사용하도록 구성했지만, 작업 브랜치의 원격 workflow 실행 자체는 아직 수행하지 않았습니다.
+인쇄 검증은 Chromium의 print 미디어 에뮬레이션이며, 실제 프린터/PDF 페이지 나눔과 Safari·Firefox·Windows 렌더링은 별도 확인 대상입니다. GitHub Actions와 dependency-audit workflow는 고정 런타임·검증 명령을 사용하며, 현재 로컬 아바타/홈 단순화 변경은 아직 원격 배포하지 않았습니다.

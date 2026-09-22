@@ -21,13 +21,24 @@ if (themeButton) {
   });
 }
 
-const toc = document.querySelector('[data-responsive-toc]');
+const toc = document.querySelector('[data-persistent-toc]');
 if (toc) {
-  // Keep this breakpoint aligned with 20-article.css.
-  const wide = matchMedia('(min-width: 1200px)');
-  const resizeToc = () => { toc.open = wide.matches; };
-  resizeToc();
-  wide.addEventListener('change', resizeToc);
+  const tocPreferenceKey = 'pref-toc-open';
+  try {
+    const saved = localStorage.getItem(tocPreferenceKey);
+    if (saved === 'open') toc.open = true;
+    else if (saved === 'closed') toc.open = false;
+  } catch { /* Keep the default expanded state. */ }
+
+  toc.addEventListener('toggle', () => {
+    try { localStorage.setItem(tocPreferenceKey, toc.open ? 'open' : 'closed'); } catch { /* Keep the in-page preference. */ }
+  });
+
+  window.addEventListener('storage', (event) => {
+    if (event.key !== tocPreferenceKey) return;
+    if (event.newValue === 'open') toc.open = true;
+    else if (event.newValue === 'closed') toc.open = false;
+  });
 
   const sections = [...toc.querySelectorAll('a[href^="#"]')].flatMap((link) => {
     try {

@@ -24,16 +24,46 @@ try {
   await go('/');
   await page.evaluate(() => { localStorage.setItem('pref-theme', 'light'); });
   await go('/');
-  const home = await page.evaluate(() => ({ count: document.querySelectorAll('article.post-row').length, menus: [...document.querySelectorAll('nav[aria-label="주 메뉴"] a')].map(n=>n.textContent), width: document.documentElement.scrollWidth, viewport: innerWidth, background: getComputedStyle(document.body).backgroundColor }));
+  const home = await page.evaluate(() => {
+    const brand = document.querySelector('.site-name');
+    const avatar = document.querySelector('.site-avatar');
+    return {
+      count: document.querySelectorAll('article.post-row').length,
+      menus: [...document.querySelectorAll('nav[aria-label="주 메뉴"] a')].map(n=>n.textContent),
+      width: document.documentElement.scrollWidth,
+      viewport: innerWidth,
+      background: getComputedStyle(document.body).backgroundColor,
+      brand: { text: brand?.textContent.trim(), avatarWidth: avatar?.getBoundingClientRect().width, avatarHeight: avatar?.getBoundingClientRect().height, avatarSrc: avatar?.currentSrc, targetHeight: brand?.getBoundingClientRect().height },
+      hasHomeProfile: Boolean(document.querySelector('.home-profile')),
+      recentHeading: document.querySelector('#recent-posts')?.tagName,
+      summaryCount: document.querySelectorAll('.post-summary').length,
+    };
+  });
   assert.equal(home.count, 6);
-  assert.deepEqual(home.menus, ['글', '시리즈', '소개', '검색']);
+  assert.deepEqual(home.menus, ['글', '시리즈', '검색']);
   assert.ok(home.width <= home.viewport);
   assert.equal(home.background, 'rgb(255, 255, 255)');
+  assert.equal(home.brand.text, 'kktae.io');
+  assert.equal(home.brand.avatarWidth, 36);
+  assert.equal(home.brand.avatarHeight, 36);
+  assert.ok(home.brand.avatarSrc.endsWith('avatar-72.webp'));
+  assert.ok(home.brand.targetHeight >= 44);
+  assert.equal(home.hasHomeProfile, false);
+  assert.equal(home.recentHeading, 'H1');
+  assert.equal(home.summaryCount, 0);
   check('desktop home', home);
   await capture('new-home-desktop');
+  await go('/posts/');
+  const fullListSummaryCount = await page.evaluate(() => document.querySelectorAll('.post-summary').length);
+  assert.ok(fullListSummaryCount > 0);
+  check('home hides summaries while full post list keeps them', { home: home.summaryCount, posts: fullListSummaryCount });
   await viewport(390, 844);
   await go('/');
-  const mobileTargets = await page.evaluate(() => [...document.querySelectorAll('nav[aria-label="주 메뉴"] a, #theme-toggle')].map((node) => ({ label: node.textContent?.trim() || node.getAttribute('aria-label'), width: node.getBoundingClientRect().width, height: node.getBoundingClientRect().height })));
+  const mobileBrand = await page.evaluate(() => ({ avatarWidth: document.querySelector('.site-avatar').getBoundingClientRect().width, avatarHeight: document.querySelector('.site-avatar').getBoundingClientRect().height }));
+  assert.equal(mobileBrand.avatarWidth, 32);
+  assert.equal(mobileBrand.avatarHeight, 32);
+  check('mobile compact brand', mobileBrand);
+  const mobileTargets = await page.evaluate(() => [...document.querySelectorAll('.site-name, nav[aria-label="주 메뉴"] a, #theme-toggle')].map((node) => ({ label: node.textContent?.trim() || node.getAttribute('aria-label'), width: node.getBoundingClientRect().width, height: node.getBoundingClientRect().height })));
   for (const target of mobileTargets) {
     assert.ok(target.width >= 44, `${target.label}: touch target width ${target.width}`);
     assert.ok(target.height >= 44, `${target.label}: touch target height ${target.height}`);
@@ -41,17 +71,32 @@ try {
   check('mobile primary-navigation touch targets', mobileTargets);
 
 
+  await page.evaluate(() => localStorage.removeItem('pref-toc-open'));
   for (const width of [390, 320, 768]) {
     await viewport(width, 844);
     await go(posts[6]);
-    const mobile = await page.evaluate(() => ({ width: innerWidth, scrollWidth: document.documentElement.scrollWidth, tocOpen: document.querySelector('.toc').open, tocHeight: document.querySelector('.toc').getBoundingClientRect().height, bodyTop: document.querySelector('.post-content').getBoundingClientRect().top, font: getComputedStyle(document.querySelector('.post-content')).fontSize }));
-    assert.equal(mobile.tocOpen, false);
-    assert.ok(mobile.tocHeight < 80);
-    assert.ok(mobile.bodyTop < 600);
+    const mobile = await page.evaluate(() => ({ width: innerWidth, scrollWidth: document.documentElement.scrollWidth, tocOpen: document.querySelector('.toc').open, tocHeight: document.querySelector('.toc').getBoundingClientRect().height, font: getComputedStyle(document.querySelector('.post-content')).fontSize }));
+    assert.equal(mobile.tocOpen, true);
+    assert.ok(mobile.tocHeight > 80);
     assert.ok(mobile.scrollWidth <= mobile.width);
     check(`responsive article ${width}`, mobile);
     if (width === 390) await capture('new-article-mobile');
   }
+
+  await viewport(390, 844);
+  await go(posts[6]);
+  assert.equal(await page.evaluate(() => document.querySelector('.toc').open), true);
+  await page.click('.toc > summary');
+  await page.waitForFunction(() => document.querySelector('.toc').open === false);
+  assert.equal(await page.evaluate(() => localStorage.getItem('pref-toc-open')), 'closed');
+  await go(posts[6]);
+  assert.equal(await page.evaluate(() => document.querySelector('.toc').open), false);
+  await page.click('.toc > summary');
+  await page.waitForFunction(() => document.querySelector('.toc').open === true);
+  assert.equal(await page.evaluate(() => localStorage.getItem('pref-toc-open')), 'open');
+  await go(posts[6]);
+  assert.equal(await page.evaluate(() => document.querySelector('.toc').open), true);
+  check('table of contents preference persists in localStorage', 'passed');
 
   await viewport(1440);
   await go('/search/');
@@ -177,6 +222,7 @@ try {
   check('standalone slides accessible navigation and optimized video', slideA11y);
   await page.press('body', 'ArrowRight');
   await page.waitForFunction(() => document.querySelector('#navDots a.active')?.hash === '#s2');
+  await page.waitForTimeout(500);
   await page.press('body', 'ArrowLeft');
   await page.waitForFunction(() => document.querySelector('#navDots a.active')?.hash === '#s1');
   check('standalone slides keyboard navigation', 'passed');
@@ -189,12 +235,16 @@ try {
   check('standalone slides reduced-motion behavior', reducedMotion);
   await page.cdp('Emulation.setEmulatedMedia', { media: 'screen', features: [{ name: 'prefers-reduced-motion', value: 'no-preference' }] });
 
-  for (const route of ['/posts/', '/series/', '/series/psa/psc-guide/', '/series/gemini-enterprise/', '/tags/', '/archives/', '/about/']) {
+  for (const route of ['/posts/', '/series/', '/series/psa/psc-guide/', '/series/gemini-enterprise/', '/tags/', '/archives/']) {
     await go(route);
     assert.ok(await page.evaluate(() => document.querySelector('main h1')?.textContent));
     assert.deepEqual(await page.evaluate(() => window.__blogErrors), [], route);
   }
-  check('navigation pages', '7 routes passed');
+  check('navigation pages', '6 routes passed');
+  await go('/about/');
+  await page.waitForFunction(() => location.pathname === '/');
+  assert.equal(await page.evaluate(() => location.pathname), '/');
+  check('legacy about URL redirects home', 'passed');
   await go('/');
   await page.evaluate(() => { localStorage.setItem('pref-theme', 'light'); });
   await go('/');

@@ -207,12 +207,47 @@ class SiteTests(unittest.TestCase):
             with self.subTest(route=route):
                 self.assertTrue(self.page(route).find("h1"))
 
-    def test_primary_navigation_has_four_clear_choices(self):
+    def test_primary_navigation_has_three_clear_choices(self):
         nav = self.page("/").find("nav", **{"aria-label": "주 메뉴"})
         self.assertEqual(len(nav), 1)
         self.assertEqual(
-            [a.text.strip() for a in nav[0].find("a")], ["글", "시리즈", "소개", "검색"]
+            [a.text.strip() for a in nav[0].find("a")], ["글", "시리즈", "검색"]
         )
+
+    def test_header_brand_combines_avatar_and_site_name(self):
+        home = self.page("/")
+        self.assertFalse(home.find(cls="home-profile"))
+
+        brand = home.find("a", cls="site-name")
+        self.assertEqual(len(brand), 1)
+        self.assertEqual(brand[0].text.strip(), "kktae.io")
+
+        avatar = brand[0].find("img", cls="site-avatar")
+        self.assertEqual(len(avatar), 1)
+        self.assertEqual(avatar[0].attrs.get("width"), "36")
+        self.assertEqual(avatar[0].attrs.get("height"), "36")
+        self.assertTrue(avatar[0].attrs.get("src", "").endswith("avatar-72.webp"))
+        self.assertEqual(avatar[0].attrs.get("alt"), "")
+
+        recent = home.find("h1", id="recent-posts")
+        self.assertEqual(len(recent), 1)
+        self.assertEqual(recent[0].text.strip(), "최근 글")
+
+    def test_footer_uses_author_name(self):
+        footer = self.page("/").find("footer", cls="site-footer")[0]
+        self.assertIn("kktae", footer.text)
+
+    def test_about_url_redirects_to_home_without_an_about_page(self):
+        about = self.output / "about/index.html"
+        self.assertTrue(about.is_file())
+        doc = Document(about.read_text(encoding="utf-8"))
+        refresh = doc.find("meta", **{"http-equiv": "refresh"})
+        self.assertEqual(len(refresh), 1)
+        self.assertIn(
+            "url=https://kktae.github.io/",
+            refresh[0].attrs.get("content", "").lower(),
+        )
+        self.assertFalse(doc.find("main"))
 
     def test_home_is_bounded_flat_list(self):
         home = self.page("/")
@@ -223,17 +258,47 @@ class SiteTests(unittest.TestCase):
         self.assertFalse(home.find(cls="timeline-toc"))
         self.assertFalse(home.find(cls="post-entry"))
 
+
+    def test_home_hides_summaries_but_seo_and_discovery_surfaces_keep_them(self):
+        home = self.page("/")
+        self.assertFalse(home.find(cls="post-summary"))
+
+        posts = self.page("/posts/")
+        self.assertTrue(posts.find(cls="post-summary"))
+
+        entries = json.loads((self.output / "index.json").read_text(encoding="utf-8"))
+        self.assertTrue(all(entry.get("summary", "").strip() for entry in entries))
+        article_entry = next(
+            entry for entry in entries if urlsplit(entry["permalink"]).path == ARTICLE
+        )
+
+        article = self.page(ARTICLE)
+        description = article.find("meta", name="description")[0].attrs["content"]
+        self.assertEqual(description, article_entry["summary"])
+        og_description = article.find("meta", property="og:description")[0].attrs["content"]
+        twitter_description = article.find("meta", name="twitter:description")[0].attrs["content"]
+        self.assertEqual(og_description, article_entry["summary"])
+        self.assertEqual(twitter_description, article_entry["summary"])
+
+        home_description = home.find("meta", name="description")[0].attrs["content"]
+        self.assertEqual(home_description, CONFIG["params"]["description"])
+
+        rss = ET.fromstring((self.output / "index.xml").read_text(encoding="utf-8"))
+        self.assertTrue(
+            all((item.findtext("description") or "").strip() for item in rss.findall("channel/item"))
+        )
     def test_korean_language_and_light_default(self):
         html = self.page("/").find("html")[0]
         self.assertEqual(html.attrs.get("lang"), "ko")
         self.assertEqual(html.attrs.get("data-theme"), "light")
         self.assertEqual(html.attrs.get("dir"), "ltr")
 
-    def test_one_closed_toc_and_no_duplicate_ids(self):
+    def test_one_open_toc_and_no_duplicate_ids(self):
         doc = self.page(ARTICLE)
         toc = doc.find("details", cls="toc")
         self.assertEqual(len(toc), 1)
-        self.assertNotIn("open", toc[0].attrs)
+        self.assertIn("open", toc[0].attrs)
+        self.assertIn("data-persistent-toc", toc[0].attrs)
         ids = [node.attrs["id"] for node in doc.walk() if "id" in node.attrs]
         self.assertEqual(len(ids), len(set(ids)))
         self.assertTrue(doc.find("a", href="#main-content"))
