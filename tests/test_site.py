@@ -177,6 +177,18 @@ class SiteTests(unittest.TestCase):
         self.assertIn('version: "0.16.8"', workflow)
         self.assertIn("hugo --minify --panicOnWarning --cleanDestinationDir", workflow)
 
+
+    def test_ci_cancels_stale_prs_bounds_jobs_and_skips_non_main_pages_artifacts(self):
+        workflow = (ROOT / ".github/workflows/pages.yml").read_text(encoding="utf-8")
+        self.assertIn("cancel-in-progress: ${{ github.event_name == 'pull_request' }}", workflow)
+        self.assertIn("timeout-minutes: 10", workflow)
+        main_only = "if: github.ref == 'refs/heads/main'"
+        self.assertEqual(workflow.count(main_only), 3)
+
+        audit = (ROOT / ".github/workflows/dependency-audit.yml").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("timeout-minutes: 5", audit)
     def test_dependency_audit_is_scheduled(self):
         workflow = (ROOT / ".github/workflows/dependency-audit.yml").read_text(
             encoding="utf-8"

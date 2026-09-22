@@ -98,6 +98,6 @@ GitHub Actions는 PR에서 테스트와 엄격 빌드를 실행하고, `main`에
 
 ## 검증 범위
 
-최종 리팩토링 검증에서 빌드 회귀 테스트 27개와 Fuse 경계 테스트 8개를 실행했습니다. Mac의 Ego Chromium에서는 19개 시나리오 그룹으로 반응형 화면(320/390/768/1440px), 44px 모바일 탐색 터치 영역, 검색과 한글 조합 입력, 네트워크 실패 및 재시도, 게시글 10개와 Mermaid 12개, 테마 전환, 클립보드 성공/실패 UI, 인쇄 스타일, 최적화된 슬라이드 video, ARIA slide navigation, reduced-motion, iframe 및 키보드 이동을 검증했습니다.
+최종 리팩토링 검증에서 빌드 회귀 테스트 28개와 Fuse 경계 테스트 8개를 실행했습니다. Mac의 Ego Chromium에서는 19개 시나리오 그룹으로 반응형 화면(320/390/768/1440px), 44px 모바일 탐색 터치 영역, 검색과 한글 조합 입력, 네트워크 실패 및 재시도, 게시글 10개와 Mermaid 12개, 테마 전환, 클립보드 성공/실패 UI, 인쇄 스타일, 최적화된 슬라이드 video, ARIA slide navigation, reduced-motion, iframe 및 키보드 이동을 검증했습니다.
 
 인쇄 검증은 Chromium의 print 미디어 에뮬레이션이며, 실제 프린터/PDF 페이지 나눔과 Safari·Firefox·Windows 렌더링은 별도 확인 대상입니다. GitHub Actions와 dependency-audit workflow는 로컬과 동일한 고정 런타임·검증 명령을 사용하도록 구성했지만, 작업 브랜치의 원격 workflow 실행 자체는 아직 수행하지 않았습니다.
