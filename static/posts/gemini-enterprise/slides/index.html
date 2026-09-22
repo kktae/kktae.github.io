@@ -2396,6 +2396,7 @@ function go(i) {
     slides[i].scrollIntoView({ behavior: reduceMotion.matches ? 'auto' : 'smooth' });
 }
 document.addEventListener('keydown', (event) => {
+    if (event.target instanceof Element && event.target.closest('a, button, input, textarea, select, [contenteditable]')) return;
     if (['ArrowDown','ArrowRight','PageDown',' '].includes(event.key)) { event.preventDefault(); go(currentIndex() + 1); }
     else if (['ArrowUp','ArrowLeft','PageUp'].includes(event.key)) { event.preventDefault(); go(currentIndex() - 1); }
     else if (event.key === 'Home') { go(0); }

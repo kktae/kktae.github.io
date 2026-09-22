@@ -96,6 +96,18 @@ try {
   await page.waitForFunction(() => document.querySelector('iframe')?.contentDocument?.readyState === 'complete');
   assert.ok(await page.evaluate(() => document.querySelector('iframe')?.contentDocument?.title));
   await go('/posts/gemini-enterprise/slides/');
+  await page.waitForFunction(() => document.querySelector('#navDots a[aria-current="page"]'));
+  await go('/posts/gemini-enterprise/slides/#s22');
+  await page.waitForFunction(() => document.querySelector('#navDots a[aria-current="page"]')?.hash === '#s22');
+  await page.waitForTimeout(700);
+  assert.equal(await page.evaluate(() => document.querySelector('#navDots a[aria-current="page"]')?.hash), '#s22');
+  await page.evaluate(() => {
+    const link = document.querySelector('#s22 a.link-card');
+    link.focus();
+    link.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true, cancelable: true }));
+  });
+  await page.waitForTimeout(500);
+  assert.equal(await page.evaluate(() => document.querySelector('#navDots a[aria-current="page"]')?.hash), '#s22');
   assert.ok(await page.evaluate(() => document.querySelector('#navDots')));
   check('slides smoke', 'passed');
 
