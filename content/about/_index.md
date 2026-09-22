@@ -1,13 +1,11 @@
 ---
-title: "About"
+title: "소개"
 ShowToc: false
-ShowBreadCrumbs: false
 ---
 
 ## kktae
 
 Cloud & Infrastructure Engineer
-
 
 ### Skills
 

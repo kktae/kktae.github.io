@@ -1,0 +1,9 @@
+{{- $src := .Get "src" -}}
+{{- $title := .Get "title" | default "Slides" -}}
+<iframe
+  class="embedded-slides"
+  src="{{ $src }}"
+  loading="lazy"
+  referrerpolicy="no-referrer"
+  title="{{ $title }}">
+</iframe>

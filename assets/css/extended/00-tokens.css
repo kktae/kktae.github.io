@@ -1,0 +1,94 @@
+/* Site-owned presentation over PaperMod's reset, prose and Chroma foundation. */
+:root {
+  --theme: #ffffff;
+  --entry: #ffffff;
+  --primary: #171717;
+  --secondary: #666666;
+  --tertiary: #e5e5e5;
+  --content: #262626;
+  --border: #e5e5e5;
+  --surface: #f7f7f7;
+  --code-bg: #f3f3f3;
+  --code-block-bg: #f7f7f7;
+  --page-width: 1080px;
+  --reading-width: 760px;
+  --gap: 24px;
+  --content-gap: 24px;
+  --main-width: 760px;
+  --radius: 4px;
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif;
+  --font-code: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+:root[data-theme='dark'] {
+  --theme: #171717;
+  --entry: #171717;
+  --primary: #f5f5f5;
+  --secondary: #a3a3a3;
+  --tertiary: #3a3a3a;
+  --content: #e5e5e5;
+  --border: #333333;
+  --surface: #202020;
+  --code-bg: #292929;
+  --code-block-bg: #202020;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-padding-top: 32px; scrollbar-gutter: stable; }
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  margin: 0;
+  background: var(--theme);
+  color: var(--primary);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.75;
+  letter-spacing: -0.012em;
+  -webkit-font-smoothing: antialiased;
+}
+button, input { font: inherit; }
+a { color: inherit; text-underline-offset: 0.22em; }
+a:hover { text-decoration: underline; }
+button { cursor: pointer; }
+[hidden] { display: none !important; }
+:focus-visible { outline: 2px solid var(--primary); outline-offset: 4px; border-radius: 2px; }
+:target { scroll-margin-top: 32px; }
+::selection { background: var(--tertiary); color: var(--primary); }
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+.skip-link {
+  position: fixed;
+  z-index: 10;
+  inset: 12px auto auto 12px;
+  padding: 8px 16px;
+  background: var(--theme);
+  transform: translateY(-200%);
+}
+.skip-link:focus { transform: translateY(0); }
+.main {
+  flex: 1;
+  width: min(100% - 48px, var(--page-width));
+  max-width: none;
+  min-height: 0;
+  margin: 0 auto;
+  padding: 48px 0 64px;
+}
+.reading-width { width: 100%; max-width: var(--reading-width); margin-inline: auto; }
+@media (max-width: 600px) {
+  body { font-size: 16px; }
+  .main { width: calc(100% - 40px); padding-block: 32px 48px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}

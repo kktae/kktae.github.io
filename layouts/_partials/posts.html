@@ -1,0 +1,2 @@
+{{- /* The single source of truth for publishable article collections. */ -}}
+{{- return (where site.RegularPages "Section" "in" site.MainSections) -}}

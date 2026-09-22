@@ -1,0 +1,13 @@
+{{ define "main" }}
+<div class="reading-width">
+  <header class="page-header"><h1>{{ .Title }}</h1><p>제목과 본문에서 한국어·영문 키워드로 검색합니다.</p></header>
+  <section id="searchbox" aria-label="글 검색">
+    <label for="searchInput" class="sr-only">검색어</label>
+    <input id="searchInput" type="search" placeholder="{{ .Params.placeholder }}" autocomplete="off" maxlength="160" aria-describedby="searchStatus" enterkeyhint="search" autofocus>
+    <p id="searchStatus" class="search-status" role="status" aria-live="polite">검색을 준비하고 있습니다.</p>
+    <button type="button" id="searchRetry" class="text-button" hidden>다시 시도</button>
+    <ul id="searchResults" class="search-results" aria-label="검색 결과"></ul>
+    <noscript><p>검색에는 JavaScript가 필요합니다. <a href="{{ (site.GetPage "/archives").RelPermalink }}">전체 글을 확인하세요.</a></p></noscript>
+  </section>
+</div>
+{{ end }}

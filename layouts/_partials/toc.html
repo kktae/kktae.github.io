@@ -1,0 +1,8 @@
+{{- if and (.Param "ShowToc") (strings.Contains .TableOfContents "<a ") -}}
+<aside class="article-toc" aria-label="이 글의 목차">
+  <details class="toc" data-responsive-toc>
+    <summary>목차</summary>
+    <div class="toc-content">{{ .TableOfContents }}</div>
+  </details>
+</aside>
+{{- end -}}

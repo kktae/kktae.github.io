@@ -1,0 +1,4 @@
+{{- if not .Date.IsZero -}}
+<time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date.Format site.Params.DateFormat }}</time>
+{{- end -}}
+{{- if .Param "ShowReadingTime" }}<span aria-hidden="true"> · </span><span>{{ .ReadingTime }}분 읽기</span>{{ end -}}

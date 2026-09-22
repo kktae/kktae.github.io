@@ -1,0 +1,42 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ if not .IsHome }}{{ .Title }} · {{ end }}{{ site.Title }}</title>
+<meta name="description" content="{{ (or .Description .Summary site.Params.description) | plainify | htmlUnescape }}">
+<meta name="author" content="{{ partial "author.html" . }}">
+{{- $robotsNoIndex := .Params.robotsNoIndex | default false -}}
+{{- if and (eq .Kind "term") (eq .Type "tags") (le (len .RegularPages) 1) -}}
+  {{- $robotsNoIndex = true -}}
+{{- end -}}
+<meta name="robots" content="{{ if not hugo.IsProduction }}noindex, nofollow{{ else if $robotsNoIndex }}noindex, follow{{ else }}index, follow{{ end }}">
+<link rel="canonical" href="{{ .Params.canonicalURL | default .Permalink }}">
+<link rel="icon" type="image/svg+xml" href="{{ "favicon.svg" | relURL }}">
+<link rel="icon" sizes="32x32" href="{{ "favicon-32x32.png" | relURL }}">
+<link rel="apple-touch-icon" href="{{ "apple-touch-icon.png" | relURL }}">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#171717" media="(prefers-color-scheme: dark)">
+{{- range .AlternativeOutputFormats }}
+<link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink }}" title="{{ site.Title }} · {{ .Name }}">
+{{- end }}
+{{- range .AllTranslations }}
+<link rel="alternate" hreflang="{{ .Language.Locale }}" href="{{ .Permalink }}">
+{{- end }}
+<script>
+  try {
+    const preference = localStorage.getItem('pref-theme');
+    if (preference === 'light' || preference === 'dark') document.documentElement.dataset.theme = preference;
+  } catch { /* Storage can be unavailable; the configured light theme remains readable. */ }
+</script>
+{{- /* Reuse the maintained PaperMod foundation; project styles own presentation. */ -}}
+{{- $styles := slice (resources.Get "css/core/license.css") (resources.Get "css/core/theme-vars.css") (resources.Get "css/core/reset.css") (resources.Get "css/common/md-content.css") (resources.Get "css/includes/chroma-styles.css") (resources.Get "css/includes/chroma-mod.css") -}}
+{{- range resources.Match "css/extended/*.css" }}{{ $styles = $styles | append . }}{{ end -}}
+{{- $css := $styles | resources.Concat "assets/css/site.css" | minify | fingerprint "sha384" -}}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous">
+{{- if eq .Layout "search" -}}
+  {{- $index := (site.Home.OutputFormats.Get "JSON").RelPermalink -}}
+  {{- $search := resources.Get "js/search.js" | js.Build (dict "targetPath" "assets/js/search.js" "target" "es2022" "minify" true "params" (dict "indexURL" $index "options" site.Params.fuseOpts)) | fingerprint "sha384" -}}
+<script defer src="{{ $search.RelPermalink }}" integrity="{{ $search.Data.Integrity }}" crossorigin="anonymous"></script>
+{{- end -}}
+{{- partial "templates/opengraph.html" . -}}
+{{- partial "templates/twitter_cards.html" . -}}
+{{- partial "templates/schema_json.html" . -}}

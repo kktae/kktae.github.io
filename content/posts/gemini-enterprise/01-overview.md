@@ -10,12 +10,7 @@ summary: "Gemini Enterprise의 통합 엔터프라이즈 AI 화면, 4가지 Agen
 
 > 풀스크린으로 보기: [/posts/gemini-enterprise/slides/](../slides/)
 
-<iframe
-  src="../slides/"
-  style="width:100%; aspect-ratio: 16 / 9; border:1px solid rgba(128,128,128,0.3); border-radius:8px; display:block;"
-  loading="lazy"
-  title="Gemini Enterprise Slides">
-</iframe>
+{{< slides src="../slides/" title="Gemini Enterprise Slides" >}}
 
 ---
 

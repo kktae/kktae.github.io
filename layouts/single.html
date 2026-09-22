@@ -1,0 +1,31 @@
+{{ define "main" }}
+{{- $series := partial "series-data.html" . -}}
+<article class="post-single">
+  <header class="post-header">
+    <div class="article-eyebrow">
+      <a href="{{ (site.GetPage `/posts`).RelPermalink }}">글</a>
+      {{- with $series }}<span aria-hidden="true"> / </span><a href="{{ .term.RelPermalink }}">{{ .term.LinkTitle }}</a>{{ end }}
+    </div>
+    <h1 class="post-title">{{ .Title }}</h1>
+    {{- with .Description }}<p class="post-description">{{ . }}</p>{{ end }}
+    <div class="post-meta">{{ partial "post_meta.html" . }}</div>
+  </header>
+  {{- with .Params.cover.image }}{{ partial "cover.html" (dict "cxt" $ "IsSingle" true "isHidden" false) }}{{ end -}}
+  <div class="article-layout">
+    {{- partial "toc.html" . -}}
+    <div class="article-main">
+      <div class="post-content md-content">{{ .Content }}</div>
+      <div class="article-tools" aria-label="글 내보내기">
+        <button type="button" class="text-button" data-print hidden>인쇄 / PDF</button>
+        {{- with .File }}
+        <a href="{{ printf `https://raw.githubusercontent.com/%s/%s/content/%s` site.Params.githubRepo site.Params.sourceBranch .Path }}" target="_blank" rel="noopener noreferrer">Markdown 원문</a>
+        {{- end }}
+      </div>
+      {{- with .GetTerms "tags" }}
+      <nav class="article-tags" aria-label="이 글의 태그">{{ range . }}<a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}</nav>
+      {{- end -}}
+      {{- partial "series-nav.html" $series -}}
+    </div>
+  </div>
+</article>
+{{ end }}

@@ -1,7 +1,7 @@
 ---
 title: "Proxy-Only Subnet & Envoy Proxy Deep Dive"
 date: 2026-04-13
-tags: ["GCP", "Load Balancer", "Envoy Proxy", "Proxy-Only Subnet", "Internal Application Load Balancer"]
+tags: ["GCP", "Load Balancer", "Load Balancing", "Envoy Proxy", "Proxy-Only Subnet", "Internal Application Load Balancer"]
 categories: ["GCP Deep Dive"]
 series: ["PSA/PSC Guide"]
 series_order: 7

@@ -22,3 +22,8 @@ node_modules/
 
 # Working documents (not for publishing)
 content/**/references/
+
+# Local agent state and Python caches
+.pi/
+__pycache__/
+*.py[cod]

@@ -1,0 +1,5 @@
+{{- $index := slice -}}
+{{- range where (partial "posts.html" .) "Params.searchHidden" "ne" true -}}
+  {{- $index = $index | append (dict "title" .Title "content" .Plain "permalink" .RelPermalink "summary" (.Summary | plainify | htmlUnescape) "date" (.Date.Format site.Params.DateFormat)) -}}
+{{- end -}}
+{{- $index | jsonify -}}

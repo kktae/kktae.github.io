@@ -1,0 +1,32 @@
+@media print {
+  @page { margin: 18mm; }
+  :root, :root[data-theme='dark'] {
+    --theme: #ffffff;
+    --entry: #ffffff;
+    --primary: #111111;
+    --secondary: #444444;
+    --content: #111111;
+    --border: #dddddd;
+    --surface: #f7f7f7;
+    --code-bg: #f3f3f3;
+    --code-block-bg: #f7f7f7;
+    color-scheme: light;
+  }
+  html, body { display: block; min-height: 0; background: white; color: black; }
+  .site-header, .site-footer, .skip-link, .article-toc, .article-tools,
+  .article-tags, .series-section, .copy-code, .article-eyebrow, .anchor { display: none !important; }
+  .main, .reading-width, .post-single, .post-header { width: 100%; max-width: none; margin: 0; padding: 0; }
+  .article-layout { display: block; }
+  .post-title { font-size: 24pt; }
+  .post-header { margin-bottom: 20pt; }
+  .post-content { font-size: 11pt; line-height: 1.65; }
+  .md-content h1, .md-content h2, .md-content h3 { break-after: avoid; }
+  .md-content pre, .md-content pre code { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 8pt; }
+  .md-content table { display: table; table-layout: fixed; width: 100%; font-size: 8pt; }
+  .md-content table th, .md-content table td { min-width: 0; padding: 6px 8px; }
+  .md-content .chroma, .md-content .chroma span, .md-content code { color: #111111 !important; background: transparent !important; }
+  .diagram [data-rendered='dark'] svg { filter: invert(1) grayscale(1); }
+  .diagram { break-inside: avoid; }
+  .diagram svg { max-height: 210mm; }
+  .md-content a { color: black; }
+}

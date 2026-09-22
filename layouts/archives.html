@@ -1,0 +1,13 @@
+{{ define "main" }}
+<div class="reading-width">
+  <header class="page-header"><h1>{{ .Title }}</h1><p>지금까지 기록한 글을 시간순으로 모았습니다.</p></header>
+  {{- range (partial "posts.html" .).ByDate.Reverse.GroupByDate "2006" }}
+  <section class="archive-year" aria-labelledby="year-{{ .Key }}">
+    <h2 id="year-{{ .Key }}">{{ .Key }}</h2>
+    {{- range .Pages }}
+    <div class="archive-row"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "01.02" }}</time><a href="{{ .RelPermalink }}">{{ .Title }}</a></div>
+    {{- end }}
+  </section>
+  {{- end }}
+</div>
+{{ end }}

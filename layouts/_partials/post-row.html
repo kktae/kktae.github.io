@@ -1,0 +1,7 @@
+<article class="post-row">
+  <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+  {{- with .Summary }}
+  <p class="post-summary">{{ . | plainify | htmlUnescape }}</p>
+  {{- end }}
+  <div class="post-meta">{{ partial "post_meta.html" . }}</div>
+</article>

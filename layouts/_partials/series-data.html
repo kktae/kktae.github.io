@@ -1,0 +1,18 @@
+{{- $result := false -}}
+{{- $page := . -}}
+{{- with .GetTerms "series" -}}
+  {{- $term := index . 0 -}}
+  {{- $pages := $term.RegularPages.ByParam "series_order" -}}
+  {{- $position := -1 -}}
+  {{- range $i, $entry := $pages -}}
+    {{- if eq $entry.RelPermalink $page.RelPermalink }}{{ $position = $i }}{{ end -}}
+  {{- end -}}
+  {{- if ge $position 0 -}}
+    {{- $previous := false -}}
+    {{- $next := false -}}
+    {{- if gt $position 0 }}{{ $previous = index $pages (sub $position 1) }}{{ end -}}
+    {{- if lt (add $position 1) (len $pages) }}{{ $next = index $pages (add $position 1) }}{{ end -}}
+    {{- $result = dict "term" $term "pages" $pages "number" (add $position 1) "previous" $previous "next" $next "current" $page -}}
+  {{- end -}}
+{{- end -}}
+{{- return $result -}}

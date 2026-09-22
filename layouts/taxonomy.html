@@ -1,0 +1,15 @@
+{{ define "main" }}
+<div class="reading-width">
+  <header class="page-header">
+    <h1>{{ if eq .Type "series" }}시리즈{{ else if eq .Type "tags" }}태그{{ else }}분류{{ end }}</h1>
+    <p>{{ if eq .Type "series" }}하나의 주제를 차근차근 살펴보는 글 모음입니다.{{ else }}관심 있는 주제로 글을 찾아보세요.{{ end }}</p>
+  </header>
+  <div class="taxonomy-list">
+    {{- range .Data.Terms.Alphabetical }}
+      {{- if or (ne $.Type "tags") (in site.Params.curatedTags .Page.LinkTitle) }}
+    <a href="{{ .Page.RelPermalink }}"><span>{{ .Page.LinkTitle }}</span><span class="term-count">{{ .Count }}편 <span aria-hidden="true">→</span></span></a>
+      {{- end }}
+    {{- end }}
+  </div>
+</div>
+{{ end }}

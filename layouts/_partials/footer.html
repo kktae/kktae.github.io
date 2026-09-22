@@ -1,0 +1,14 @@
+<footer class="site-footer">
+  <span>© {{ now.Year }} {{ site.Params.homeInfoParams.Title }}</span>
+  <nav aria-label="보조 메뉴">
+    {{- range site.Menus.footer }}
+    <a href="{{ .URL }}">{{ .Name }}</a>
+    {{- end }}
+  </nav>
+</footer>
+{{- $script := resources.Get "js/site.js" | js.Build (dict "targetPath" "assets/js/site.js" "target" "es2022" "minify" true) | fingerprint "sha384" -}}
+<script defer src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}" crossorigin="anonymous"></script>
+{{- if .Store.Get "hasMermaid" -}}
+{{- $mermaid := resources.Get "js/diagrams.js" | js.Build (dict "targetPath" "assets/js/diagrams.js" "target" "es2022" "minify" true "params" (dict "mermaidURL" hugo.Data.dependencies.mermaid.url)) | fingerprint "sha384" -}}
+<script defer src="{{ $mermaid.RelPermalink }}" integrity="{{ $mermaid.Data.Integrity }}" crossorigin="anonymous"></script>
+{{- end -}}

@@ -1,0 +1,27 @@
+{{ define "main" }}
+<div class="reading-width">
+  <header class="page-header">
+    <h1>{{ .Title }}</h1>
+    {{- with .Description }}<p>{{ . }}</p>{{ end -}}
+  </header>
+  {{- with .Content }}<div class="md-content">{{ . }}</div>{{ end -}}
+  {{- $pages := .RegularPages -}}
+  {{- if .IsSection }}{{ $pages = .RegularPagesRecursive }}{{ end -}}
+  {{- $pages = where $pages "Section" "in" site.MainSections -}}
+  {{- if or (eq .Type "series") (and .IsSection (ne .CurrentSection .FirstSection)) -}}
+    {{- $pages = $pages.ByParam "series_order" -}}
+  {{- else -}}
+    {{- $pages = $pages.ByDate.Reverse -}}
+  {{- end -}}
+  {{- if eq .RelPermalink (site.GetPage "/posts").RelPermalink }}
+  <nav class="list-filters" aria-label="글 탐색">
+    <a href="{{ (site.GetPage "/series").RelPermalink }}">시리즈별</a>
+    <a href="{{ (site.GetPage "/tags").RelPermalink }}">태그별</a>
+    <a href="{{ (site.GetPage "/archives").RelPermalink }}">연도별</a>
+  </nav>
+  {{- end -}}
+  {{- $paginator := .Paginate $pages -}}
+  {{- range $paginator.Pages }}{{ partial "post-row.html" . }}{{ end -}}
+  {{- partial "pagination.html" $paginator -}}
+</div>
+{{ end }}

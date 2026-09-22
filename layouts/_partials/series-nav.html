@@ -1,0 +1,19 @@
+{{- with . -}}
+<section class="series-section" aria-label="시리즈 이어 읽기">
+  <details class="series-panel">
+    <summary>{{ .term.LinkTitle }} <span class="series-position">{{ .number }} / {{ len .pages }}</span></summary>
+    <ol class="series-list">
+      {{- $current := .current -}}
+      {{- range .pages }}
+      <li><a href="{{ .RelPermalink }}"{{ if eq .RelPermalink $current.RelPermalink }} aria-current="page"{{ end }}>{{ .Title }}</a></li>
+      {{- end }}
+    </ol>
+  </details>
+  {{- if or .previous .next }}
+  <nav class="series-pagination" aria-label="시리즈 이전·다음 글">
+    <div>{{ with .previous }}<a rel="prev" href="{{ .RelPermalink }}"><span>← 이전 글</span><strong>{{ .Title }}</strong></a>{{ end }}</div>
+    <div>{{ with .next }}<a rel="next" href="{{ .RelPermalink }}"><span>다음 글 →</span><strong>{{ .Title }}</strong></a>{{ end }}</div>
+  </nav>
+  {{- end }}
+</section>
+{{- end -}}
