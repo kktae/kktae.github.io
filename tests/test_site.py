@@ -176,6 +176,8 @@ class SiteTests(unittest.TestCase):
         self.assertIn("node-version-file: .node-version", workflow)
         self.assertIn('version: "0.16.8"', workflow)
         self.assertIn("hugo --minify --panicOnWarning --cleanDestinationDir", workflow)
+        self.assertEqual(workflow.count("runs-on: ubuntu-24.04"), 2)
+        self.assertNotIn("runs-on: ubuntu-latest", workflow)
 
 
     def test_ci_cancels_stale_prs_bounds_jobs_and_skips_non_main_pages_artifacts(self):
@@ -189,6 +191,8 @@ class SiteTests(unittest.TestCase):
             encoding="utf-8"
         )
         self.assertIn("timeout-minutes: 5", audit)
+        self.assertEqual(audit.count("runs-on: ubuntu-24.04"), 1)
+        self.assertNotIn("runs-on: ubuntu-latest", audit)
     def test_dependency_audit_is_scheduled(self):
         workflow = (ROOT / ".github/workflows/dependency-audit.yml").read_text(
             encoding="utf-8"
