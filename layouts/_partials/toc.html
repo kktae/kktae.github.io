@@ -1,7 +1,12 @@
 {{- if and (.Param "ShowToc") (strings.Contains .TableOfContents "<a ") -}}
 <aside class="article-toc" aria-label="이 글의 목차">
   <details class="toc" data-persistent-toc open>
-    <summary>목차</summary>
+    <summary>
+      <svg class="toc-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+        <path d="m9 18 6-6-6-6" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      <span>목차</span>
+    </summary>
     <div class="toc-content">{{ .TableOfContents }}</div>
   </details>
 </aside>
