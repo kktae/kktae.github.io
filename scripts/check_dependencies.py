@@ -131,6 +131,7 @@ def main() -> int:
         "Node.js": (ROOT / ".node-version").read_text(encoding="utf-8").strip(),
         "Ruff": local_ruff_version(),
         "Mermaid": str(dependencies["mermaid"]["version"]),
+        "Mermaid ELK": str(dependencies["mermaid_elk"]["version"]),
         "Fuse.js": str(dependencies["fuse"]["version"]),
         "PaperMod": paper_mod_commit(),
     }
@@ -140,6 +141,7 @@ def main() -> int:
         "Node.js": latest_node(),
         "Ruff": latest_pypi("ruff"),
         "Mermaid": latest_npm("mermaid"),
+        "Mermaid ELK": latest_npm("@mermaid-js/layout-elk"),
         "Fuse.js": latest_npm("fuse.js"),
         "PaperMod": latest_github_branch_commit(
             "adityatelange/hugo-PaperMod", "master"

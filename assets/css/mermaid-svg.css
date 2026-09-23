@@ -1,0 +1,110 @@
+svg[aria-roledescription] {
+  --diagram-surface: #ffffff;
+  --diagram-line: #3b3b3b;
+  --diagram-text: #3b3b3b;
+  --diagram-header: #f5f5f5;
+  --diagram-group-text: #555555;
+  --diagram-accent: #005fb8;
+  --diagram-label-text: #757575;
+  --diagram-label-border: #e8e8e8;
+  --diagram-font: -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif;
+  --diagram-node-size: 13px;
+  --diagram-header-size: 12px;
+  --diagram-label-size: 11px;
+  font-family: var(--diagram-font) !important;
+  background: var(--diagram-surface);
+}
+
+:root[data-theme='dark'] svg[aria-roledescription],
+svg[aria-roledescription].mermaid-theme-dark {
+  --diagram-surface: #202020;
+  --diagram-line: #d4d4d4;
+  --diagram-text: #e5e5e5;
+  --diagram-header: #292929;
+  --diagram-group-text: #c4c4c4;
+  --diagram-accent: #58a6ff;
+  --diagram-label-text: #b0b0b0;
+  --diagram-label-border: #3a3a3a;
+}
+
+svg[aria-roledescription] * { font-family: var(--diagram-font) !important; }
+
+svg[aria-roledescription] .cluster > rect,
+svg[aria-roledescription] .node > :is(rect, circle, ellipse, polygon, path),
+svg[aria-roledescription] :is(.actor, .note, .labelBox) {
+  fill: var(--diagram-surface) !important;
+  stroke: var(--diagram-line) !important;
+  stroke-width: 1px !important;
+  rx: 0 !important;
+  ry: 0 !important;
+}
+
+svg[aria-roledescription] .cluster > rect.mermaid-group-header { fill: var(--diagram-header) !important; }
+
+svg[aria-roledescription] :is(.nodeLabel, .node .label, .node text, text.actor, .noteText, .messageText) {
+  color: var(--diagram-text) !important;
+  fill: var(--diagram-text) !important;
+  font-size: var(--diagram-node-size) !important;
+  font-weight: 500 !important;
+}
+
+svg[aria-roledescription] .node .label,
+svg[aria-roledescription] .node .label * {
+  color: var(--diagram-text) !important;
+  fill: var(--diagram-text) !important;
+  stroke: none !important;
+}
+
+svg[aria-roledescription] .cluster-label :is(span, p, text) {
+  color: var(--diagram-group-text) !important;
+  fill: var(--diagram-group-text) !important;
+  font-size: var(--diagram-header-size) !important;
+  font-weight: 600 !important;
+  stroke: none !important;
+}
+
+svg[aria-roledescription] :is(.flowchart-link, .messageLine0, .messageLine1, .actor-line) {
+  stroke: var(--diagram-line) !important;
+  stroke-width: 1px !important;
+}
+
+svg[aria-roledescription] .flowchart-link { fill: none !important; }
+
+svg[aria-roledescription] marker :is(path, polygon, circle) {
+  fill: var(--diagram-accent) !important;
+  stroke: var(--diagram-accent) !important;
+  stroke-width: .75px !important;
+}
+
+svg[aria-roledescription] .edgeLabel :is(p, rect),
+svg[aria-roledescription] .labelBkg {
+  background: var(--diagram-surface) !important;
+  fill: var(--diagram-surface) !important;
+  border: 1px solid var(--diagram-label-border) !important;
+  stroke: var(--diagram-label-border) !important;
+  stroke-width: 1px !important;
+  border-radius: 0;
+}
+
+svg[aria-roledescription] .edgeLabel :is(span, p, text) {
+  color: var(--diagram-label-text) !important;
+  font-size: var(--diagram-label-size) !important;
+  font-weight: 400 !important;
+}
+
+svg[aria-roledescription] .edgeLabel text { fill: var(--diagram-label-text) !important; }
+svg[aria-roledescription] text.sequenceNumber { fill: var(--diagram-surface) !important; }
+
+@media print {
+  svg[aria-roledescription],
+  svg[aria-roledescription].mermaid-theme-dark {
+    --diagram-surface: #ffffff;
+    --diagram-line: #222222;
+    --diagram-text: #222222;
+    --diagram-header: #f3f3f3;
+    --diagram-group-text: #444444;
+    --diagram-accent: #005fb8;
+    --diagram-label-text: #555555;
+    --diagram-label-border: #dddddd;
+  }
+}

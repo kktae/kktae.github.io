@@ -14,7 +14,7 @@
 
 - `ruff check scripts/check-browser.py scripts/check_dependencies.py tests/test_site.py`
 - `python3 -m unittest discover -s tests -v`
-- `node --test tests/fuse.test.mjs`
+- `node --test tests/*.test.mjs`
 - `HUGO_ENVIRONMENT=production hugo --minify --panicOnWarning --cleanDestinationDir`
 
 ## Deploy

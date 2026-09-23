@@ -61,10 +61,6 @@
 .series-pagination strong { display: block; font-weight: 500; font-size: 14px; line-height: 1.6; }
 .copy-code { display: block; position: absolute; top: 8px; right: 8px; padding: 4px 8px; border: 1px solid var(--border); border-radius: 4px; background: var(--surface); color: var(--primary); font-family: var(--font-body); font-size: 11px; line-height: 1.5; opacity: 1; }
 .copy-code:disabled { cursor: wait; }
-.diagram { margin: 28px 0; padding: 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 4px; overflow-x: auto; }
-.diagram pre.mermaid { padding: 0; margin: 0; background: transparent; font-size: 12px; }
-.diagram svg { display: block; max-width: 100%; height: auto; margin-inline: auto; }
-.diagram-status { margin-top: 12px; color: var(--secondary); font-size: 13px; }
 @media (min-width: 1200px) {
   .post-single { max-width: var(--page-width); }
   .article-layout { display: grid; grid-template-columns: minmax(0, var(--reading-width)) minmax(0, 220px); column-gap: 64px; align-items: start; }
@@ -80,5 +76,4 @@
   .post-title { font-size: 30px; }
   .article-eyebrow { font-size: 12px; }
   .series-pagination { gap: 16px; }
-  .diagram { padding: 10px; }
 }

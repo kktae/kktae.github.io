@@ -57,7 +57,7 @@ jobs:
       - name: Regression tests
         run: |
           python3 -m unittest discover -s tests -v
-          node --test tests/fuse.test.mjs
+          node --test tests/*.test.mjs
       - name: Configure Pages
         if: github.ref == 'refs/heads/main'
         # v6.0.0

@@ -1,0 +1,129 @@
+.diagram {
+  margin: 28px 0;
+  border: 1px solid var(--border);
+  border-radius: 0;
+  background: var(--surface);
+}
+
+.diagram-canvas {
+  overflow-x: auto;
+  padding: 16px;
+}
+
+.diagram pre.mermaid {
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  font-size: 12px;
+}
+
+.diagram svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-inline: auto;
+}
+
+.diagram-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 38px;
+  padding: 0 10px;
+  border-top: 1px solid var(--border);
+  background: var(--theme);
+}
+
+.diagram-format {
+  color: var(--secondary);
+  font-family: var(--font-code);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.diagram-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.diagram-action {
+  border: 0;
+  padding: 4px 6px;
+  background: transparent;
+  color: var(--secondary);
+  font: inherit;
+  font-size: 12px;
+  line-height: 1.4;
+  text-decoration: none;
+}
+
+.diagram-action:hover {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.diagram-status {
+  padding: 10px 16px;
+  border-top: 1px solid var(--border);
+  color: var(--secondary);
+  font-size: 13px;
+}
+
+.diagram-zoom {
+  width: min(96vw, 1400px);
+  max-width: 96vw;
+  max-height: 94dvh;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 0;
+  background: var(--theme);
+  color: var(--primary);
+}
+
+.diagram-zoom::backdrop { background: rgb(0 0 0 / 55%); }
+
+.diagram-zoom-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 44px;
+  padding: 0 12px;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+
+.diagram-zoom-title {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.diagram-zoom-canvas {
+  overflow: auto;
+  max-width: 96vw;
+  max-height: calc(94dvh - 45px);
+  padding: 16px;
+  background: var(--surface);
+}
+
+.diagram-zoom-canvas svg {
+  display: block;
+  max-width: none;
+  height: auto;
+}
+
+@media (max-width: 600px) {
+  .diagram-canvas { padding: 10px; }
+  .diagram-toolbar { align-items: flex-start; padding-block: 8px; }
+  .diagram-actions { flex-wrap: wrap; justify-content: flex-end; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .diagram-action { scroll-behavior: auto; }
+}

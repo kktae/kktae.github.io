@@ -87,6 +87,56 @@ try {
   assert.ok(alerts > 0);
   check('article and Markdown smoke', { articles: posts.length, diagrams, alerts });
 
+  await go('/posts/google-cloud/gemini-cli-ip-access/');
+  await page.waitForFunction(() =>
+    document.querySelectorAll('pre.mermaid').length > 0 &&
+    [...document.querySelectorAll('pre.mermaid')].every(node => node.querySelector('svg')),
+  );
+  const mermaidUX = await page.evaluate(() => {
+    const svg = document.querySelector('pre.mermaid svg');
+    const headers = [...svg.querySelectorAll('.mermaid-group-header')];
+    const edges = [...svg.querySelectorAll('.flowchart-link')];
+    const labels = [...svg.querySelectorAll('.nodeLabel')].filter(label => !label.closest('.cluster-label'));
+    const clippedLabels = labels.filter(label => {
+      const viewport = label.closest('foreignObject')?.getBoundingClientRect();
+      if (!viewport) return false;
+      const range = document.createRange();
+      range.selectNodeContents(label);
+      return [...range.getClientRects()].some(
+        rect => rect.right > viewport.right + 0.6 || rect.left < viewport.left - 0.6,
+      );
+    });
+    return {
+      headers: headers.length,
+      toolbars: document.querySelectorAll('.diagram-toolbar').length,
+      diagrams: document.querySelectorAll('pre.mermaid').length,
+      curvedEdges: edges.filter(edge => /[CQ]/.test(edge.getAttribute('d') ?? '')).length,
+      clippedLabels: clippedLabels.length,
+    };
+  });
+  assert.ok(mermaidUX.headers > 0);
+  assert.equal(mermaidUX.toolbars, mermaidUX.diagrams);
+  assert.equal(mermaidUX.curvedEdges, 0);
+  assert.equal(mermaidUX.clippedLabels, 0);
+
+  await page.click('.diagram-expand');
+  await page.waitForSelector('dialog.diagram-zoom[open]');
+  assert.equal(await page.evaluate(() => document.querySelectorAll('dialog.diagram-zoom svg').length), 1);
+  await page.press('dialog.diagram-zoom', 'Escape');
+  await page.waitForFunction(() => !document.querySelector('dialog.diagram-zoom'));
+  assert.equal(await page.evaluate(() => document.activeElement?.classList.contains('diagram-expand')), true);
+
+  const downloading = page.waitForEvent('download', { timeout: 10000 });
+  await page.click('.diagram-download');
+  const download = await downloading;
+  const downloadPath = path.join(options.outputDirectory, 'mermaid-download.svg');
+  await download.saveAs(downloadPath);
+  const downloadedSVG = await fs.readFile(downloadPath, 'utf8');
+  assert.match(downloadedSVG, /<svg\b/);
+  assert.match(downloadedSVG, /--diagram-surface/);
+  assert.match(downloadedSVG, /mermaid-group-header/);
+  check('Mermaid UX smoke', mermaidUX);
+
   await go(posts[6]);
   await page.evaluate(() => localStorage.setItem('pref-theme', 'light'));
   await go(posts[6]);
