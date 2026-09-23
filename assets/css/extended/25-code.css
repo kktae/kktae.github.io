@@ -1,4 +1,4 @@
-/* Code blocks and project-owned Chroma contrast overrides. */
+/* Code block chrome and the site-owned Chroma syntax palette. */
 .md-content .code-block {
   margin: 24px 0;
   border: 1px solid var(--border);
@@ -40,27 +40,61 @@
   line-height: 1.35;
 }
 
-/* High-contrast light palette. */
-.chroma,
-.chroma :is(.x, .n, .nx, .p, .l, .ld, .w, .g, .go, .gp) { color: #24292f; }
-.chroma :is(.c, .ch, .cm, .c1, .cs, .cp, .cpf, .sd, .sh) { color: #57606a; }
-.chroma :is(.k, .kc, .kd, .kn, .kp, .kr, .kt, .o, .ow, .err, .ne, .gd, .gr, .gt) { color: #cf222e; }
-.chroma :is(.nc, .nd, .nf, .fm, .nn) { color: #8250df; }
-.chroma :is(.na, .nb, .bp, .nl, .nt, .dl, .se, .sr) { color: #0550ae; }
-.chroma :is(.s, .sa, .sb, .sc, .s1, .s2, .si, .sx, .ss) { color: #116329; }
-.chroma :is(.m, .mb, .mf, .mh, .mi, .il, .mo, .py, .gh, .gu) { color: #953800; }
-.chroma :is(.nv, .vc, .vg, .vi, .vm) { color: #24292f; }
-.chroma .lnt, .chroma .ln { color: #6e7781; }
+/* Site-owned Chroma palette. PaperMod provides markup only; token colors live here. */
+:root {
+  --syntax-fg: #24292f;
+  --syntax-comment: #57606a;
+  --syntax-keyword: #cf222e;
+  --syntax-name: #8250df;
+  --syntax-symbol: #0550ae;
+  --syntax-string: #116329;
+  --syntax-number: #953800;
+  --syntax-line-number: #6e7781;
+  --syntax-highlight-bg: #fff8c5;
+  --syntax-deleted-bg: #ffebe9;
+  --syntax-inserted-bg: #dafbe1;
+}
 
-/* High-contrast dark palette. */
-:root[data-theme='dark'] .chroma,
-:root[data-theme='dark'] .chroma :is(.x, .n, .nx, .p, .l, .ld, .w, .g, .go, .gp) { color: #e6edf3; }
-:root[data-theme='dark'] .chroma :is(.c, .ch, .cm, .c1, .cs, .cp, .cpf, .sd, .sh) { color: #8b949e; }
-:root[data-theme='dark'] .chroma :is(.k, .kc, .kd, .kn, .kp, .kr, .kt, .o, .ow, .err, .ne, .gd, .gr, .gt) { color: #ff7b72; }
-:root[data-theme='dark'] .chroma :is(.nc, .nd, .nf, .fm, .nn) { color: #d2a8ff; }
-:root[data-theme='dark'] .chroma :is(.na, .nb, .bp, .nl, .nt, .dl, .se, .sr) { color: #79c0ff; }
-:root[data-theme='dark'] .chroma :is(.s, .sa, .sb, .sc, .s1, .s2, .si, .sx, .ss) { color: #a5d6ff; }
-:root[data-theme='dark'] .chroma :is(.m, .mb, .mf, .mh, .mi, .il, .mo, .py, .gh, .gu) { color: #ffa657; }
-:root[data-theme='dark'] .chroma :is(.nv, .vc, .vg, .vi, .vm) { color: #e6edf3; }
-:root[data-theme='dark'] .chroma .lnt,
-:root[data-theme='dark'] .chroma .ln { color: #8b949e; }
+:root[data-theme='dark'] {
+  --syntax-fg: #e6edf3;
+  --syntax-comment: #8b949e;
+  --syntax-keyword: #ff7b72;
+  --syntax-name: #d2a8ff;
+  --syntax-symbol: #79c0ff;
+  --syntax-string: #a5d6ff;
+  --syntax-number: #ffa657;
+  --syntax-line-number: #8b949e;
+  --syntax-highlight-bg: #3d3d2b;
+  --syntax-deleted-bg: #3c1e20;
+  --syntax-inserted-bg: #1f3525;
+}
+
+.md-content .chroma,
+.md-content pre.chroma code,
+.md-content .chroma :is(.line, .cl, .x, .n, .nx, .p, .l, .ld, .w, .g, .go, .gp) {
+  color: var(--syntax-fg);
+}
+
+.md-content .chroma,
+.md-content pre.chroma code,
+.md-content .highlight .bg {
+  color: var(--syntax-fg);
+  background: transparent !important;
+}
+
+.md-content .chroma :is(.c, .ch, .cm, .c1, .cs, .cp, .cpf, .sd, .sh) { color: var(--syntax-comment); }
+.md-content .chroma :is(.k, .kc, .kd, .kn, .kp, .kr, .kt, .o, .ow, .err, .ne, .gd, .gr, .gt) { color: var(--syntax-keyword); }
+.md-content .chroma :is(.nc, .nd, .nf, .fm, .nn, .no, .ni) { color: var(--syntax-name); }
+.md-content .chroma :is(.na, .nb, .bp, .nl, .nt, .dl, .se, .sr) { color: var(--syntax-symbol); }
+.md-content .chroma :is(.s, .sa, .sb, .sc, .s1, .s2, .si, .sx, .ss, .gi) { color: var(--syntax-string); }
+.md-content .chroma :is(.m, .mb, .mf, .mh, .mi, .il, .mo, .py, .gh, .gu) { color: var(--syntax-number); }
+.md-content .chroma :is(.nv, .vc, .vg, .vi, .vm) { color: var(--syntax-fg); }
+.md-content .chroma :is(.lnt, .ln) { color: var(--syntax-line-number); }
+
+.md-content .chroma .hl { background-color: var(--syntax-highlight-bg); }
+.md-content .chroma .gd { background-color: var(--syntax-deleted-bg); }
+.md-content .chroma .gi { background-color: var(--syntax-inserted-bg); }
+.md-content .chroma :is(.ge, .c, .ch, .cm, .c1, .cs, .cp, .cpf) { font-style: italic; }
+.md-content .chroma :is(.gs, .gh, .gu, .nd, .cpf) { font-weight: 600; }
+.md-content .chroma .gl { text-decoration: underline; }
+.md-content .chroma .lnlinks { color: inherit; outline: none; text-decoration: none; }
