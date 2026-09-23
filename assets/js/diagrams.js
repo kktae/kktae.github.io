@@ -1,5 +1,7 @@
 import { renderDiagram, renderErrorMessage } from './diagram/renderer.mjs';
 
+const EDGE_CORNER_RADIUS = 4;
+
 const diagrams = [...document.querySelectorAll('pre.diagram-source')].map((node, index) => ({
   node,
   source: node.textContent ?? '',
@@ -177,6 +179,7 @@ async function renderDiagrams() {
             theme,
             font: 'Inter',
             interactive: false,
+            edgeCornerRadius: EDGE_CORNER_RADIUS,
           });
           const svg = parseSVG(result.svg);
           svg.dataset.renderer = 'antigravity-direct';

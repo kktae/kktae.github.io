@@ -8,6 +8,7 @@ import {
   svgText,
   svgThemeStyle,
 } from './common.mjs';
+import { svgPolyline } from './geometry.mjs';
 
 function ensureClass(classes, id) {
   let value = classes.get(id);
@@ -315,9 +316,8 @@ function markerAttr(relation) {
     : ' marker-end="url(#' + marker + ')"';
 }
 
-function relationshipSVG(relation) {
+function relationshipSVG(relation, edgeCornerRadius = 0) {
   if (relation.points.length < 2) return '';
-  const points = relation.points.map(point => point.x + ',' + point.y).join(' ');
   const dash = relation.type === 'dependency' || relation.type === 'realization'
     ? ' stroke-dasharray="6 4"'
     : '';
@@ -331,8 +331,8 @@ function relationshipSVG(relation) {
   if (relation.label) attrs.push('data-label="' + escapeXML(relation.label) + '"');
   if (relation.fromCardinality) attrs.push('data-from-cardinality="' + escapeXML(relation.fromCardinality) + '"');
   if (relation.toCardinality) attrs.push('data-to-cardinality="' + escapeXML(relation.toCardinality) + '"');
-  return '<polyline ' + attrs.join(' ') + ' points="' + points +
-    '" fill="none" stroke="var(--_line)" stroke-width="1"' + dash + markerAttr(relation) + ' />';
+  const suffix = ' fill="none" stroke="var(--_line)" stroke-width="1"' + dash + markerAttr(relation);
+  return svgPolyline(relation.points, attrs.join(' '), suffix, edgeCornerRadius);
 }
 
 function memberSVG(member, x, y) {
@@ -367,6 +367,7 @@ function cardinalityOffset(point, neighbour) {
 export function renderClassLayout(layout, palette, options = {}) {
   const font = options.font ?? 'Inter';
   const transparent = options.transparent ?? false;
+  const edgeCornerRadius = Math.max(0, Number(options.edgeCornerRadius) || 0);
   const lines = [svgOpen(layout.width, layout.height, palette, transparent), svgThemeStyle(font, true), '<defs>'];
   lines.push(
     '  <marker id="cls-inherit" markerWidth="12" markerHeight="10" refX="12" refY="5" orient="auto-start-reverse">\n' +
@@ -384,7 +385,7 @@ export function renderClassLayout(layout, palette, options = {}) {
   );
   lines.push('</defs>');
 
-  for (const relation of layout.relationships) lines.push(relationshipSVG(relation));
+  for (const relation of layout.relationships) lines.push(relationshipSVG(relation, edgeCornerRadius));
 
   for (const cls of layout.classes) {
     const values = [
@@ -467,7 +468,13 @@ export function renderClassLayout(layout, palette, options = {}) {
   return lines.join('\n');
 }
 
-export async function renderClassDiagram(source, { elk, palette, font = 'Inter', transparent = false } = {}) {
+export async function renderClassDiagram(source, {
+  elk,
+  palette,
+  font = 'Inter',
+  transparent = false,
+  edgeCornerRadius = 0,
+} = {}) {
   if (!elk) throw new Error('ELK instance is required');
   const model = parseClassDiagram(source);
   const layout = await layoutClassDiagram(model, elk);
@@ -475,6 +482,6 @@ export async function renderClassDiagram(source, { elk, palette, font = 'Inter',
     type: 'class',
     model,
     layout,
-    svg: renderClassLayout(layout, palette, { font, transparent }),
+    svg: renderClassLayout(layout, palette, { font, transparent, edgeCornerRadius }),
   };
 }

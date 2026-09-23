@@ -7,6 +7,7 @@ import {
   svgText,
   svgThemeStyle,
 } from './common.mjs';
+import { svgPolyline } from './geometry.mjs';
 
 function ensureActor(model, ids, id) {
   if (ids.has(id)) return;
@@ -369,6 +370,7 @@ export function layoutSequence(model) {
 export function renderSequenceLayout(layout, palette, options = {}) {
   const font = options.font ?? 'Inter';
   const transparent = options.transparent ?? false;
+  const edgeCornerRadius = Math.max(0, Number(options.edgeCornerRadius) || 0);
   const lines = [svgOpen(layout.width, layout.height, palette, transparent), svgThemeStyle(font, false), '<defs>'];
   lines.push(
     '  <marker id="seq-arrow" markerWidth="8" markerHeight="5" refX="8" refY="2.5" orient="auto-start-reverse">\n' +
@@ -440,11 +442,15 @@ export function renderSequenceLayout(layout, palette, options = {}) {
     ];
 
     if (message.isSelf) {
-      messageLines.push(
-        '  <polyline points="' + message.x1 + ',' + message.y + ' ' + (message.x1 + 30) + ',' + message.y +
-        ' ' + (message.x1 + 30) + ',' + (message.y + 20) + ' ' + message.x2 + ',' + (message.y + 20) +
-        '" fill="none" stroke="var(--_line)" stroke-width="1"' + dash + ' marker-end="url(#' + marker + ')" />'
-      );
+      const selfPoints = [
+        { x: message.x1, y: message.y },
+        { x: message.x1 + 30, y: message.y },
+        { x: message.x1 + 30, y: message.y + 20 },
+        { x: message.x2, y: message.y + 20 },
+      ];
+      const suffix = ' fill="none" stroke="var(--_line)" stroke-width="1"' + dash +
+        ' marker-end="url(#' + marker + ')"';
+      messageLines.push('  ' + svgPolyline(selfPoints, '', suffix, edgeCornerRadius));
       messageLines.push(
         '  ' + svgText(message.label, message.x1 + 38, message.y + 10, 11,
           'font-size="11" text-anchor="start" font-weight="400" fill="var(--_text-muted)"')
@@ -526,13 +532,18 @@ export function renderSequenceLayout(layout, palette, options = {}) {
   return lines.join('\n');
 }
 
-export async function renderSequence(source, { palette, font = 'Inter', transparent = false } = {}) {
+export async function renderSequence(source, {
+  palette,
+  font = 'Inter',
+  transparent = false,
+  edgeCornerRadius = 0,
+} = {}) {
   const model = parseSequence(source);
   const layout = layoutSequence(model);
   return {
     type: 'sequence',
     model,
     layout,
-    svg: renderSequenceLayout(layout, palette, { font, transparent }),
+    svg: renderSequenceLayout(layout, palette, { font, transparent, edgeCornerRadius }),
   };
 }

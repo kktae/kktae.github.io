@@ -7,6 +7,7 @@ import {
   svgText,
   svgThemeStyle,
 } from './common.mjs';
+import { polylineMidpoint, svgPolyline } from './geometry.mjs';
 
 const DEFAULTS = Object.freeze({
   font: 'Inter',
@@ -558,29 +559,6 @@ function collectELKEdges(node, map, offsetX = 0, offsetY = 0) {
   }
 }
 
-function pathMidpoint(points) {
-  if (!points.length) return { x: 0, y: 0 };
-  if (points.length === 1) return points[0];
-  let total = 0;
-  for (let index = 1; index < points.length; index += 1) {
-    total += Math.hypot(points[index].x - points[index - 1].x, points[index].y - points[index - 1].y);
-  }
-  let remaining = total / 2;
-  for (let index = 1; index < points.length; index += 1) {
-    const previous = points[index - 1];
-    const current = points[index];
-    const length = Math.hypot(current.x - previous.x, current.y - previous.y);
-    if (remaining <= length) {
-      const ratio = length > 0 ? remaining / length : 0;
-      return {
-        x: previous.x + (current.x - previous.x) * ratio,
-        y: previous.y + (current.y - previous.y) * ratio,
-      };
-    }
-    remaining -= length;
-  }
-  return points[points.length - 1];
-}
 
 function groupBoxes(groups, output = []) {
   for (const group of groups) {
@@ -652,14 +630,14 @@ function flattenEdges(elkGraph, graph, groups) {
 
     let labelPosition;
     if (source.label && points.length >= 2) {
-      labelPosition = parts.external?.labelPosition ?? pathMidpoint(points);
+      labelPosition = parts.external?.labelPosition ?? polylineMidpoint(points);
     }
 
     const normalized = normalizeOrthogonal(points, bounds, detour);
     const pathChanged = normalized !== points;
     if (pathChanged && normalized.length) detour += 1;
     points = normalized;
-    if (pathChanged && source.label && points.length >= 2) labelPosition = pathMidpoint(points);
+    if (pathChanged && source.label && points.length >= 2) labelPosition = polylineMidpoint(points);
 
     edges.push({
       ...source,
@@ -1124,6 +1102,7 @@ function markerSuffix(color) {
 export function renderFlowchartLayout(layout, palette, options = {}) {
   const font = options.font ?? DEFAULTS.font;
   const transparent = options.transparent ?? false;
+  const edgeCornerRadius = Math.max(0, Number(options.edgeCornerRadius) || 0);
   const lines = [svgOpen(layout.width, layout.height, palette, transparent), svgThemeStyle(font, false), '<defs>'];
   lines.push(
     '  <marker id="arrowhead" markerWidth="8" markerHeight="5" refX="7" refY="2.5" orient="auto">\n' +
@@ -1156,7 +1135,6 @@ export function renderFlowchartLayout(layout, palette, options = {}) {
 
   for (const edge of layout.edges) {
     if (edge.points.length < 2) continue;
-    const points = edge.points.map(point => point.x + ',' + point.y).join(' ');
     const dotted = edge.style === 'dotted' ? ' stroke-dasharray="4 4"' : '';
     const width = escapeXML(edge.inlineStyle?.['stroke-width'] ?? String(edge.style === 'thick' ? 2 : 1));
     const stroke = escapeXML(edge.inlineStyle?.stroke ?? 'var(--_line)');
@@ -1164,6 +1142,7 @@ export function renderFlowchartLayout(layout, palette, options = {}) {
     let markers = '';
     if (edge.hasArrowEnd) markers += ' marker-end="url(#arrowhead' + suffix + ')"';
     if (edge.hasArrowStart) markers += ' marker-start="url(#arrowhead-start' + suffix + ')"';
+    const geometrySuffix = ' fill="none" stroke="' + stroke + '" stroke-width="' + width + '"' + dotted + markers;
     const attrs = [
       'class="edge"',
       'data-from="' + escapeXML(edge.source) + '"',
@@ -1173,13 +1152,12 @@ export function renderFlowchartLayout(layout, palette, options = {}) {
       'data-arrow-end="' + edge.hasArrowEnd + '"',
     ];
     if (edge.label) attrs.push('data-label="' + escapeXML(edge.label) + '"');
-    lines.push('<polyline ' + attrs.join(' ') + ' points="' + points +
-      '" fill="none" stroke="' + stroke + '" stroke-width="' + width + '"' + dotted + markers + ' />');
+    lines.push(svgPolyline(edge.points, attrs.join(' '), geometrySuffix, edgeCornerRadius));
   }
 
   for (const edge of layout.edges) {
     if (!edge.label) continue;
-    const position = edge.labelPosition ?? pathMidpoint(edge.points);
+    const position = edge.labelPosition ?? polylineMidpoint(edge.points);
     const measured = measureMultiline(edge.label, 11, 400);
     const width = measured.width + 16;
     const height = measured.height + 16;
@@ -1216,6 +1194,7 @@ export async function renderFlowchart(source, {
   palette,
   font = DEFAULTS.font,
   transparent = false,
+  edgeCornerRadius = 0,
   layoutOptions = {},
 } = {}) {
   if (!elk) throw new Error('ELK instance is required');
@@ -1225,6 +1204,6 @@ export async function renderFlowchart(source, {
     type: 'flowchart',
     graph,
     layout,
-    svg: renderFlowchartLayout(layout, palette, { font, transparent }),
+    svg: renderFlowchartLayout(layout, palette, { font, transparent, edgeCornerRadius }),
   };
 }

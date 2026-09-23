@@ -8,6 +8,7 @@ import {
   svgText,
   svgThemeStyle,
 } from './common.mjs';
+import { polylineMidpoint, svgPolyline } from './geometry.mjs';
 
 function ensureEntity(entities, id) {
   let entity = entities.get(id);
@@ -177,31 +178,9 @@ export async function layoutERDiagram(model, elk) {
   };
 }
 
-function midpoint(points) {
-  if (!points.length) return { x: 0, y: 0 };
-  if (points.length === 1) return points[0];
-  let total = 0;
-  for (let index = 1; index < points.length; index += 1) {
-    total += Math.hypot(points[index].x - points[index - 1].x, points[index].y - points[index - 1].y);
-  }
-  if (!total) return points[0];
-  let remaining = total / 2;
-  for (let index = 1; index < points.length; index += 1) {
-    const a = points[index - 1];
-    const b = points[index];
-    const length = Math.hypot(b.x - a.x, b.y - a.y);
-    if (remaining <= length) {
-      const ratio = length > 0 ? remaining / length : 0;
-      return { x: a.x + (b.x - a.x) * ratio, y: a.y + (b.y - a.y) * ratio };
-    }
-    remaining -= length;
-  }
-  return points[points.length - 1];
-}
 
-function relationshipLine(relationship) {
+function relationshipLine(relationship, edgeCornerRadius = 0) {
   if (relationship.points.length < 2) return '';
-  const points = relationship.points.map(point => point.x + ',' + point.y).join(' ');
   const dash = relationship.identifying ? '' : ' stroke-dasharray="6 4"';
   const label = relationship.label ? ' data-label="' + escapeXML(relationship.label) + '"' : '';
   const attrs = [
@@ -211,9 +190,9 @@ function relationshipLine(relationship) {
     'data-cardinality1="' + relationship.cardinality1 + '"',
     'data-cardinality2="' + relationship.cardinality2 + '"',
     'data-identifying="' + relationship.identifying + '"',
-  ].join(' ');
-  return '<polyline ' + attrs + label + ' points="' + points +
-    '" fill="none" stroke="var(--_line)" stroke-width="1"' + dash + ' />';
+  ].join(' ') + label;
+  const suffix = ' fill="none" stroke="var(--_line)" stroke-width="1"' + dash;
+  return svgPolyline(relationship.points, attrs, suffix, edgeCornerRadius);
 }
 
 function cardinalitySVG(point, neighbour, kind) {
@@ -275,9 +254,10 @@ function cardinalitySVG(point, neighbour, kind) {
 export function renderERLayout(layout, palette, options = {}) {
   const font = options.font ?? 'Inter';
   const transparent = options.transparent ?? false;
+  const edgeCornerRadius = Math.max(0, Number(options.edgeCornerRadius) || 0);
   const lines = [svgOpen(layout.width, layout.height, palette, transparent), svgThemeStyle(font, true), '<defs>', '</defs>'];
 
-  for (const relationship of layout.relationships) lines.push(relationshipLine(relationship));
+  for (const relationship of layout.relationships) lines.push(relationshipLine(relationship, edgeCornerRadius));
 
   for (const entity of layout.entities) {
     const values = [
@@ -351,7 +331,7 @@ export function renderERLayout(layout, palette, options = {}) {
 
   for (const relationship of layout.relationships) {
     if (!relationship.label || relationship.points.length < 2) continue;
-    const position = midpoint(relationship.points);
+    const position = polylineMidpoint(relationship.points);
     const measured = measureMultiline(relationship.label, 11, 400);
     const width = measured.width + 8;
     const height = measured.height + 6;
@@ -368,7 +348,13 @@ export function renderERLayout(layout, palette, options = {}) {
   return lines.join('\n');
 }
 
-export async function renderERDiagram(source, { elk, palette, font = 'Inter', transparent = false } = {}) {
+export async function renderERDiagram(source, {
+  elk,
+  palette,
+  font = 'Inter',
+  transparent = false,
+  edgeCornerRadius = 0,
+} = {}) {
   if (!elk) throw new Error('ELK instance is required');
   const model = parseERDiagram(source);
   const layout = await layoutERDiagram(model, elk);
@@ -376,6 +362,6 @@ export async function renderERDiagram(source, { elk, palette, font = 'Inter', tr
     type: 'er',
     model,
     layout,
-    svg: renderERLayout(layout, palette, { font, transparent }),
+    svg: renderERLayout(layout, palette, { font, transparent, edgeCornerRadius }),
   };
 }

@@ -27,6 +27,16 @@ The Antigravity-compatible API accepts:
 
 Antigravity accepts `mergeEdges` and `thoroughness` in the options object but its current 2.15.1 implementation later reads fixed defaults for those two values. The compatibility renderer intentionally preserves that behavior.
 
+## Module boundaries
+
+- `renderer.mjs` is the facade and diagram-family dispatcher.
+- `common.mjs` owns text measurement, escaping, palette/theme SVG helpers and style parsing.
+- `geometry.mjs` owns reusable polyline geometry and SVG line serialization.
+- Each diagram-family module owns its parser, layout adapter and family-specific SVG structures.
+- `state.mjs` deliberately reuses the flowchart layout and SVG renderer instead of duplicating them.
+
+`renderAntigravityDiagram()` is the strict compatibility API and always preserves Antigravity geometry. `renderDiagram()` is the site-facing presentation API. The site may opt into presentation-only features such as `edgeCornerRadius`; these do not change the compatibility API or its golden hashes.
+
 ## Verification
 
 Compatibility is tested without checking proprietary Antigravity source or generated SVG files into this repository.

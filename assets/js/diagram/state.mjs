@@ -139,6 +139,7 @@ export async function renderStateDiagram(source, {
   palette,
   font = 'Inter',
   transparent = false,
+  edgeCornerRadius = 0,
   layoutOptions = {},
 } = {}) {
   if (!elk) throw new Error('ELK instance is required');
@@ -148,6 +149,6 @@ export async function renderStateDiagram(source, {
     type: 'state',
     graph,
     layout,
-    svg: renderFlowchartLayout(layout, palette, { font, transparent }),
+    svg: renderFlowchartLayout(layout, palette, { font, transparent, edgeCornerRadius }),
   };
 }

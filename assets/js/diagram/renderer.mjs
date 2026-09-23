@@ -42,6 +42,7 @@ async function renderAntigravityDetailed(source, options = {}) {
     palette,
     font: options.font ?? 'Inter',
     transparent: options.transparent ?? false,
+    edgeCornerRadius: Math.max(0, Number(options.edgeCornerRadius) || 0),
   };
 
   const type = detectDiagramType(decoded);
@@ -64,7 +65,7 @@ async function renderAntigravityDetailed(source, options = {}) {
 }
 
 export async function renderAntigravityDiagram(source, options = {}) {
-  return (await renderAntigravityDetailed(source, options)).svg;
+  return (await renderAntigravityDetailed(source, { ...options, edgeCornerRadius: 0 })).svg;
 }
 
 export async function renderDiagram(source, options = {}) {
@@ -76,7 +77,7 @@ export async function renderDiagram(source, options = {}) {
     transparent: options.transparent ?? false,
     interactive: options.interactive ?? false,
   };
-  for (const key of ['padding', 'nodeSpacing', 'layerSpacing', 'mergeEdges', 'thoroughness']) {
+  for (const key of ['padding', 'nodeSpacing', 'layerSpacing', 'mergeEdges', 'thoroughness', 'edgeCornerRadius']) {
     if (Object.prototype.hasOwnProperty.call(options, key)) coreOptions[key] = options[key];
   }
   return renderAntigravityDetailed(source, coreOptions);

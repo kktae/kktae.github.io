@@ -104,16 +104,8 @@ try {
       const rects = [...group.querySelectorAll(':scope > rect')];
       return rects.length === 2 && Number(rects[1].getAttribute('height')) === 28;
     });
-    const nonOrthogonal = edges.filter(edge => {
-      const points = (edge.getAttribute('points') ?? '').trim().split(/\s+/).map(pair => {
-        const [x, y] = pair.split(',').map(Number);
-        return { x, y };
-      });
-      return points.slice(1).some((point, index) => {
-        const previous = points[index];
-        return Math.abs(point.x - previous.x) > 0.01 && Math.abs(point.y - previous.y) > 0.01;
-      });
-    });
+    const pathEdges = edges.filter(edge => edge.tagName.toLowerCase() === 'path');
+    const roundedEdges = pathEdges.filter(edge => /\bQ\b/.test(edge.getAttribute('d') ?? ''));
     const clippedLabels = nodes.filter(node => {
       const shape = node.querySelector(':scope > rect, :scope > polygon, :scope > circle, :scope > ellipse');
       const text = node.querySelector(':scope > text');
@@ -131,7 +123,9 @@ try {
       headers: headers.length,
       toolbars: document.querySelectorAll('.diagram-toolbar').length,
       diagrams: document.querySelectorAll('pre.diagram-source').length,
-      nonOrthogonalEdges: nonOrthogonal.length,
+      edges: edges.length,
+      pathEdges: pathEdges.length,
+      roundedEdges: roundedEdges.length,
       clippedLabels: clippedLabels.length,
     };
   });
@@ -140,7 +134,8 @@ try {
   assert.ok(diagramUX.groups > 0);
   assert.equal(diagramUX.headers, diagramUX.groups);
   assert.equal(diagramUX.toolbars, diagramUX.diagrams);
-  assert.equal(diagramUX.nonOrthogonalEdges, 0);
+  assert.equal(diagramUX.pathEdges, diagramUX.edges);
+  assert.ok(diagramUX.roundedEdges > 0);
   assert.equal(diagramUX.clippedLabels, 0);
 
   await page.evaluate(() => {

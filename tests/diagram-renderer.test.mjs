@@ -5,6 +5,7 @@ import { join } from 'node:path';
 import test from 'node:test';
 
 import { measureText, PALETTES } from '../assets/js/diagram/common.mjs';
+import { roundedPolylinePath } from '../assets/js/diagram/geometry.mjs';
 import { parseFlowchart } from '../assets/js/diagram/flowchart.mjs';
 import {
   detectDiagramType,
@@ -121,6 +122,26 @@ test('Antigravity text-width heuristic remains deterministic for Latin and CJK',
   assert.ok(Math.abs(measureText('abc', 13, 500) - 24.18) < 1e-9);
   assert.ok(Math.abs(measureText('한글', 13, 500) - 31.59) < 1e-9);
 });
+
+test('rounded polyline geometry keeps endpoints and rounds only real corners', () => {
+  assert.equal(
+    roundedPolylinePath([
+      { x: 0, y: 0 },
+      { x: 10, y: 0 },
+      { x: 10, y: 10 },
+    ], 4),
+    'M 0 0 L 6 0 Q 10 0 10 4 L 10 10'
+  );
+  assert.equal(
+    roundedPolylinePath([
+      { x: 0, y: 0 },
+      { x: 10, y: 0 },
+      { x: 20, y: 0 },
+    ], 4),
+    'M 0 0 L 10 0 L 20 0'
+  );
+});
+
 
 test('flowchart parser preserves nested groups, edge styles, labels, and class styling', () => {
   const graph = parseFlowchart(FIXTURES.flowchart);
