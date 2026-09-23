@@ -20,6 +20,7 @@ POSTS = (ROOT / "tests/fixtures/published-posts.txt").read_text(encoding="utf-8"
 TAGS = (ROOT / "tests/fixtures/published-tags.txt").read_text(encoding="utf-8").splitlines()
 CONFIG = tomllib.loads((ROOT / "hugo.toml").read_text(encoding="utf-8"))
 ARTICLE = POSTS[6]
+SLIDE_ARTICLE = "/posts/gemini-enterprise/01-overview/"
 VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"}
 
 
@@ -309,8 +310,17 @@ class SiteTests(unittest.TestCase):
         self.assertTrue(diagrams)
         self.assertTrue(all(node.text.strip() for node in diagrams))
         self.assertFalse(CONFIG["markup"]["goldmark"]["renderer"]["unsafe"])
+        alerts = [
+            node
+            for route in POSTS
+            for node in self.page(route).find("blockquote", cls="alert")
+        ]
+        self.assertTrue(alerts)
+        self.assertTrue(any("alert-note" in node.attrs.get("class", "").split() for node in alerts))
+        self.assertTrue(self.page("/posts/google-cloud/compute-availability-visibility/").find("input", type="checkbox"))
+        self.assertTrue(self.page("/posts/google-cloud/gke-agent-substrate/").find(cls="footnotes"))
 
-        iframe = self.page(POSTS[-1]).find("iframe")
+        iframe = self.page(SLIDE_ARTICLE).find("iframe")
         self.assertEqual(len(iframe), 1)
         self.assertTrue((self.output / "posts/gemini-enterprise/slides/index.html").is_file())
 

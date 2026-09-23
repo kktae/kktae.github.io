@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1180" font-family="'Apple SD Gothic Neo', 'Helvetica Neue', 'Arial', sans-serif">
+  <!-- Background: warm cream paper -->
+  <rect width="900" height="1180" fill="#fbf9f4"/>
+
+  <!-- Title bar -->
+  <g>
+    <text x="450" y="55" text-anchor="middle" font-size="26" font-weight="700" fill="#1f1f1f">Direct VPC egress · IP 산정 공식</text>
+    <text x="450" y="82" text-anchor="middle" font-size="13" fill="#5f6368">출처: Cloud Run docs — Direct VPC egress with Shared VPC</text>
+    <line x1="100" y1="100" x2="800" y2="100" stroke="#1f1f1f" stroke-width="1.5"/>
+  </g>
+
+  <!-- ============ STEP 1: 2X rule ============ -->
+  <g transform="translate(0, 130)">
+    <!-- Step number circle -->
+    <circle cx="80" cy="90" r="38" fill="none" stroke="#1f1f1f" stroke-width="3"/>
+    <text x="80" y="103" text-anchor="middle" font-size="42" font-weight="700" fill="#1f1f1f">1</text>
+
+    <!-- Illustration: instance × 2 IP -->
+    <g transform="translate(170, 30)">
+      <!-- Cloud Run instance box -->
+      <rect x="0" y="40" width="100" height="70" fill="none" stroke="#1f1f1f" stroke-width="2.5" rx="6"/>
+      <text x="50" y="68" text-anchor="middle" font-size="11" fill="#1f1f1f">Cloud Run</text>
+      <text x="50" y="88" text-anchor="middle" font-size="11" font-weight="600" fill="#1f1f1f">인스턴스</text>
+      <text x="50" y="103" text-anchor="middle" font-size="10" fill="#5f6368">× 1</text>
+
+      <!-- Arrow -->
+      <line x1="115" y1="75" x2="160" y2="75" stroke="#1f1f1f" stroke-width="2" marker-end="url(#arr)"/>
+      <text x="138" y="68" text-anchor="middle" font-size="11" font-weight="600" fill="#1976d2">소비</text>
+
+      <!-- IP blocks (2) -->
+      <g transform="translate(175, 45)">
+        <rect x="0" y="0" width="60" height="60" fill="#e3f2fd" stroke="#1976d2" stroke-width="2" rx="4"/>
+        <text x="30" y="35" text-anchor="middle" font-size="14" font-weight="700" fill="#1976d2">IP</text>
+        <rect x="70" y="0" width="60" height="60" fill="#e3f2fd" stroke="#1976d2" stroke-width="2" rx="4"/>
+        <text x="100" y="35" text-anchor="middle" font-size="14" font-weight="700" fill="#1976d2">IP</text>
+        <text x="65" y="80" text-anchor="middle" font-size="22" font-weight="700" fill="#1f1f1f">×2</text>
+      </g>
+    </g>
+
+    <!-- Label -->
+    <g transform="translate(560, 50)">
+      <text x="0" y="20" font-size="16" font-weight="700" fill="#1f1f1f">2X 규칙</text>
+      <text x="0" y="48" font-size="13" fill="#1f1f1f">정상 상태에서 인스턴스 수</text>
+      <text x="0" y="66" font-size="13" fill="#1f1f1f">× 2배의 IP를 사용합니다.</text>
+      <text x="0" y="92" font-size="11" fill="#5f6368">"At steady state, Cloud Run uses</text>
+      <text x="0" y="108" font-size="11" fill="#5f6368">2 times (2X) as many IP addresses"</text>
+    </g>
+
+    <!-- Section separator -->
+    <line x1="100" y1="180" x2="800" y2="180" stroke="#dadce0" stroke-width="1"/>
+  </g>
+
+  <!-- ============ STEP 2: 16-block allocation ============ -->
+  <g transform="translate(0, 320)">
+    <circle cx="80" cy="90" r="38" fill="none" stroke="#1f1f1f" stroke-width="3"/>
+    <text x="80" y="103" text-anchor="middle" font-size="42" font-weight="700" fill="#1f1f1f">2</text>
+
+    <g transform="translate(170, 40)">
+      <!-- 4x4 grid of IP blocks (16 IPs = /28) -->
+      <g>
+        <rect x="0" y="0" width="180" height="120" fill="none" stroke="#1f1f1f" stroke-width="2.5" rx="6"/>
+        <text x="90" y="-5" text-anchor="middle" font-size="11" font-weight="600" fill="#1f1f1f">예약 블록 (16 IP, /28)</text>
+      </g>
+      <g transform="translate(10, 15)">
+        <!-- 4x4 = 16 cells -->
+        <g fill="#e3f2fd" stroke="#1976d2" stroke-width="1.5">
+          <rect x="0"   y="0"  width="35" height="20" rx="2"/>
+          <rect x="40"  y="0"  width="35" height="20" rx="2"/>
+          <rect x="80"  y="0"  width="35" height="20" rx="2"/>
+          <rect x="120" y="0"  width="35" height="20" rx="2"/>
+          <rect x="0"   y="25" width="35" height="20" rx="2"/>
+          <rect x="40"  y="25" width="35" height="20" rx="2"/>
+          <rect x="80"  y="25" width="35" height="20" rx="2"/>
+          <rect x="120" y="25" width="35" height="20" rx="2"/>
+          <rect x="0"   y="50" width="35" height="20" rx="2"/>
+          <rect x="40"  y="50" width="35" height="20" rx="2"/>
+          <rect x="80"  y="50" width="35" height="20" rx="2"/>
+          <rect x="120" y="50" width="35" height="20" rx="2"/>
+          <rect x="0"   y="75" width="35" height="20" rx="2"/>
+          <rect x="40"  y="75" width="35" height="20" rx="2"/>
+          <rect x="80"  y="75" width="35" height="20" rx="2"/>
+          <rect x="120" y="75" width="35" height="20" rx="2"/>
+        </g>
+      </g>
+    </g>
+
+    <g transform="translate(440, 60)">
+      <text x="0" y="20" font-size="16" font-weight="700" fill="#1f1f1f">블록 단위 예약 (/28 = 16 IP)</text>
+      <text x="0" y="48" font-size="13" fill="#1f1f1f">빠른 스케일업을 위해 IP를</text>
+      <text x="0" y="66" font-size="13" fill="#1f1f1f">한 번에 16개 묶음으로 할당합니다.</text>
+      <text x="0" y="94" font-size="11" fill="#5f6368">"reserves IP addresses in blocks of 16</text>
+      <text x="0" y="110" font-size="11" fill="#5f6368">(/28 subnet mask) at a time"</text>
+    </g>
+
+    <line x1="100" y1="200" x2="800" y2="200" stroke="#dadce0" stroke-width="1"/>
+  </g>
+
+  <!-- ============ STEP 3: 20-min retention (warning) ============ -->
+  <g transform="translate(0, 530)">
+    <circle cx="80" cy="90" r="38" fill="none" stroke="#1f1f1f" stroke-width="3"/>
+    <text x="80" y="103" text-anchor="middle" font-size="42" font-weight="700" fill="#1f1f1f">3</text>
+
+    <g transform="translate(170, 35)">
+      <!-- Clock icon -->
+      <circle cx="60" cy="60" r="45" fill="none" stroke="#d32f2f" stroke-width="3"/>
+      <circle cx="60" cy="60" r="3" fill="#d32f2f"/>
+      <!-- Clock hands -->
+      <line x1="60" y1="60" x2="60" y2="25" stroke="#d32f2f" stroke-width="3" stroke-linecap="round"/>
+      <line x1="60" y1="60" x2="84" y2="60" stroke="#d32f2f" stroke-width="3" stroke-linecap="round"/>
+      <!-- Tick marks -->
+      <line x1="60" y1="18" x2="60" y2="24" stroke="#d32f2f" stroke-width="2"/>
+      <line x1="102" y1="60" x2="96" y2="60" stroke="#d32f2f" stroke-width="2"/>
+      <line x1="60" y1="102" x2="60" y2="96" stroke="#d32f2f" stroke-width="2"/>
+      <line x1="18" y1="60" x2="24" y2="60" stroke="#d32f2f" stroke-width="2"/>
+
+      <text x="60" y="135" text-anchor="middle" font-size="20" font-weight="700" fill="#d32f2f">20 min</text>
+
+      <!-- Arrow showing scale down -->
+      <g transform="translate(140, 30)">
+        <text x="0" y="0" font-size="11" fill="#1f1f1f">인스턴스</text>
+        <text x="0" y="15" font-size="11" font-weight="600" fill="#1f1f1f">축소 후</text>
+        <line x1="40" y1="40" x2="80" y2="60" stroke="#d32f2f" stroke-width="2" marker-end="url(#arr-r)"/>
+        <text x="0" y="80" font-size="11" fill="#1f1f1f">IP는</text>
+        <text x="0" y="95" font-size="11" font-weight="600" fill="#d32f2f">20분간 유지</text>
+      </g>
+    </g>
+
+    <g transform="translate(490, 60)">
+      <!-- Warning triangle -->
+      <g transform="translate(0, -10)">
+        <polygon points="0,30 15,0 30,30" fill="none" stroke="#d32f2f" stroke-width="2.5"/>
+        <text x="15" y="25" text-anchor="middle" font-size="16" font-weight="700" fill="#d32f2f">!</text>
+      </g>
+      <text x="40" y="15" font-size="16" font-weight="700" fill="#d32f2f">축소 후 IP 20분 유지</text>
+      <text x="0" y="50" font-size="13" fill="#1f1f1f">리비전 업데이트 중 동시 운영 시</text>
+      <text x="0" y="68" font-size="13" font-weight="600" fill="#1f1f1f">2X + 버퍼 IP를 확보합니다.</text>
+      <text x="0" y="96" font-size="11" fill="#5f6368">"retains its IP addresses for up to</text>
+      <text x="0" y="112" font-size="11" fill="#5f6368">20 minutes"</text>
+    </g>
+
+    <line x1="100" y1="200" x2="800" y2="200" stroke="#dadce0" stroke-width="1"/>
+  </g>
+
+  <!-- ============ STEP 4: Job task = 1 IP + 7 min tail ============ -->
+  <g transform="translate(0, 740)">
+    <circle cx="80" cy="90" r="38" fill="none" stroke="#1f1f1f" stroke-width="3"/>
+    <text x="80" y="103" text-anchor="middle" font-size="42" font-weight="700" fill="#1f1f1f">4</text>
+
+    <g transform="translate(170, 40)">
+      <!-- Task box -->
+      <rect x="0" y="20" width="80" height="60" fill="none" stroke="#1f1f1f" stroke-width="2.5" rx="6"/>
+      <text x="40" y="48" text-anchor="middle" font-size="11" fill="#1f1f1f">Job task</text>
+      <text x="40" y="65" text-anchor="middle" font-size="11" font-weight="600" fill="#1f1f1f">× 1</text>
+
+      <line x1="90" y1="50" x2="125" y2="50" stroke="#1f1f1f" stroke-width="2" marker-end="url(#arr)"/>
+      <text x="107" y="42" text-anchor="middle" font-size="11" font-weight="600" fill="#1976d2">사용</text>
+
+      <!-- IP box -->
+      <rect x="135" y="25" width="50" height="50" fill="#e3f2fd" stroke="#1976d2" stroke-width="2" rx="4"/>
+      <text x="160" y="55" text-anchor="middle" font-size="13" font-weight="700" fill="#1976d2">IP × 1</text>
+
+      <!-- Plus 7 min tail -->
+      <text x="200" y="55" font-size="20" font-weight="700" fill="#1f1f1f">+</text>
+      <g transform="translate(220, 25)">
+        <rect x="0" y="0" width="80" height="50" fill="#fff3e0" stroke="#f57c00" stroke-width="2" rx="4"/>
+        <text x="40" y="22" text-anchor="middle" font-size="11" font-weight="600" fill="#f57c00">+7 min</text>
+        <text x="40" y="38" text-anchor="middle" font-size="10" fill="#f57c00">tail</text>
+      </g>
+    </g>
+
+    <g transform="translate(560, 50)">
+      <text x="0" y="20" font-size="16" font-weight="700" fill="#1f1f1f">Job IP 동작</text>
+      <text x="0" y="48" font-size="13" fill="#1f1f1f">task 1개 = IP 1개 사용,</text>
+      <text x="0" y="66" font-size="13" fill="#1f1f1f">완료 후 7분간 유지합니다.</text>
+      <text x="0" y="94" font-size="11" fill="#5f6368">"each task consumes 1 IP address</text>
+      <text x="0" y="110" font-size="11" fill="#5f6368">plus 7 minutes after it completes"</text>
+    </g>
+
+    <line x1="100" y1="180" x2="800" y2="180" stroke="#dadce0" stroke-width="1"/>
+  </g>
+
+  <!-- ============ STEP 5: max-instances 100 → 200 IP ceiling ============ -->
+  <g transform="translate(0, 930)">
+    <circle cx="80" cy="90" r="38" fill="none" stroke="#1f1f1f" stroke-width="3"/>
+    <text x="80" y="103" text-anchor="middle" font-size="42" font-weight="700" fill="#1f1f1f">5</text>
+
+    <g transform="translate(170, 40)">
+      <!-- 100 instances representation -->
+      <rect x="0" y="0" width="120" height="110" fill="none" stroke="#1f1f1f" stroke-width="2.5" rx="6"/>
+      <text x="60" y="-5" text-anchor="middle" font-size="11" font-weight="600" fill="#1f1f1f">max-instances</text>
+      <text x="60" y="55" text-anchor="middle" font-size="36" font-weight="700" fill="#1f1f1f">100</text>
+      <text x="60" y="85" text-anchor="middle" font-size="11" fill="#5f6368">인스턴스</text>
+
+      <!-- equals -->
+      <text x="140" y="60" font-size="24" font-weight="700" fill="#1f1f1f">×2</text>
+      <text x="185" y="60" font-size="24" font-weight="700" fill="#1f1f1f">=</text>
+
+      <!-- 200 IP -->
+      <rect x="225" y="0" width="150" height="110" fill="#e3f2fd" stroke="#1976d2" stroke-width="3" rx="6"/>
+      <text x="300" y="-5" text-anchor="middle" font-size="11" font-weight="600" fill="#1976d2">이론상 IP 최대</text>
+      <text x="300" y="55" text-anchor="middle" font-size="36" font-weight="700" fill="#1976d2">200</text>
+      <text x="300" y="85" text-anchor="middle" font-size="11" fill="#1976d2">IP</text>
+    </g>
+
+    <g transform="translate(620, 50)">
+      <text x="0" y="20" font-size="16" font-weight="700" fill="#1f1f1f">소요 IP 상한</text>
+      <text x="0" y="48" font-size="13" fill="#1f1f1f">Direct VPC egress 인스턴스</text>
+      <text x="0" y="66" font-size="13" fill="#1f1f1f">한도 100 × 2X 규칙 적용 시</text>
+      <text x="0" y="84" font-size="13" font-weight="600" fill="#1976d2">/24 이상 권장 (252 usable).</text>
+    </g>
+  </g>
+
+  <!-- Footer -->
+  <g>
+    <line x1="100" y1="1110" x2="800" y2="1110" stroke="#1f1f1f" stroke-width="1.5"/>
+    <text x="450" y="1140" text-anchor="middle" font-size="11" fill="#5f6368">© Megazone Cloud Professional Services · Cloud Run Production Operation Reference Brief</text>
+    <text x="450" y="1158" text-anchor="middle" font-size="10" fill="#9aa0a6">Reference: docs.cloud.google.com/run/docs/configuring/shared-vpc-direct-vpc</text>
+  </g>
+
+  <!-- Arrowhead markers -->
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <polygon points="0 0, 10 4, 0 8" fill="#1f1f1f"/>
+    </marker>
+    <marker id="arr-r" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <polygon points="0 0, 10 4, 0 8" fill="#d32f2f"/>
+    </marker>
+  </defs>
+</svg>

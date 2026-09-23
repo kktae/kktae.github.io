@@ -63,6 +63,7 @@ try {
   check('search smoke', await page.evaluate(() => document.querySelector('#searchStatus').textContent));
 
   let diagrams = 0;
+  let alerts = 0;
   for (const route of posts) {
     await go(route);
     await page.waitForFunction(() =>
@@ -73,6 +74,7 @@ try {
     const result = await page.evaluate(() => ({
       source: document.querySelectorAll('pre.mermaid').length,
       rendered: document.querySelectorAll('pre.mermaid svg').length,
+      alerts: document.querySelectorAll('blockquote.alert').length,
       overflow: document.documentElement.scrollWidth > innerWidth,
       errors: window.__blogErrors,
     }));
@@ -80,8 +82,10 @@ try {
     assert.equal(result.overflow, false, route);
     assert.deepEqual(result.errors, [], route);
     diagrams += result.source;
+    alerts += result.alerts;
   }
-  check('article and Mermaid smoke', { articles: posts.length, diagrams });
+  assert.ok(alerts > 0);
+  check('article and Markdown smoke', { articles: posts.length, diagrams, alerts });
 
   await go(posts[6]);
   await page.evaluate(() => localStorage.setItem('pref-theme', 'light'));
@@ -92,7 +96,7 @@ try {
   assert.equal(await page.evaluate(() => document.documentElement.dataset.theme), 'dark');
   check('theme persistence', 'passed');
 
-  await go(posts.at(-1));
+  await go('/posts/gemini-enterprise/01-overview/');
   await page.waitForFunction(() => document.querySelector('iframe')?.contentDocument?.readyState === 'complete');
   assert.ok(await page.evaluate(() => document.querySelector('iframe')?.contentDocument?.title));
   await go('/posts/gemini-enterprise/slides/');

@@ -17,6 +17,9 @@
 .md-content li { margin-block: 0.3em; }
 .md-content blockquote { border-inline-start: 2px solid var(--border); margin: 24px 0; padding: 4px 0 4px 18px; color: var(--secondary); }
 .md-content blockquote p:last-child { margin-bottom: 0; }
+.md-content blockquote.alert { padding: 14px 16px; border: 1px solid var(--border); border-inline-start: 3px solid var(--primary); border-radius: 4px; background: var(--surface); color: var(--content); }
+.md-content .alert-heading { margin: 0 0 6px; color: var(--primary); font-size: 0.88em; font-weight: 650; }
+.md-content blockquote.alert > :last-child { margin-bottom: 0; }
 .md-content code { font-family: var(--font-code); font-size: 0.84em; border-radius: 3px; }
 .md-content pre { position: relative; overflow-x: auto; border-radius: 4px; background: var(--code-block-bg); }
 .md-content pre code { font-size: 13px; line-height: 1.7; }

@@ -34,7 +34,7 @@ ignoreFiles = ['(^|/)references(/|$)']
   githubRepo = "kktae/kktae.github.io"
   sourceBranch = "main"
   homePostLimit = 6
-  curatedTags = ["GCP", "PSA", "PSC", "VPC", "IP Management", "Load Balancing", "Monitoring", "Vertex AI", "Gemini", "AI Agent"]
+  curatedTags = ["GCP", "GKE", "Compute Engine", "Cloud Run", "PSA", "PSC", "VPC", "VPC Service Controls", "IP Management", "Load Balancing", "Security", "Monitoring", "Vertex AI", "Gemini", "AI Agent", "MCP"]
   ShowReadingTime = true
   ShowToc = true
   DateFormat = "2006.01.02"
@@ -83,11 +83,22 @@ ignoreFiles = ['(^|/)references(/|$)']
 
 [markup]
   [markup.goldmark]
-    [markup.goldmark.extensions.cjk]
-      enable = true
-      eastAsianLineBreaks = true
-      eastAsianLineBreaksStyle = "simple"
-      escapedSpace = true
+    [markup.goldmark.extensions]
+      definitionList = true
+      footnote = true
+      linkify = true
+      strikethrough = true
+      table = true
+      taskList = true
+      [markup.goldmark.extensions.cjk]
+        enable = true
+        eastAsianLineBreaks = true
+        eastAsianLineBreaksStyle = "simple"
+        escapedSpace = true
+    [markup.goldmark.parser]
+      [markup.goldmark.parser.attribute]
+        block = true
+        title = true
     [markup.goldmark.renderer]
       unsafe = false
   [markup.highlight]

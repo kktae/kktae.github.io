@@ -1,0 +1,23 @@
+{{- $labels := dict
+  "note" "참고"
+  "tip" "팁"
+  "important" "중요"
+  "warning" "주의"
+  "caution" "경고"
+-}}
+{{- if eq .Type "alert" }}
+<blockquote class="alert alert-{{ .AlertType }}">
+  <p class="alert-heading">
+    {{- with .AlertTitle -}}
+      {{ . }}
+    {{- else -}}
+      {{ index $labels .AlertType | default (title .AlertType) }}
+    {{- end -}}
+  </p>
+  {{ .Text }}
+</blockquote>
+{{- else }}
+<blockquote>
+  {{ .Text }}
+</blockquote>
+{{- end }}

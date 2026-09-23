@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" font-family="'Apple SD Gothic Neo', 'Helvetica Neue', 'Arial', sans-serif">
+  <!-- Background: warm cream paper -->
+  <rect width="1200" height="900" fill="#fbf9f4"/>
+
+  <!-- Title -->
+  <g>
+    <text x="600" y="48" text-anchor="middle" font-size="24" font-weight="700" fill="#1f1f1f">VPC 연동 4 모드 · IP 소비 비교</text>
+    <text x="600" y="73" text-anchor="middle" font-size="12" fill="#5f6368">출처: docs.cloud.google.com/run/docs/configuring/connecting-vpc</text>
+    <line x1="100" y1="90" x2="1100" y2="90" stroke="#1f1f1f" stroke-width="1.5"/>
+  </g>
+
+  <!-- Legend / IP intensity scale -->
+  <g transform="translate(420, 105)">
+    <text x="0" y="15" font-size="11" font-weight="600" fill="#5f6368">IP 소비 강도:</text>
+    <g transform="translate(95, 5)">
+      <rect x="0" y="0" width="20" height="14" fill="#e6f4ea" stroke="#34a853" stroke-width="1.5"/>
+      <text x="28" y="11" font-size="10" fill="#1f1f1f">0 IP</text>
+    </g>
+    <g transform="translate(155, 5)">
+      <rect x="0" y="0" width="20" height="14" fill="#e8f0fe" stroke="#4285f4" stroke-width="1.5"/>
+      <text x="28" y="11" font-size="10" fill="#1f1f1f">1 IP</text>
+    </g>
+    <g transform="translate(215, 5)">
+      <rect x="0" y="0" width="20" height="14" fill="#fef7e0" stroke="#fbbc04" stroke-width="1.5"/>
+      <text x="28" y="11" font-size="10" fill="#1f1f1f">12 IP (/28)</text>
+    </g>
+    <g transform="translate(295, 5)">
+      <rect x="0" y="0" width="20" height="14" fill="#fce8e6" stroke="#ea4335" stroke-width="1.5"/>
+      <text x="28" y="11" font-size="10" fill="#1f1f1f">최대 200 IP</text>
+    </g>
+  </g>
+
+  <!-- ═════════ Panel 1: Default Cloud Run (green) ═════════ -->
+  <g transform="translate(80, 165)">
+    <!-- Panel frame -->
+    <rect x="0" y="0" width="490" height="315" fill="none" stroke="#34a853" stroke-width="2.5" rx="8"/>
+    <!-- Header badge -->
+    <rect x="0" y="0" width="490" height="40" fill="#e6f4ea" rx="8"/>
+    <rect x="0" y="32" width="490" height="8" fill="#e6f4ea"/>
+    <circle cx="30" cy="20" r="14" fill="#34a853"/>
+    <text x="30" y="26" text-anchor="middle" font-size="16" font-weight="700" fill="white">1</text>
+    <text x="55" y="26" font-size="15" font-weight="700" fill="#1f1f1f">기본 Cloud Run (VPC 미연동)</text>
+
+    <!-- Diagram: Cloud Run → Google network → Internet -->
+    <g transform="translate(30, 70)">
+      <!-- Cloud Run instance -->
+      <rect x="0" y="20" width="100" height="60" fill="white" stroke="#1f1f1f" stroke-width="2" rx="6"/>
+      <text x="50" y="42" text-anchor="middle" font-size="11" fill="#1f1f1f">Cloud Run</text>
+      <text x="50" y="60" text-anchor="middle" font-size="11" font-weight="600" fill="#1f1f1f">인스턴스</text>
+
+      <!-- Arrow -->
+      <line x1="105" y1="50" x2="145" y2="50" stroke="#1f1f1f" stroke-width="2" marker-end="url(#arr-k)"/>
+
+      <!-- Google managed network (cloud icon) -->
+      <g transform="translate(150, 25)">
+        <!-- Cloud shape -->
+        <path d="M 20 35 Q 5 35 5 20 Q 5 8 18 8 Q 22 0 35 0 Q 50 0 55 12 Q 70 12 70 25 Q 70 35 60 35 Z" fill="#e6f4ea" stroke="#34a853" stroke-width="2"/>
+        <text x="38" y="55" text-anchor="middle" font-size="10" fill="#1f1f1f">Google</text>
+        <text x="38" y="68" text-anchor="middle" font-size="10" fill="#1f1f1f">관리망</text>
+      </g>
+
+      <!-- Arrow -->
+      <line x1="230" y1="50" x2="270" y2="50" stroke="#1f1f1f" stroke-width="2" marker-end="url(#arr-k)"/>
+
+      <!-- Internet (globe) -->
+      <g transform="translate(280, 25)">
+        <circle cx="35" cy="25" r="22" fill="white" stroke="#1f1f1f" stroke-width="2"/>
+        <ellipse cx="35" cy="25" rx="22" ry="9" fill="none" stroke="#1f1f1f" stroke-width="1.5"/>
+        <line x1="35" y1="3" x2="35" y2="47" stroke="#1f1f1f" stroke-width="1.5"/>
+        <ellipse cx="35" cy="25" rx="11" ry="22" fill="none" stroke="#1f1f1f" stroke-width="1.5"/>
+        <text x="35" y="68" text-anchor="middle" font-size="11" fill="#1f1f1f">Internet</text>
+      </g>
+    </g>
+
+    <!-- IP callout -->
+    <g transform="translate(30, 195)">
+      <rect x="0" y="0" width="430" height="95" fill="#e6f4ea" stroke="#34a853" stroke-width="1.5" rx="6"/>
+      <text x="20" y="25" font-size="13" font-weight="700" fill="#1f1f1f">Shared VPC subnet IP 소비</text>
+      <text x="280" y="42" font-size="48" font-weight="800" fill="#34a853">0</text>
+      <text x="20" y="55" font-size="11" fill="#5f6368">VPC 미연동 시 Cloud Run 트래픽은</text>
+      <text x="20" y="71" font-size="11" fill="#5f6368">Google 관리 네트워크를 통과합니다.</text>
+      <text x="20" y="88" font-size="10" fill="#5f6368" font-style="italic">기본 max-instances 100</text>
+    </g>
+  </g>
+
+  <!-- ═════════ Panel 2: Direct VPC egress (red) ═════════ -->
+  <g transform="translate(630, 165)">
+    <rect x="0" y="0" width="490" height="315" fill="none" stroke="#ea4335" stroke-width="2.5" rx="8"/>
+    <rect x="0" y="0" width="490" height="40" fill="#fce8e6" rx="8"/>
+    <rect x="0" y="32" width="490" height="8" fill="#fce8e6"/>
+    <circle cx="30" cy="20" r="14" fill="#ea4335"/>
+    <text x="30" y="26" text-anchor="middle" font-size="16" font-weight="700" fill="white">2</text>
+    <text x="55" y="26" font-size="15" font-weight="700" fill="#1f1f1f">Direct VPC egress</text>
+
+    <!-- Diagram: Cloud Run ↔ Shared VPC subnet -->
+    <g transform="translate(30, 70)">
+      <!-- Cloud Run instance -->
+      <rect x="0" y="20" width="100" height="60" fill="white" stroke="#1f1f1f" stroke-width="2" rx="6"/>
+      <text x="50" y="42" text-anchor="middle" font-size="11" fill="#1f1f1f">Cloud Run</text>
+      <text x="50" y="60" text-anchor="middle" font-size="11" font-weight="600" fill="#1f1f1f">인스턴스</text>
+
+      <!-- Bidirectional arrow -->
+      <line x1="105" y1="50" x2="180" y2="50" stroke="#ea4335" stroke-width="2.5" marker-end="url(#arr-r)" marker-start="url(#arr-r-rev)"/>
+      <text x="143" y="40" text-anchor="middle" font-size="10" font-weight="700" fill="#ea4335">2X IP</text>
+
+      <!-- Shared VPC subnet (with IP grid) -->
+      <g transform="translate(185, 5)">
+        <rect x="0" y="0" width="240" height="95" fill="white" stroke="#ea4335" stroke-width="2" rx="6"/>
+        <text x="120" y="-5" text-anchor="middle" font-size="10" font-weight="600" fill="#1f1f1f">Shared VPC subnet (최소 /26)</text>
+
+        <!-- 16-IP block grid 4x2 -->
+        <g transform="translate(20, 15)" fill="#fce8e6" stroke="#ea4335" stroke-width="1">
+          <rect x="0"   y="0"  width="22" height="15"/>
+          <rect x="25"  y="0"  width="22" height="15"/>
+          <rect x="50"  y="0"  width="22" height="15"/>
+          <rect x="75"  y="0"  width="22" height="15"/>
+          <rect x="100" y="0"  width="22" height="15"/>
+          <rect x="125" y="0"  width="22" height="15"/>
+          <rect x="150" y="0"  width="22" height="15"/>
+          <rect x="175" y="0"  width="22" height="15"/>
+          <rect x="0"   y="20" width="22" height="15"/>
+          <rect x="25"  y="20" width="22" height="15"/>
+          <rect x="50"  y="20" width="22" height="15"/>
+          <rect x="75"  y="20" width="22" height="15"/>
+          <rect x="100" y="20" width="22" height="15"/>
+          <rect x="125" y="20" width="22" height="15"/>
+          <rect x="150" y="20" width="22" height="15"/>
+          <rect x="175" y="20" width="22" height="15"/>
+        </g>
+        <text x="120" y="80" text-anchor="middle" font-size="10" fill="#1f1f1f">16-IP 블록 단위 예약</text>
+      </g>
+    </g>
+
+    <!-- IP callout -->
+    <g transform="translate(30, 195)">
+      <rect x="0" y="0" width="430" height="95" fill="#fce8e6" stroke="#ea4335" stroke-width="1.5" rx="6"/>
+      <text x="20" y="25" font-size="13" font-weight="700" fill="#1f1f1f">Shared VPC subnet IP 소비</text>
+      <text x="20" y="55" font-size="20" font-weight="800" fill="#ea4335">인스턴스 × 2</text>
+      <text x="20" y="74" font-size="10" fill="#1f1f1f">+ 축소 후 20분 유지, Job task 1IP +7분 tail</text>
+      <text x="20" y="89" font-size="10" font-weight="600" fill="#1f1f1f">max-instances 100 시 이론상 최대 200 IP</text>
+      <!-- Big number ceiling -->
+      <text x="380" y="60" text-anchor="middle" font-size="36" font-weight="800" fill="#ea4335">200</text>
+      <text x="380" y="78" text-anchor="middle" font-size="9" fill="#ea4335">IP 상한</text>
+    </g>
+  </g>
+
+  <!-- ═════════ Panel 3: Serverless VPC Access connector (yellow) ═════════ -->
+  <g transform="translate(80, 510)">
+    <rect x="0" y="0" width="490" height="315" fill="none" stroke="#f9ab00" stroke-width="2.5" rx="8"/>
+    <rect x="0" y="0" width="490" height="40" fill="#fef7e0" rx="8"/>
+    <rect x="0" y="32" width="490" height="8" fill="#fef7e0"/>
+    <circle cx="30" cy="20" r="14" fill="#f9ab00"/>
+    <text x="30" y="26" text-anchor="middle" font-size="16" font-weight="700" fill="white">3</text>
+    <text x="55" y="26" font-size="15" font-weight="700" fill="#1f1f1f">Serverless VPC Access connector</text>
+
+    <!-- Diagram: Cloud Run → /28 connector → Shared VPC subnet -->
+    <g transform="translate(20, 65)">
+      <!-- Cloud Run service -->
+      <rect x="0" y="25" width="90" height="55" fill="white" stroke="#1f1f1f" stroke-width="2" rx="6"/>
+      <text x="45" y="46" text-anchor="middle" font-size="11" fill="#1f1f1f">Cloud Run</text>
+      <text x="45" y="62" text-anchor="middle" font-size="11" font-weight="600" fill="#1f1f1f">서비스</text>
+
+      <line x1="92" y1="52" x2="125" y2="52" stroke="#1f1f1f" stroke-width="2" marker-end="url(#arr-k)"/>
+
+      <!-- Connector (/28) -->
+      <g transform="translate(130, 10)">
+        <rect x="0" y="0" width="125" height="90" fill="white" stroke="#f9ab00" stroke-width="2" rx="6"/>
+        <text x="62" y="-5" text-anchor="middle" font-size="10" font-weight="600" fill="#1f1f1f">VPC connector</text>
+        <text x="62" y="20" text-anchor="middle" font-size="12" font-weight="700" fill="#f9ab00">/28</text>
+        <text x="62" y="37" text-anchor="middle" font-size="9" fill="#5f6368">12 usable IP</text>
+        <!-- Small grid 4x3 -->
+        <g transform="translate(20, 45)" fill="#fef7e0" stroke="#f9ab00" stroke-width="0.5">
+          <rect x="0"  y="0"  width="14" height="10"/>
+          <rect x="17" y="0"  width="14" height="10"/>
+          <rect x="34" y="0"  width="14" height="10"/>
+          <rect x="51" y="0"  width="14" height="10"/>
+          <rect x="68" y="0"  width="14" height="10"/>
+          <rect x="0"  y="13" width="14" height="10"/>
+          <rect x="17" y="13" width="14" height="10"/>
+          <rect x="34" y="13" width="14" height="10"/>
+          <rect x="51" y="13" width="14" height="10"/>
+          <rect x="68" y="13" width="14" height="10"/>
+        </g>
+        <text x="62" y="83" text-anchor="middle" font-size="9" fill="#5f6368">확장 불가</text>
+      </g>
+
+      <line x1="257" y1="52" x2="290" y2="52" stroke="#1f1f1f" stroke-width="2" marker-end="url(#arr-k)"/>
+
+      <!-- Shared VPC subnet -->
+      <g transform="translate(295, 15)">
+        <rect x="0" y="10" width="135" height="75" fill="white" stroke="#1f1f1f" stroke-width="2" stroke-dasharray="6,3" rx="6"/>
+        <text x="67" y="35" text-anchor="middle" font-size="11" fill="#1f1f1f">Shared VPC</text>
+        <text x="67" y="52" text-anchor="middle" font-size="11" font-weight="600" fill="#1f1f1f">subnet</text>
+        <text x="67" y="72" text-anchor="middle" font-size="9" fill="#5f6368">(호스트 프로젝트)</text>
+      </g>
+    </g>
+
+    <!-- IP callout -->
+    <g transform="translate(30, 195)">
+      <rect x="0" y="0" width="430" height="95" fill="#fef7e0" stroke="#f9ab00" stroke-width="1.5" rx="6"/>
+      <text x="20" y="25" font-size="13" font-weight="700" fill="#1f1f1f">Shared VPC subnet IP 소비</text>
+      <text x="20" y="55" font-size="24" font-weight="800" fill="#f9ab00">connector 당 /28</text>
+      <text x="20" y="75" font-size="10" fill="#1f1f1f">전용 subnet 1개 (12 usable IP) · 확장 불가</text>
+      <text x="20" y="89" font-size="10" fill="#1f1f1f">머신: f1-micro / e2-micro / e2-standard-4, min 2 / max 10</text>
+      <text x="380" y="60" text-anchor="middle" font-size="36" font-weight="800" fill="#f9ab00">12</text>
+      <text x="380" y="78" text-anchor="middle" font-size="9" fill="#f9ab00">usable</text>
+    </g>
+  </g>
+
+  <!-- ═════════ Panel 4: Private Service Connect (blue) ═════════ -->
+  <g transform="translate(630, 510)">
+    <rect x="0" y="0" width="490" height="315" fill="none" stroke="#4285f4" stroke-width="2.5" rx="8"/>
+    <rect x="0" y="0" width="490" height="40" fill="#e8f0fe" rx="8"/>
+    <rect x="0" y="32" width="490" height="8" fill="#e8f0fe"/>
+    <circle cx="30" cy="20" r="14" fill="#4285f4"/>
+    <text x="30" y="26" text-anchor="middle" font-size="16" font-weight="700" fill="white">4</text>
+    <text x="55" y="26" font-size="15" font-weight="700" fill="#1f1f1f">Private Service Connect (PSC)</text>
+
+    <!-- Diagram: Cloud Run → PSC endpoint → Google API -->
+    <g transform="translate(20, 65)">
+      <!-- Cloud Run service -->
+      <rect x="0" y="25" width="90" height="55" fill="white" stroke="#1f1f1f" stroke-width="2" rx="6"/>
+      <text x="45" y="46" text-anchor="middle" font-size="11" fill="#1f1f1f">Cloud Run</text>
+      <text x="45" y="62" text-anchor="middle" font-size="11" font-weight="600" fill="#1f1f1f">서비스</text>
+
+      <line x1="92" y1="52" x2="135" y2="52" stroke="#1f1f1f" stroke-width="2" marker-end="url(#arr-k)"/>
+
+      <!-- PSC endpoint - single IP block -->
+      <g transform="translate(140, 15)">
+        <rect x="0" y="0" width="125" height="80" fill="white" stroke="#4285f4" stroke-width="2" rx="6"/>
+        <text x="62" y="-5" text-anchor="middle" font-size="10" font-weight="600" fill="#1f1f1f">PSC endpoint</text>
+        <!-- Single IP block emphasized -->
+        <rect x="40" y="20" width="46" height="32" fill="#e8f0fe" stroke="#4285f4" stroke-width="2.5"/>
+        <text x="63" y="42" text-anchor="middle" font-size="16" font-weight="700" fill="#4285f4">1 IP</text>
+        <text x="62" y="70" text-anchor="middle" font-size="9" fill="#5f6368">NAT 기반</text>
+      </g>
+
+      <line x1="267" y1="52" x2="305" y2="52" stroke="#1f1f1f" stroke-width="2" marker-end="url(#arr-k)"/>
+
+      <!-- Google API -->
+      <g transform="translate(310, 15)">
+        <rect x="0" y="10" width="125" height="75" fill="#e8f0fe" stroke="#4285f4" stroke-width="2" rx="6"/>
+        <text x="62" y="32" text-anchor="middle" font-size="11" fill="#1f1f1f">Google API</text>
+        <text x="62" y="48" text-anchor="middle" font-size="10" fill="#5f6368">Cloud Storage</text>
+        <text x="62" y="62" text-anchor="middle" font-size="10" fill="#5f6368">BigQuery 등</text>
+      </g>
+    </g>
+
+    <!-- IP callout -->
+    <g transform="translate(30, 195)">
+      <rect x="0" y="0" width="430" height="95" fill="#e8f0fe" stroke="#4285f4" stroke-width="1.5" rx="6"/>
+      <text x="20" y="25" font-size="13" font-weight="700" fill="#1f1f1f">Shared VPC subnet IP 소비</text>
+      <text x="20" y="55" font-size="24" font-weight="800" fill="#4285f4">endpoint 당 1 IP</text>
+      <text x="20" y="75" font-size="10" fill="#1f1f1f">Google API 사설 접근 · consumer/producer IP 충돌 없음</text>
+      <text x="20" y="89" font-size="10" fill="#1f1f1f">PSC 단독 사용 시 최소 IP 풋프린트</text>
+      <text x="380" y="60" text-anchor="middle" font-size="36" font-weight="800" fill="#4285f4">1</text>
+      <text x="380" y="78" text-anchor="middle" font-size="9" fill="#4285f4">per endpoint</text>
+    </g>
+  </g>
+
+  <!-- Footer -->
+  <g>
+    <line x1="100" y1="855" x2="1100" y2="855" stroke="#1f1f1f" stroke-width="1"/>
+    <text x="600" y="880" text-anchor="middle" font-size="10" fill="#5f6368">© Megazone Cloud Professional Services · Cloud Run Production Operation Reference Brief</text>
+  </g>
+
+  <!-- Markers -->
+  <defs>
+    <marker id="arr-k" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <polygon points="0 0, 10 4, 0 8" fill="#1f1f1f"/>
+    </marker>
+    <marker id="arr-r" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <polygon points="0 0, 10 4, 0 8" fill="#ea4335"/>
+    </marker>
+    <marker id="arr-r-rev" markerWidth="10" markerHeight="8" refX="1" refY="4" orient="auto">
+      <polygon points="10 0, 0 4, 10 8" fill="#ea4335"/>
+    </marker>
+  </defs>
+</svg>

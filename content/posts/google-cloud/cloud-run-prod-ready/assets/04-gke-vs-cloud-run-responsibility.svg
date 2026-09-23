@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1300 950" font-family="'Apple SD Gothic Neo', 'Helvetica Neue', 'Arial', sans-serif">
+  <!-- Background -->
+  <rect width="1300" height="950" fill="#fbf9f4"/>
+
+  <!-- Title -->
+  <g>
+    <text x="650" y="48" text-anchor="middle" font-size="24" font-weight="700" fill="#1f1f1f">GKE vs Cloud Run · 책임 분담 매트릭스</text>
+    <text x="650" y="73" text-anchor="middle" font-size="12" fill="#5f6368">출처: docs.cloud.google.com/kubernetes-engine/docs/concepts/gke-and-cloud-run</text>
+    <line x1="100" y1="90" x2="1200" y2="90" stroke="#1f1f1f" stroke-width="1.5"/>
+  </g>
+
+  <!-- Legend -->
+  <g transform="translate(380, 105)">
+    <text x="0" y="18" font-size="12" font-weight="600" fill="#5f6368">관리 주체:</text>
+
+    <g transform="translate(95, 0)">
+      <rect x="0" y="0" width="100" height="28" fill="#fce8e6" stroke="#ea4335" stroke-width="2" rx="4"/>
+      <!-- person icon -->
+      <g transform="translate(8, 6)" stroke="#ea4335" stroke-width="1.8" fill="none">
+        <circle cx="8" cy="5" r="4"/>
+        <path d="M 1 18 Q 1 11 8 11 Q 15 11 15 18 Z" fill="#ea4335"/>
+      </g>
+      <text x="32" y="19" font-size="13" font-weight="600" fill="#1f1f1f">고객</text>
+    </g>
+
+    <g transform="translate(210, 0)">
+      <rect x="0" y="0" width="100" height="28" fill="#e6f4ea" stroke="#34a853" stroke-width="2" rx="4"/>
+      <!-- gear icon -->
+      <g transform="translate(8, 6)" stroke="#34a853" stroke-width="1.8" fill="none">
+        <circle cx="8" cy="8" r="4"/>
+        <line x1="8" y1="0" x2="8" y2="3"/>
+        <line x1="8" y1="13" x2="8" y2="16"/>
+        <line x1="0" y1="8" x2="3" y2="8"/>
+        <line x1="13" y1="8" x2="16" y2="8"/>
+        <line x1="3" y1="3" x2="5" y2="5"/>
+        <line x1="11" y1="11" x2="13" y2="13"/>
+        <line x1="3" y1="13" x2="5" y2="11"/>
+        <line x1="11" y1="5" x2="13" y2="3"/>
+      </g>
+      <text x="32" y="19" font-size="13" font-weight="600" fill="#1f1f1f">Google</text>
+    </g>
+
+    <g transform="translate(325, 0)">
+      <rect x="0" y="0" width="120" height="28" fill="#f1f3f4" stroke="#9aa0a6" stroke-width="2" rx="4"/>
+      <line x1="8" y1="14" x2="20" y2="14" stroke="#5f6368" stroke-width="2.5"/>
+      <text x="32" y="19" font-size="13" font-weight="600" fill="#5f6368">해당 없음 / 자동</text>
+    </g>
+  </g>
+
+  <!-- Column headers -->
+  <g transform="translate(0, 165)">
+    <!-- Column 1: GKE Standard -->
+    <g transform="translate(135, 0)">
+      <rect x="0" y="0" width="340" height="55" fill="#fce8e6" stroke="#1f1f1f" stroke-width="2" rx="6"/>
+      <text x="170" y="25" text-anchor="middle" font-size="18" font-weight="700" fill="#1f1f1f">GKE Standard</text>
+      <text x="170" y="45" text-anchor="middle" font-size="11" fill="#5f6368">고객이 노드·업그레이드·정책을 직접 운영</text>
+    </g>
+    <!-- Column 2: GKE Autopilot -->
+    <g transform="translate(490, 0)">
+      <rect x="0" y="0" width="340" height="55" fill="#fff3e0" stroke="#1f1f1f" stroke-width="2" rx="6"/>
+      <text x="170" y="25" text-anchor="middle" font-size="18" font-weight="700" fill="#1f1f1f">GKE Autopilot</text>
+      <text x="170" y="45" text-anchor="middle" font-size="11" fill="#5f6368">Google 이 노드·패치·release channel 관리</text>
+    </g>
+    <!-- Column 3: Cloud Run -->
+    <g transform="translate(845, 0)">
+      <rect x="0" y="0" width="340" height="55" fill="#e6f4ea" stroke="#1f1f1f" stroke-width="2" rx="6"/>
+      <text x="170" y="25" text-anchor="middle" font-size="18" font-weight="700" fill="#1f1f1f">Cloud Run</text>
+      <text x="170" y="45" text-anchor="middle" font-size="11" fill="#5f6368">Fully managed · 클러스터 개념 없음</text>
+    </g>
+  </g>
+
+  <!-- Row labels (left side) + cells -->
+  <!-- Each row: label (left) + 3 cells -->
+  <!-- Helper: row at y, label, cells (3 states) -->
+
+  <!-- Row 1: 클러스터·노드 -->
+  <g transform="translate(0, 240)">
+    <text x="125" y="22" text-anchor="end" font-size="13" font-weight="600" fill="#1f1f1f">클러스터·노드</text>
+    <!-- GKE Standard: 고객 -->
+    <g transform="translate(135, 0)">
+      <rect x="0" y="0" width="340" height="40" fill="#fce8e6" stroke="#ea4335" stroke-width="1.5" rx="4"/>
+      <g transform="translate(15, 10)" stroke="#ea4335" stroke-width="1.8" fill="none">
+        <circle cx="8" cy="5" r="4"/>
+        <path d="M 1 18 Q 1 11 8 11 Q 15 11 15 18 Z" fill="#ea4335"/>
+      </g>
+      <text x="45" y="25" font-size="12" fill="#1f1f1f">고객 (노드풀 직접 관리)</text>
+    </g>
+    <!-- GKE Autopilot: Google (노드 관리) -->
+    <g transform="translate(490, 0)">
+      <rect x="0" y="0" width="340" height="40" fill="#e6f4ea" stroke="#34a853" stroke-width="1.5" rx="4"/>
+      <g transform="translate(15, 10)" stroke="#34a853" stroke-width="1.8" fill="none">
+        <circle cx="8" cy="8" r="4"/>
+        <line x1="8" y1="0" x2="8" y2="3"/><line x1="8" y1="13" x2="8" y2="16"/>
+        <line x1="0" y1="8" x2="3" y2="8"/><line x1="13" y1="8" x2="16" y2="8"/>
+      </g>
+      <text x="45" y="25" font-size="12" fill="#1f1f1f">Google (노드 자동 관리)</text>
+    </g>
+    <!-- Cloud Run: N/A -->
+    <g transform="translate(845, 0)">
+      <rect x="0" y="0" width="340" height="40" fill="#f1f3f4" stroke="#9aa0a6" stroke-width="1.5" rx="4"/>
+      <line x1="15" y1="20" x2="32" y2="20" stroke="#5f6368" stroke-width="2.5"/>
+      <text x="45" y="25" font-size="12" fill="#5f6368">해당 없음 (클러스터 개념 없음)</text>
+    </g>
+  </g>
+
+  <!-- Row 2: Control plane -->
+  <g transform="translate(0, 290)">
+    <text x="125" y="22" text-anchor="end" font-size="13" font-weight="600" fill="#1f1f1f">Control plane</text>
+    <g transform="translate(135, 0)">
+      <rect x="0" y="0" width="340" height="40" fill="#e6f4ea" stroke="#34a853" stroke-width="1.5" rx="4"/>
+      <g transform="translate(15, 10)" stroke="#34a853" stroke-width="1.8" fill="none">
+        <circle cx="8" cy="8" r="4"/>
+        <line x1="8" y1="0" x2="8" y2="3"/><line x1="8" y1="13" x2="8" y2="16"/>
+        <line x1="0" y1="8" x2="3" y2="8"/><line x1="13" y1="8" x2="16" y2="8"/>
+      </g>
+      <text x="45" y="25" font-size="12" fill="#1f1f1f">Google</text>
+    </g>
+    <g transform="translate(490, 0)">
+      <rect x="0" y="0" width="340" height="40" fill="#e6f4ea" stroke="#34a853" stroke-width="1.5" rx="4"/>
+      <g transform="translate(15, 10)" stroke="#34a853" stroke-width="1.8" fill="none">
+        <circle cx="8" cy="8" r="4"/>
+        <line x1="8" y1="0" x2="8" y2="3"/><line x1="8" y1="13" x2="8" y2="16"/>
+        <line x1="0" y1="8" x2="3" y2="8"/><line x1="13" y1="8" x2="16" y2="8"/>
+      </g>
+      <text x="45" y="25" font-size="12" fill="#1f1f1f">Google</text>
+    </g>
+    <g transform="translate(845, 0)">
+      <rect x="0" y="0" width="340" height="40" fill="#f1f3f4" stroke="#9aa0a6" stroke-width="1.5" rx="4"/>
+      <line x1="15" y1="20" x2="32" y2="20" stroke="#5f6368" stroke-width="2.5"/>
+      <text x="45" y="25" font-size="12" fill="#5f6368">해당 없음</text>
+    </g>
+  </g>
+
+  <!-- Row 3: OS·k8s 업그레이드 -->
+  <g transform="translate(0, 340)">
+    <text x="125" y="22" text-anchor="end" font-size="13" font-weight="600" fill="#1f1f1f">OS·k8s 업그레이드</text>
+    <g transform="translate(135, 0)">
+      <rect x="0" y="0" width="340" height="40" fill="#e6f4ea" stroke="#34a853" stroke-width="1.5" rx="4"/>
+      <g transform="translate(15, 10)" stroke="#34a853" stroke-width="1.8" fill="none">
+        <circle cx="8" cy="8" r="4"/>
+        <line x1="8" y1="0" x2="8" y2="3"/><line x1="8" y1="13" x2="8" y2="16"/>
+        <line x1="0" y1="8" x2="3" y2="8"/><line x1="13" y1="8" x2="16" y2="8"/>
+      </g>
+      <text x="45" y="25" font-size="12" fill="#1f1f1f">GKE 자동 (window 조정)</text>
+    </g>
+    <g transform="translate(490, 0)">
+      <rect x="0" y="0" width="340" height="40" fill="#e6f4ea" stroke="#34a853" stroke-width="1.5" rx="4"/>
+      <g transform="translate(15, 10)" stroke="#34a853" stroke-width="1.8" fill="none">
+        <circle cx="8" cy="8" r="4"/>
+        <line x1="8" y1="0" x2="8" y2="3"/><line x1="8" y1="13" x2="8" y2="16"/>
+        <line x1="0" y1="8" x2="3" y2="8"/><line x1="13" y1="8" x2="16" y2="8"/>
+      </g>
+      <text x="45" y="25" font-size="12" fill="#1f1f1f">Google (release channel)</text>
+    </g>
+    <g transform="translate(845, 0)">
+      <rect x="0" y="0" width="340" height="40" fill="#f1f3f4" stroke="#9aa0a6" stroke-width="1.5" rx="4"/>
+      <line x1="15" y1="20" x2="32" y2="20" stroke="#5f6368" stroke-width="2.5"/>
+      <text x="45" y="25" font-size="12" fill="#5f6368">해당 없음</text>
+    </g>
+  </g>
+
+  <!-- Row 4: 보안 패치 -->
+  <g transform="translate(0, 390)">
+    <text x="125" y="22" text-anchor="end" font-size="13" font-weight="600" fill="#1f1f1f">보안 패치</text>
+    <g transform="translate(135, 0)">
+      <rect x="0" y="0" width="340" height="40" fill="#fce8e6" stroke="#ea4335" stroke-width="1.5" rx="4"/>
+      <g transform="translate(15, 10)" stroke="#ea4335" stroke-width="1.8" fill="none">
+        <circle cx="8" cy="5" r="4"/>
+        <path d="M 1 18 Q 1 11 8 11 Q 15 11 15 18 Z" fill="#ea4335"/>
+      </g>
+      <text x="45" y="25" font-size="12" fill="#1f1f1f">고객 / 자동화</text>
+    </g>
+    <g transform="translate(490, 0)">
+      <rect x="0" y="0" width="340" height="40" fill="#e6f4ea" stroke="#34a853" stroke-width="1.5" rx="4"/>
+      <g transform="translate(15, 10)" stroke="#34a853" stroke-width="1.8" fill="none">
+        <circle cx="8" cy="8" r="4"/>
+        <line x1="8" y1="0" x2="8" y2="3"/><line x1="8" y1="13" x2="8" y2="16"/>
+        <line x1="0" y1="8" x2="3" y2="8"/><line x1="13" y1="8" x2="16" y2="8"/>
+      </g>
+      <text x="45" y="25" font-size="12" fill="#1f1f1f">Google 자동 적용</text>
+    </g>
+    <g transform="translate(845, 0)">
+      <rect x="0" y="0" width="340" height="40" fill="#e6f4ea" stroke="#34a853" stroke-width="1.5" rx="4"/>
+      <g transform="translate(15, 10)" stroke="#34a853" stroke-width="1.8" fill="none">
+        <circle cx="8" cy="8" r="4"/>
+        <line x1="8" y1="0" x2="8" y2="3"/><line x1="8" y1="13" x2="8" y2="16"/>
+        <line x1="0" y1="8" x2="3" y2="8"/><line x1="13" y1="8" x2="16" y2="8"/>
+      </g>
+      <text x="45" y="25" font-size="12" fill="#1f1f1f">Google</text>
+    </g>
+  </g>
+
+  <!-- Row 5: RBAC -->
+  <g transform="translate(0, 440)">
+    <text x="125" y="22" text-anchor="end" font-size="13" font-weight="600" fill="#1f1f1f">RBAC</text>
+    <g transform="translate(135, 0)">
+      <rect x="0" y="0" width="340" height="40" fill="#fce8e6" stroke="#ea4335" stroke-width="1.5" rx="4"/>
+      <g transform="translate(15, 10)" stroke="#ea4335" stroke-width="1.8" fill="none">
+        <circle cx="8" cy="5" r="4"/>
+        <path d="M 1 18 Q 1 11 8 11 Q 15 11 15 18 Z" fill="#ea4335"/>
+      </g>
+      <text x="45" y="25" font-size="12" fill="#1f1f1f">고객</text>
+    </g>
+    <g transform="translate(490, 0)">
+      <rect x="0" y="0" width="340" height="40" fill="#fce8e6" stroke="#ea4335" stroke-width="1.5" rx="4"/>
+      <g transform="translate(15, 10)" stroke="#ea4335" stroke-width="1.8" fill="none">
+        <circle cx="8" cy="5" r="4"/>
+        <path d="M 1 18 Q 1 11 8 11 Q 15 11 15 18 Z" fill="#ea4335"/>
+      </g>
+      <text x="45" y="25" font-size="12" fill="#1f1f1f">고객</text>
+    </g>
+    <g transform="translate(845, 0)">
+      <rect x="0" y="0" width="340" height="40" fill="#f1f3f4" stroke="#9aa0a6" stroke-width="1.5" rx="4"/>
+      <line x1="15" y1="20" x2="32" y2="20" stroke="#5f6368" stroke-width="2.5"/>
+      <text x="45" y="25" font-size="12" fill="#5f6368">해당 없음 (IAM 사용)</text>
+    </g>
+  </g>
+
+  <!-- Row 6: NetworkPolicy -->
+  <g transform="translate(0, 490)">
+    <text x="125" y="22" text-anchor="end" font-size="13" font-weight="600" fill="#1f1f1f">NetworkPolicy</text>
+    <g transform="translate(135, 0)">
+      <rect x="0" y="0" width="340" height="40" fill="#fce8e6" stroke="#ea4335" stroke-width="1.5" rx="4"/>
+      <g transform="translate(15, 10)" stroke="#ea4335" stroke-width="1.8" fill="none">
+        <circle cx="8" cy="5" r="4"/>
+        <path d="M 1 18 Q 1 11 8 11 Q 15 11 15 18 Z" fill="#ea4335"/>
+      </g>
+      <text x="45" y="25" font-size="12" fill="#1f1f1f">고객</text>
+    </g>
+    <g transform="translate(490, 0)">
+      <rect x="0" y="0" width="340" height="40" fill="#e6f4ea" stroke="#34a853" stroke-width="1.5" rx="4"/>
+      <g transform="translate(15, 10)" stroke="#34a853" stroke-width="1.8" fill="none">
+        <circle cx="8" cy="8" r="4"/>
+        <line x1="8" y1="0" x2="8" y2="3"/><line x1="8" y1="13" x2="8" y2="16"/>
+        <line x1="0" y1="8" x2="3" y2="8"/><line x1="13" y1="8" x2="16" y2="8"/>
+      </g>
+      <text x="45" y="25" font-size="12" fill="#1f1f1f">기본 활성 (Dataplane V2)</text>
+    </g>
+    <g transform="translate(845, 0)">
+      <rect x="0" y="0" width="340" height="40" fill="#f1f3f4" stroke="#9aa0a6" stroke-width="1.5" rx="4"/>
+      <line x1="15" y1="20" x2="32" y2="20" stroke="#5f6368" stroke-width="2.5"/>
+      <text x="45" y="25" font-size="12" fill="#5f6368">해당 없음</text>
+    </g>
+  </g>
+
+  <!-- Row 7: Ingress / Gateway -->
+  <g transform="translate(0, 540)">
+    <text x="125" y="22" text-anchor="end" font-size="13" font-weight="600" fill="#1f1f1f">Ingress / Gateway</text>
+    <g transform="translate(135, 0)">
+      <rect x="0" y="0" width="340" height="40" fill="#fce8e6" stroke="#ea4335" stroke-width="1.5" rx="4"/>
+      <g transform="translate(15, 10)" stroke="#ea4335" stroke-width="1.8" fill="none">
+        <circle cx="8" cy="5" r="4"/>
+        <path d="M 1 18 Q 1 11 8 11 Q 15 11 15 18 Z" fill="#ea4335"/>
+      </g>
+      <text x="45" y="25" font-size="12" fill="#1f1f1f">고객</text>
+    </g>
+    <g transform="translate(490, 0)">
+      <rect x="0" y="0" width="340" height="40" fill="#fce8e6" stroke="#ea4335" stroke-width="1.5" rx="4"/>
+      <g transform="translate(15, 10)" stroke="#ea4335" stroke-width="1.8" fill="none">
+        <circle cx="8" cy="5" r="4"/>
+        <path d="M 1 18 Q 1 11 8 11 Q 15 11 15 18 Z" fill="#ea4335"/>
+      </g>
+      <text x="45" y="25" font-size="12" fill="#1f1f1f">고객</text>
+    </g>
+    <g transform="translate(845, 0)">
+      <rect x="0" y="0" width="340" height="40" fill="#e6f4ea" stroke="#34a853" stroke-width="1.5" rx="4"/>
+      <g transform="translate(15, 10)" stroke="#34a853" stroke-width="1.8" fill="none">
+        <circle cx="8" cy="8" r="4"/>
+        <line x1="8" y1="0" x2="8" y2="3"/><line x1="8" y1="13" x2="8" y2="16"/>
+        <line x1="0" y1="8" x2="3" y2="8"/><line x1="13" y1="8" x2="16" y2="8"/>
+      </g>
+      <text x="45" y="25" font-size="12" fill="#1f1f1f">자동 (*.run.app)</text>
+    </g>
+  </g>
+
+  <!-- Row 8: HPA / VPA -->
+  <g transform="translate(0, 590)">
+    <text x="125" y="22" text-anchor="end" font-size="13" font-weight="600" fill="#1f1f1f">HPA / VPA</text>
+    <g transform="translate(135, 0)">
+      <rect x="0" y="0" width="340" height="40" fill="#fce8e6" stroke="#ea4335" stroke-width="1.5" rx="4"/>
+      <g transform="translate(15, 10)" stroke="#ea4335" stroke-width="1.8" fill="none">
+        <circle cx="8" cy="5" r="4"/>
+        <path d="M 1 18 Q 1 11 8 11 Q 15 11 15 18 Z" fill="#ea4335"/>
+      </g>
+      <text x="45" y="25" font-size="12" fill="#1f1f1f">고객</text>
+    </g>
+    <g transform="translate(490, 0)">
+      <rect x="0" y="0" width="340" height="40" fill="#fce8e6" stroke="#ea4335" stroke-width="1.5" rx="4"/>
+      <g transform="translate(15, 10)" stroke="#ea4335" stroke-width="1.8" fill="none">
+        <circle cx="8" cy="5" r="4"/>
+        <path d="M 1 18 Q 1 11 8 11 Q 15 11 15 18 Z" fill="#ea4335"/>
+      </g>
+      <text x="45" y="25" font-size="12" fill="#1f1f1f">고객</text>
+    </g>
+    <g transform="translate(845, 0)">
+      <rect x="0" y="0" width="340" height="40" fill="#e6f4ea" stroke="#34a853" stroke-width="1.5" rx="4"/>
+      <g transform="translate(15, 10)" stroke="#34a853" stroke-width="1.8" fill="none">
+        <circle cx="8" cy="8" r="4"/>
+        <line x1="8" y1="0" x2="8" y2="3"/><line x1="8" y1="13" x2="8" y2="16"/>
+        <line x1="0" y1="8" x2="3" y2="8"/><line x1="13" y1="8" x2="16" y2="8"/>
+      </g>
+      <text x="45" y="25" font-size="12" fill="#1f1f1f">자동 (CPU/concurrency 60%)</text>
+    </g>
+  </g>
+
+  <!-- Row 9: TLS 종단 -->
+  <g transform="translate(0, 640)">
+    <text x="125" y="22" text-anchor="end" font-size="13" font-weight="600" fill="#1f1f1f">TLS 종단</text>
+    <g transform="translate(135, 0)">
+      <rect x="0" y="0" width="340" height="40" fill="#fce8e6" stroke="#ea4335" stroke-width="1.5" rx="4"/>
+      <g transform="translate(15, 10)" stroke="#ea4335" stroke-width="1.8" fill="none">
+        <circle cx="8" cy="5" r="4"/>
+        <path d="M 1 18 Q 1 11 8 11 Q 15 11 15 18 Z" fill="#ea4335"/>
+      </g>
+      <text x="45" y="25" font-size="12" fill="#1f1f1f">고객</text>
+    </g>
+    <g transform="translate(490, 0)">
+      <rect x="0" y="0" width="340" height="40" fill="#fce8e6" stroke="#ea4335" stroke-width="1.5" rx="4"/>
+      <g transform="translate(15, 10)" stroke="#ea4335" stroke-width="1.8" fill="none">
+        <circle cx="8" cy="5" r="4"/>
+        <path d="M 1 18 Q 1 11 8 11 Q 15 11 15 18 Z" fill="#ea4335"/>
+      </g>
+      <text x="45" y="25" font-size="12" fill="#1f1f1f">고객</text>
+    </g>
+    <g transform="translate(845, 0)">
+      <rect x="0" y="0" width="340" height="40" fill="#e6f4ea" stroke="#34a853" stroke-width="1.5" rx="4"/>
+      <g transform="translate(15, 10)" stroke="#34a853" stroke-width="1.8" fill="none">
+        <circle cx="8" cy="8" r="4"/>
+        <line x1="8" y1="0" x2="8" y2="3"/><line x1="8" y1="13" x2="8" y2="16"/>
+        <line x1="0" y1="8" x2="3" y2="8"/><line x1="13" y1="8" x2="16" y2="8"/>
+      </g>
+      <text x="45" y="25" font-size="12" fill="#1f1f1f">Google</text>
+    </g>
+  </g>
+
+  <!-- Row 10: Namespace 격리 -->
+  <g transform="translate(0, 690)">
+    <text x="125" y="22" text-anchor="end" font-size="13" font-weight="600" fill="#1f1f1f">Namespace 격리</text>
+    <g transform="translate(135, 0)">
+      <rect x="0" y="0" width="340" height="40" fill="#fce8e6" stroke="#ea4335" stroke-width="1.5" rx="4"/>
+      <g transform="translate(15, 10)" stroke="#ea4335" stroke-width="1.8" fill="none">
+        <circle cx="8" cy="5" r="4"/>
+        <path d="M 1 18 Q 1 11 8 11 Q 15 11 15 18 Z" fill="#ea4335"/>
+      </g>
+      <text x="45" y="25" font-size="12" fill="#1f1f1f">고객</text>
+    </g>
+    <g transform="translate(490, 0)">
+      <rect x="0" y="0" width="340" height="40" fill="#fce8e6" stroke="#ea4335" stroke-width="1.5" rx="4"/>
+      <g transform="translate(15, 10)" stroke="#ea4335" stroke-width="1.8" fill="none">
+        <circle cx="8" cy="5" r="4"/>
+        <path d="M 1 18 Q 1 11 8 11 Q 15 11 15 18 Z" fill="#ea4335"/>
+      </g>
+      <text x="45" y="25" font-size="12" fill="#1f1f1f">고객</text>
+    </g>
+    <g transform="translate(845, 0)">
+      <rect x="0" y="0" width="340" height="40" fill="#f1f3f4" stroke="#9aa0a6" stroke-width="1.5" rx="4"/>
+      <line x1="15" y1="20" x2="32" y2="20" stroke="#5f6368" stroke-width="2.5"/>
+      <text x="45" y="25" font-size="12" fill="#5f6368">프로젝트로 대체</text>
+    </g>
+  </g>
+
+  <!-- Tally / footer summary -->
+  <g transform="translate(0, 770)">
+    <text x="125" y="22" text-anchor="end" font-size="13" font-weight="700" fill="#1f1f1f">고객 책임 항목 수</text>
+    <!-- Standard: 8 customer rows -->
+    <g transform="translate(135, 0)">
+      <rect x="0" y="0" width="340" height="50" fill="#fce8e6" stroke="#ea4335" stroke-width="2.5" rx="6"/>
+      <text x="170" y="35" text-anchor="middle" font-size="28" font-weight="800" fill="#ea4335">8 / 10</text>
+    </g>
+    <!-- Autopilot: 5 customer rows (RBAC, Ingress, HPA, TLS, Namespace) -->
+    <g transform="translate(490, 0)">
+      <rect x="0" y="0" width="340" height="50" fill="#fff3e0" stroke="#f57c00" stroke-width="2.5" rx="6"/>
+      <text x="170" y="35" text-anchor="middle" font-size="28" font-weight="800" fill="#f57c00">5 / 10</text>
+    </g>
+    <!-- Cloud Run: 0 customer rows -->
+    <g transform="translate(845, 0)">
+      <rect x="0" y="0" width="340" height="50" fill="#e6f4ea" stroke="#34a853" stroke-width="2.5" rx="6"/>
+      <text x="170" y="35" text-anchor="middle" font-size="28" font-weight="800" fill="#34a853">0 / 10</text>
+    </g>
+  </g>
+
+  <!-- Footer -->
+  <g>
+    <line x1="100" y1="855" x2="1200" y2="855" stroke="#1f1f1f" stroke-width="1"/>
+    <text x="650" y="880" text-anchor="middle" font-size="11" fill="#5f6368">© Megazone Cloud Professional Services · Cloud Run Production Operation Reference Brief</text>
+    <text x="650" y="900" text-anchor="middle" font-size="10" fill="#9aa0a6">출처: GKE and Cloud Run, GKE Autopilot overview, GKE cluster architecture</text>
+  </g>
+</svg>
