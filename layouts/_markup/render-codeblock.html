@@ -1,0 +1,6 @@
+{{- $language := .Type | default "text" -}}
+{{- $result := transform.HighlightCodeBlock . -}}
+<figure class="code-block">
+  <figcaption class="code-block-header">{{ $language }}</figcaption>
+  {{ $result.Wrapped }}
+</figure>

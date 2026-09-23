@@ -319,6 +319,9 @@ class SiteTests(unittest.TestCase):
         self.assertTrue(any("alert-note" in node.attrs.get("class", "").split() for node in alerts))
         self.assertTrue(self.page("/posts/google-cloud/compute-availability-visibility/").find("input", type="checkbox"))
         self.assertTrue(self.page("/posts/google-cloud/gke-agent-substrate/").find(cls="footnotes"))
+        code_blocks = self.page("/posts/google-cloud/vertex-gemini-429-resilience/").find("figure", cls="code-block")
+        self.assertTrue(code_blocks)
+        self.assertEqual(code_blocks[0].find("figcaption", cls="code-block-header")[0].text.strip(), "json")
 
         iframe = self.page(SLIDE_ARTICLE).find("iframe")
         self.assertEqual(len(iframe), 1)

@@ -77,13 +77,15 @@ for (const button of document.querySelectorAll('[data-print]')) {
 for (const code of document.querySelectorAll('.post-content pre > code')) {
   if (code.closest('.lntd')?.querySelector('.lnt')) continue;
   const pre = code.parentElement;
+  const header = code.closest('.code-block')?.querySelector('.code-block-header');
+  const buttonHost = header ?? pre;
   const button = document.createElement('button');
   button.type = 'button';
   button.className = 'copy-code';
   button.textContent = '복사';
   button.setAttribute('aria-label', '코드 복사');
   button.setAttribute('aria-live', 'polite');
-  pre.append(button);
+  buttonHost.append(button);
   let reset;
   button.addEventListener('click', async () => {
     clearTimeout(reset);
