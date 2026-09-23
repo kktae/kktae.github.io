@@ -1,5 +1,6 @@
-{{- if and (.Param "ShowToc") (strings.Contains .TableOfContents "<a ") -}}
-<aside class="article-toc" aria-label="이 글의 목차">
+{{- $hasToc := and (.Param "ShowToc") (strings.Contains .TableOfContents "<a ") -}}
+<aside class="article-toc{{ if not $hasToc }} article-toc--nav-only{{ end }}" aria-label="{{ if $hasToc }}이 글의 목차 및 이동{{ else }}글 이동{{ end }}">
+  {{- if $hasToc }}
   <details class="toc" data-persistent-toc open>
     <summary>
       <svg class="toc-chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
@@ -9,5 +10,6 @@
     </summary>
     <div class="toc-content">{{ .TableOfContents }}</div>
   </details>
+  {{- end }}
+  {{- partial "article-nav.html" (dict "page" . "class" "article-nav--desktop") -}}
 </aside>
-{{- end -}}

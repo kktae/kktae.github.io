@@ -14,7 +14,7 @@
   }
   html, body { display: block; min-height: 0; background: white; color: black; }
   .site-header, .site-footer, .skip-link, .article-toc, .article-tools,
-  .article-tags, .series-section, .copy-code, .article-eyebrow, .anchor { display: none !important; }
+  .article-nav-compact, .article-tags, .series-section, .copy-code, .article-eyebrow, .anchor { display: none !important; }
   .main, .reading-width, .post-single, .post-header { width: 100%; max-width: none; margin: 0; padding: 0; }
   .article-layout { display: block; }
   .post-title { font-size: 24pt; }

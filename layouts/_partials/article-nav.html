@@ -1,0 +1,30 @@
+{{- $page := .page -}}
+{{- $class := .class | default "" -}}
+<nav class="article-nav-compact {{ $class }}" aria-label="글 이동">
+  <span class="article-nav-slot article-nav-slot-prev">
+    {{- with $page.PrevInSection }}
+    <a rel="prev" href="{{ .RelPermalink }}" aria-label="이전 글: {{ .Title }}" title="이전 글: {{ .Title }}">
+      <svg class="article-nav-icon" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+        <path d="m15 18-6-6 6-6" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      <span>이전</span>
+    </a>
+    {{- end }}
+  </span>
+  <a class="article-nav-top" href="#top" aria-label="글 맨 위로" title="글 맨 위로">
+    <svg class="article-nav-icon" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+      <path d="m18 15-6-6-6 6" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+    <span>위로</span>
+  </a>
+  <span class="article-nav-slot article-nav-slot-next">
+    {{- with $page.NextInSection }}
+    <a rel="next" href="{{ .RelPermalink }}" aria-label="다음 글: {{ .Title }}" title="다음 글: {{ .Title }}">
+      <span>다음</span>
+      <svg class="article-nav-icon" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+        <path d="m9 18 6-6-6-6" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </a>
+    {{- end }}
+  </span>
+</nav>

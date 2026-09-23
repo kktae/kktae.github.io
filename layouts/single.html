@@ -25,6 +25,7 @@
       <nav class="article-tags" aria-label="이 글의 태그">{{ range . }}<a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}</nav>
       {{- end -}}
       {{- partial "series-nav.html" $series -}}
+      {{- partial "article-nav.html" (dict "page" . "class" "article-nav--mobile") -}}
     </div>
   </div>
 </article>
