@@ -174,6 +174,41 @@ class SiteTests(unittest.TestCase):
         self.assertEqual(search.find("meta", name="robots")[0].attrs["content"], "noindex, follow")
 
     def test_metadata_and_rss_are_valid(self):
+        home = self.page("/")
+        head = home.find("head")[0]
+        self.assertEqual(head.children[0].tag, "meta")
+        self.assertEqual(head.children[0].attrs.get("charset"), "utf-8")
+        self.assertFalse(home.find("meta", name="generator"))
+        self.assertEqual(home.find("title")[0].text.strip(), CONFIG["params"]["seoTitle"])
+        self.assertEqual(
+            home.find("meta", name="description")[0].attrs["content"],
+            CONFIG["params"]["description"],
+        )
+        social_image = urljoin(CONFIG["baseURL"], CONFIG["params"]["socialImage"])
+        self.assertEqual(
+            home.find("meta", property="og:image")[0].attrs["content"],
+            social_image,
+        )
+        self.assertEqual(
+            home.find("meta", name="twitter:image")[0].attrs["content"],
+            social_image,
+        )
+        self.assertEqual(
+            home.find("meta", name="twitter:card")[0].attrs["content"],
+            "summary_large_image",
+        )
+        self.assertEqual(
+            home.find("meta", name="twitter:title")[0].attrs["content"],
+            CONFIG["params"]["seoTitle"],
+        )
+        self.assertTrue(home.find("link", rel="manifest"))
+        self.assertTrue(home.find("link", rel="icon", type="image/svg+xml"))
+        social_path = self.output / urlsplit(social_image).path.lstrip("/")
+        self.assertTrue(social_path.is_file())
+        manifest = json.loads((self.output / "site.webmanifest").read_text(encoding="utf-8"))
+        self.assertEqual(manifest["name"], "kktae.io")
+        self.assertEqual({icon["sizes"] for icon in manifest["icons"]}, {"192x192", "512x512"})
+
         for route in ["/", ARTICLE]:
             doc = self.page(route)
             self.assertTrue(doc.find("link", rel="canonical"))

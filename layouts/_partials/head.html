@@ -1,6 +1,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{{ if not .IsHome }}{{ .Title }} · {{ end }}{{ site.Title }}</title>
+<title>{{ if .IsHome }}{{ site.Params.seoTitle }}{{ else }}{{ .Title }} · {{ site.Title }}{{ end }}</title>
 <meta name="description" content="{{ (or .Description .Summary site.Params.description) | plainify | htmlUnescape }}">
 <meta name="author" content="{{ partial "author.html" . }}">
 {{- $robotsNoIndex := .Params.robotsNoIndex | default false -}}
@@ -9,9 +9,11 @@
 {{- end -}}
 <meta name="robots" content="{{ if not hugo.IsProduction }}noindex, nofollow{{ else if $robotsNoIndex }}noindex, follow{{ else }}index, follow{{ end }}">
 <link rel="canonical" href="{{ .Params.canonicalURL | default .Permalink }}">
-<link rel="icon" type="image/png" sizes="32x32" href="{{ "favicon-32x32.png" | relURL }}?v=avatar">
-<link rel="icon" type="image/png" sizes="16x16" href="{{ "favicon-16x16.png" | relURL }}?v=avatar">
-<link rel="apple-touch-icon" sizes="180x180" href="{{ "apple-touch-icon.png" | relURL }}?v=avatar">
+<link rel="icon" type="image/svg+xml" href="{{ "favicon.svg" | relURL }}?v=2">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ "favicon-32x32.png" | relURL }}?v=2">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ "favicon-16x16.png" | relURL }}?v=2">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ "apple-touch-icon.png" | relURL }}?v=2">
+<link rel="manifest" href="{{ "site.webmanifest" | relURL }}?v=2">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#171717" media="(prefers-color-scheme: dark)">

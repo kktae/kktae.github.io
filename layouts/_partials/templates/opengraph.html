@@ -1,6 +1,6 @@
 <meta property="og:url" content="{{ .Permalink }}">
 <meta property="og:site_name" content="{{ site.Title | plainify }}">
-<meta property="og:title" content="{{ if .IsHome }}{{ site.Title | plainify }}{{ else }}{{ .Title | plainify }}{{ end }}">
+<meta property="og:title" content="{{ if .IsHome }}{{ site.Params.seoTitle | plainify }}{{ else }}{{ .Title | plainify }}{{ end }}">
 <meta property="og:description" content="{{ (or .Description .Summary site.Params.description) | plainify | htmlUnescape }}">
 <meta property="og:locale" content="{{ replace site.Language.Locale `-` `_` }}">
 {{- if .IsPage }}
@@ -13,6 +13,24 @@
 {{- else }}
 <meta property="og:type" content="website">
 {{- end }}
+{{- $image := "" -}}
+{{- $imageAlt := .Title | plainify -}}
+{{- $defaultSocial := false -}}
 {{- with .Params.cover.image }}
-<meta property="og:image" content="{{ if $.Params.cover.relative }}{{ (path.Join $.RelPermalink .) | absURL }}{{ else }}{{ . | absURL }}{{ end }}">
+  {{- if $.Params.cover.relative }}{{ $image = (path.Join $.RelPermalink .) | absURL }}{{ else }}{{ $image = . | absURL }}{{ end }}
+  {{- with $.Params.cover.alt }}{{ $imageAlt = . | plainify }}{{ end }}
+{{- else with site.Params.socialImage }}
+  {{- $image = . | absURL }}
+  {{- $imageAlt = site.Params.socialImageAlt }}
+  {{- $defaultSocial = true }}
+{{- end }}
+{{- with $image }}
+<meta property="og:image" content="{{ . }}">
+<meta property="og:image:secure_url" content="{{ . }}">
+<meta property="og:image:alt" content="{{ $imageAlt }}">
+{{- if $defaultSocial }}
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+{{- end }}
 {{- end }}
