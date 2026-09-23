@@ -8,6 +8,8 @@ import { measureText, PALETTES } from '../assets/js/diagram/common.mjs';
 import { parseFlowchart } from '../assets/js/diagram/flowchart.mjs';
 import {
   detectDiagramType,
+  renderAntigravityDiagram,
+  renderErrorMessage,
   renderDiagram,
   SUPPORTED_DIAGRAM_TYPES,
 } from '../assets/js/diagram/renderer.mjs';
@@ -108,7 +110,7 @@ test('direct renderer exposes the Antigravity 2.15.1 supported type set', () => 
     'xychart-beta',
   ]);
   assert.equal(detectDiagramType(FIXTURES.flowchart), 'flowchart');
-  assert.equal(detectDiagramType(FIXTURES.state), 'state');
+  assert.equal(detectDiagramType(FIXTURES.state), 'flowchart');
   assert.equal(detectDiagramType(FIXTURES.sequence), 'sequence');
   assert.equal(detectDiagramType(FIXTURES.class), 'class');
   assert.equal(detectDiagramType(FIXTURES.er), 'er');
@@ -166,6 +168,38 @@ test('all six Antigravity diagram families match oracle output', async () => {
       assert.match(result.svg, /^<svg\b/, name);
       assert.doesNotMatch(result.svg, /mermaid\.esm|foreignObject|flowchart-v2/, name);
     }
+  }
+});
+
+test('clean-room renderer matches the 466-case Antigravity 2.15.1 corpus', async () => {
+  const corpus = JSON.parse(
+    await readFile(join(ROOT, 'tests/fixtures/antigravity-diagram-corpus.json'), 'utf8'),
+  );
+  assert.equal(corpus.oracle, 'Antigravity 2.15.1 f6b()');
+  assert.equal(corpus.cases.length, 466);
+
+  for (const item of corpus.cases) {
+    const options = {
+      ...(item.profile ? corpus.profiles[item.profile] : {}),
+      ...(item.options ?? {}),
+    };
+    if (item.error) {
+      await assert.rejects(
+        () => renderAntigravityDiagram(item.source, options),
+        error => {
+          assert.equal(error.message, item.error, item.id);
+          if (item.formattedError) {
+            assert.equal(renderErrorMessage(error), item.formattedError, item.id);
+          }
+          return true;
+        },
+      );
+      continue;
+    }
+
+    const svg = await renderAntigravityDiagram(item.source, options);
+    const digest = createHash('sha256').update(svg).digest('hex');
+    assert.equal(digest, item.sha256, item.id);
   }
 });
 

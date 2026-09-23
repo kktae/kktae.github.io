@@ -16,9 +16,6 @@ function ensureActor(model, ids, id) {
 
 export function parseSequence(source) {
   const lines = source.split('\n').map(line => line.trim()).filter(line => line && !line.startsWith('%%'));
-  if (!lines.length || !/^sequenceDiagram\s*$/i.test(lines[0])) {
-    throw new Error('Invalid sequenceDiagram header');
-  }
 
   const model = { type: 'sequence', actors: [], messages: [], blocks: [], notes: [] };
   const actorIds = new Set();

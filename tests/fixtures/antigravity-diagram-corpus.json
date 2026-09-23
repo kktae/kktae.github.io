@@ -1,0 +1,2943 @@
+{
+  "oracle": "Antigravity 2.15.1 f6b()",
+  "note": "Clean-room compatibility fixture. No Antigravity source or SVG output is stored.",
+  "profiles": {
+    "light": {
+      "bg": "#FFFFFF",
+      "fg": "#3B3B3B",
+      "line": "#3B3B3B",
+      "accent": "#005FB8",
+      "muted": "#3B3B3BCC",
+      "surface": "#F8F8F8",
+      "border": "#3B3B3B"
+    }
+  },
+  "cases": [
+    {
+      "id": "syntax:flow-direction-TD",
+      "source": "flowchart TD\nA[Start] --> B[End]",
+      "profile": "light",
+      "sha256": "ac2a8eb141ec8b09aa68db99222cc02f2138f170ac9aac9b566b7e2b0ad47f02"
+    },
+    {
+      "id": "syntax:flow-direction-TB",
+      "source": "flowchart TB\nA[Start] --> B[End]",
+      "profile": "light",
+      "sha256": "ac2a8eb141ec8b09aa68db99222cc02f2138f170ac9aac9b566b7e2b0ad47f02"
+    },
+    {
+      "id": "syntax:flow-direction-LR",
+      "source": "flowchart LR\nA[Start] --> B[End]",
+      "profile": "light",
+      "sha256": "1632409b3e389e379df764c45728dab4c25bb6889715b6f53bd6c30ed96ce627"
+    },
+    {
+      "id": "syntax:flow-direction-BT",
+      "source": "flowchart BT\nA[Start] --> B[End]",
+      "profile": "light",
+      "sha256": "7dc295fe59080616313a4b6d047e1bcd825a11cb5d1e7e51f3837261ca15b051"
+    },
+    {
+      "id": "syntax:flow-direction-RL",
+      "source": "flowchart RL\nA[Start] --> B[End]",
+      "profile": "light",
+      "sha256": "41d4d878317a5eb5332b4b3842d25937ba14508f7e5745031cbc44189e8dc889"
+    },
+    {
+      "id": "syntax:flow-shape-doublecircle",
+      "source": "flowchart LR\nA(((Double))) --> B[End]",
+      "profile": "light",
+      "sha256": "3c6eeedcf765ae7290b5005d660bdeb195327ca95c1c17647f46c4c600fa65d7"
+    },
+    {
+      "id": "syntax:flow-shape-stadium",
+      "source": "flowchart LR\nA([Stadium]) --> B[End]",
+      "profile": "light",
+      "sha256": "ea506f8edb11b37572dca0d835b53e6dbe70c0b9376411c0d1e3e605738f4312"
+    },
+    {
+      "id": "syntax:flow-shape-circle",
+      "source": "flowchart LR\nA((Circle)) --> B[End]",
+      "profile": "light",
+      "sha256": "8dcbedd426fdbb019cbf882647842f753d21cb513f19f54dcf3ead3ed76a9536"
+    },
+    {
+      "id": "syntax:flow-shape-subroutine",
+      "source": "flowchart LR\nA[[Subroutine]] --> B[End]",
+      "profile": "light",
+      "sha256": "ecf71b774637405e97078d6389407a113ab0e5c53bd410f8542560571ee7a11e"
+    },
+    {
+      "id": "syntax:flow-shape-cylinder",
+      "source": "flowchart LR\nA[(Database)] --> B[End]",
+      "profile": "light",
+      "sha256": "68545bc9b7b1f28b9b4893297dcbddffd7e2aff91f9dd2f243dca8b07cce489c"
+    },
+    {
+      "id": "syntax:flow-shape-trapezoid",
+      "source": "flowchart LR\nA[/Trap\\] --> B[End]",
+      "profile": "light",
+      "sha256": "7706a7b92efc8cbfbd6fdc1513dbadc7ea00c53de98b4386fb99ca3f25b39a7e"
+    },
+    {
+      "id": "syntax:flow-shape-trapezoid-alt",
+      "source": "flowchart LR\nA[\\Trap/] --> B[End]",
+      "profile": "light",
+      "sha256": "c33909e6acd591b77c39c78a929866c44ded1e26c9613cbed8017960c2d75294"
+    },
+    {
+      "id": "syntax:flow-shape-asymmetric",
+      "source": "flowchart LR\nA>Asymmetric] --> B[End]",
+      "profile": "light",
+      "sha256": "a7a3d26458829924bfb4f771402c119bd5588908e43fd4a44f2eaf49150aab62"
+    },
+    {
+      "id": "syntax:flow-shape-hexagon",
+      "source": "flowchart LR\nA{{Hexagon}} --> B[End]",
+      "profile": "light",
+      "sha256": "5f65c4ec30d66cb0fd768bdafb086db257dc8c8d7240afe42fe0d5df5b1ffba1"
+    },
+    {
+      "id": "syntax:flow-shape-rectangle",
+      "source": "flowchart LR\nA[Rectangle] --> B[End]",
+      "profile": "light",
+      "sha256": "47134b7a889b76d2cab6dc7af6b7ff7380f774e48e7c499b5204f8f78bb7d946"
+    },
+    {
+      "id": "syntax:flow-shape-rounded",
+      "source": "flowchart LR\nA(Rounded) --> B[End]",
+      "profile": "light",
+      "sha256": "27e682ba675b7c14a426c1c8ba544c1369560b2b237d942f7c893ce5591c0f6b"
+    },
+    {
+      "id": "syntax:flow-shape-diamond",
+      "source": "flowchart LR\nA{Diamond} --> B[End]",
+      "profile": "light",
+      "sha256": "87eba084c5b47360b0d7d879644f5455e284f4449c8e0c4c507a3a7475d73a8e"
+    },
+    {
+      "id": "syntax:flow-label-quoted",
+      "source": "flowchart LR\nA[\"Quoted label\"] --> B[End]",
+      "profile": "light",
+      "sha256": "9c9d55019228d44259cfbe7ca87bd77ab2d8e037e22869ad41c4e38bb38ecab1"
+    },
+    {
+      "id": "syntax:flow-label-apostrophe",
+      "source": "flowchart LR\nA[Owner's node] --> B[End]",
+      "profile": "light",
+      "sha256": "7f933f324933ea261c4d63ee1a18fe5f4e6b5b057a2efb254c300520dfeb60a0"
+    },
+    {
+      "id": "syntax:flow-label-entities",
+      "source": "flowchart LR\nA[\"A &amp; B &lt; C &quot;Q&quot; &apos;S&apos;\"] --> B[End]",
+      "profile": "light",
+      "sha256": "af5b7fdfa60016da6965969cdbcf9d7bfa2a69015ca5865351a45ea1236ff4b8"
+    },
+    {
+      "id": "syntax:flow-label-break",
+      "source": "flowchart LR\nA[\"Line 1<br/>한글 Line 2\"] --> B[End]",
+      "profile": "light",
+      "sha256": "21dc1f0e0374edd17d0c180c5cd3bbe85386fb8cf964dc57966dd7724acb75c0"
+    },
+    {
+      "id": "syntax:flow-label-escaped-newline",
+      "source": "flowchart LR\nA[\"Line 1\\nLine 2\"] --> B[End]",
+      "profile": "light",
+      "sha256": "dd121be0e05172d22a538ccbcdb14f8a89fb99650046de138409acb2291f3261"
+    },
+    {
+      "id": "syntax:flow-label-rich",
+      "source": "flowchart LR\nA[\"**bold** *italic* ~~strike~~ <u>under</u>\"] --> B[End]",
+      "profile": "light",
+      "sha256": "25e636f62af97d709f25e0821780496212713fc445773fd93bec38c8c03cd2d9"
+    },
+    {
+      "id": "syntax:flow-label-strip-tags",
+      "source": "flowchart LR\nA[\"x<sub>2</sub><sup>3</sup><small>s</small><mark>m</mark>\"] --> B[End]",
+      "profile": "light",
+      "sha256": "391ac071030af97c699bac13cc548b8c656116e2b50303287ca18fdfbce00762"
+    },
+    {
+      "id": "syntax:flow-edge-dashdashgt",
+      "source": "flowchart LR\nA --> B",
+      "profile": "light",
+      "sha256": "c3277bce0435774514a62cfc4813de71efc9d6d2aa6e6d6a21a43c5b12e7e2b5"
+    },
+    {
+      "id": "syntax:flow-edge-bi-dashdashgt",
+      "source": "flowchart LR\nA <--> B",
+      "profile": "light",
+      "sha256": "99229fe083421a92aceec2584fcd916a8fae3d6730f5f0b63fd12df75cc916fd"
+    },
+    {
+      "id": "syntax:flow-edge-dashdotdashgt",
+      "source": "flowchart LR\nA -.-> B",
+      "profile": "light",
+      "sha256": "166dff4153e34ed3484d5d3ba318eb3e761e60453e395cc85618e672b672e96e"
+    },
+    {
+      "id": "syntax:flow-edge-bi-dashdotdashgt",
+      "source": "flowchart LR\nA <-.-> B",
+      "profile": "light",
+      "sha256": "96c846e0ee6d7c3cc76d6c8a2c9715c1ce2520720ffd99e726943777f2c8fd1b"
+    },
+    {
+      "id": "syntax:flow-edge-eqeqgt",
+      "source": "flowchart LR\nA ==> B",
+      "profile": "light",
+      "sha256": "5e3ca0379d3e3e2ae3aa054374246053b931542191fd6a9346fb65b0ad002ce4"
+    },
+    {
+      "id": "syntax:flow-edge-bi-eqeqgt",
+      "source": "flowchart LR\nA <==> B",
+      "profile": "light",
+      "sha256": "8f6a614a418bdc631cc338f296f9f9d0520ba2a38f657e642eea4d62ab806afe"
+    },
+    {
+      "id": "syntax:flow-edge-dashdashdash",
+      "source": "flowchart LR\nA --- B",
+      "profile": "light",
+      "sha256": "d204f8db4826d3b5a7e96a3beb1482c3652240709dfd5464159812d95d6b4e61"
+    },
+    {
+      "id": "syntax:flow-edge-bi-dashdashdash",
+      "source": "flowchart LR\nA <--- B",
+      "profile": "light",
+      "sha256": "479cfcb328fea402a0baaf70dbb167ac4fa143660fc6c532365bd4592e7f1ff3"
+    },
+    {
+      "id": "syntax:flow-edge-dashdotdash",
+      "source": "flowchart LR\nA -.- B",
+      "profile": "light",
+      "sha256": "9d3583ac189e9b06fe75938dc157799c21ddb214072be3fcc4bd3b6003e7c3f5"
+    },
+    {
+      "id": "syntax:flow-edge-bi-dashdotdash",
+      "source": "flowchart LR\nA <-.- B",
+      "profile": "light",
+      "sha256": "ae7fa5e83317329f938996bc1ecda60f01e3ef62aee5aca4134e79fb4a2ff073"
+    },
+    {
+      "id": "syntax:flow-edge-eqeqeq",
+      "source": "flowchart LR\nA === B",
+      "profile": "light",
+      "sha256": "29de9eeaa4dad25fe68de62e505b4a3c44b83214b889c101605993523b15be2f"
+    },
+    {
+      "id": "syntax:flow-edge-bi-eqeqeq",
+      "source": "flowchart LR\nA <=== B",
+      "profile": "light",
+      "sha256": "74131996a6d98486d16989cff73b3a9558aa74f94c80d3f1f82207b9fb1c6ebe"
+    },
+    {
+      "id": "syntax:flow-edge-pipe-dashdashgt",
+      "source": "flowchart LR\nA -->|edge label| B",
+      "profile": "light",
+      "sha256": "4ca0713aea93b8c76afedcbdc64f1fc695f52293a41c7cabf284e7c8fa02cf42"
+    },
+    {
+      "id": "syntax:flow-edge-pipe-dashdotdashgt",
+      "source": "flowchart LR\nA -.->|edge label| B",
+      "profile": "light",
+      "sha256": "1dd1dc7806b498cc27bc23949b653023ba528d8ae0588d58ab77d70718eb9c3f"
+    },
+    {
+      "id": "syntax:flow-edge-pipe-eqeqgt",
+      "source": "flowchart LR\nA ==>|edge label| B",
+      "profile": "light",
+      "sha256": "84e93a5380302bd12ea5c702bae4792c79d2425ded2b90d64a4d755f31594e4c"
+    },
+    {
+      "id": "syntax:flow-edge-pipe-dashdashdash",
+      "source": "flowchart LR\nA ---|edge label| B",
+      "profile": "light",
+      "sha256": "ce2f0880b5a5d3137152be30058231a7fc7ebd4d4c25d30713b6795713231265"
+    },
+    {
+      "id": "syntax:flow-edge-pipe-dashdotdash",
+      "source": "flowchart LR\nA -.-|edge label| B",
+      "profile": "light",
+      "sha256": "8e73e9dbdbdd64b0b79b37fc501d45879e28f183e6a42e51e08263c1f1c3eb33"
+    },
+    {
+      "id": "syntax:flow-edge-pipe-eqeqeq",
+      "source": "flowchart LR\nA ===|edge label| B",
+      "profile": "light",
+      "sha256": "1bcd90d928ea73b024d565b7097e223bd72cc5e27545b5ed51ed929821dd29e5"
+    },
+    {
+      "id": "syntax:flow-edge-spaced-dashdash_dashdashgt",
+      "source": "flowchart LR\nA -- label --> B",
+      "profile": "light",
+      "sha256": "761391ba1f3cf916f75e448d99dd793fe5f190001294fc75c5db79f20cb1d584"
+    },
+    {
+      "id": "syntax:flow-edge-spaced-dashdash_dashdashdash",
+      "source": "flowchart LR\nA -- label --- B",
+      "profile": "light",
+      "sha256": "bcc75e3c8deaf15cf42c695e12baf60c227322ccf1e510eeb1571aa50d2eb5f7"
+    },
+    {
+      "id": "syntax:flow-edge-spaced-dashdash_dotdashgt",
+      "source": "flowchart LR\nA -- label .-> B",
+      "profile": "light",
+      "sha256": "3a598581b154eb9874a51cb6f648a7d9391f9cd7eabeefeb9830e4b42abe72a5"
+    },
+    {
+      "id": "syntax:flow-edge-spaced-dashdash_dashdotdash",
+      "source": "flowchart LR\nA -- label -.- B",
+      "profile": "light",
+      "sha256": "d11923f0807dc020686463aeb55f9ab6c7ca8551c27e3c1a49d5a4a3d5f73472"
+    },
+    {
+      "id": "syntax:flow-edge-spaced-dashdash_eqeqgt",
+      "source": "flowchart LR\nA -- label ==> B",
+      "profile": "light",
+      "sha256": "8baf0fbc2a4835487cdc893c533cc196f59e76a324012c3d2641118c22477886"
+    },
+    {
+      "id": "syntax:flow-edge-spaced-dashdash_eqeqeq",
+      "source": "flowchart LR\nA -- label === B",
+      "profile": "light",
+      "sha256": "8a1807c30993f681dfc264bb30af6358e75705f20276f35bda6da9911382aa08"
+    },
+    {
+      "id": "syntax:flow-edge-spaced-dashdot_dashdashgt",
+      "source": "flowchart LR\nA -. label --> B",
+      "profile": "light",
+      "sha256": "3a598581b154eb9874a51cb6f648a7d9391f9cd7eabeefeb9830e4b42abe72a5"
+    },
+    {
+      "id": "syntax:flow-edge-spaced-dashdot_dashdashdash",
+      "source": "flowchart LR\nA -. label --- B",
+      "profile": "light",
+      "sha256": "d11923f0807dc020686463aeb55f9ab6c7ca8551c27e3c1a49d5a4a3d5f73472"
+    },
+    {
+      "id": "syntax:flow-edge-spaced-dashdot_dotdashgt",
+      "source": "flowchart LR\nA -. label .-> B",
+      "profile": "light",
+      "sha256": "3a598581b154eb9874a51cb6f648a7d9391f9cd7eabeefeb9830e4b42abe72a5"
+    },
+    {
+      "id": "syntax:flow-edge-spaced-dashdot_dashdotdash",
+      "source": "flowchart LR\nA -. label -.- B",
+      "profile": "light",
+      "sha256": "d11923f0807dc020686463aeb55f9ab6c7ca8551c27e3c1a49d5a4a3d5f73472"
+    },
+    {
+      "id": "syntax:flow-edge-spaced-dashdot_eqeqgt",
+      "source": "flowchart LR\nA -. label ==> B",
+      "profile": "light",
+      "sha256": "3a598581b154eb9874a51cb6f648a7d9391f9cd7eabeefeb9830e4b42abe72a5"
+    },
+    {
+      "id": "syntax:flow-edge-spaced-dashdot_eqeqeq",
+      "source": "flowchart LR\nA -. label === B",
+      "profile": "light",
+      "sha256": "d11923f0807dc020686463aeb55f9ab6c7ca8551c27e3c1a49d5a4a3d5f73472"
+    },
+    {
+      "id": "syntax:flow-edge-spaced-eqeq_dashdashgt",
+      "source": "flowchart LR\nA == label --> B",
+      "profile": "light",
+      "sha256": "8baf0fbc2a4835487cdc893c533cc196f59e76a324012c3d2641118c22477886"
+    },
+    {
+      "id": "syntax:flow-edge-spaced-eqeq_dashdashdash",
+      "source": "flowchart LR\nA == label --- B",
+      "profile": "light",
+      "sha256": "8a1807c30993f681dfc264bb30af6358e75705f20276f35bda6da9911382aa08"
+    },
+    {
+      "id": "syntax:flow-edge-spaced-eqeq_dotdashgt",
+      "source": "flowchart LR\nA == label .-> B",
+      "profile": "light",
+      "sha256": "3a598581b154eb9874a51cb6f648a7d9391f9cd7eabeefeb9830e4b42abe72a5"
+    },
+    {
+      "id": "syntax:flow-edge-spaced-eqeq_dashdotdash",
+      "source": "flowchart LR\nA == label -.- B",
+      "profile": "light",
+      "sha256": "d11923f0807dc020686463aeb55f9ab6c7ca8551c27e3c1a49d5a4a3d5f73472"
+    },
+    {
+      "id": "syntax:flow-edge-spaced-eqeq_eqeqgt",
+      "source": "flowchart LR\nA == label ==> B",
+      "profile": "light",
+      "sha256": "8baf0fbc2a4835487cdc893c533cc196f59e76a324012c3d2641118c22477886"
+    },
+    {
+      "id": "syntax:flow-edge-spaced-eqeq_eqeqeq",
+      "source": "flowchart LR\nA == label === B",
+      "profile": "light",
+      "sha256": "8a1807c30993f681dfc264bb30af6358e75705f20276f35bda6da9911382aa08"
+    },
+    {
+      "id": "syntax:flow-node-set",
+      "source": "flowchart LR\nA & B --> C & D",
+      "profile": "light",
+      "sha256": "2bdaeff7bd29294a37dcb381bc8557aed1931411ca231fa18fa8885ca3e336e2"
+    },
+    {
+      "id": "syntax:flow-chain",
+      "source": "flowchart LR\nA --> B --> C --> D",
+      "profile": "light",
+      "sha256": "39ebe60057a58a42d6813859bc057672016043a17c3e76b4dcfd99dc2f5120ad"
+    },
+    {
+      "id": "syntax:flow-class-suffix",
+      "source": "flowchart LR\nA[Hot]:::hot --> B\nclassDef hot fill:#ffeeee,stroke:#cc0000,color:#111",
+      "profile": "light",
+      "sha256": "0e4d49c57198be5e33ea9c9811708434f516d117928a73e1e0c85abeac067658"
+    },
+    {
+      "id": "syntax:flow-class-directive",
+      "source": "flowchart LR\nA --> B\nclassDef c fill:#eef,stroke:#00f,color:#123\nclass A,B c",
+      "profile": "light",
+      "sha256": "5c2a2d7eecbfbafadabccf457e4e0d6e1f246c3afbc03214452f6852ee660605"
+    },
+    {
+      "id": "syntax:flow-style",
+      "source": "flowchart LR\nA --> B\nstyle A fill:#abc,stroke:#123,color:#456,stroke-width:3",
+      "profile": "light",
+      "sha256": "543260d5cb5d64f523fad7a39b5d166a9823c1c205d4d7296f4a5762b68b75b9"
+    },
+    {
+      "id": "syntax:flow-linkstyle-default",
+      "source": "flowchart LR\nA --> B\nB --> C\nlinkStyle default stroke:#f00,stroke-width:2",
+      "profile": "light",
+      "sha256": "ce6f4605c8b8cbd3438a5c130246897ecf9f4e4607b460a3ef7c82b90b7a9c66"
+    },
+    {
+      "id": "syntax:flow-linkstyle-index",
+      "source": "flowchart LR\nA --> B\nB --> C\nlinkStyle 1 stroke:#0a0,stroke-width:3",
+      "profile": "light",
+      "sha256": "9df0a3593ae25070896b4754554ca175337c7a5d81696c40fe9e84eaf3d1c30d"
+    },
+    {
+      "id": "syntax:flow-subgraph-explicit",
+      "source": "flowchart LR\nsubgraph G[Explicit Group]\nA --> B\nend\nB --> C",
+      "profile": "light",
+      "sha256": "9ae4e73a789a38d188c2d0aa7f72bf0f700525f4cf90774b153be6635b25ef4f"
+    },
+    {
+      "id": "syntax:flow-subgraph-implicit",
+      "source": "flowchart TD\nsubgraph Implicit Group Name\nA --> B\nend",
+      "profile": "light",
+      "sha256": "12fe392ed1274feaec200de80c28c7d977cea178a13f886a0817541edb2720d3"
+    },
+    {
+      "id": "syntax:flow-subgraph-nested-direction",
+      "source": "flowchart LR\nsubgraph Outer[Outer]\ndirection TB\nA\nsubgraph Inner[Inner]\ndirection RL\nB --> C\nend\nA --> B\nend\nC --> D",
+      "profile": "light",
+      "sha256": "9b47db1d16624847a8237926f226eb21fe34f69c277b354a211b1749e5ae7347"
+    },
+    {
+      "id": "syntax:state-basic",
+      "source": "stateDiagram-v2\n[*] --> Idle\nIdle --> Working : start\nWorking --> [*]",
+      "profile": "light",
+      "sha256": "68c0dfc71c4785490b69144c8ed7e4592883e3d098395d6f2da7a8cd919a84bb"
+    },
+    {
+      "id": "syntax:state-alias",
+      "source": "stateDiagram-v2\nstate \"Long State\" as S\n[*] --> S\nS --> [*]",
+      "profile": "light",
+      "sha256": "61d966eba5cb7214335be33d27dec24b1bcb71e89f2af50789f2c5129a10d343"
+    },
+    {
+      "id": "syntax:state-composite",
+      "source": "stateDiagram-v2\nstate Parent {\ndirection LR\nA --> B : next\n}\n[*] --> Parent\nParent --> [*]",
+      "profile": "light",
+      "sha256": "90e020a1bc1a62df25d60d5cb6a47dd096b568a4d15b9444e3de19667053fef2"
+    },
+    {
+      "id": "syntax:state-multiple-start-end",
+      "source": "stateDiagram-v2\n[*] --> A\nA --> [*]\n[*] --> B\nB --> [*]",
+      "profile": "light",
+      "sha256": "5cd2737c69c8b11f4e3b703936d60e987c1cbd7bd99ef38175f20c22ec9bbbc3"
+    },
+    {
+      "id": "syntax:state-linkstyle",
+      "source": "stateDiagram-v2\nA --> B\nB --> C\nlinkStyle 1 stroke:#f00,stroke-width:2",
+      "profile": "light",
+      "sha256": "8c224bb357842c1fbd1d39c656cd1da9f207be3085ac60c388520af447214bb5"
+    },
+    {
+      "id": "syntax:state-label-declare",
+      "source": "stateDiagram-v2\nA : Alpha State\nA --> B",
+      "profile": "light",
+      "sha256": "368c7c78599ef698d0b2565c6b5a539661b39794be4ca1e5fdd1713c9f1ff565"
+    },
+    {
+      "id": "syntax:seq-participants",
+      "source": "sequenceDiagram\nparticipant A\nparticipant B as Beta User\nactor U as Human\nA->>B: hello",
+      "profile": "light",
+      "sha256": "6bb385121d021cf1cc5e0e5665c3f4c045c149ca5c337f173e08963b75f84260"
+    },
+    {
+      "id": "syntax:seq-note-left",
+      "source": "sequenceDiagram\nparticipant A\nparticipant B\nNote left of A: left\nA->>B: go",
+      "profile": "light",
+      "sha256": "5e9dd7fd9ba0c5628bcbee2ced0414d69be5159482c4b4941c90d986ba9c3cf1"
+    },
+    {
+      "id": "syntax:seq-note-right",
+      "source": "sequenceDiagram\nparticipant A\nparticipant B\nNote right of A: right\nA->>B: go",
+      "profile": "light",
+      "sha256": "5e9dd7fd9ba0c5628bcbee2ced0414d69be5159482c4b4941c90d986ba9c3cf1"
+    },
+    {
+      "id": "syntax:seq-note-over-one",
+      "source": "sequenceDiagram\nparticipant A\nparticipant B\nNote over A: over\nA->>B: go",
+      "profile": "light",
+      "sha256": "5e9dd7fd9ba0c5628bcbee2ced0414d69be5159482c4b4941c90d986ba9c3cf1"
+    },
+    {
+      "id": "syntax:seq-note-over-two",
+      "source": "sequenceDiagram\nparticipant A\nparticipant B\nNote over A,B: over both\nA->>B: go",
+      "profile": "light",
+      "sha256": "5e9dd7fd9ba0c5628bcbee2ced0414d69be5159482c4b4941c90d986ba9c3cf1"
+    },
+    {
+      "id": "syntax:seq-arrow-dashgtgt",
+      "source": "sequenceDiagram\nA->>B: message",
+      "profile": "light",
+      "sha256": "5ce7974ea6489b8536f67558e538c8dcb20676d4962e64452ade42cba3031ff6"
+    },
+    {
+      "id": "syntax:seq-arrow-dashdashgtgt",
+      "source": "sequenceDiagram\nA-->>B: message",
+      "profile": "light",
+      "sha256": "5b2071d3d0ab652787c9291e8fe8dc9018eef011000d625526eaf5698d19079a"
+    },
+    {
+      "id": "syntax:seq-arrow-dashparen",
+      "source": "sequenceDiagram\nA-)B: message",
+      "profile": "light",
+      "sha256": "db75464c89eebe80a619aa9e77643c82280d06fed489f4993b8cf03b34df0109"
+    },
+    {
+      "id": "syntax:seq-arrow-dashdashparen",
+      "source": "sequenceDiagram\nA--)B: message",
+      "profile": "light",
+      "sha256": "13accbd23235f4a6a0f16d7e92a33f0315479746f86b8d172d5a94dc4cf001df"
+    },
+    {
+      "id": "syntax:seq-arrow-dashx",
+      "source": "sequenceDiagram\nA-xB: message",
+      "profile": "light",
+      "sha256": "5ce7974ea6489b8536f67558e538c8dcb20676d4962e64452ade42cba3031ff6"
+    },
+    {
+      "id": "syntax:seq-arrow-dashdashx",
+      "source": "sequenceDiagram\nA--xB: message",
+      "profile": "light",
+      "sha256": "5b2071d3d0ab652787c9291e8fe8dc9018eef011000d625526eaf5698d19079a"
+    },
+    {
+      "id": "syntax:seq-arrow-dashgt",
+      "source": "sequenceDiagram\nA->B: message",
+      "profile": "light",
+      "sha256": "db75464c89eebe80a619aa9e77643c82280d06fed489f4993b8cf03b34df0109"
+    },
+    {
+      "id": "syntax:seq-arrow-dashdashgt",
+      "source": "sequenceDiagram\nA-->B: message",
+      "profile": "light",
+      "sha256": "13accbd23235f4a6a0f16d7e92a33f0315479746f86b8d172d5a94dc4cf001df"
+    },
+    {
+      "id": "syntax:seq-self",
+      "source": "sequenceDiagram\nA->>A: self message",
+      "profile": "light",
+      "sha256": "cd3fd09e7a730687a1fe2552e2df1c71c45d4d3d89fab21369bb9d4d6e3d41b0"
+    },
+    {
+      "id": "syntax:seq-activate",
+      "source": "sequenceDiagram\nA->>+B: start\nB-->>-A: done",
+      "profile": "light",
+      "sha256": "57e7e8af892002f6dc4c25eab3924e556ee27df6c3d3bc13f79424164d8694ab"
+    },
+    {
+      "id": "syntax:seq-block-loop",
+      "source": "sequenceDiagram\nparticipant A\nparticipant B\nloop block label\nA->>B: one\nend",
+      "profile": "light",
+      "sha256": "52c8373054401d2e3867c810786338344df3bca58384895db3de64fd71cdd257"
+    },
+    {
+      "id": "syntax:seq-block-alt",
+      "source": "sequenceDiagram\nparticipant A\nparticipant B\nalt block label\nA->>B: one\nelse alternate\nB-->>A: two\nend",
+      "profile": "light",
+      "sha256": "38662912b72910fe500d89b91952daf11e86d6a9c536a7dc3200c67d08eead48"
+    },
+    {
+      "id": "syntax:seq-block-opt",
+      "source": "sequenceDiagram\nparticipant A\nparticipant B\nopt block label\nA->>B: one\nend",
+      "profile": "light",
+      "sha256": "c800556aa20c7320cbbee90c355e40bf5b5b0b00579f2cd235ff54304b1fd83e"
+    },
+    {
+      "id": "syntax:seq-block-par",
+      "source": "sequenceDiagram\nparticipant A\nparticipant B\npar block label\nA->>B: one\nelse alternate\nB-->>A: two\nend",
+      "profile": "light",
+      "sha256": "fe0db75043a8fb46e2eb8a4efe17e58b487a69469c297f692eb62e9114648e44"
+    },
+    {
+      "id": "syntax:seq-block-critical",
+      "source": "sequenceDiagram\nparticipant A\nparticipant B\ncritical block label\nA->>B: one\nend",
+      "profile": "light",
+      "sha256": "65ad18f868494b214b958e33818658f83d148f925f556272214d445279fe9fbd"
+    },
+    {
+      "id": "syntax:seq-block-break",
+      "source": "sequenceDiagram\nparticipant A\nparticipant B\nbreak block label\nA->>B: one\nend",
+      "profile": "light",
+      "sha256": "51903f8935f8c27dffcb34227021a9a2b4fbddcd353bb246a9b8f80db103d6db"
+    },
+    {
+      "id": "syntax:seq-block-rect",
+      "source": "sequenceDiagram\nparticipant A\nparticipant B\nrect block label\nA->>B: one\nend",
+      "profile": "light",
+      "sha256": "4555c60856d26dd121375ee57691c5964618eba351d556265de40caa14b57083"
+    },
+    {
+      "id": "syntax:seq-nested-block",
+      "source": "sequenceDiagram\nA->>B: before\nalt outer\nloop inner\nA->>B: inside\nend\nelse other\nB-->>A: other\nend",
+      "profile": "light",
+      "sha256": "bf3faf7b031fd80300b5e0579b295284615b161cff93e9b84ef29d71c8e80a93"
+    },
+    {
+      "id": "syntax:seq-rich",
+      "source": "sequenceDiagram\nactor A as **Bold** User\nparticipant B as Other\nA->>B: hello<br/>**world**",
+      "profile": "light",
+      "sha256": "0838f36d10ef5bd04024716c35d77209dc18f85e9a8ebe39451e8f5bc60c2e4a"
+    },
+    {
+      "id": "syntax:class-basic",
+      "source": "classDiagram\nclass A\nclass B\nA --> B",
+      "profile": "light",
+      "sha256": "56ba4612529b30eb9aef5e8b716d934592673dac42fa971ef1dc5781d024a049"
+    },
+    {
+      "id": "syntax:class-generic",
+      "source": "classDiagram\nclass Box ~T~\nclass Item\nBox --> Item",
+      "profile": "light",
+      "sha256": "593d44a04e2ec97b9733242f6647ecc69fa63be9285e1e0b6e81a3fd7c6afff8"
+    },
+    {
+      "id": "syntax:class-annotation-body",
+      "source": "classDiagram\nclass Service {\n<<interface>>\n+String name\n+run(arg) void\n}\nclass Impl\nService <|-- Impl",
+      "profile": "light",
+      "sha256": "6df3143633fd52375846f49a1fa842bfab7dfed07631992bec8a94484d74cbde"
+    },
+    {
+      "id": "syntax:class-annotation-inline",
+      "source": "classDiagram\nclass Foo { <<abstract>> }",
+      "profile": "light",
+      "sha256": "307b3eb65cfff16e961007358c68671ef9752c5b977f690d693651740edec815"
+    },
+    {
+      "id": "syntax:class-namespace",
+      "source": "classDiagram\nnamespace pkg {\nclass A\nclass B\n}\nA --> B",
+      "profile": "light",
+      "sha256": "56ba4612529b30eb9aef5e8b716d934592673dac42fa971ef1dc5781d024a049"
+    },
+    {
+      "id": "syntax:class-member-0",
+      "source": "classDiagram\nclass A {\n+String publicAttr\n}",
+      "profile": "light",
+      "sha256": "767702f8081ae79141d80f04f20f5f65d9de65cd333879e68eb64f386bc866c4"
+    },
+    {
+      "id": "syntax:class-member-1",
+      "source": "classDiagram\nclass A {\n-int privateAttr\n}",
+      "profile": "light",
+      "sha256": "bad4b386c470ce4da61e124dabe6ef769268cb74bdfc589750b4db4efba34735"
+    },
+    {
+      "id": "syntax:class-member-2",
+      "source": "classDiagram\nclass A {\n#bool protectedAttr\n}",
+      "profile": "light",
+      "sha256": "ebe2c251caee6f24b6d27101f4ff2872f2b653632116c28a276fd4f9dad9ddb7"
+    },
+    {
+      "id": "syntax:class-member-3",
+      "source": "classDiagram\nclass A {\n~float packageAttr\n}",
+      "profile": "light",
+      "sha256": "126642b115034d68dbcb773712aa7d02c39e16b67b362f66523350bbe95e8403"
+    },
+    {
+      "id": "syntax:class-member-4",
+      "source": "classDiagram\nclass A {\n+staticMethod()$ void\n}",
+      "profile": "light",
+      "sha256": "a515eae3ac9932ddc5bf2af56694f2e633dce0a2dc2857ccb9c7c9f520d0d35f"
+    },
+    {
+      "id": "syntax:class-member-5",
+      "source": "classDiagram\nclass A {\n+abstractMethod()* void\n}",
+      "profile": "light",
+      "sha256": "acbf36efd9610d2ddfa4bcddf080ea0beadf22562b1a22a63ab6337fcf3d2df8"
+    },
+    {
+      "id": "syntax:class-member-6",
+      "source": "classDiagram\nclass A {\n+String field$\n}",
+      "profile": "light",
+      "sha256": "f9310c1f6dc8b90bebbb581a1840d10605972160e6445c3894deabf96e2d24ef"
+    },
+    {
+      "id": "syntax:class-member-7",
+      "source": "classDiagram\nclass A {\n+String absField*\n}",
+      "profile": "light",
+      "sha256": "7867caa40e9c44524df20f34b53226c497aac570f36bad457cc6a00930836a5e"
+    },
+    {
+      "id": "syntax:class-rel-ltbardashdash",
+      "source": "classDiagram\nclass A\nclass B\nA \"1\" <|-- \"many\" B : relation label",
+      "profile": "light",
+      "sha256": "ed3e67ca33f0ab18157e9deb89efb1d752e8b0131396177f4b548f7d47b3ea1e"
+    },
+    {
+      "id": "syntax:class-rel-dashdashbargt",
+      "source": "classDiagram\nclass A\nclass B\nA \"1\" --|> \"many\" B : relation label",
+      "profile": "light",
+      "sha256": "f9d747c9fadecf83f2d722eb6136b80c8bc1aa674121c36555cbff1336810d79"
+    },
+    {
+      "id": "syntax:class-rel-ltbardotdot",
+      "source": "classDiagram\nclass A\nclass B\nA \"1\" <|.. \"many\" B : relation label",
+      "profile": "light",
+      "sha256": "68173801e86557ddad617d5d492c311b8b149e3b40893256d9b2b895b4420bf8"
+    },
+    {
+      "id": "syntax:class-rel-dotdotbargt",
+      "source": "classDiagram\nclass A\nclass B\nA \"1\" ..|> \"many\" B : relation label",
+      "profile": "light",
+      "sha256": "2d2f5e97bbf9cedcc7858b97e6db6676b3878116f727d6c35d6d4e18accd244f"
+    },
+    {
+      "id": "syntax:class-rel-stardashdash",
+      "source": "classDiagram\nclass A\nclass B\nA \"1\" *-- \"many\" B : relation label",
+      "profile": "light",
+      "sha256": "f57f05cd218e609b2c019d45a94c97e26c01f7eaf9edb5ab65240e51c797b0eb"
+    },
+    {
+      "id": "syntax:class-rel-dashdashstar",
+      "source": "classDiagram\nclass A\nclass B\nA \"1\" --* \"many\" B : relation label",
+      "profile": "light",
+      "sha256": "b130f828023dede88aa96b9d0186d8825d3519f67671a04f8ab9b6bd4fb37dee"
+    },
+    {
+      "id": "syntax:class-rel-odashdash",
+      "source": "classDiagram\nclass A\nclass B\nA \"1\" o-- \"many\" B : relation label",
+      "profile": "light",
+      "sha256": "db960a8e3e2a9f13e105e4bfc7e5b5df9144e289a55f83b1cfd6620e205507d5"
+    },
+    {
+      "id": "syntax:class-rel-dashdasho",
+      "source": "classDiagram\nclass A\nclass B\nA \"1\" --o \"many\" B : relation label",
+      "profile": "light",
+      "sha256": "cb092b17345af398b4bfaa686913ee31e8229945e747b23ae172b2dd1977a496"
+    },
+    {
+      "id": "syntax:class-rel-dashdashgt",
+      "source": "classDiagram\nclass A\nclass B\nA \"1\" --> \"many\" B : relation label",
+      "profile": "light",
+      "sha256": "69cbb31cb84226a11dd056f639f3a45140a2eabddd188168e486ea498de0d100"
+    },
+    {
+      "id": "syntax:class-rel-ltdashdash",
+      "source": "classDiagram\nclass A\nclass B\nA \"1\" <-- \"many\" B : relation label",
+      "profile": "light",
+      "sha256": "34a2bee21b924ffc5876c61c3f34a531fc220974d3674eec12860ac87d723689"
+    },
+    {
+      "id": "syntax:class-rel-dotdotgt",
+      "source": "classDiagram\nclass A\nclass B\nA \"1\" ..> \"many\" B : relation label",
+      "profile": "light",
+      "sha256": "85cafcc2e62c501c9fce7a64168a3f4a81c883fb0c012fab05e81ef30368edcd"
+    },
+    {
+      "id": "syntax:class-rel-ltdotdot",
+      "source": "classDiagram\nclass A\nclass B\nA \"1\" <.. \"many\" B : relation label",
+      "profile": "light",
+      "sha256": "4d8bcab7e1140a1e0b35174b930102099371f06010cfd3e671c0eebaca0eb142"
+    },
+    {
+      "id": "syntax:class-rel-dashdash",
+      "source": "classDiagram\nclass A\nclass B\nA \"1\" -- \"many\" B : relation label",
+      "profile": "light",
+      "sha256": "69cbb31cb84226a11dd056f639f3a45140a2eabddd188168e486ea498de0d100"
+    },
+    {
+      "id": "syntax:class-inline-member",
+      "source": "classDiagram\nA : +String name\nA : +run(x) bool",
+      "profile": "light",
+      "sha256": "8b0e633f7edcd93e168ec62b78ccba8564ce795d837fc3fae19de4f66acf9f63"
+    },
+    {
+      "id": "syntax:class-rich-label",
+      "source": "classDiagram\nclass A ~T~\nA : +String owner's_name",
+      "profile": "light",
+      "sha256": "238c067db8954684d90e061e826853160bbd73ba9bea51a28163be676176e4e1"
+    },
+    {
+      "id": "syntax:er-basic",
+      "source": "erDiagram\nA {\nint id PK\nstring name\n}\nB {\nint id PK\n}\nA ||--o{ B : owns",
+      "profile": "light",
+      "sha256": "d1f80e952aeb235c681ca5b2ea3ec347595aaa05d8a03cd1dc04554e234829ca"
+    },
+    {
+      "id": "syntax:er-keys-comment",
+      "source": "erDiagram\nA {\nint id PK FK UK \"identifier comment\"\nstring name \"owner's name\"\n}",
+      "profile": "light",
+      "sha256": "ffb3e4dc0fd561fbd7c7f3773249b9d5f1db6d9c84326d9f488a8d3bcf4aa018"
+    },
+    {
+      "id": "syntax:er-card-0-id",
+      "source": "erDiagram\nA ||--|| B : \"rel label\"",
+      "profile": "light",
+      "sha256": "bd11bb8d61b3bffd9f5a8090dc480b52e4d1e0cbb15c43071059af89368a88e9"
+    },
+    {
+      "id": "syntax:er-card-0-nonid",
+      "source": "erDiagram\nA ||..|| B : \"rel label\"",
+      "profile": "light",
+      "sha256": "4351a316c661bdaa727c7b73578e03ef70a7b16db0ef6e46a3cd68dee92f0f62"
+    },
+    {
+      "id": "syntax:er-card-1-id",
+      "source": "erDiagram\nA ||--o| B : \"rel label\"",
+      "profile": "light",
+      "sha256": "494c34e170d007ba23f07f9e91a980552732d3566fe4f0a5afde7ddf0170df50"
+    },
+    {
+      "id": "syntax:er-card-1-nonid",
+      "source": "erDiagram\nA ||..o| B : \"rel label\"",
+      "profile": "light",
+      "sha256": "46d30c39c8030a72b0310504f02f667bf98295c2728c7afa275d92234f737e5a"
+    },
+    {
+      "id": "syntax:er-card-2-id",
+      "source": "erDiagram\nA ||--|{ B : \"rel label\"",
+      "profile": "light",
+      "sha256": "fa845c0b5eb88fbe2dfff3c6f0384b55a74a3335c21fb3847cc7b46975a96747"
+    },
+    {
+      "id": "syntax:er-card-2-nonid",
+      "source": "erDiagram\nA ||..|{ B : \"rel label\"",
+      "profile": "light",
+      "sha256": "a4a1abb1d8b4caf71dfe96cf5d49504cd869f8147144230d0348acc08a88138a"
+    },
+    {
+      "id": "syntax:er-card-3-id",
+      "source": "erDiagram\nA o|--o{ B : \"rel label\"",
+      "profile": "light",
+      "sha256": "81d0648163831426932a984c6282b1e0dc1b01b4830385418f1371422eedfdc5"
+    },
+    {
+      "id": "syntax:er-card-3-nonid",
+      "source": "erDiagram\nA o|..o{ B : \"rel label\"",
+      "profile": "light",
+      "sha256": "79c7a433cdefb6e083d09f226dbbd86bd2397036b141767d776d186a6db90e23"
+    },
+    {
+      "id": "syntax:er-card-4-id",
+      "source": "erDiagram\nA {|--|| B : \"rel label\"",
+      "profile": "light",
+      "sha256": "cdf30ff2d580b109e00408b6ea912b3104b5383b9c6ad306d80649f4f53c0b65"
+    },
+    {
+      "id": "syntax:er-card-4-nonid",
+      "source": "erDiagram\nA {|..|| B : \"rel label\"",
+      "profile": "light",
+      "sha256": "598c22860c58ffc5ebe623fa793763566696a2150e6e36b53b15d3ad78015aba"
+    },
+    {
+      "id": "syntax:er-card-5-id",
+      "source": "erDiagram\nA {o--o| B : \"rel label\"",
+      "profile": "light",
+      "sha256": "3b94a1196d01dbf6a5535710fa7f257a31f70cfc77007de3331848164378da39"
+    },
+    {
+      "id": "syntax:er-card-5-nonid",
+      "source": "erDiagram\nA {o..o| B : \"rel label\"",
+      "profile": "light",
+      "sha256": "5795d5270d5d108436046d1880118ab686b66ea56bdbe68d7ca3ca1a8c4de30e"
+    },
+    {
+      "id": "syntax:er-empty-entity",
+      "source": "erDiagram\nEMPTY {\n}\nFULL {\nint id PK\n}\nEMPTY ||--|| FULL : link",
+      "profile": "light",
+      "sha256": "f5a0571b4ac384bb8aa717e03d80e5542dd955b7861ce9f641b42e94feabc133"
+    },
+    {
+      "id": "syntax:xy-vertical-categories",
+      "source": "xychart-beta\ntitle \"Sales\"\nx-axis \"Month\" [Jan, Feb, Mar]\ny-axis \"Count\" 0 --> 100\nbar [20,40,60]\nline [10,50,90]",
+      "profile": "light",
+      "sha256": "6d4ff68904c7c1741a8b0d0158e3ac02d708b384d2a97e725eb18681dac11662"
+    },
+    {
+      "id": "syntax:xy-horizontal",
+      "source": "xychart-beta horizontal\ntitle \"Horizontal\"\nx-axis \"Value\" [A, B, C]\ny-axis \"Score\" 0 --> 100\nbar [20,40,60]\nline [10,50,90]",
+      "profile": "light",
+      "sha256": "227bf817083aa37eed6d8e7ddccffd59f93db3c3664447fc5766e762f1a4d4ce"
+    },
+    {
+      "id": "syntax:xy-xrange",
+      "source": "xychart-beta\nx-axis \"X\" -10 --> 10\ny-axis \"Y\" -5 --> 15\nline [-5,0,5,10,15]",
+      "profile": "light",
+      "sha256": "fa3662eb4b655b6131a906d784b91450f991714881d7700c12bdaaf4bdd750ac"
+    },
+    {
+      "id": "syntax:xy-auto-range-positive",
+      "source": "xychart-beta\nx-axis [A,B,C]\nbar [10,20,30]",
+      "profile": "light",
+      "sha256": "a96744c494a0a88dfd02cdf5f967087592d58323ae8c996835abbc5c43cff4bc"
+    },
+    {
+      "id": "syntax:xy-auto-range-negative",
+      "source": "xychart-beta\nx-axis [A,B,C]\nline [-30,-20,-10]",
+      "profile": "light",
+      "sha256": "585591c557d288e395782f24541aeaa2ddcbd25933d27e94f2b0bbfc3727af1f"
+    },
+    {
+      "id": "syntax:xy-auto-range-mixed",
+      "source": "xychart-beta\nx-axis [A,B,C,D]\nbar [-10,0,15,25]\nline [5,-5,20,10]",
+      "profile": "light",
+      "sha256": "5c929f9183159bf2dbe2fa72e90414e0b31757fb9d28d40842ecd9a45fcca4c2"
+    },
+    {
+      "id": "syntax:xy-multi-series",
+      "source": "xychart-beta\nx-axis [A,B,C]\ny-axis 0 --> 100\nbar [10,20,30]\nbar [15,25,35]\nline [40,50,60]\nline [45,55,65]",
+      "profile": "light",
+      "sha256": "a57370645d589a1e4184b2fe38b230e8d3cbc9207fbcb46ce052c3ede977816d"
+    },
+    {
+      "id": "syntax:xy-interactive-single",
+      "source": "xychart-beta\nx-axis [A,B,C]\ny-axis 0 --> 100\nbar [10,20,30]\nline [40,50,60]",
+      "profile": "light",
+      "options": {
+        "interactive": true
+      },
+      "sha256": "6282d4e6f68339d0aacd296338a8c567c87553c951255cf254cfa48bb0bcc629"
+    },
+    {
+      "id": "syntax:xy-interactive-multi",
+      "source": "xychart-beta\nx-axis [A,B,C]\ny-axis 0 --> 100\nline [10,20,30]\nline [15,25,35]",
+      "profile": "light",
+      "options": {
+        "interactive": true
+      },
+      "sha256": "7a5fccb9b68ce560f77fbd9d4c4b9bc1281096d95eaac1709daa7e809e2887e2"
+    },
+    {
+      "id": "syntax:flow-edge-spaced-bi-dashdash_dashdashgt",
+      "source": "flowchart LR\nA <-- label --> B",
+      "profile": "light",
+      "sha256": "bd0098ee9b5dffe4d85f20d366e16d0d276c31d225579c2534e41bc466afd860"
+    },
+    {
+      "id": "syntax:flow-edge-spaced-bi-dashdash_dashdashdash",
+      "source": "flowchart LR\nA <-- label --- B",
+      "profile": "light",
+      "sha256": "c561f207ed4c374a0e6c1419ff6584dff1de270e97c10bd149ec3b92f5b7d0a7"
+    },
+    {
+      "id": "syntax:flow-edge-spaced-bi-dashdash_dotdashgt",
+      "source": "flowchart LR\nA <-- label .-> B",
+      "profile": "light",
+      "sha256": "65a00a6ee33d0a12253007b7282655cc345d6d9ad31421b9759d3d2efebd5755"
+    },
+    {
+      "id": "syntax:flow-edge-spaced-bi-dashdash_dashdotdash",
+      "source": "flowchart LR\nA <-- label -.- B",
+      "profile": "light",
+      "sha256": "e472e1f09776cc951605a40c26ac676a84fc533b2f746624fdae928c6069ce8d"
+    },
+    {
+      "id": "syntax:flow-edge-spaced-bi-dashdash_eqeqgt",
+      "source": "flowchart LR\nA <-- label ==> B",
+      "profile": "light",
+      "sha256": "c693a79c0b9fe01a2f9b268a620a61cd646d48ecf57a6050d975ccac3bebc0f7"
+    },
+    {
+      "id": "syntax:flow-edge-spaced-bi-dashdash_eqeqeq",
+      "source": "flowchart LR\nA <-- label === B",
+      "profile": "light",
+      "sha256": "417772e39a55912bab905ced32cbc2113cbae1aa15fa22b6294d1c576fceb21a"
+    },
+    {
+      "id": "syntax:flow-edge-spaced-bi-dashdot_dashdashgt",
+      "source": "flowchart LR\nA <-. label --> B",
+      "profile": "light",
+      "sha256": "65a00a6ee33d0a12253007b7282655cc345d6d9ad31421b9759d3d2efebd5755"
+    },
+    {
+      "id": "syntax:flow-edge-spaced-bi-dashdot_dashdashdash",
+      "source": "flowchart LR\nA <-. label --- B",
+      "profile": "light",
+      "sha256": "e472e1f09776cc951605a40c26ac676a84fc533b2f746624fdae928c6069ce8d"
+    },
+    {
+      "id": "syntax:flow-edge-spaced-bi-dashdot_dotdashgt",
+      "source": "flowchart LR\nA <-. label .-> B",
+      "profile": "light",
+      "sha256": "65a00a6ee33d0a12253007b7282655cc345d6d9ad31421b9759d3d2efebd5755"
+    },
+    {
+      "id": "syntax:flow-edge-spaced-bi-dashdot_dashdotdash",
+      "source": "flowchart LR\nA <-. label -.- B",
+      "profile": "light",
+      "sha256": "e472e1f09776cc951605a40c26ac676a84fc533b2f746624fdae928c6069ce8d"
+    },
+    {
+      "id": "syntax:flow-edge-spaced-bi-dashdot_eqeqgt",
+      "source": "flowchart LR\nA <-. label ==> B",
+      "profile": "light",
+      "sha256": "65a00a6ee33d0a12253007b7282655cc345d6d9ad31421b9759d3d2efebd5755"
+    },
+    {
+      "id": "syntax:flow-edge-spaced-bi-dashdot_eqeqeq",
+      "source": "flowchart LR\nA <-. label === B",
+      "profile": "light",
+      "sha256": "e472e1f09776cc951605a40c26ac676a84fc533b2f746624fdae928c6069ce8d"
+    },
+    {
+      "id": "syntax:flow-edge-spaced-bi-eqeq_dashdashgt",
+      "source": "flowchart LR\nA <== label --> B",
+      "profile": "light",
+      "sha256": "c693a79c0b9fe01a2f9b268a620a61cd646d48ecf57a6050d975ccac3bebc0f7"
+    },
+    {
+      "id": "syntax:flow-edge-spaced-bi-eqeq_dashdashdash",
+      "source": "flowchart LR\nA <== label --- B",
+      "profile": "light",
+      "sha256": "417772e39a55912bab905ced32cbc2113cbae1aa15fa22b6294d1c576fceb21a"
+    },
+    {
+      "id": "syntax:flow-edge-spaced-bi-eqeq_dotdashgt",
+      "source": "flowchart LR\nA <== label .-> B",
+      "profile": "light",
+      "sha256": "65a00a6ee33d0a12253007b7282655cc345d6d9ad31421b9759d3d2efebd5755"
+    },
+    {
+      "id": "syntax:flow-edge-spaced-bi-eqeq_dashdotdash",
+      "source": "flowchart LR\nA <== label -.- B",
+      "profile": "light",
+      "sha256": "e472e1f09776cc951605a40c26ac676a84fc533b2f746624fdae928c6069ce8d"
+    },
+    {
+      "id": "syntax:flow-edge-spaced-bi-eqeq_eqeqgt",
+      "source": "flowchart LR\nA <== label ==> B",
+      "profile": "light",
+      "sha256": "c693a79c0b9fe01a2f9b268a620a61cd646d48ecf57a6050d975ccac3bebc0f7"
+    },
+    {
+      "id": "syntax:flow-edge-spaced-bi-eqeq_eqeqeq",
+      "source": "flowchart LR\nA <== label === B",
+      "profile": "light",
+      "sha256": "417772e39a55912bab905ced32cbc2113cbae1aa15fa22b6294d1c576fceb21a"
+    },
+    {
+      "id": "syntax:flow-redefine-node",
+      "source": "flowchart LR\nA[First]\nA[Second]\nA --> B",
+      "profile": "light",
+      "sha256": "d3215a82a689115ddf160bd24d68c71bbe7b7bc5c2273d7a8d0ad10be76608cc"
+    },
+    {
+      "id": "syntax:flow-unknown-line",
+      "source": "flowchart LR\nthis is ignored\nA --> B",
+      "profile": "light",
+      "sha256": "399cfe4babcfe6aa932059f60e7208947b7d4b7309a092caf1cbcdc71191aea4"
+    },
+    {
+      "id": "syntax:flow-class-style-merge",
+      "source": "flowchart LR\nA --> B\nclassDef c fill:#abc,stroke:#123,color:#456\nclass A c\nstyle A stroke:#f00,stroke-width:4",
+      "profile": "light",
+      "sha256": "99585c7145ec39e7a342d543ae7d9c544767554d58db3848c218db448edffda5"
+    },
+    {
+      "id": "syntax:flow-linkstyle-merge",
+      "source": "flowchart LR\nA --> B\nB --> C\nlinkStyle default stroke:#111\nlinkStyle 1 stroke:#f00,stroke-width:3",
+      "profile": "light",
+      "sha256": "ad26391db70f6cc8176794004adbeb2b62e088231ae92b0c94580e766c77d6fa"
+    },
+    {
+      "id": "syntax:flow-multi-index-linkstyle",
+      "source": "flowchart LR\nA --> B\nB --> C\nC --> D\nlinkStyle 0, 2 stroke:#00f,stroke-width:2",
+      "profile": "light",
+      "sha256": "d2d62b7d2375863af4be21b79e32f1fbbc9c388b2096a3eb890163ad3db1898c"
+    },
+    {
+      "id": "syntax:state-direction-TD",
+      "source": "stateDiagram-v2\ndirection TD\n[*] --> A\nA --> B\nB --> [*]",
+      "profile": "light",
+      "sha256": "7cca1c3d080c7552a200085d2a306d9b3847d08d4b6c6a7f247bbfc1118cba8a"
+    },
+    {
+      "id": "syntax:state-direction-TB",
+      "source": "stateDiagram-v2\ndirection TB\n[*] --> A\nA --> B\nB --> [*]",
+      "profile": "light",
+      "sha256": "7cca1c3d080c7552a200085d2a306d9b3847d08d4b6c6a7f247bbfc1118cba8a"
+    },
+    {
+      "id": "syntax:state-direction-LR",
+      "source": "stateDiagram-v2\ndirection LR\n[*] --> A\nA --> B\nB --> [*]",
+      "profile": "light",
+      "sha256": "8b5e7fc50cd446b6be58a1223a33c480e770753e28e81b5de3b5614b8c9f32fc"
+    },
+    {
+      "id": "syntax:state-direction-BT",
+      "source": "stateDiagram-v2\ndirection BT\n[*] --> A\nA --> B\nB --> [*]",
+      "profile": "light",
+      "sha256": "3dcb8091bed0f11206f56653a799ed121691c992432f6fc5d619350b27f8600d"
+    },
+    {
+      "id": "syntax:state-direction-RL",
+      "source": "stateDiagram-v2\ndirection RL\n[*] --> A\nA --> B\nB --> [*]",
+      "profile": "light",
+      "sha256": "c857a99605aa8ab660832ebcb38d4b222836cabda3813cd48552fccd25d12452"
+    },
+    {
+      "id": "syntax:state-composite-alias",
+      "source": "stateDiagram-v2\nstate \"Parent Label\" as Parent {\ndirection BT\nA --> B\n}\n[*] --> Parent\nParent --> [*]",
+      "profile": "light",
+      "sha256": "b21a55ccd6db43328d11925fb99f360821f35ff96b298ec95b388693b1096e7e"
+    },
+    {
+      "id": "syntax:state-existing-node-into-group",
+      "source": "stateDiagram-v2\nA : Alpha\nstate Parent {\nA --> B\n}\n[*] --> Parent",
+      "profile": "light",
+      "sha256": "bd372bcd6bb99afc54b4774a9d65a876ee895cf9441700bc4f21bcd7a3a29c0e"
+    },
+    {
+      "id": "syntax:state-unknown-lines",
+      "source": "stateDiagram-v2\nclassDef ignored fill:#f00\nstyle A fill:#00f\nA --> B",
+      "profile": "light",
+      "sha256": "e9e6e141bab69e8294ce47ff805e6286aa4eba557011c43d127c7bc437a17c83"
+    },
+    {
+      "id": "syntax:seq-autonumber-ignored",
+      "source": "sequenceDiagram\nautonumber\nA->>B: hello",
+      "profile": "light",
+      "sha256": "120fa858e62bb39a45dd50a36a5612436ea0926975a2d68f1a7fc73da26ab711"
+    },
+    {
+      "id": "syntax:seq-activate-lines-ignored",
+      "source": "sequenceDiagram\nA->>B: first\nactivate B\nB-->>A: second\ndeactivate B",
+      "profile": "light",
+      "sha256": "69194fec96a439bd6a9d492e551aeac0f55733eabc616dfc78489f73f75360c3"
+    },
+    {
+      "id": "syntax:seq-box-ignored",
+      "source": "sequenceDiagram\nbox Group\nparticipant A\nparticipant B\nend\nA->>B: hello",
+      "profile": "light",
+      "sha256": "120fa858e62bb39a45dd50a36a5612436ea0926975a2d68f1a7fc73da26ab711"
+    },
+    {
+      "id": "syntax:seq-note-before-message",
+      "source": "sequenceDiagram\nparticipant A\nNote right of A: before\nA->>A: self",
+      "profile": "light",
+      "sha256": "4ec0f993d503e7fcfa2bde3dac7ad7cd44329f2e780b5dbf4990eec3bb19a2eb"
+    },
+    {
+      "id": "syntax:seq-multiple-notes",
+      "source": "sequenceDiagram\nparticipant A\nparticipant B\nA->>B: one\nNote left of A: left\nNote right of B: right\nNote over A,B: both\nB-->>A: two",
+      "profile": "light",
+      "sha256": "6906e3db5cb6406b2220021c011d7ee5c5739c4a3e221fdb117e6101fe23d6a6"
+    },
+    {
+      "id": "syntax:seq-divider-and",
+      "source": "sequenceDiagram\nA->>B: before\npar first\nA->>B: one\nand second\nB-->>A: two\nend",
+      "profile": "light",
+      "sha256": "761f6cbb025ff422d5fedb24d0e6915718a311b1781961de6abaa013d51bc80a"
+    },
+    {
+      "id": "syntax:seq-alt-else-empty",
+      "source": "sequenceDiagram\nalt yes\nA->>B: one\nelse\nB-->>A: two\nend",
+      "profile": "light",
+      "sha256": "4c01c3213c5db9a7818dd504d9f9086ef3e9be85ab9c0d6d2d263c996a149e85"
+    },
+    {
+      "id": "syntax:seq-activation-self",
+      "source": "sequenceDiagram\nA->>+A: begin\nA-->>-A: end",
+      "profile": "light",
+      "sha256": "6698ca03a732cdf25189f16882a408e26cd86836b0e7b9bca5c1afc997d0a9cf"
+    },
+    {
+      "id": "syntax:seq-activation-plus-dashgtgt",
+      "source": "sequenceDiagram\nA->>+B: plus",
+      "profile": "light",
+      "sha256": "96b7c116e26f226167fa7c298867015e64ae04009456019ede0b7a2b30de3968"
+    },
+    {
+      "id": "syntax:seq-activation-minus-dashgtgt",
+      "source": "sequenceDiagram\nA->>-B: minus",
+      "profile": "light",
+      "sha256": "fa5ac87851f8bd8bb871ce827c857f81e9527fb35a44526e12ce7b8b7143a0ea"
+    },
+    {
+      "id": "syntax:seq-activation-plus-dashdashgtgt",
+      "source": "sequenceDiagram\nA-->>+B: plus",
+      "profile": "light",
+      "sha256": "1e56d2651a8a4cc499a77ec30cf6ba103f2e2793776023b8bf140843f3a33b40"
+    },
+    {
+      "id": "syntax:seq-activation-minus-dashdashgtgt",
+      "source": "sequenceDiagram\nA-->>-B: minus",
+      "profile": "light",
+      "sha256": "4f650cc36784b6e2b8d778b38db7342ab14d6cc8177a8c79253ca814785da6ca"
+    },
+    {
+      "id": "syntax:seq-activation-plus-dashparen",
+      "source": "sequenceDiagram\nA-)+B: plus",
+      "profile": "light",
+      "sha256": "2d1418cbbbbb790868ad831533781965867b1cde38764c76c6979d4264175558"
+    },
+    {
+      "id": "syntax:seq-activation-minus-dashparen",
+      "source": "sequenceDiagram\nA-)-B: minus",
+      "profile": "light",
+      "sha256": "c7b4df4766659af24b5e974ac3cfdbb47039a66c4b386d30b2da65df163d6f8c"
+    },
+    {
+      "id": "syntax:seq-activation-plus-dashdashparen",
+      "source": "sequenceDiagram\nA--)+B: plus",
+      "profile": "light",
+      "sha256": "acc1e4edaf7e8271fb9d0344afbb21b1737c0c219c39d7f0a2dbe40876887483"
+    },
+    {
+      "id": "syntax:seq-activation-minus-dashdashparen",
+      "source": "sequenceDiagram\nA--)-B: minus",
+      "profile": "light",
+      "sha256": "c3ee3e61a817378de6282a5641cd41fcb6735b3c6b89a51ab736abd5c1c3fc43"
+    },
+    {
+      "id": "syntax:seq-activation-plus-dashx",
+      "source": "sequenceDiagram\nA-x+B: plus",
+      "profile": "light",
+      "sha256": "96b7c116e26f226167fa7c298867015e64ae04009456019ede0b7a2b30de3968"
+    },
+    {
+      "id": "syntax:seq-activation-minus-dashx",
+      "source": "sequenceDiagram\nA-x-B: minus",
+      "profile": "light",
+      "sha256": "fa5ac87851f8bd8bb871ce827c857f81e9527fb35a44526e12ce7b8b7143a0ea"
+    },
+    {
+      "id": "syntax:seq-activation-plus-dashdashx",
+      "source": "sequenceDiagram\nA--x+B: plus",
+      "profile": "light",
+      "sha256": "1e56d2651a8a4cc499a77ec30cf6ba103f2e2793776023b8bf140843f3a33b40"
+    },
+    {
+      "id": "syntax:seq-activation-minus-dashdashx",
+      "source": "sequenceDiagram\nA--x-B: minus",
+      "profile": "light",
+      "sha256": "4f650cc36784b6e2b8d778b38db7342ab14d6cc8177a8c79253ca814785da6ca"
+    },
+    {
+      "id": "syntax:seq-activation-plus-dashgt",
+      "source": "sequenceDiagram\nA->+B: plus",
+      "profile": "light",
+      "sha256": "2d1418cbbbbb790868ad831533781965867b1cde38764c76c6979d4264175558"
+    },
+    {
+      "id": "syntax:seq-activation-minus-dashgt",
+      "source": "sequenceDiagram\nA->-B: minus",
+      "profile": "light",
+      "sha256": "c7b4df4766659af24b5e974ac3cfdbb47039a66c4b386d30b2da65df163d6f8c"
+    },
+    {
+      "id": "syntax:seq-activation-plus-dashdashgt",
+      "source": "sequenceDiagram\nA-->+B: plus",
+      "profile": "light",
+      "sha256": "acc1e4edaf7e8271fb9d0344afbb21b1737c0c219c39d7f0a2dbe40876887483"
+    },
+    {
+      "id": "syntax:seq-activation-minus-dashdashgt",
+      "source": "sequenceDiagram\nA-->-B: minus",
+      "profile": "light",
+      "sha256": "c3ee3e61a817378de6282a5641cd41fcb6735b3c6b89a51ab736abd5c1c3fc43"
+    },
+    {
+      "id": "syntax:class-rel-leftcard-0",
+      "source": "classDiagram\nA \"1\" <|-- B",
+      "profile": "light",
+      "sha256": "20368589cab13bec1b7235d8a22a258897057b31828fd670922df8041b28deda"
+    },
+    {
+      "id": "syntax:class-rel-rightcard-0",
+      "source": "classDiagram\nA <|-- \"0..*\" B",
+      "profile": "light",
+      "sha256": "83f108539bf93f59f0f1ae79b19b21132ac9d33d7db4d9c58f7f298791cf5bbc"
+    },
+    {
+      "id": "syntax:class-rel-leftcard-1",
+      "source": "classDiagram\nA \"1\" --|> B",
+      "profile": "light",
+      "sha256": "bf269d25df3c0e28bb507ced62295352442f8acccfa39174307047b1a1fadd5b"
+    },
+    {
+      "id": "syntax:class-rel-rightcard-1",
+      "source": "classDiagram\nA --|> \"0..*\" B",
+      "profile": "light",
+      "sha256": "6a1ecb729b74c37424241a98f607bc3137751ce7e6480ec3a3ccd01a93218721"
+    },
+    {
+      "id": "syntax:class-rel-leftcard-2",
+      "source": "classDiagram\nA \"1\" <|.. B",
+      "profile": "light",
+      "sha256": "ffdabf69ec1a0e4488581294efef93125dd2564a89f0a34d0545a3d4b7cb6ef7"
+    },
+    {
+      "id": "syntax:class-rel-rightcard-2",
+      "source": "classDiagram\nA <|.. \"0..*\" B",
+      "profile": "light",
+      "sha256": "bcd3edc9813dd831d4e212fc919dcef67f822c112817cd5ea9662aca0d1468f1"
+    },
+    {
+      "id": "syntax:class-rel-leftcard-3",
+      "source": "classDiagram\nA \"1\" ..|> B",
+      "profile": "light",
+      "sha256": "5e06642f5f5099ef23d6a8160a8868fe35084b8b169b610511fd2eb9779a9670"
+    },
+    {
+      "id": "syntax:class-rel-rightcard-3",
+      "source": "classDiagram\nA ..|> \"0..*\" B",
+      "profile": "light",
+      "sha256": "7b7f91932fc28ff202aec33824ab2b89b01c5f58f22ca60366657490cc4747a8"
+    },
+    {
+      "id": "syntax:class-rel-leftcard-4",
+      "source": "classDiagram\nA \"1\" *-- B",
+      "profile": "light",
+      "sha256": "628ff0922bf3155bbff50ae281d2852284a395e1c09000447a06f2cfa85ab6cf"
+    },
+    {
+      "id": "syntax:class-rel-rightcard-4",
+      "source": "classDiagram\nA *-- \"0..*\" B",
+      "profile": "light",
+      "sha256": "3d70a36d97eae12f2200b3bb80848ee43d336be818f608d77efce41d8d225234"
+    },
+    {
+      "id": "syntax:class-rel-leftcard-5",
+      "source": "classDiagram\nA \"1\" --* B",
+      "profile": "light",
+      "sha256": "5f2da902e7d4b5421d8eabae8adfca57df32fd5999d4a87b45761c14fdf2852c"
+    },
+    {
+      "id": "syntax:class-rel-rightcard-5",
+      "source": "classDiagram\nA --* \"0..*\" B",
+      "profile": "light",
+      "sha256": "2f41033bd2edac689efbb60bb2d4aa56e3287dce2d7206337007cf2260a25ebd"
+    },
+    {
+      "id": "syntax:class-rel-leftcard-6",
+      "source": "classDiagram\nA \"1\" o-- B",
+      "profile": "light",
+      "sha256": "1a30302ca5b3b9017804a7573eb4ba7083a05b904fa29489e588b2d2ea2048cc"
+    },
+    {
+      "id": "syntax:class-rel-rightcard-6",
+      "source": "classDiagram\nA o-- \"0..*\" B",
+      "profile": "light",
+      "sha256": "4faa5e5a74c4d096c918656079a55a6bdc901dda82473855cff4a60e52057e0c"
+    },
+    {
+      "id": "syntax:class-rel-leftcard-7",
+      "source": "classDiagram\nA \"1\" --o B",
+      "profile": "light",
+      "sha256": "97c0b9d6b8f3ab62cdd55cd1d1d0c4adc1c23b79935d4ea23fecafda9e5b977a"
+    },
+    {
+      "id": "syntax:class-rel-rightcard-7",
+      "source": "classDiagram\nA --o \"0..*\" B",
+      "profile": "light",
+      "sha256": "364976ce65e6accd1d7ff4ade7132c6d1ad83257c3e7421c595ea6a65edf3c36"
+    },
+    {
+      "id": "syntax:class-rel-leftcard-8",
+      "source": "classDiagram\nA \"1\" --> B",
+      "profile": "light",
+      "sha256": "499ee2295f2d0ebda5ac9007f5fd096284d57a00773242f05d2be9cf143cf7e2"
+    },
+    {
+      "id": "syntax:class-rel-rightcard-8",
+      "source": "classDiagram\nA --> \"0..*\" B",
+      "profile": "light",
+      "sha256": "86731ec6bd5132e50f0bc09a037eb04819216ace48616fb3266d591ff2f209ee"
+    },
+    {
+      "id": "syntax:class-rel-leftcard-9",
+      "source": "classDiagram\nA \"1\" <-- B",
+      "profile": "light",
+      "sha256": "3340c30fdb9492b5ab350fa60b2e63acb047cf7ef520551a0ea4c70d10db05b3"
+    },
+    {
+      "id": "syntax:class-rel-rightcard-9",
+      "source": "classDiagram\nA <-- \"0..*\" B",
+      "profile": "light",
+      "sha256": "d7512e668d0d654895b0d4f011652833e19f0516ebbea4e2d5fc352d87d2648d"
+    },
+    {
+      "id": "syntax:class-rel-leftcard-10",
+      "source": "classDiagram\nA \"1\" ..> B",
+      "profile": "light",
+      "sha256": "6a334f00ea737f9e72e8d6092db7601b389597fbe2a125f47af5270739535f12"
+    },
+    {
+      "id": "syntax:class-rel-rightcard-10",
+      "source": "classDiagram\nA ..> \"0..*\" B",
+      "profile": "light",
+      "sha256": "04128bc1f12fdee4a6e78dcd0efff8e2b1f2c4eeb3df13cc3d61e04f45863bdf"
+    },
+    {
+      "id": "syntax:class-rel-leftcard-11",
+      "source": "classDiagram\nA \"1\" <.. B",
+      "profile": "light",
+      "sha256": "88de8a93c2229c53302d6183c0c1903c4967d3bbfbcbf3e2d624c4383c517dcc"
+    },
+    {
+      "id": "syntax:class-rel-rightcard-11",
+      "source": "classDiagram\nA <.. \"0..*\" B",
+      "profile": "light",
+      "sha256": "71caa0135f0a744ddb07b7c10465efee089e54dcc0319bdd954492b3776109aa"
+    },
+    {
+      "id": "syntax:class-rel-leftcard-12",
+      "source": "classDiagram\nA \"1\" -- B",
+      "profile": "light",
+      "sha256": "499ee2295f2d0ebda5ac9007f5fd096284d57a00773242f05d2be9cf143cf7e2"
+    },
+    {
+      "id": "syntax:class-rel-rightcard-12",
+      "source": "classDiagram\nA -- \"0..*\" B",
+      "profile": "light",
+      "sha256": "86731ec6bd5132e50f0bc09a037eb04819216ace48616fb3266d591ff2f209ee"
+    },
+    {
+      "id": "syntax:class-unknown-lines",
+      "source": "classDiagram\n%% c\nunknown directive\nclass A",
+      "profile": "light",
+      "sha256": "0eb6fa8cb515a5b5c44184f9d33724fc35184234007e9079cf9e859ed37640ed"
+    },
+    {
+      "id": "syntax:class-duplicate-members",
+      "source": "classDiagram\nclass A {\n+String name\n+String name\n+run() void\n+run() void\n}",
+      "profile": "light",
+      "sha256": "3ae763ea46d6f265e15aa179e03d673f5eac93b44fab55b67f30b2e7d763b40d"
+    },
+    {
+      "id": "syntax:class-inline-static-abstract",
+      "source": "classDiagram\nA : +foo()$ int\nA : #bar()* bool",
+      "profile": "light",
+      "sha256": "66f4a3e1422d9991ce033d24f2955a24bdde30b92d774b628d9f95c9d57dfe77"
+    },
+    {
+      "id": "syntax:er-card-matrix-0",
+      "source": "erDiagram\nA ||--|| B : rel",
+      "profile": "light",
+      "sha256": "a46a4b8f747adf823c52291af88f8a66183da5ca8a10cc76b948492631df6904"
+    },
+    {
+      "id": "syntax:er-card-matrix-1",
+      "source": "erDiagram\nA ||--o| B : rel",
+      "profile": "light",
+      "sha256": "eb059359490511c322da5ab6b412709a4895677cf2e51e39e88eacc1856d6fbc"
+    },
+    {
+      "id": "syntax:er-card-matrix-2",
+      "source": "erDiagram\nA ||--|o B : rel",
+      "profile": "light",
+      "sha256": "eb059359490511c322da5ab6b412709a4895677cf2e51e39e88eacc1856d6fbc"
+    },
+    {
+      "id": "syntax:er-card-matrix-3",
+      "source": "erDiagram\nA ||--|} B : rel",
+      "profile": "light",
+      "sha256": "62c5db831f3f893d7ffa6c06740813551dd03909516fb830c843c301bf335b81"
+    },
+    {
+      "id": "syntax:er-card-matrix-4",
+      "source": "erDiagram\nA ||--}| B : rel",
+      "profile": "light",
+      "sha256": "62c5db831f3f893d7ffa6c06740813551dd03909516fb830c843c301bf335b81"
+    },
+    {
+      "id": "syntax:er-card-matrix-5",
+      "source": "erDiagram\nA ||--{| B : rel",
+      "profile": "light",
+      "sha256": "62c5db831f3f893d7ffa6c06740813551dd03909516fb830c843c301bf335b81"
+    },
+    {
+      "id": "syntax:er-card-matrix-6",
+      "source": "erDiagram\nA ||--|{ B : rel",
+      "profile": "light",
+      "sha256": "62c5db831f3f893d7ffa6c06740813551dd03909516fb830c843c301bf335b81"
+    },
+    {
+      "id": "syntax:er-card-matrix-7",
+      "source": "erDiagram\nA ||--o{ B : rel",
+      "profile": "light",
+      "sha256": "4b0796c54253f23956cd2ad308fef8e5862a8ae4fc4d837cdcb877d0903e97a4"
+    },
+    {
+      "id": "syntax:er-card-matrix-8",
+      "source": "erDiagram\nA ||--{o B : rel",
+      "profile": "light",
+      "sha256": "4b0796c54253f23956cd2ad308fef8e5862a8ae4fc4d837cdcb877d0903e97a4"
+    },
+    {
+      "id": "syntax:er-card-matrix-9",
+      "source": "erDiagram\nA ||--o} B : rel",
+      "profile": "light",
+      "sha256": "dbcf9f44de77f6f58f48b921fc6bf9ae2d3157887803c27a48f847664ee45791"
+    },
+    {
+      "id": "syntax:er-card-matrix-10",
+      "source": "erDiagram\nA ||--}o B : rel",
+      "profile": "light",
+      "sha256": "dbcf9f44de77f6f58f48b921fc6bf9ae2d3157887803c27a48f847664ee45791"
+    },
+    {
+      "id": "syntax:er-card-matrix-11",
+      "source": "erDiagram\nA o|--|| B : rel",
+      "profile": "light",
+      "sha256": "ead6eeb1cff2d1dba1d72198ce49b141bef39d96025de3b73e9e48a3dfcd82ab"
+    },
+    {
+      "id": "syntax:er-card-matrix-12",
+      "source": "erDiagram\nA o|--o| B : rel",
+      "profile": "light",
+      "sha256": "fc4ebf98c15fa083d8726e4bfca971bddfb624073b953233a4649225243c78ff"
+    },
+    {
+      "id": "syntax:er-card-matrix-13",
+      "source": "erDiagram\nA o|--|o B : rel",
+      "profile": "light",
+      "sha256": "fc4ebf98c15fa083d8726e4bfca971bddfb624073b953233a4649225243c78ff"
+    },
+    {
+      "id": "syntax:er-card-matrix-14",
+      "source": "erDiagram\nA o|--|} B : rel",
+      "profile": "light",
+      "sha256": "1c815483093a4a9c851504e4e0e52ee2e8df268fe4f574570d91cf1b39f224f8"
+    },
+    {
+      "id": "syntax:er-card-matrix-15",
+      "source": "erDiagram\nA o|--}| B : rel",
+      "profile": "light",
+      "sha256": "1c815483093a4a9c851504e4e0e52ee2e8df268fe4f574570d91cf1b39f224f8"
+    },
+    {
+      "id": "syntax:er-card-matrix-16",
+      "source": "erDiagram\nA o|--{| B : rel",
+      "profile": "light",
+      "sha256": "1c815483093a4a9c851504e4e0e52ee2e8df268fe4f574570d91cf1b39f224f8"
+    },
+    {
+      "id": "syntax:er-card-matrix-17",
+      "source": "erDiagram\nA o|--|{ B : rel",
+      "profile": "light",
+      "sha256": "1c815483093a4a9c851504e4e0e52ee2e8df268fe4f574570d91cf1b39f224f8"
+    },
+    {
+      "id": "syntax:er-card-matrix-18",
+      "source": "erDiagram\nA o|--o{ B : rel",
+      "profile": "light",
+      "sha256": "4ebb5c6c87e09c5f56c6682c53ee9b1d8fef3db2e7d9e0628792a7b5358b4b58"
+    },
+    {
+      "id": "syntax:er-card-matrix-19",
+      "source": "erDiagram\nA o|--{o B : rel",
+      "profile": "light",
+      "sha256": "4ebb5c6c87e09c5f56c6682c53ee9b1d8fef3db2e7d9e0628792a7b5358b4b58"
+    },
+    {
+      "id": "syntax:er-card-matrix-20",
+      "source": "erDiagram\nA o|--o} B : rel",
+      "profile": "light",
+      "sha256": "dbcf9f44de77f6f58f48b921fc6bf9ae2d3157887803c27a48f847664ee45791"
+    },
+    {
+      "id": "syntax:er-card-matrix-21",
+      "source": "erDiagram\nA o|--}o B : rel",
+      "profile": "light",
+      "sha256": "dbcf9f44de77f6f58f48b921fc6bf9ae2d3157887803c27a48f847664ee45791"
+    },
+    {
+      "id": "syntax:er-card-matrix-22",
+      "source": "erDiagram\nA |o--|| B : rel",
+      "profile": "light",
+      "sha256": "ead6eeb1cff2d1dba1d72198ce49b141bef39d96025de3b73e9e48a3dfcd82ab"
+    },
+    {
+      "id": "syntax:er-card-matrix-23",
+      "source": "erDiagram\nA |o--o| B : rel",
+      "profile": "light",
+      "sha256": "fc4ebf98c15fa083d8726e4bfca971bddfb624073b953233a4649225243c78ff"
+    },
+    {
+      "id": "syntax:er-card-matrix-24",
+      "source": "erDiagram\nA |o--|o B : rel",
+      "profile": "light",
+      "sha256": "fc4ebf98c15fa083d8726e4bfca971bddfb624073b953233a4649225243c78ff"
+    },
+    {
+      "id": "syntax:er-card-matrix-25",
+      "source": "erDiagram\nA |o--|} B : rel",
+      "profile": "light",
+      "sha256": "1c815483093a4a9c851504e4e0e52ee2e8df268fe4f574570d91cf1b39f224f8"
+    },
+    {
+      "id": "syntax:er-card-matrix-26",
+      "source": "erDiagram\nA |o--}| B : rel",
+      "profile": "light",
+      "sha256": "1c815483093a4a9c851504e4e0e52ee2e8df268fe4f574570d91cf1b39f224f8"
+    },
+    {
+      "id": "syntax:er-card-matrix-27",
+      "source": "erDiagram\nA |o--{| B : rel",
+      "profile": "light",
+      "sha256": "1c815483093a4a9c851504e4e0e52ee2e8df268fe4f574570d91cf1b39f224f8"
+    },
+    {
+      "id": "syntax:er-card-matrix-28",
+      "source": "erDiagram\nA |o--|{ B : rel",
+      "profile": "light",
+      "sha256": "1c815483093a4a9c851504e4e0e52ee2e8df268fe4f574570d91cf1b39f224f8"
+    },
+    {
+      "id": "syntax:er-card-matrix-29",
+      "source": "erDiagram\nA |o--o{ B : rel",
+      "profile": "light",
+      "sha256": "4ebb5c6c87e09c5f56c6682c53ee9b1d8fef3db2e7d9e0628792a7b5358b4b58"
+    },
+    {
+      "id": "syntax:er-card-matrix-30",
+      "source": "erDiagram\nA |o--{o B : rel",
+      "profile": "light",
+      "sha256": "4ebb5c6c87e09c5f56c6682c53ee9b1d8fef3db2e7d9e0628792a7b5358b4b58"
+    },
+    {
+      "id": "syntax:er-card-matrix-31",
+      "source": "erDiagram\nA |o--o} B : rel",
+      "profile": "light",
+      "sha256": "dbcf9f44de77f6f58f48b921fc6bf9ae2d3157887803c27a48f847664ee45791"
+    },
+    {
+      "id": "syntax:er-card-matrix-32",
+      "source": "erDiagram\nA |o--}o B : rel",
+      "profile": "light",
+      "sha256": "dbcf9f44de77f6f58f48b921fc6bf9ae2d3157887803c27a48f847664ee45791"
+    },
+    {
+      "id": "syntax:er-card-matrix-33",
+      "source": "erDiagram\nA |}--|| B : rel",
+      "profile": "light",
+      "sha256": "035ba0ead67e905c6bd94604ffb4a183fa9de7ca4b4cfab97ed9d19c0da1f5c6"
+    },
+    {
+      "id": "syntax:er-card-matrix-34",
+      "source": "erDiagram\nA |}--o| B : rel",
+      "profile": "light",
+      "sha256": "cce0f69efa235d67024aa4ec6c6117d2e8c8c98eaf0f683ebe11e54aafd68a85"
+    },
+    {
+      "id": "syntax:er-card-matrix-35",
+      "source": "erDiagram\nA |}--|o B : rel",
+      "profile": "light",
+      "sha256": "cce0f69efa235d67024aa4ec6c6117d2e8c8c98eaf0f683ebe11e54aafd68a85"
+    },
+    {
+      "id": "syntax:er-card-matrix-36",
+      "source": "erDiagram\nA |}--|} B : rel",
+      "profile": "light",
+      "sha256": "fbcc3cba70fb42270a0c7d88464bccea05a1e56609d236ab3edf812289c5f4a1"
+    },
+    {
+      "id": "syntax:er-card-matrix-37",
+      "source": "erDiagram\nA |}--}| B : rel",
+      "profile": "light",
+      "sha256": "fbcc3cba70fb42270a0c7d88464bccea05a1e56609d236ab3edf812289c5f4a1"
+    },
+    {
+      "id": "syntax:er-card-matrix-38",
+      "source": "erDiagram\nA |}--{| B : rel",
+      "profile": "light",
+      "sha256": "fbcc3cba70fb42270a0c7d88464bccea05a1e56609d236ab3edf812289c5f4a1"
+    },
+    {
+      "id": "syntax:er-card-matrix-39",
+      "source": "erDiagram\nA |}--|{ B : rel",
+      "profile": "light",
+      "sha256": "fbcc3cba70fb42270a0c7d88464bccea05a1e56609d236ab3edf812289c5f4a1"
+    },
+    {
+      "id": "syntax:er-card-matrix-40",
+      "source": "erDiagram\nA |}--o{ B : rel",
+      "profile": "light",
+      "sha256": "5b253219da0fbffa8b568103e18af913d7ee13a5027ef64e2d33fc8783da1634"
+    },
+    {
+      "id": "syntax:er-card-matrix-41",
+      "source": "erDiagram\nA |}--{o B : rel",
+      "profile": "light",
+      "sha256": "5b253219da0fbffa8b568103e18af913d7ee13a5027ef64e2d33fc8783da1634"
+    },
+    {
+      "id": "syntax:er-card-matrix-42",
+      "source": "erDiagram\nA |}--o} B : rel",
+      "profile": "light",
+      "sha256": "dbcf9f44de77f6f58f48b921fc6bf9ae2d3157887803c27a48f847664ee45791"
+    },
+    {
+      "id": "syntax:er-card-matrix-43",
+      "source": "erDiagram\nA |}--}o B : rel",
+      "profile": "light",
+      "sha256": "dbcf9f44de77f6f58f48b921fc6bf9ae2d3157887803c27a48f847664ee45791"
+    },
+    {
+      "id": "syntax:er-card-matrix-44",
+      "source": "erDiagram\nA }|--|| B : rel",
+      "profile": "light",
+      "sha256": "035ba0ead67e905c6bd94604ffb4a183fa9de7ca4b4cfab97ed9d19c0da1f5c6"
+    },
+    {
+      "id": "syntax:er-card-matrix-45",
+      "source": "erDiagram\nA }|--o| B : rel",
+      "profile": "light",
+      "sha256": "cce0f69efa235d67024aa4ec6c6117d2e8c8c98eaf0f683ebe11e54aafd68a85"
+    },
+    {
+      "id": "syntax:er-card-matrix-46",
+      "source": "erDiagram\nA }|--|o B : rel",
+      "profile": "light",
+      "sha256": "cce0f69efa235d67024aa4ec6c6117d2e8c8c98eaf0f683ebe11e54aafd68a85"
+    },
+    {
+      "id": "syntax:er-card-matrix-47",
+      "source": "erDiagram\nA }|--|} B : rel",
+      "profile": "light",
+      "sha256": "fbcc3cba70fb42270a0c7d88464bccea05a1e56609d236ab3edf812289c5f4a1"
+    },
+    {
+      "id": "syntax:er-card-matrix-48",
+      "source": "erDiagram\nA }|--}| B : rel",
+      "profile": "light",
+      "sha256": "fbcc3cba70fb42270a0c7d88464bccea05a1e56609d236ab3edf812289c5f4a1"
+    },
+    {
+      "id": "syntax:er-card-matrix-49",
+      "source": "erDiagram\nA }|--{| B : rel",
+      "profile": "light",
+      "sha256": "fbcc3cba70fb42270a0c7d88464bccea05a1e56609d236ab3edf812289c5f4a1"
+    },
+    {
+      "id": "syntax:er-card-matrix-50",
+      "source": "erDiagram\nA }|--|{ B : rel",
+      "profile": "light",
+      "sha256": "fbcc3cba70fb42270a0c7d88464bccea05a1e56609d236ab3edf812289c5f4a1"
+    },
+    {
+      "id": "syntax:er-card-matrix-51",
+      "source": "erDiagram\nA }|--o{ B : rel",
+      "profile": "light",
+      "sha256": "5b253219da0fbffa8b568103e18af913d7ee13a5027ef64e2d33fc8783da1634"
+    },
+    {
+      "id": "syntax:er-card-matrix-52",
+      "source": "erDiagram\nA }|--{o B : rel",
+      "profile": "light",
+      "sha256": "5b253219da0fbffa8b568103e18af913d7ee13a5027ef64e2d33fc8783da1634"
+    },
+    {
+      "id": "syntax:er-card-matrix-53",
+      "source": "erDiagram\nA }|--o} B : rel",
+      "profile": "light",
+      "sha256": "dbcf9f44de77f6f58f48b921fc6bf9ae2d3157887803c27a48f847664ee45791"
+    },
+    {
+      "id": "syntax:er-card-matrix-54",
+      "source": "erDiagram\nA }|--}o B : rel",
+      "profile": "light",
+      "sha256": "dbcf9f44de77f6f58f48b921fc6bf9ae2d3157887803c27a48f847664ee45791"
+    },
+    {
+      "id": "syntax:er-card-matrix-55",
+      "source": "erDiagram\nA {|--|| B : rel",
+      "profile": "light",
+      "sha256": "035ba0ead67e905c6bd94604ffb4a183fa9de7ca4b4cfab97ed9d19c0da1f5c6"
+    },
+    {
+      "id": "syntax:er-card-matrix-56",
+      "source": "erDiagram\nA {|--o| B : rel",
+      "profile": "light",
+      "sha256": "cce0f69efa235d67024aa4ec6c6117d2e8c8c98eaf0f683ebe11e54aafd68a85"
+    },
+    {
+      "id": "syntax:er-card-matrix-57",
+      "source": "erDiagram\nA {|--|o B : rel",
+      "profile": "light",
+      "sha256": "cce0f69efa235d67024aa4ec6c6117d2e8c8c98eaf0f683ebe11e54aafd68a85"
+    },
+    {
+      "id": "syntax:er-card-matrix-58",
+      "source": "erDiagram\nA {|--|} B : rel",
+      "profile": "light",
+      "sha256": "fbcc3cba70fb42270a0c7d88464bccea05a1e56609d236ab3edf812289c5f4a1"
+    },
+    {
+      "id": "syntax:er-card-matrix-59",
+      "source": "erDiagram\nA {|--}| B : rel",
+      "profile": "light",
+      "sha256": "fbcc3cba70fb42270a0c7d88464bccea05a1e56609d236ab3edf812289c5f4a1"
+    },
+    {
+      "id": "syntax:er-card-matrix-60",
+      "source": "erDiagram\nA {|--{| B : rel",
+      "profile": "light",
+      "sha256": "fbcc3cba70fb42270a0c7d88464bccea05a1e56609d236ab3edf812289c5f4a1"
+    },
+    {
+      "id": "syntax:er-card-matrix-61",
+      "source": "erDiagram\nA {|--|{ B : rel",
+      "profile": "light",
+      "sha256": "fbcc3cba70fb42270a0c7d88464bccea05a1e56609d236ab3edf812289c5f4a1"
+    },
+    {
+      "id": "syntax:er-card-matrix-62",
+      "source": "erDiagram\nA {|--o{ B : rel",
+      "profile": "light",
+      "sha256": "5b253219da0fbffa8b568103e18af913d7ee13a5027ef64e2d33fc8783da1634"
+    },
+    {
+      "id": "syntax:er-card-matrix-63",
+      "source": "erDiagram\nA {|--{o B : rel",
+      "profile": "light",
+      "sha256": "5b253219da0fbffa8b568103e18af913d7ee13a5027ef64e2d33fc8783da1634"
+    },
+    {
+      "id": "syntax:er-card-matrix-64",
+      "source": "erDiagram\nA {|--o} B : rel",
+      "profile": "light",
+      "sha256": "dbcf9f44de77f6f58f48b921fc6bf9ae2d3157887803c27a48f847664ee45791"
+    },
+    {
+      "id": "syntax:er-card-matrix-65",
+      "source": "erDiagram\nA {|--}o B : rel",
+      "profile": "light",
+      "sha256": "dbcf9f44de77f6f58f48b921fc6bf9ae2d3157887803c27a48f847664ee45791"
+    },
+    {
+      "id": "syntax:er-card-matrix-66",
+      "source": "erDiagram\nA |{--|| B : rel",
+      "profile": "light",
+      "sha256": "035ba0ead67e905c6bd94604ffb4a183fa9de7ca4b4cfab97ed9d19c0da1f5c6"
+    },
+    {
+      "id": "syntax:er-card-matrix-67",
+      "source": "erDiagram\nA |{--o| B : rel",
+      "profile": "light",
+      "sha256": "cce0f69efa235d67024aa4ec6c6117d2e8c8c98eaf0f683ebe11e54aafd68a85"
+    },
+    {
+      "id": "syntax:er-card-matrix-68",
+      "source": "erDiagram\nA |{--|o B : rel",
+      "profile": "light",
+      "sha256": "cce0f69efa235d67024aa4ec6c6117d2e8c8c98eaf0f683ebe11e54aafd68a85"
+    },
+    {
+      "id": "syntax:er-card-matrix-69",
+      "source": "erDiagram\nA |{--|} B : rel",
+      "profile": "light",
+      "sha256": "fbcc3cba70fb42270a0c7d88464bccea05a1e56609d236ab3edf812289c5f4a1"
+    },
+    {
+      "id": "syntax:er-card-matrix-70",
+      "source": "erDiagram\nA |{--}| B : rel",
+      "profile": "light",
+      "sha256": "fbcc3cba70fb42270a0c7d88464bccea05a1e56609d236ab3edf812289c5f4a1"
+    },
+    {
+      "id": "syntax:er-card-matrix-71",
+      "source": "erDiagram\nA |{--{| B : rel",
+      "profile": "light",
+      "sha256": "fbcc3cba70fb42270a0c7d88464bccea05a1e56609d236ab3edf812289c5f4a1"
+    },
+    {
+      "id": "syntax:er-card-matrix-72",
+      "source": "erDiagram\nA |{--|{ B : rel",
+      "profile": "light",
+      "sha256": "fbcc3cba70fb42270a0c7d88464bccea05a1e56609d236ab3edf812289c5f4a1"
+    },
+    {
+      "id": "syntax:er-card-matrix-73",
+      "source": "erDiagram\nA |{--o{ B : rel",
+      "profile": "light",
+      "sha256": "5b253219da0fbffa8b568103e18af913d7ee13a5027ef64e2d33fc8783da1634"
+    },
+    {
+      "id": "syntax:er-card-matrix-74",
+      "source": "erDiagram\nA |{--{o B : rel",
+      "profile": "light",
+      "sha256": "5b253219da0fbffa8b568103e18af913d7ee13a5027ef64e2d33fc8783da1634"
+    },
+    {
+      "id": "syntax:er-card-matrix-75",
+      "source": "erDiagram\nA |{--o} B : rel",
+      "profile": "light",
+      "sha256": "dbcf9f44de77f6f58f48b921fc6bf9ae2d3157887803c27a48f847664ee45791"
+    },
+    {
+      "id": "syntax:er-card-matrix-76",
+      "source": "erDiagram\nA |{--}o B : rel",
+      "profile": "light",
+      "sha256": "dbcf9f44de77f6f58f48b921fc6bf9ae2d3157887803c27a48f847664ee45791"
+    },
+    {
+      "id": "syntax:er-card-matrix-77",
+      "source": "erDiagram\nA o{--|| B : rel",
+      "profile": "light",
+      "sha256": "cd9ee09d13a24cdc8ae880f51e9426ed48106c62032fbacbbac693a4a4034378"
+    },
+    {
+      "id": "syntax:er-card-matrix-78",
+      "source": "erDiagram\nA o{--o| B : rel",
+      "profile": "light",
+      "sha256": "c630b662036c28e66d278fe3d6a4d45a3c69bd7900c51a36c43cf5bf6e05644f"
+    },
+    {
+      "id": "syntax:er-card-matrix-79",
+      "source": "erDiagram\nA o{--|o B : rel",
+      "profile": "light",
+      "sha256": "c630b662036c28e66d278fe3d6a4d45a3c69bd7900c51a36c43cf5bf6e05644f"
+    },
+    {
+      "id": "syntax:er-card-matrix-80",
+      "source": "erDiagram\nA o{--|} B : rel",
+      "profile": "light",
+      "sha256": "f7e5eb0a4c4a16234106c8083f32aa4d59366eddb9dc448eaa939d4731c87974"
+    },
+    {
+      "id": "syntax:er-card-matrix-81",
+      "source": "erDiagram\nA o{--}| B : rel",
+      "profile": "light",
+      "sha256": "f7e5eb0a4c4a16234106c8083f32aa4d59366eddb9dc448eaa939d4731c87974"
+    },
+    {
+      "id": "syntax:er-card-matrix-82",
+      "source": "erDiagram\nA o{--{| B : rel",
+      "profile": "light",
+      "sha256": "f7e5eb0a4c4a16234106c8083f32aa4d59366eddb9dc448eaa939d4731c87974"
+    },
+    {
+      "id": "syntax:er-card-matrix-83",
+      "source": "erDiagram\nA o{--|{ B : rel",
+      "profile": "light",
+      "sha256": "f7e5eb0a4c4a16234106c8083f32aa4d59366eddb9dc448eaa939d4731c87974"
+    },
+    {
+      "id": "syntax:er-card-matrix-84",
+      "source": "erDiagram\nA o{--o{ B : rel",
+      "profile": "light",
+      "sha256": "1a7bada7dad54aa9fdd10a599f16f200a313f6b5ef087fc2806db4672c0594a6"
+    },
+    {
+      "id": "syntax:er-card-matrix-85",
+      "source": "erDiagram\nA o{--{o B : rel",
+      "profile": "light",
+      "sha256": "1a7bada7dad54aa9fdd10a599f16f200a313f6b5ef087fc2806db4672c0594a6"
+    },
+    {
+      "id": "syntax:er-card-matrix-86",
+      "source": "erDiagram\nA o{--o} B : rel",
+      "profile": "light",
+      "sha256": "dbcf9f44de77f6f58f48b921fc6bf9ae2d3157887803c27a48f847664ee45791"
+    },
+    {
+      "id": "syntax:er-card-matrix-87",
+      "source": "erDiagram\nA o{--}o B : rel",
+      "profile": "light",
+      "sha256": "dbcf9f44de77f6f58f48b921fc6bf9ae2d3157887803c27a48f847664ee45791"
+    },
+    {
+      "id": "syntax:er-card-matrix-88",
+      "source": "erDiagram\nA {o--|| B : rel",
+      "profile": "light",
+      "sha256": "cd9ee09d13a24cdc8ae880f51e9426ed48106c62032fbacbbac693a4a4034378"
+    },
+    {
+      "id": "syntax:er-card-matrix-89",
+      "source": "erDiagram\nA {o--o| B : rel",
+      "profile": "light",
+      "sha256": "c630b662036c28e66d278fe3d6a4d45a3c69bd7900c51a36c43cf5bf6e05644f"
+    },
+    {
+      "id": "syntax:er-card-matrix-90",
+      "source": "erDiagram\nA {o--|o B : rel",
+      "profile": "light",
+      "sha256": "c630b662036c28e66d278fe3d6a4d45a3c69bd7900c51a36c43cf5bf6e05644f"
+    },
+    {
+      "id": "syntax:er-card-matrix-91",
+      "source": "erDiagram\nA {o--|} B : rel",
+      "profile": "light",
+      "sha256": "f7e5eb0a4c4a16234106c8083f32aa4d59366eddb9dc448eaa939d4731c87974"
+    },
+    {
+      "id": "syntax:er-card-matrix-92",
+      "source": "erDiagram\nA {o--}| B : rel",
+      "profile": "light",
+      "sha256": "f7e5eb0a4c4a16234106c8083f32aa4d59366eddb9dc448eaa939d4731c87974"
+    },
+    {
+      "id": "syntax:er-card-matrix-93",
+      "source": "erDiagram\nA {o--{| B : rel",
+      "profile": "light",
+      "sha256": "f7e5eb0a4c4a16234106c8083f32aa4d59366eddb9dc448eaa939d4731c87974"
+    },
+    {
+      "id": "syntax:er-card-matrix-94",
+      "source": "erDiagram\nA {o--|{ B : rel",
+      "profile": "light",
+      "sha256": "f7e5eb0a4c4a16234106c8083f32aa4d59366eddb9dc448eaa939d4731c87974"
+    },
+    {
+      "id": "syntax:er-card-matrix-95",
+      "source": "erDiagram\nA {o--o{ B : rel",
+      "profile": "light",
+      "sha256": "1a7bada7dad54aa9fdd10a599f16f200a313f6b5ef087fc2806db4672c0594a6"
+    },
+    {
+      "id": "syntax:er-card-matrix-96",
+      "source": "erDiagram\nA {o--{o B : rel",
+      "profile": "light",
+      "sha256": "1a7bada7dad54aa9fdd10a599f16f200a313f6b5ef087fc2806db4672c0594a6"
+    },
+    {
+      "id": "syntax:er-card-matrix-97",
+      "source": "erDiagram\nA {o--o} B : rel",
+      "profile": "light",
+      "sha256": "dbcf9f44de77f6f58f48b921fc6bf9ae2d3157887803c27a48f847664ee45791"
+    },
+    {
+      "id": "syntax:er-card-matrix-98",
+      "source": "erDiagram\nA {o--}o B : rel",
+      "profile": "light",
+      "sha256": "dbcf9f44de77f6f58f48b921fc6bf9ae2d3157887803c27a48f847664ee45791"
+    },
+    {
+      "id": "syntax:er-card-matrix-99",
+      "source": "erDiagram\nA o}--|| B : rel",
+      "profile": "light",
+      "sha256": "dbcf9f44de77f6f58f48b921fc6bf9ae2d3157887803c27a48f847664ee45791"
+    },
+    {
+      "id": "syntax:er-card-matrix-100",
+      "source": "erDiagram\nA o}--o| B : rel",
+      "profile": "light",
+      "sha256": "dbcf9f44de77f6f58f48b921fc6bf9ae2d3157887803c27a48f847664ee45791"
+    },
+    {
+      "id": "syntax:er-card-matrix-101",
+      "source": "erDiagram\nA o}--|o B : rel",
+      "profile": "light",
+      "sha256": "dbcf9f44de77f6f58f48b921fc6bf9ae2d3157887803c27a48f847664ee45791"
+    },
+    {
+      "id": "syntax:er-card-matrix-102",
+      "source": "erDiagram\nA o}--|} B : rel",
+      "profile": "light",
+      "sha256": "dbcf9f44de77f6f58f48b921fc6bf9ae2d3157887803c27a48f847664ee45791"
+    },
+    {
+      "id": "syntax:er-card-matrix-103",
+      "source": "erDiagram\nA o}--}| B : rel",
+      "profile": "light",
+      "sha256": "dbcf9f44de77f6f58f48b921fc6bf9ae2d3157887803c27a48f847664ee45791"
+    },
+    {
+      "id": "syntax:er-card-matrix-104",
+      "source": "erDiagram\nA o}--{| B : rel",
+      "profile": "light",
+      "sha256": "dbcf9f44de77f6f58f48b921fc6bf9ae2d3157887803c27a48f847664ee45791"
+    },
+    {
+      "id": "syntax:er-card-matrix-105",
+      "source": "erDiagram\nA o}--|{ B : rel",
+      "profile": "light",
+      "sha256": "dbcf9f44de77f6f58f48b921fc6bf9ae2d3157887803c27a48f847664ee45791"
+    },
+    {
+      "id": "syntax:er-card-matrix-106",
+      "source": "erDiagram\nA o}--o{ B : rel",
+      "profile": "light",
+      "sha256": "dbcf9f44de77f6f58f48b921fc6bf9ae2d3157887803c27a48f847664ee45791"
+    },
+    {
+      "id": "syntax:er-card-matrix-107",
+      "source": "erDiagram\nA o}--{o B : rel",
+      "profile": "light",
+      "sha256": "dbcf9f44de77f6f58f48b921fc6bf9ae2d3157887803c27a48f847664ee45791"
+    },
+    {
+      "id": "syntax:er-card-matrix-108",
+      "source": "erDiagram\nA o}--o} B : rel",
+      "profile": "light",
+      "sha256": "dbcf9f44de77f6f58f48b921fc6bf9ae2d3157887803c27a48f847664ee45791"
+    },
+    {
+      "id": "syntax:er-card-matrix-109",
+      "source": "erDiagram\nA o}--}o B : rel",
+      "profile": "light",
+      "sha256": "dbcf9f44de77f6f58f48b921fc6bf9ae2d3157887803c27a48f847664ee45791"
+    },
+    {
+      "id": "syntax:er-card-matrix-110",
+      "source": "erDiagram\nA }o--|| B : rel",
+      "profile": "light",
+      "sha256": "dbcf9f44de77f6f58f48b921fc6bf9ae2d3157887803c27a48f847664ee45791"
+    },
+    {
+      "id": "syntax:er-card-matrix-111",
+      "source": "erDiagram\nA }o--o| B : rel",
+      "profile": "light",
+      "sha256": "dbcf9f44de77f6f58f48b921fc6bf9ae2d3157887803c27a48f847664ee45791"
+    },
+    {
+      "id": "syntax:er-card-matrix-112",
+      "source": "erDiagram\nA }o--|o B : rel",
+      "profile": "light",
+      "sha256": "dbcf9f44de77f6f58f48b921fc6bf9ae2d3157887803c27a48f847664ee45791"
+    },
+    {
+      "id": "syntax:er-card-matrix-113",
+      "source": "erDiagram\nA }o--|} B : rel",
+      "profile": "light",
+      "sha256": "dbcf9f44de77f6f58f48b921fc6bf9ae2d3157887803c27a48f847664ee45791"
+    },
+    {
+      "id": "syntax:er-card-matrix-114",
+      "source": "erDiagram\nA }o--}| B : rel",
+      "profile": "light",
+      "sha256": "dbcf9f44de77f6f58f48b921fc6bf9ae2d3157887803c27a48f847664ee45791"
+    },
+    {
+      "id": "syntax:er-card-matrix-115",
+      "source": "erDiagram\nA }o--{| B : rel",
+      "profile": "light",
+      "sha256": "dbcf9f44de77f6f58f48b921fc6bf9ae2d3157887803c27a48f847664ee45791"
+    },
+    {
+      "id": "syntax:er-card-matrix-116",
+      "source": "erDiagram\nA }o--|{ B : rel",
+      "profile": "light",
+      "sha256": "dbcf9f44de77f6f58f48b921fc6bf9ae2d3157887803c27a48f847664ee45791"
+    },
+    {
+      "id": "syntax:er-card-matrix-117",
+      "source": "erDiagram\nA }o--o{ B : rel",
+      "profile": "light",
+      "sha256": "dbcf9f44de77f6f58f48b921fc6bf9ae2d3157887803c27a48f847664ee45791"
+    },
+    {
+      "id": "syntax:er-card-matrix-118",
+      "source": "erDiagram\nA }o--{o B : rel",
+      "profile": "light",
+      "sha256": "dbcf9f44de77f6f58f48b921fc6bf9ae2d3157887803c27a48f847664ee45791"
+    },
+    {
+      "id": "syntax:er-card-matrix-119",
+      "source": "erDiagram\nA }o--o} B : rel",
+      "profile": "light",
+      "sha256": "dbcf9f44de77f6f58f48b921fc6bf9ae2d3157887803c27a48f847664ee45791"
+    },
+    {
+      "id": "syntax:er-card-matrix-120",
+      "source": "erDiagram\nA }o--}o B : rel",
+      "profile": "light",
+      "sha256": "dbcf9f44de77f6f58f48b921fc6bf9ae2d3157887803c27a48f847664ee45791"
+    },
+    {
+      "id": "syntax:er-invalid-cardinality",
+      "source": "erDiagram\nA oo--oo B : ignored",
+      "profile": "light",
+      "sha256": "dbcf9f44de77f6f58f48b921fc6bf9ae2d3157887803c27a48f847664ee45791"
+    },
+    {
+      "id": "syntax:er-multiple-keys",
+      "source": "erDiagram\nA {\nint id PK FK\nstring email UK\n}",
+      "profile": "light",
+      "sha256": "4152b437e5d5cdfb8e409edb5fa3dbd5eb7862a3d7c8ad0fd606ae13923004a4"
+    },
+    {
+      "id": "syntax:er-single-quoted-label",
+      "source": "erDiagram\nA ||--|| B : 'single quoted'",
+      "profile": "light",
+      "sha256": "89d6c6e677a8589ae22a813d15152d2023ca815364d04edcd9721e3f7a51c18d"
+    },
+    {
+      "id": "syntax:er-unquoted-label",
+      "source": "erDiagram\nA ||--|| B : plain relation",
+      "profile": "light",
+      "sha256": "e48aedecf8164e73ad3324280df142be042eee772be9a8f8f37ba943c9696c83"
+    },
+    {
+      "id": "syntax:xy-line-count-1",
+      "source": "xychart-beta\nx-axis [C1]\ny-axis 0 --> 100\nline [5]",
+      "profile": "light",
+      "sha256": "15b211d9d0bfb99b418cea45945d767b1516e0f98c639639d4e9b79f55dd7bc7"
+    },
+    {
+      "id": "syntax:xy-line-count-2",
+      "source": "xychart-beta\nx-axis [C1, C2]\ny-axis 0 --> 100\nline [5, 15]",
+      "profile": "light",
+      "sha256": "ba04e50f249637f372c8586c76a0587d802a9a6187d7a7131f04bffecf9a56fb"
+    },
+    {
+      "id": "syntax:xy-line-count-3",
+      "source": "xychart-beta\nx-axis [C1, C2, C3]\ny-axis 0 --> 100\nline [5, 15, 25]",
+      "profile": "light",
+      "sha256": "0dc955519080266843594ff7a9e099e159ecd7e6dd56ba3f920c767b363bfba8"
+    },
+    {
+      "id": "syntax:xy-line-count-12",
+      "source": "xychart-beta\nx-axis [C1, C2, C3, C4, C5, C6, C7, C8, C9, C10, C11, C12]\ny-axis 0 --> 130\nline [5, 15, 25, 35, 45, 55, 65, 75, 85, 95, 105, 115]",
+      "profile": "light",
+      "sha256": "013a4158127b241ea8e85c00eaf16eddba7d5ce8d9d266494377819aa25f5fc8"
+    },
+    {
+      "id": "syntax:xy-line-count-13",
+      "source": "xychart-beta\nx-axis [C1, C2, C3, C4, C5, C6, C7, C8, C9, C10, C11, C12, C13]\ny-axis 0 --> 140\nline [5, 15, 25, 35, 45, 55, 65, 75, 85, 95, 105, 115, 125]",
+      "profile": "light",
+      "sha256": "d8ed4c6d56238e8d4834b3acfcbf6196be80ba62e103e2c8f9700e71561393a2"
+    },
+    {
+      "id": "syntax:xy-horizontal-interactive",
+      "source": "xychart-beta horizontal\ntitle \"H\"\nx-axis [A,B,C]\ny-axis 0 --> 100\nbar [10,20,30]\nline [40,50,60]",
+      "profile": "light",
+      "options": {
+        "interactive": true
+      },
+      "sha256": "83ec2b5cce0276b9683f5b0b5a68106bb82cc8c55ab4eb7fc3ef158e7cfbc2db"
+    },
+    {
+      "id": "syntax:xy-seven-series",
+      "source": "xychart-beta\nx-axis [A,B,C]\ny-axis 0 --> 100\nbar [10,20,30]\nbar [15,25,35]\nbar [20,30,40]\nline [30,40,50]\nline [35,45,55]\nline [40,50,60]\nline [45,55,65]",
+      "profile": "light",
+      "sha256": "0e09ddf46cc80c175045e943c25fd4dc7348ba36bcce557422304b4f1c9e4348"
+    },
+    {
+      "id": "syntax:xy-zero-span",
+      "source": "xychart-beta\nx-axis [A,B]\ny-axis 5 --> 5\nline [5,5]",
+      "profile": "light",
+      "sha256": "41ea9ee1314d51ba2596a67206c611d77123ea0fa1a40cd6a3d5ba07dbed5904"
+    },
+    {
+      "id": "syntax:xy-numeric-x-single",
+      "source": "xychart-beta\nx-axis \"X\" 10 --> 10\ny-axis 0 --> 10\nline [5]",
+      "profile": "light",
+      "sha256": "2d9670e5d4c6555d5d7490142816b136a6a3effb7fdda08b9cab52f295f8ff9f"
+    },
+    {
+      "id": "syntax:xy-title-only-y",
+      "source": "xychart-beta\nx-axis [A,B,C]\ny-axis \"Only title\"\nbar [1,2,3]",
+      "profile": "light",
+      "sha256": "f61072237fae3418242e20f8fb51cb28c5f8903079b0f97aee471c2ef15ca4be"
+    },
+    {
+      "id": "options:default-flow",
+      "source": "flowchart LR\nsubgraph G[\"Group\"]\n  direction TB\n  A[\"Alpha\"] --> B{Decision}\n  B --> C[\"Gamma\"]\nend\nC --> D[\"Delta\"]",
+      "sha256": "f9353a7d86be5f2f4434ff91fdff58e781a9d41451411fd6f3bbc6274691ae1b"
+    },
+    {
+      "id": "options:nullish",
+      "source": "flowchart LR\nsubgraph G[\"Group\"]\n  direction TB\n  A[\"Alpha\"] --> B{Decision}\n  B --> C[\"Gamma\"]\nend\nC --> D[\"Delta\"]",
+      "options": {
+        "bg": null,
+        "fg": null,
+        "font": null,
+        "transparent": null
+      },
+      "sha256": "f9353a7d86be5f2f4434ff91fdff58e781a9d41451411fd6f3bbc6274691ae1b"
+    },
+    {
+      "id": "options:partial-bg",
+      "source": "flowchart LR\nsubgraph G[\"Group\"]\n  direction TB\n  A[\"Alpha\"] --> B{Decision}\n  B --> C[\"Gamma\"]\nend\nC --> D[\"Delta\"]",
+      "options": {
+        "bg": "#FAFAFA"
+      },
+      "sha256": "65a6e565ff1329b837c253472f7ab668dc08326051948b687e72955eb3187ea8"
+    },
+    {
+      "id": "options:partial-fg",
+      "source": "flowchart LR\nsubgraph G[\"Group\"]\n  direction TB\n  A[\"Alpha\"] --> B{Decision}\n  B --> C[\"Gamma\"]\nend\nC --> D[\"Delta\"]",
+      "options": {
+        "fg": "#111111"
+      },
+      "sha256": "aa34b6f061b15d6574bd94ee6b2f8490ccbbc5f17c34dd23ef45b2371e6231e2"
+    },
+    {
+      "id": "options:partial-line",
+      "source": "flowchart LR\nsubgraph G[\"Group\"]\n  direction TB\n  A[\"Alpha\"] --> B{Decision}\n  B --> C[\"Gamma\"]\nend\nC --> D[\"Delta\"]",
+      "options": {
+        "line": "#FF0000"
+      },
+      "sha256": "0252061319c2fccfb714339d52c38ea3162eee233a96d18f75d02821ef8e915f"
+    },
+    {
+      "id": "options:partial-accent",
+      "source": "flowchart LR\nsubgraph G[\"Group\"]\n  direction TB\n  A[\"Alpha\"] --> B{Decision}\n  B --> C[\"Gamma\"]\nend\nC --> D[\"Delta\"]",
+      "options": {
+        "accent": "#00AAFF"
+      },
+      "sha256": "160df348fe4bd4a1ee078c188c9b8564e9fa05f82ad157e46f06235137b40887"
+    },
+    {
+      "id": "options:partial-muted",
+      "source": "flowchart LR\nsubgraph G[\"Group\"]\n  direction TB\n  A[\"Alpha\"] --> B{Decision}\n  B --> C[\"Gamma\"]\nend\nC --> D[\"Delta\"]",
+      "options": {
+        "muted": "#888888"
+      },
+      "sha256": "28645dec04f699c1c5c9a023a2d0a3c23573e6a4caf673bb63b34482c9102807"
+    },
+    {
+      "id": "options:partial-surface",
+      "source": "flowchart LR\nsubgraph G[\"Group\"]\n  direction TB\n  A[\"Alpha\"] --> B{Decision}\n  B --> C[\"Gamma\"]\nend\nC --> D[\"Delta\"]",
+      "options": {
+        "surface": "#EEEEEE"
+      },
+      "sha256": "34ed110a3b84187828ef2681521fd0b47a6e888eee91b0d9db63160abbcf1cb9"
+    },
+    {
+      "id": "options:partial-border",
+      "source": "flowchart LR\nsubgraph G[\"Group\"]\n  direction TB\n  A[\"Alpha\"] --> B{Decision}\n  B --> C[\"Gamma\"]\nend\nC --> D[\"Delta\"]",
+      "options": {
+        "border": "#123456"
+      },
+      "sha256": "0b1467e7de5e25c27581eb3693047f0f5f027a039d3db9aa4da483af9d1a2f36"
+    },
+    {
+      "id": "options:full-palette",
+      "source": "flowchart LR\nsubgraph G[\"Group\"]\n  direction TB\n  A[\"Alpha\"] --> B{Decision}\n  B --> C[\"Gamma\"]\nend\nC --> D[\"Delta\"]",
+      "options": {
+        "bg": "#FEFEFE",
+        "fg": "#101010",
+        "line": "#202020",
+        "accent": "#3366CC",
+        "muted": "#777777",
+        "surface": "#F2F2F2",
+        "border": "#444444"
+      },
+      "sha256": "3c5079f7731421db9a2312de7441af5a02ab7a324340545386dd733d837fe553"
+    },
+    {
+      "id": "options:font-custom",
+      "source": "flowchart LR\nsubgraph G[\"Group\"]\n  direction TB\n  A[\"Alpha\"] --> B{Decision}\n  B --> C[\"Gamma\"]\nend\nC --> D[\"Delta\"]",
+      "options": {
+        "font": "Noto Sans KR"
+      },
+      "sha256": "b20c0e195fdd5e5549c8e8a69379bcc73f7b7bf38415c0f0335a7387b37fd5d0"
+    },
+    {
+      "id": "options:font-empty",
+      "source": "flowchart LR\nsubgraph G[\"Group\"]\n  direction TB\n  A[\"Alpha\"] --> B{Decision}\n  B --> C[\"Gamma\"]\nend\nC --> D[\"Delta\"]",
+      "options": {
+        "font": ""
+      },
+      "sha256": "450df7769310fd2679ff3df3366e3400d862186d855d5b696d26542bfeb47b3a"
+    },
+    {
+      "id": "options:transparent-true",
+      "source": "flowchart LR\nsubgraph G[\"Group\"]\n  direction TB\n  A[\"Alpha\"] --> B{Decision}\n  B --> C[\"Gamma\"]\nend\nC --> D[\"Delta\"]",
+      "options": {
+        "transparent": true
+      },
+      "sha256": "0ffb240b2e1d0654f2a86854f011f2141b1674121108c08b691e8f039dadd7ce"
+    },
+    {
+      "id": "options:transparent-false",
+      "source": "flowchart LR\nsubgraph G[\"Group\"]\n  direction TB\n  A[\"Alpha\"] --> B{Decision}\n  B --> C[\"Gamma\"]\nend\nC --> D[\"Delta\"]",
+      "options": {
+        "transparent": false
+      },
+      "sha256": "f9353a7d86be5f2f4434ff91fdff58e781a9d41451411fd6f3bbc6274691ae1b"
+    },
+    {
+      "id": "options:padding-0",
+      "source": "flowchart LR\nsubgraph G[\"Group\"]\n  direction TB\n  A[\"Alpha\"] --> B{Decision}\n  B --> C[\"Gamma\"]\nend\nC --> D[\"Delta\"]",
+      "options": {
+        "padding": 0
+      },
+      "sha256": "6e053a2602677ce30c9cfd641eac1da034c3081bac14015d6cefdb6d7e06c6f8"
+    },
+    {
+      "id": "options:padding-10",
+      "source": "flowchart LR\nsubgraph G[\"Group\"]\n  direction TB\n  A[\"Alpha\"] --> B{Decision}\n  B --> C[\"Gamma\"]\nend\nC --> D[\"Delta\"]",
+      "options": {
+        "padding": 10
+      },
+      "sha256": "065b18d1ef130f9feb68d807fe1d7b9496cd5e7a75f74d6efca0d2105bbf1286"
+    },
+    {
+      "id": "options:padding-64",
+      "source": "flowchart LR\nsubgraph G[\"Group\"]\n  direction TB\n  A[\"Alpha\"] --> B{Decision}\n  B --> C[\"Gamma\"]\nend\nC --> D[\"Delta\"]",
+      "options": {
+        "padding": 64
+      },
+      "sha256": "9c6ca440adf5241d7f30dfdce24ac3055b8743a0df16bcd65bb17bcbb0433245"
+    },
+    {
+      "id": "options:nodeSpacing-0",
+      "source": "flowchart LR\nsubgraph G[\"Group\"]\n  direction TB\n  A[\"Alpha\"] --> B{Decision}\n  B --> C[\"Gamma\"]\nend\nC --> D[\"Delta\"]",
+      "options": {
+        "nodeSpacing": 0
+      },
+      "sha256": "f9353a7d86be5f2f4434ff91fdff58e781a9d41451411fd6f3bbc6274691ae1b"
+    },
+    {
+      "id": "options:nodeSpacing-10",
+      "source": "flowchart LR\nsubgraph G[\"Group\"]\n  direction TB\n  A[\"Alpha\"] --> B{Decision}\n  B --> C[\"Gamma\"]\nend\nC --> D[\"Delta\"]",
+      "options": {
+        "nodeSpacing": 10
+      },
+      "sha256": "f9353a7d86be5f2f4434ff91fdff58e781a9d41451411fd6f3bbc6274691ae1b"
+    },
+    {
+      "id": "options:nodeSpacing-80",
+      "source": "flowchart LR\nsubgraph G[\"Group\"]\n  direction TB\n  A[\"Alpha\"] --> B{Decision}\n  B --> C[\"Gamma\"]\nend\nC --> D[\"Delta\"]",
+      "options": {
+        "nodeSpacing": 80
+      },
+      "sha256": "f9353a7d86be5f2f4434ff91fdff58e781a9d41451411fd6f3bbc6274691ae1b"
+    },
+    {
+      "id": "options:layerSpacing-0",
+      "source": "flowchart LR\nsubgraph G[\"Group\"]\n  direction TB\n  A[\"Alpha\"] --> B{Decision}\n  B --> C[\"Gamma\"]\nend\nC --> D[\"Delta\"]",
+      "options": {
+        "layerSpacing": 0
+      },
+      "sha256": "987ba1834f79ec96419c347a719cb2bd7ad25ae276b671bd0944487894b02679"
+    },
+    {
+      "id": "options:layerSpacing-12",
+      "source": "flowchart LR\nsubgraph G[\"Group\"]\n  direction TB\n  A[\"Alpha\"] --> B{Decision}\n  B --> C[\"Gamma\"]\nend\nC --> D[\"Delta\"]",
+      "options": {
+        "layerSpacing": 12
+      },
+      "sha256": "b28f46668195a265c2378055c2d4c2374d50513e653c99b530cd804d3d66eadb"
+    },
+    {
+      "id": "options:layerSpacing-100",
+      "source": "flowchart LR\nsubgraph G[\"Group\"]\n  direction TB\n  A[\"Alpha\"] --> B{Decision}\n  B --> C[\"Gamma\"]\nend\nC --> D[\"Delta\"]",
+      "options": {
+        "layerSpacing": 100
+      },
+      "sha256": "adcdb3ae7530c4aaf64f611fd2fff78967c04551b467a774cca844b80c343849"
+    },
+    {
+      "id": "options:layout-combo",
+      "source": "flowchart LR\nsubgraph G[\"Group\"]\n  direction TB\n  A[\"Alpha\"] --> B{Decision}\n  B --> C[\"Gamma\"]\nend\nC --> D[\"Delta\"]",
+      "options": {
+        "padding": 13,
+        "nodeSpacing": 37,
+        "layerSpacing": 79
+      },
+      "sha256": "e2e17213dbb7589e5a0a79a66f5c23c4c41e71b5b726bfd1ca76bde38769bd90"
+    },
+    {
+      "id": "options:mergeEdges-false",
+      "source": "flowchart LR\nsubgraph G[\"Group\"]\n  direction TB\n  A[\"Alpha\"] --> B{Decision}\n  B --> C[\"Gamma\"]\nend\nC --> D[\"Delta\"]",
+      "options": {
+        "mergeEdges": false
+      },
+      "sha256": "f9353a7d86be5f2f4434ff91fdff58e781a9d41451411fd6f3bbc6274691ae1b"
+    },
+    {
+      "id": "options:mergeEdges-true",
+      "source": "flowchart LR\nsubgraph G[\"Group\"]\n  direction TB\n  A[\"Alpha\"] --> B{Decision}\n  B --> C[\"Gamma\"]\nend\nC --> D[\"Delta\"]",
+      "options": {
+        "mergeEdges": true
+      },
+      "sha256": "f9353a7d86be5f2f4434ff91fdff58e781a9d41451411fd6f3bbc6274691ae1b"
+    },
+    {
+      "id": "options:thoroughness-1",
+      "source": "flowchart LR\nsubgraph G[\"Group\"]\n  direction TB\n  A[\"Alpha\"] --> B{Decision}\n  B --> C[\"Gamma\"]\nend\nC --> D[\"Delta\"]",
+      "options": {
+        "thoroughness": 1
+      },
+      "sha256": "f9353a7d86be5f2f4434ff91fdff58e781a9d41451411fd6f3bbc6274691ae1b"
+    },
+    {
+      "id": "options:thoroughness-9",
+      "source": "flowchart LR\nsubgraph G[\"Group\"]\n  direction TB\n  A[\"Alpha\"] --> B{Decision}\n  B --> C[\"Gamma\"]\nend\nC --> D[\"Delta\"]",
+      "options": {
+        "thoroughness": 9
+      },
+      "sha256": "f9353a7d86be5f2f4434ff91fdff58e781a9d41451411fd6f3bbc6274691ae1b"
+    },
+    {
+      "id": "options:layout-all",
+      "source": "flowchart LR\nsubgraph G[\"Group\"]\n  direction TB\n  A[\"Alpha\"] --> B{Decision}\n  B --> C[\"Gamma\"]\nend\nC --> D[\"Delta\"]",
+      "options": {
+        "padding": 17,
+        "nodeSpacing": 33,
+        "layerSpacing": 71,
+        "mergeEdges": false,
+        "thoroughness": 9
+      },
+      "sha256": "4912900aaa05332d78028bde92b6a1744255d9e7535d86e28ae5b75313d7106b"
+    },
+    {
+      "id": "options:state-padding",
+      "source": "stateDiagram-v2\n[*] --> A\nstate Parent {\n  direction LR\n  A --> B\n}\nB --> [*]",
+      "options": {
+        "padding": 9
+      },
+      "sha256": "263533b5ae88e4925c410c3adc1867fedfe8527d0759ae8d030cccf95b68d38c"
+    },
+    {
+      "id": "options:state-spacing",
+      "source": "stateDiagram-v2\n[*] --> A\nstate Parent {\n  direction LR\n  A --> B\n}\nB --> [*]",
+      "options": {
+        "nodeSpacing": 66,
+        "layerSpacing": 88
+      },
+      "sha256": "90de30246bb9e4774ad3e5e3c8e9967dfc61e968de755ad101a578424ccf85ed"
+    },
+    {
+      "id": "options:state-transparent",
+      "source": "stateDiagram-v2\n[*] --> A\nstate Parent {\n  direction LR\n  A --> B\n}\nB --> [*]",
+      "options": {
+        "transparent": true
+      },
+      "sha256": "2dbcca708fa7b94f55250a16f17255bac3ccf5800b834d356d3a5d8458ffa38f"
+    },
+    {
+      "id": "options:xy-default",
+      "source": "xychart-beta\ntitle \"Metrics\"\nx-axis \"Month\" [Jan, Feb, Mar]\ny-axis \"Value\" 0 --> 100\nbar [10, 30, 50]\nline [20, 40, 60]\nline [25, 45, 65]",
+      "sha256": "6880268c280764fdd4654abcb32acbfb18e68e7e9fdbcab34ac7a076f6be1c78"
+    },
+    {
+      "id": "options:xy-partial-accent",
+      "source": "xychart-beta\ntitle \"Metrics\"\nx-axis \"Month\" [Jan, Feb, Mar]\ny-axis \"Value\" 0 --> 100\nbar [10, 30, 50]\nline [20, 40, 60]\nline [25, 45, 65]",
+      "options": {
+        "accent": "#FF00AA"
+      },
+      "sha256": "41855bf2ca220cf1853f715c1a389e94c0ea4eeff39d8b06ebbaa95ca5253a66"
+    },
+    {
+      "id": "options:xy-dark-bg-partial",
+      "source": "xychart-beta\ntitle \"Metrics\"\nx-axis \"Month\" [Jan, Feb, Mar]\ny-axis \"Value\" 0 --> 100\nbar [10, 30, 50]\nline [20, 40, 60]\nline [25, 45, 65]",
+      "options": {
+        "bg": "#111111",
+        "fg": "#EEEEEE",
+        "accent": "#00CCFF"
+      },
+      "sha256": "b0c7b87fa07b0bd4dc93dcff68118b6d1fcbfaa23a3ebbf27831dd0f90899d34"
+    },
+    {
+      "id": "options:xy-interactive",
+      "source": "xychart-beta\ntitle \"Metrics\"\nx-axis \"Month\" [Jan, Feb, Mar]\ny-axis \"Value\" 0 --> 100\nbar [10, 30, 50]\nline [20, 40, 60]\nline [25, 45, 65]",
+      "options": {
+        "interactive": true
+      },
+      "sha256": "913deb725ab7273acbaf3cdb45616a3743092fca6c63dcc35bd837564db2da22"
+    },
+    {
+      "id": "options:xy-interactive-null",
+      "source": "xychart-beta\ntitle \"Metrics\"\nx-axis \"Month\" [Jan, Feb, Mar]\ny-axis \"Value\" 0 --> 100\nbar [10, 30, 50]\nline [20, 40, 60]\nline [25, 45, 65]",
+      "options": {
+        "interactive": null
+      },
+      "sha256": "6880268c280764fdd4654abcb32acbfb18e68e7e9fdbcab34ac7a076f6be1c78"
+    },
+    {
+      "id": "options:xy-interactive-custom",
+      "source": "xychart-beta\ntitle \"Metrics\"\nx-axis \"Month\" [Jan, Feb, Mar]\ny-axis \"Value\" 0 --> 100\nbar [10, 30, 50]\nline [20, 40, 60]\nline [25, 45, 65]",
+      "options": {
+        "interactive": true,
+        "bg": "#111111",
+        "fg": "#EEEEEE",
+        "accent": "#00CCFF",
+        "surface": "#191919",
+        "border": "#CCCCCC"
+      },
+      "sha256": "823c4b98807a800c0077cd5854f58fff59e89cdf6856980091e2bffb5df2fa21"
+    },
+    {
+      "id": "options:xy-transparent",
+      "source": "xychart-beta\ntitle \"Metrics\"\nx-axis \"Month\" [Jan, Feb, Mar]\ny-axis \"Value\" 0 --> 100\nbar [10, 30, 50]\nline [20, 40, 60]\nline [25, 45, 65]",
+      "options": {
+        "transparent": true
+      },
+      "sha256": "976e7a42fa713336025910fe70871841bbaf7da0423a3d339bed9658c66bbbfe"
+    },
+    {
+      "id": "options:xy-font",
+      "source": "xychart-beta\ntitle \"Metrics\"\nx-axis \"Month\" [Jan, Feb, Mar]\ny-axis \"Value\" 0 --> 100\nbar [10, 30, 50]\nline [20, 40, 60]\nline [25, 45, 65]",
+      "options": {
+        "font": "Roboto"
+      },
+      "sha256": "ac1718d16b22cbe967a45340056e696d9bce7a45a79a3a863248b9146feede58"
+    },
+    {
+      "id": "options:family-flowchart-default",
+      "source": "flowchart LR\n  subgraph G[\"Group\"]\n    direction TB\n    A[\"Start<br/>한글\"] --> B{Decision?}\n  end\n  B -- Yes --> C[\"Done\"]\n  B -. No .-> D[\"Retry\"]\n  classDef hot fill:#ffeeee,stroke:#cc0000,color:#111\n  class C hot",
+      "sha256": "4029197b8a316098de71d676453395b7653b52310619c01fd9220a24e1027784"
+    },
+    {
+      "id": "options:family-flowchart-transparent",
+      "source": "flowchart LR\n  subgraph G[\"Group\"]\n    direction TB\n    A[\"Start<br/>한글\"] --> B{Decision?}\n  end\n  B -- Yes --> C[\"Done\"]\n  B -. No .-> D[\"Retry\"]\n  classDef hot fill:#ffeeee,stroke:#cc0000,color:#111\n  class C hot",
+      "options": {
+        "transparent": true
+      },
+      "sha256": "b303e9d9279369b72c9d4cb5aa26f59e80b83e16093960ceec6befe89fcd9f41"
+    },
+    {
+      "id": "options:family-flowchart-font",
+      "source": "flowchart LR\n  subgraph G[\"Group\"]\n    direction TB\n    A[\"Start<br/>한글\"] --> B{Decision?}\n  end\n  B -- Yes --> C[\"Done\"]\n  B -. No .-> D[\"Retry\"]\n  classDef hot fill:#ffeeee,stroke:#cc0000,color:#111\n  class C hot",
+      "options": {
+        "font": "Roboto"
+      },
+      "sha256": "99345a55126e068066a56a0e1e265334ad998c4ac41dc3c8d19ae783b1cae200"
+    },
+    {
+      "id": "options:family-flowchart-partial-palette",
+      "source": "flowchart LR\n  subgraph G[\"Group\"]\n    direction TB\n    A[\"Start<br/>한글\"] --> B{Decision?}\n  end\n  B -- Yes --> C[\"Done\"]\n  B -. No .-> D[\"Retry\"]\n  classDef hot fill:#ffeeee,stroke:#cc0000,color:#111\n  class C hot",
+      "options": {
+        "bg": "#101010",
+        "fg": "#EEEEEE",
+        "accent": "#00AAFF"
+      },
+      "sha256": "e89f8c45b61c0a92193a4ec1d704728fa4384c174dd5a935ca3eadbc0fd66a35"
+    },
+    {
+      "id": "options:family-state-default",
+      "source": "stateDiagram-v2\n  [*] --> Idle\n  state \"Working State\" as Working\n  Idle --> Working : start\n  state Parent {\n    direction LR\n    A --> B\n  }\n  Working --> [*]",
+      "sha256": "a788ac6937c82e503498964cfe739abcb3ae558d27bf9c7b1092a4e7d303a9b8"
+    },
+    {
+      "id": "options:family-state-transparent",
+      "source": "stateDiagram-v2\n  [*] --> Idle\n  state \"Working State\" as Working\n  Idle --> Working : start\n  state Parent {\n    direction LR\n    A --> B\n  }\n  Working --> [*]",
+      "options": {
+        "transparent": true
+      },
+      "sha256": "77511b4f6e2104ffc905ee8369e4013ec415f1b335503b8b80335c9285feccd0"
+    },
+    {
+      "id": "options:family-state-font",
+      "source": "stateDiagram-v2\n  [*] --> Idle\n  state \"Working State\" as Working\n  Idle --> Working : start\n  state Parent {\n    direction LR\n    A --> B\n  }\n  Working --> [*]",
+      "options": {
+        "font": "Roboto"
+      },
+      "sha256": "2477666712e040add2fe6529dd2f6869f79bae7eb7e5a49afc47017ca655538e"
+    },
+    {
+      "id": "options:family-state-partial-palette",
+      "source": "stateDiagram-v2\n  [*] --> Idle\n  state \"Working State\" as Working\n  Idle --> Working : start\n  state Parent {\n    direction LR\n    A --> B\n  }\n  Working --> [*]",
+      "options": {
+        "bg": "#101010",
+        "fg": "#EEEEEE",
+        "accent": "#00AAFF"
+      },
+      "sha256": "161d6a8de3764661d5d8e5f3e903c3319a93aecf4ef60b4c81f42cb6a841587a"
+    },
+    {
+      "id": "options:family-sequence-default",
+      "source": "sequenceDiagram\n  actor U as 사용자\n  participant A as App\n  Note over U,A: hello<br/>world\n  U->>A: request\n  A-->>U: response",
+      "sha256": "8239172399cfdd6f8b7c8965989e6a954635b603aecc7afa7c83296c2ecb2108"
+    },
+    {
+      "id": "options:family-sequence-transparent",
+      "source": "sequenceDiagram\n  actor U as 사용자\n  participant A as App\n  Note over U,A: hello<br/>world\n  U->>A: request\n  A-->>U: response",
+      "options": {
+        "transparent": true
+      },
+      "sha256": "2ef5b2d085e032a06626f2130176d110da7fc2e9945dfd14603a7e301aece861"
+    },
+    {
+      "id": "options:family-sequence-font",
+      "source": "sequenceDiagram\n  actor U as 사용자\n  participant A as App\n  Note over U,A: hello<br/>world\n  U->>A: request\n  A-->>U: response",
+      "options": {
+        "font": "Roboto"
+      },
+      "sha256": "dcb0ae4920ea8030d4c3ee6017ab5ef92238f6834770aab9eb43d3676aa4e3ee"
+    },
+    {
+      "id": "options:family-sequence-partial-palette",
+      "source": "sequenceDiagram\n  actor U as 사용자\n  participant A as App\n  Note over U,A: hello<br/>world\n  U->>A: request\n  A-->>U: response",
+      "options": {
+        "bg": "#101010",
+        "fg": "#EEEEEE",
+        "accent": "#00AAFF"
+      },
+      "sha256": "78d4c1050a217ebe3db7d54e13d88610919e49cae9836c5643364b47b7389a84"
+    },
+    {
+      "id": "options:family-class-default",
+      "source": "classDiagram\n  class Animal {\n    <<abstract>>\n    +String name\n    +speak() void\n  }\n  class Dog\n  Animal <|-- Dog : inherits",
+      "sha256": "47697979b475a529993195ea71b45bf6f05e9fcec309fc6d2ee03630936df46e"
+    },
+    {
+      "id": "options:family-class-transparent",
+      "source": "classDiagram\n  class Animal {\n    <<abstract>>\n    +String name\n    +speak() void\n  }\n  class Dog\n  Animal <|-- Dog : inherits",
+      "options": {
+        "transparent": true
+      },
+      "sha256": "ea6705db052292ef9d13378eb6146a7752a854dd5cdb2015eac8a0b769574ed2"
+    },
+    {
+      "id": "options:family-class-font",
+      "source": "classDiagram\n  class Animal {\n    <<abstract>>\n    +String name\n    +speak() void\n  }\n  class Dog\n  Animal <|-- Dog : inherits",
+      "options": {
+        "font": "Roboto"
+      },
+      "sha256": "48c74260bbd6be45a4cc10eaa66aa176dee5c3c709c9329777ae7fd2271359e1"
+    },
+    {
+      "id": "options:family-class-partial-palette",
+      "source": "classDiagram\n  class Animal {\n    <<abstract>>\n    +String name\n    +speak() void\n  }\n  class Dog\n  Animal <|-- Dog : inherits",
+      "options": {
+        "bg": "#101010",
+        "fg": "#EEEEEE",
+        "accent": "#00AAFF"
+      },
+      "sha256": "a267b5d94b9806ed14357815c7a34ecfbac04f19812bad25c57d4cf01e0f3a9c"
+    },
+    {
+      "id": "options:family-er-default",
+      "source": "erDiagram\n  CUSTOMER {\n    int id PK\n    string name \"display name\"\n  }\n  ORDER {\n    int id PK\n    int customer_id FK\n  }\n  CUSTOMER ||--o{ ORDER : places",
+      "sha256": "46dd9c743a884cd2bf2b2c418f778db3ddc59ae929c146e37c28e37e6482e53a"
+    },
+    {
+      "id": "options:family-er-transparent",
+      "source": "erDiagram\n  CUSTOMER {\n    int id PK\n    string name \"display name\"\n  }\n  ORDER {\n    int id PK\n    int customer_id FK\n  }\n  CUSTOMER ||--o{ ORDER : places",
+      "options": {
+        "transparent": true
+      },
+      "sha256": "9ea029d19997b608e7fc74031dd802e8c2dcb64da416098c9c70696b45f433f8"
+    },
+    {
+      "id": "options:family-er-font",
+      "source": "erDiagram\n  CUSTOMER {\n    int id PK\n    string name \"display name\"\n  }\n  ORDER {\n    int id PK\n    int customer_id FK\n  }\n  CUSTOMER ||--o{ ORDER : places",
+      "options": {
+        "font": "Roboto"
+      },
+      "sha256": "b35fdbefa2612904360b4a09b8d5853896ba85579c4b838529c35d0509f39ce6"
+    },
+    {
+      "id": "options:family-er-partial-palette",
+      "source": "erDiagram\n  CUSTOMER {\n    int id PK\n    string name \"display name\"\n  }\n  ORDER {\n    int id PK\n    int customer_id FK\n  }\n  CUSTOMER ||--o{ ORDER : places",
+      "options": {
+        "bg": "#101010",
+        "fg": "#EEEEEE",
+        "accent": "#00AAFF"
+      },
+      "sha256": "8dec3bafc6ccd1ae87604553b8e691386289af3355880e11f4ef21bd22e44e1a"
+    },
+    {
+      "id": "options:family-xychart-default",
+      "source": "xychart-beta\n  title \"Sales\"\n  x-axis [Jan, Feb, Mar]\n  y-axis \"Count\" 0 --> 100\n  bar [30, 55, 80]\n  line [20, 65, 70]",
+      "sha256": "3b2b615fb3a7ef52af075fc381c2f23efd93510aed1be840c9c3eec261e39663"
+    },
+    {
+      "id": "options:family-xychart-transparent",
+      "source": "xychart-beta\n  title \"Sales\"\n  x-axis [Jan, Feb, Mar]\n  y-axis \"Count\" 0 --> 100\n  bar [30, 55, 80]\n  line [20, 65, 70]",
+      "options": {
+        "transparent": true
+      },
+      "sha256": "15383a7924f9711ed6eefad0b09276ce81eaeeb5777932d4f336805efa44a900"
+    },
+    {
+      "id": "options:family-xychart-font",
+      "source": "xychart-beta\n  title \"Sales\"\n  x-axis [Jan, Feb, Mar]\n  y-axis \"Count\" 0 --> 100\n  bar [30, 55, 80]\n  line [20, 65, 70]",
+      "options": {
+        "font": "Roboto"
+      },
+      "sha256": "4627db8cf75451e18a692b18d7d2065c7123ad795b0431446eeccae3cb97e9a2"
+    },
+    {
+      "id": "options:family-xychart-partial-palette",
+      "source": "xychart-beta\n  title \"Sales\"\n  x-axis [Jan, Feb, Mar]\n  y-axis \"Count\" 0 --> 100\n  bar [30, 55, 80]\n  line [20, 65, 70]",
+      "options": {
+        "bg": "#101010",
+        "fg": "#EEEEEE",
+        "accent": "#00AAFF"
+      },
+      "sha256": "8d69c45478d984d1f681684d4cdbd688a62aa895f799a43b2a7dcccd5ff47dbf"
+    },
+    {
+      "id": "error:empty",
+      "source": "",
+      "error": "Empty mermaid diagram",
+      "formattedError": "Empty mermaid diagram"
+    },
+    {
+      "id": "error:whitespace",
+      "source": "   \n\t",
+      "error": "Empty mermaid diagram",
+      "formattedError": "Empty mermaid diagram"
+    },
+    {
+      "id": "error:comment-only",
+      "source": "%% only comment",
+      "error": "Empty mermaid diagram",
+      "formattedError": "Empty mermaid diagram"
+    },
+    {
+      "id": "error:comment-only-lines",
+      "source": "%% comment\n\n",
+      "error": "Empty mermaid diagram",
+      "formattedError": "Empty mermaid diagram"
+    },
+    {
+      "id": "error:invalid-foo",
+      "source": "foo",
+      "error": "Invalid mermaid header: \"foo\". Expected \"graph TD\", \"flowchart LR\", \"stateDiagram-v2\", etc.",
+      "formattedError": "Invalid mermaid header: \"foo\". Expected \"graph TD\", \"flowchart LR\", \"stateDiagram-v2\", etc.. Supported types: flowchart/graph, stateDiagram-v2, sequenceDiagram, classDiagram, erDiagram, xychart-beta."
+    },
+    {
+      "id": "error:invalid-flow-no-dir",
+      "source": "flowchart",
+      "error": "Invalid mermaid header: \"flowchart\". Expected \"graph TD\", \"flowchart LR\", \"stateDiagram-v2\", etc.",
+      "formattedError": "Invalid mermaid header: \"flowchart\". Expected \"graph TD\", \"flowchart LR\", \"stateDiagram-v2\", etc.. Supported types: flowchart/graph, stateDiagram-v2, sequenceDiagram, classDiagram, erDiagram, xychart-beta."
+    },
+    {
+      "id": "error:invalid-flow-dir",
+      "source": "flowchart XX\nA --> B",
+      "error": "Invalid mermaid header: \"flowchart XX\". Expected \"graph TD\", \"flowchart LR\", \"stateDiagram-v2\", etc.",
+      "formattedError": "Invalid mermaid header: \"flowchart XX\". Expected \"graph TD\", \"flowchart LR\", \"stateDiagram-v2\", etc.. Supported types: flowchart/graph, stateDiagram-v2, sequenceDiagram, classDiagram, erDiagram, xychart-beta."
+    },
+    {
+      "id": "error:invalid-graph-no-dir",
+      "source": "graph\nA-->B",
+      "error": "Invalid mermaid header: \"graph\". Expected \"graph TD\", \"flowchart LR\", \"stateDiagram-v2\", etc.",
+      "formattedError": "Invalid mermaid header: \"graph\". Expected \"graph TD\", \"flowchart LR\", \"stateDiagram-v2\", etc.. Supported types: flowchart/graph, stateDiagram-v2, sequenceDiagram, classDiagram, erDiagram, xychart-beta."
+    },
+    {
+      "id": "error:state-semicolon",
+      "source": "stateDiagram-v2; A --> B",
+      "error": "Invalid mermaid header: \"stateDiagram-v2; A --> B\". Expected \"graph TD\", \"flowchart LR\", \"stateDiagram-v2\", etc.",
+      "formattedError": "Invalid mermaid header: \"stateDiagram-v2; A --> B\". Expected \"graph TD\", \"flowchart LR\", \"stateDiagram-v2\", etc.. Supported types: flowchart/graph, stateDiagram-v2, sequenceDiagram, classDiagram, erDiagram, xychart-beta."
+    },
+    {
+      "id": "error:state-semicolon-v1",
+      "source": "stateDiagram; A --> B",
+      "error": "Invalid mermaid header: \"stateDiagram; A --> B\". Expected \"graph TD\", \"flowchart LR\", \"stateDiagram-v2\", etc.",
+      "formattedError": "Invalid mermaid header: \"stateDiagram; A --> B\". Expected \"graph TD\", \"flowchart LR\", \"stateDiagram-v2\", etc.. Supported types: flowchart/graph, stateDiagram-v2, sequenceDiagram, classDiagram, erDiagram, xychart-beta."
+    },
+    {
+      "id": "error:seq-semicolon-empty",
+      "source": "sequenceDiagram;",
+      "sha256": "0f3950e3999c1e8bcf01cc2596430cd4507f5fb1f0af4dfd1a9b5a758cb26471"
+    },
+    {
+      "id": "error:seq-semicolon-body",
+      "source": "sequenceDiagram; A->>B: hello",
+      "sha256": "0f3950e3999c1e8bcf01cc2596430cd4507f5fb1f0af4dfd1a9b5a758cb26471"
+    },
+    {
+      "id": "error:class-semicolon",
+      "source": "classDiagram; class A",
+      "sha256": "57c12fecaae36b876f7753fa8d9afa219d90081110d64846fffdeadaa3461c54"
+    },
+    {
+      "id": "error:er-semicolon",
+      "source": "erDiagram; A ||--|| B : rel",
+      "sha256": "7d2a1a73c918e3644500f38c4fc07f48909d48e1fdb258e31f12e2f42839f2f5"
+    },
+    {
+      "id": "error:xy-semicolon",
+      "source": "xychart-beta; bar [1,2,3]",
+      "sha256": "4b3b68f09824826cf1aa0f8e2a525fd5ef693e76feb86937750df145c0d22a21"
+    },
+    {
+      "id": "error:seq-empty",
+      "source": "sequenceDiagram\n",
+      "sha256": "0f3950e3999c1e8bcf01cc2596430cd4507f5fb1f0af4dfd1a9b5a758cb26471"
+    },
+    {
+      "id": "error:class-empty",
+      "source": "classDiagram\n",
+      "sha256": "57c12fecaae36b876f7753fa8d9afa219d90081110d64846fffdeadaa3461c54"
+    },
+    {
+      "id": "error:er-empty",
+      "source": "erDiagram\n",
+      "sha256": "7d2a1a73c918e3644500f38c4fc07f48909d48e1fdb258e31f12e2f42839f2f5"
+    },
+    {
+      "id": "error:xy-empty",
+      "source": "xychart-beta\n",
+      "sha256": "4b3b68f09824826cf1aa0f8e2a525fd5ef693e76feb86937750df145c0d22a21"
+    },
+    {
+      "id": "error:state-empty",
+      "source": "stateDiagram-v2\n",
+      "sha256": "4173cdb60db21e28b2a80a6a732b68055deff23ab337dba6ec980a99b71b46d5"
+    },
+    {
+      "id": "error:state-case",
+      "source": "STATEdiagram-V2\n[*] --> A",
+      "sha256": "81f4dd030a4041bfea289f69a7cdb8884c2e8632fa679c1dd9486ec9d3d58851"
+    },
+    {
+      "id": "error:seq-case",
+      "source": "SEQUENCEDIAGRAM\nA->>B: hi",
+      "sha256": "0553fa481bebc7275f006a7ccc19c92ad7f8f89c1989060dd260332cbc35c129"
+    },
+    {
+      "id": "error:class-case",
+      "source": "CLASSDIAGRAM\nclass A",
+      "sha256": "67cca4f8348de64480331a213fa974be97612a0cd5703bb4173a1089571b3f38"
+    },
+    {
+      "id": "error:er-case",
+      "source": "ERDIAGRAM\nA ||--|| B : rel",
+      "sha256": "15dd788f29ed08bf655bd3d88c83bca5bdbb5e4305b048a4f68e4fbe07b3512c"
+    },
+    {
+      "id": "error:xy-alias",
+      "source": "XYCHART\nbar [1,2]",
+      "sha256": "2ff3f95bdabf9c536677e8cafdff975d8517fcdf0e60f61f772432b163fdaaa3"
+    },
+    {
+      "id": "error:leading-comment-seq",
+      "source": "%% comment\nsequenceDiagram\nA->>B: hi",
+      "error": "Invalid mermaid header: \"sequenceDiagram\". Expected \"graph TD\", \"flowchart LR\", \"stateDiagram-v2\", etc.",
+      "formattedError": "Invalid mermaid header: \"sequenceDiagram\". Expected \"graph TD\", \"flowchart LR\", \"stateDiagram-v2\", etc.. Supported types: flowchart/graph, stateDiagram-v2, sequenceDiagram, classDiagram, erDiagram, xychart-beta."
+    },
+    {
+      "id": "error:leading-comment-flow",
+      "source": "%% comment\nflowchart LR\nA-->B",
+      "sha256": "b7e9e9a45c03c0b502914df9acc8db9a2ac11dd0193797e80807d64d1a5b7b4a"
+    },
+    {
+      "id": "error:entity-invalid",
+      "source": "&amp;&amp;",
+      "error": "Invalid mermaid header: \"&&\". Expected \"graph TD\", \"flowchart LR\", \"stateDiagram-v2\", etc.",
+      "formattedError": "Invalid mermaid header: \"&&\". Expected \"graph TD\", \"flowchart LR\", \"stateDiagram-v2\", etc.. Supported types: flowchart/graph, stateDiagram-v2, sequenceDiagram, classDiagram, erDiagram, xychart-beta."
+    },
+    {
+      "id": "error:entity-valid-flow",
+      "source": "flowchart LR\nA[&quot;Q&quot; &apos;S&apos;] --> B",
+      "sha256": "cc1e6b383cac075502ca867798cd0b49e238473afe6eff21c3e4c4f1bfe6b834"
+    },
+    {
+      "id": "error:inner-comment-seq",
+      "source": "sequenceDiagram\n%% comment\nA->>B: hi",
+      "sha256": "0553fa481bebc7275f006a7ccc19c92ad7f8f89c1989060dd260332cbc35c129"
+    },
+    {
+      "id": "syntax:flow-nested-only-direction",
+      "source": "flowchart LR\nsubgraph Outer[Outer]\n  A[Alpha]\n  subgraph Inner[Inner]\n    direction TB\n    B[Beta] --> C[Gamma]\n  end\n  A --> B\nend\nC --> D[Delta]",
+      "profile": "light",
+      "sha256": "ab5a0e2ce97ed1b8a6d019a1326149e33d3332623d59856e1eac5b78db16947a"
+    }
+  ]
+}

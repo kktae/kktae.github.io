@@ -1,6 +1,7 @@
 import {
   cleanLabel,
   escapeXML,
+  escapeText,
   measureMultiline,
   measureText,
   svgOpen,
@@ -28,7 +29,6 @@ function cardinality(value) {
 
 export function parseERDiagram(source) {
   const lines = source.split('\n').map(line => line.trim()).filter(line => line && !line.startsWith('%%'));
-  if (!lines.length || !/^erDiagram\s*$/i.test(lines[0])) throw new Error('Invalid erDiagram header');
 
   const model = { type: 'er', entities: [], relationships: [] };
   const entities = new Map();
@@ -300,7 +300,7 @@ export function renderERLayout(layout, palette, options = {}) {
       const centerY = rowTop + index * entity.rowHeight + entity.rowHeight / 2;
       const row = [];
       const hasComment = Boolean(attribute.comment);
-      if (hasComment) row.push('<g><title>' + escapeXML(attribute.comment.replace(/<br\s*\/?>/gi, '\n')) + '</title>');
+      if (hasComment) row.push('<g><title>' + escapeText(attribute.comment.replace(/<br\s*\/?>/gi, '\n')) + '</title>');
       let badgeWidth = 0;
       if (attribute.keys.length) {
         const keyText = attribute.keys.join(',');
@@ -318,12 +318,12 @@ export function renderERLayout(layout, palette, options = {}) {
       row.push(
         '<text x="' + (entity.x + 8 + (badgeWidth > 0 ? badgeWidth + 6 : 0)) + '" y="' + centerY +
         '" class="mono" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-muted)">' +
-        escapeXML(attribute.type) + '</tspan></text>'
+        escapeText(attribute.type) + '</tspan></text>'
       );
       row.push(
         '<text x="' + (entity.x + entity.width - 8) + '" y="' + centerY +
         '" class="mono" text-anchor="end" dy="0.35em" font-size="11" font-weight="400"><tspan fill="var(--_text-sec)">' +
-        escapeXML(attribute.name) + '</tspan></text>'
+        escapeText(attribute.name) + '</tspan></text>'
       );
       if (hasComment) row.push('</g>');
       values.push('  ' + row.join('\n').replace(/\n/g, '\n  '));

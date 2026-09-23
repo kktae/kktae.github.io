@@ -44,6 +44,10 @@ export function escapeXML(value) {
     .replace(/>/g, '&gt;');
 }
 
+export function escapeText(value) {
+  return escapeXML(value).replace(/'/g, '&#39;');
+}
+
 export function cleanLabel(value) {
   let label = value.trim();
   if (label.startsWith('"') && label.endsWith('"')) label = label.slice(1, -1);
@@ -147,7 +151,7 @@ function richSegments(line) {
 function renderRichLine(line) {
   const segments = richSegments(line);
   if (!segments.some(segment => segment.bold || segment.italic || segment.underline || segment.strike)) {
-    return escapeXML(line);
+    return escapeText(line);
   }
   return segments.map(segment => {
     const attrs = [];
@@ -158,8 +162,8 @@ function renderRichLine(line) {
     if (segment.strike) decorations.push('line-through');
     if (decorations.length) attrs.push('text-decoration="' + decorations.join(' ') + '"');
     return attrs.length
-      ? '<tspan ' + attrs.join(' ') + '>' + escapeXML(segment.text) + '</tspan>'
-      : escapeXML(segment.text);
+      ? '<tspan ' + attrs.join(' ') + '>' + escapeText(segment.text) + '</tspan>'
+      : escapeText(segment.text);
   }).join('');
 }
 

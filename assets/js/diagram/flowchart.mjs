@@ -147,11 +147,13 @@ function parseFlowLine(line, graph, stack) {
 
 export function parseFlowchart(source) {
   const lines = source.split('\n').map(line => line.trim()).filter(line => line && !line.startsWith('%%'));
-  if (!lines.length) throw new Error('Empty diagram');
+  if (!lines.length) throw new Error('Empty mermaid diagram');
 
   const header = lines[0].match(/^(?:graph|flowchart)\s+(TD|TB|LR|BT|RL)\s*$/i);
   if (!header) {
-    throw new Error('Invalid diagram header: "' + lines[0] + '". Expected graph/flowchart direction.');
+    throw new Error(
+      'Invalid mermaid header: "' + lines[0] + '". Expected "graph TD", "flowchart LR", "stateDiagram-v2", etc.'
+    );
   }
 
   const graph = {
@@ -268,8 +270,9 @@ export function nodeSize(label, shape) {
     height = width;
   }
   if (shape === 'circle' || shape === 'doublecircle') {
-    width = Math.ceil(Math.sqrt(width * width + height * height)) + 8;
-    height = shape === 'doublecircle' ? width + 12 : width;
+    const diameter = Math.ceil(Math.sqrt(width * width + height * height)) + 8;
+    width = shape === 'doublecircle' ? diameter + 12 : diameter;
+    height = width;
   }
   if (shape === 'hexagon' || shape === 'trapezoid' || shape === 'trapezoid-alt') width += 20;
   if (shape === 'asymmetric') width += 12;
@@ -380,10 +383,7 @@ export function buildELKGraph(graph, options = {}) {
     }
   });
 
-  const hasDirectedSubgraph = graph.subgraphs.some(group => {
-    const check = item => Boolean(item.direction) || item.children.some(check);
-    return check(group);
-  });
+  const hasDirectedSubgraph = graph.subgraphs.some(group => group.direction !== undefined);
 
   const ports = new Map();
   if (hasDirectedSubgraph) {
@@ -415,7 +415,7 @@ export function buildELKGraph(graph, options = {}) {
       'elk.edgeRouting': 'ORTHOGONAL',
       'elk.layered.nodePlacement.bk.fixedAlignment': 'BALANCED',
       'elk.contentAlignment': 'H_CENTER V_CENTER',
-      'elk.layered.thoroughness': String(settings.thoroughness),
+      'elk.layered.thoroughness': String(DEFAULTS.thoroughness),
       'elk.layered.highDegreeNodes.treatment': 'true',
       'elk.layered.highDegreeNodes.threshold': '8',
       'elk.layered.compaction.postCompaction.strategy': 'LEFT_RIGHT_CONSTRAINT_LOCKING',
@@ -721,27 +721,23 @@ function shiftAlignedNodes(nodes, edges, direction) {
     if (sourceShift != null) {
       const first = edge.points[0];
       if (horizontal) {
-        const oldX = first.x;
         first.x += sourceShift;
-        if (edge.points[1].x === oldX) edge.points[1].x += sourceShift;
+        if (edge.points[1].x === first.x - sourceShift) edge.points[1].x += sourceShift;
       } else {
-        const oldY = first.y;
         first.y += sourceShift;
-        if (edge.points[1].y === oldY) edge.points[1].y += sourceShift;
+        if (edge.points[1].y === first.y - sourceShift) edge.points[1].y += sourceShift;
       }
     }
     if (targetShift != null) {
       const last = edge.points[edge.points.length - 1];
       if (horizontal) {
-        const oldX = last.x;
         last.x += targetShift;
         const previous = edge.points[edge.points.length - 2];
-        if (previous.x === oldX) previous.x += targetShift;
+        if (previous.x === last.x - targetShift) previous.x += targetShift;
       } else {
-        const oldY = last.y;
         last.y += targetShift;
         const previous = edge.points[edge.points.length - 2];
-        if (previous.y === oldY) previous.y += targetShift;
+        if (previous.y === last.y - targetShift) previous.y += targetShift;
       }
     }
   }
@@ -967,7 +963,7 @@ export async function layoutFlowchart(graph, elk, options = {}) {
 
   const edges = flattenEdges(laidOut, graph, groups);
   shiftAlignedNodes(nodes, edges, graph.direction);
-  if (settings.mergeEdges) mergeFanEdges(edges, nodes, groups, graph.direction);
+  if (DEFAULTS.mergeEdges) mergeFanEdges(edges, nodes, groups, graph.direction);
 
   const nodeMap = new Map(nodes.map(node => [node.id, node]));
   for (const edge of edges) {
@@ -981,12 +977,12 @@ export async function layoutFlowchart(graph, elk, options = {}) {
   let height = laidOut.height ?? 600;
   for (const edge of edges) {
     for (const point of edge.points) {
-      width = Math.max(width, point.x + 8 + settings.padding);
-      height = Math.max(height, point.y + 8 + settings.padding);
+      width = Math.max(width, point.x + 8 + DEFAULTS.padding);
+      height = Math.max(height, point.y + 8 + DEFAULTS.padding);
     }
     if (edge.labelPosition) {
-      width = Math.max(width, edge.labelPosition.x + 60 + settings.padding);
-      height = Math.max(height, edge.labelPosition.y + 20 + settings.padding);
+      width = Math.max(width, edge.labelPosition.x + 60 + DEFAULTS.padding);
+      height = Math.max(height, edge.labelPosition.y + 20 + DEFAULTS.padding);
     }
   }
 
@@ -1215,10 +1211,16 @@ export function renderFlowchartLayout(layout, palette, options = {}) {
   return lines.join('\n');
 }
 
-export async function renderFlowchart(source, { elk, palette, font = DEFAULTS.font, transparent = false } = {}) {
+export async function renderFlowchart(source, {
+  elk,
+  palette,
+  font = DEFAULTS.font,
+  transparent = false,
+  layoutOptions = {},
+} = {}) {
   if (!elk) throw new Error('ELK instance is required');
   const graph = parseFlowchart(source);
-  const layout = await layoutFlowchart(graph, elk);
+  const layout = await layoutFlowchart(graph, elk, layoutOptions);
   return {
     type: 'flowchart',
     graph,

@@ -466,6 +466,50 @@ function round(value) {
   return String(Math.round(value * 10) / 10);
 }
 
+function singleTooltip(x, y, text) {
+  const width = measureText(text, 15, 500) + 28;
+  const top = Math.max(4, y - 12 - 32 - 6);
+  const bottom = top + 32;
+  return '<rect x="' + round(x - width / 2) + '" y="' + round(top) + '" width="' + round(width) +
+    '" height="32" rx="8" class="xychart-tip xychart-tip-bg"/>' +
+    '<polygon points="' + round(x - 6) + ',' + round(bottom) + ' ' + round(x + 6) + ',' + round(bottom) + ' ' +
+    round(x) + ',' + round(bottom + 6) + '" class="xychart-tip xychart-tip-ptr"/>' +
+    '<text x="' + round(x) + '" y="' + round(top + 16) +
+    '" text-anchor="middle" dy="0.35em" class="xychart-tip xychart-tip-text">' + escapeXML(text) + '</text>';
+}
+
+function multiTooltip(x, y, label, entries) {
+  const labelWidth = measureText(label, 15, 600);
+  const rowWidth = Math.max(...entries.map(entry =>
+    measureText(entry.legendLabel, 15, 500) + 10 + measureText(entry.text, 15, 500)
+  ));
+  const width = Math.max(labelWidth, rowWidth) + 28;
+  const height = 26 + entries.length * 20 + 6;
+  const top = Math.max(4, y - 12 - height - 6);
+  const left = x - width / 2;
+  const bottom = top + height;
+  let svg = '<rect x="' + round(left) + '" y="' + round(top) + '" width="' + round(width) +
+    '" height="' + height + '" rx="8" class="xychart-tip xychart-tip-bg"/>';
+  svg += '<polygon points="' + round(x - 6) + ',' + round(bottom) + ' ' + round(x + 6) + ',' + round(bottom) + ' ' +
+    round(x) + ',' + round(bottom + 6) + '" class="xychart-tip xychart-tip-ptr"/>';
+  let textY = top + 6 + 10;
+  svg += '<text x="' + round(x) + '" y="' + round(textY) +
+    '" text-anchor="middle" font-weight="600" font-size="15" dy="0.35em" class="xychart-tip xychart-tip-text">' +
+    escapeXML(label) + '</text>';
+  const leftText = left + 14;
+  const rightText = left + width - 14;
+  for (const entry of entries) {
+    textY += 20;
+    svg += '<text x="' + round(leftText) + '" y="' + round(textY) +
+      '" text-anchor="start" font-size="15" font-weight="500" dy="0.35em" class="xychart-tip xychart-tip-text">' +
+      escapeXML(entry.legendLabel) + '</text>';
+    svg += '<text x="' + round(rightText) + '" y="' + round(textY) +
+      '" text-anchor="end" font-size="15" font-weight="500" dy="0.35em" class="xychart-tip xychart-tip-text">' +
+      escapeXML(entry.text) + '</text>';
+  }
+  return svg;
+}
+
 function verticalBarPath(x, y, width, height) {
   const radius = Math.min(8, width / 2, height / 2);
   if (radius <= 0) return 'M' + round(x) + ',' + round(y) + ' h' + round(width) + ' v' + round(height) + ' h' + round(-width) + ' Z';
@@ -622,6 +666,7 @@ export function renderXYChartLayout(layout, palette, options = {}) {
     }
   }
 
+  const barTooltips = [];
   for (const bar of layout.bars) {
     const data = ' data-value="' + bar.value + '"' +
       (bar.label ? ' data-label="' + escapeXML(bar.label) + '"' : '');
@@ -629,6 +674,17 @@ export function renderXYChartLayout(layout, palette, options = {}) {
       ? horizontalBarPath(bar.x, bar.y, bar.width, bar.height)
       : verticalBarPath(bar.x, bar.y, bar.width, bar.height);
     output.push('<path d="' + path + '" class="xychart-bar xychart-color-' + bar.colorIndex + '"' + data + '/>');
+
+    if (interactive) {
+      const valueText = formatValue(bar.value);
+      const title = bar.label ? bar.label + ': ' + valueText : valueText;
+      const tooltip = singleTooltip(bar.x + bar.width / 2, bar.y, valueText);
+      barTooltips.push(
+        '<g class="xychart-bar-group"><rect x="' + round(bar.x) + '" y="' + round(bar.y) +
+        '" width="' + round(bar.width) + '" height="' + round(bar.height) +
+        '" fill="transparent"/><title>' + escapeXML(title) + '</title>' + tooltip + '</g>'
+      );
+    }
   }
 
   for (const line of layout.lines) {
@@ -638,14 +694,79 @@ export function renderXYChartLayout(layout, palette, options = {}) {
     output.push('<path d="' + path + '" class="xychart-line xychart-color-' + line.colorIndex + '"/>');
   }
 
+  const lineTooltips = [];
   if (interactive || showDots) {
+    const lineLegendLabels = new Map();
+    for (const entry of layout.legend) {
+      if (entry.type === 'line') lineLegendLabels.set(entry.seriesIndex, entry.label);
+    }
+
+    const groupedPoints = new Map();
     for (const line of layout.lines) {
       for (const point of line.points) {
+        const key = round(point.x);
+        if (!groupedPoints.has(key)) groupedPoints.set(key, []);
+        groupedPoints.get(key).push({
+          ...point,
+          seriesIndex: line.seriesIndex,
+          colorIndex: line.colorIndex,
+        });
+      }
+    }
+
+    for (const points of groupedPoints.values()) {
+      const x = points[0].x;
+      const label = points[0].label || '';
+
+      if (interactive && points.length > 1) {
+        const minY = Math.min(...points.map(point => point.y));
+        const maxY = Math.max(...points.map(point => point.y));
+        let group = '<g class="xychart-dot-group"><rect x="' + round(x - 15) +
+          '" y="' + round(minY - 15) + '" width="30" height="' + round(maxY - minY + 30) +
+          '" fill="transparent" class="xychart-hit"/>';
+        const entries = points.map(point => ({
+          text: formatValue(point.value),
+          legendLabel: lineLegendLabels.get(point.seriesIndex) || 'Line ' + (point.seriesIndex + 1),
+        }));
+        for (const point of points) {
+          const data = ' data-value="' + point.value + '"' +
+            (point.label ? ' data-label="' + escapeXML(point.label) + '"' : '');
+          group += '<circle cx="' + round(point.x) + '" cy="' + round(point.y) +
+            '" r="5" class="xychart-dot xychart-color-' + point.colorIndex + '"' + data + '/>';
+        }
+        const values = entries.map(entry => entry.text);
+        const title = label ? label + ': ' + values.join(' · ') : values.join(' · ');
+        group += '<title>' + escapeXML(title) + '</title>' +
+          multiTooltip(x, minY - 5, label, entries) + '</g>';
+        lineTooltips.push(group);
+        continue;
+      }
+
+      if (interactive) {
+        const point = points[0];
+        const data = ' data-value="' + point.value + '"' +
+          (point.label ? ' data-label="' + escapeXML(point.label) + '"' : '');
+        const valueText = formatValue(point.value);
+        const title = point.label ? point.label + ': ' + valueText : valueText;
+        let group = '<g class="xychart-dot-group">';
+        if (showDots) {
+          group += '<circle cx="' + round(x) + '" cy="' + round(point.y) +
+            '" r="15" fill="transparent" class="xychart-hit"/>';
+        }
+        group += '<circle cx="' + round(point.x) + '" cy="' + round(point.y) +
+          '" r="5" class="xychart-dot xychart-color-' + point.colorIndex + '"' + data + '/>' +
+          '<title>' + escapeXML(title) + '</title>' +
+          singleTooltip(x, point.y - 5, valueText) + '</g>';
+        lineTooltips.push(group);
+        continue;
+      }
+
+      for (const point of points) {
         const data = ' data-value="' + point.value + '"' +
           (point.label ? ' data-label="' + escapeXML(point.label) + '"' : '');
         output.push(
-          '<circle cx="' + round(point.x) + '" cy="' + round(point.y) + '" r="5" class="xychart-dot xychart-color-' +
-          line.colorIndex + '"' + data + '/>'
+          '<circle cx="' + round(point.x) + '" cy="' + round(point.y) +
+          '" r="5" class="xychart-dot xychart-color-' + point.colorIndex + '"' + data + '/>'
         );
       }
     }
@@ -703,6 +824,9 @@ export function renderXYChartLayout(layout, palette, options = {}) {
       escapeXML(entry.label) + '</text>'
     );
   }
+
+  for (const tooltip of barTooltips) output.push(tooltip);
+  for (const tooltip of lineTooltips) output.push(tooltip);
 
   output.push('</svg>');
   return output.join('\n');

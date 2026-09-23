@@ -24,14 +24,20 @@ export function detectDiagramType(source) {
   if (/^sequencediagram\s*$/.test(first)) return 'sequence';
   if (/^classdiagram\s*$/.test(first)) return 'class';
   if (/^erdiagram\s*$/.test(first)) return 'er';
-  if (/^statediagram(-v2)?\s*$/.test(first)) return 'state';
   return 'flowchart';
 }
 
-export async function renderDiagram(source, options = {}) {
+async function renderAntigravityDetailed(source, options = {}) {
   const decoded = decodeEntities(source);
-  const theme = options.theme === 'dark' ? 'dark' : 'light';
-  const palette = { ...PALETTES[theme], ...(options.palette ?? {}) };
+  const palette = {
+    bg: options.bg ?? '#FFFFFF',
+    fg: options.fg ?? '#27272A',
+    line: options.line,
+    accent: options.accent,
+    muted: options.muted,
+    surface: options.surface,
+    border: options.border,
+  };
   const shared = {
     palette,
     font: options.font ?? 'Inter',
@@ -43,15 +49,42 @@ export async function renderDiagram(source, options = {}) {
   if (type === 'class') return renderClassDiagram(decoded, { ...shared, elk });
   if (type === 'er') return renderERDiagram(decoded, { ...shared, elk });
   if (type === 'xychart') {
-    return renderXYChart(decoded, { ...shared, interactive: options.interactive ?? false });
+    return renderXYChart(decoded, {
+      ...shared,
+      interactive: options.interactive ?? false,
+    });
   }
-  if (type === 'state') return renderStateDiagram(decoded, { ...shared, elk });
-  return renderFlowchart(decoded, { ...shared, elk });
+  const lines = decoded.split('\n').map(line => line.trim()).filter(
+    line => line.length > 0 && !line.startsWith('%%'),
+  );
+  if (/^stateDiagram(-v2)?\s*$/i.test(lines[0] ?? '')) {
+    return renderStateDiagram(decoded, { ...shared, elk, layoutOptions: options });
+  }
+  return renderFlowchart(decoded, { ...shared, elk, layoutOptions: options });
+}
+
+export async function renderAntigravityDiagram(source, options = {}) {
+  return (await renderAntigravityDetailed(source, options)).svg;
+}
+
+export async function renderDiagram(source, options = {}) {
+  const theme = options.theme === 'dark' ? 'dark' : 'light';
+  const palette = { ...PALETTES[theme], ...(options.palette ?? {}) };
+  const coreOptions = {
+    ...palette,
+    font: options.font ?? 'Inter',
+    transparent: options.transparent ?? false,
+    interactive: options.interactive ?? false,
+  };
+  for (const key of ['padding', 'nodeSpacing', 'layerSpacing', 'mergeEdges', 'thoroughness']) {
+    if (Object.prototype.hasOwnProperty.call(options, key)) coreOptions[key] = options[key];
+  }
+  return renderAntigravityDetailed(source, coreOptions);
 }
 
 export function renderErrorMessage(error) {
   const first = String(error instanceof Error ? error.message : error).split('\n')[0];
-  if (first.startsWith('Invalid diagram header')) {
+  if (first.startsWith('Invalid mermaid header')) {
     return first + '. Supported types: ' + SUPPORTED_DIAGRAM_TYPES.join(', ') + '.';
   }
   return first;

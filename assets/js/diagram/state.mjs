@@ -134,10 +134,16 @@ export function parseStateDiagram(source) {
   return graph;
 }
 
-export async function renderStateDiagram(source, { elk, palette, font = 'Inter', transparent = false } = {}) {
+export async function renderStateDiagram(source, {
+  elk,
+  palette,
+  font = 'Inter',
+  transparent = false,
+  layoutOptions = {},
+} = {}) {
   if (!elk) throw new Error('ELK instance is required');
   const graph = parseStateDiagram(source);
-  const layout = await layoutFlowchart(graph, elk);
+  const layout = await layoutFlowchart(graph, elk, layoutOptions);
   return {
     type: 'state',
     graph,

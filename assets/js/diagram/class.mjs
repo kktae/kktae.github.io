@@ -1,6 +1,7 @@
 import {
   cleanLabel,
   escapeXML,
+  escapeText,
   measureMultiline,
   measureText,
   svgOpen,
@@ -86,7 +87,6 @@ function relationshipType(token) {
 
 export function parseClassDiagram(source) {
   const lines = source.split('\n').map(line => line.trim()).filter(line => line && !line.startsWith('%%'));
-  if (!lines.length || !/^classDiagram\s*$/i.test(lines[0])) throw new Error('Invalid classDiagram header');
 
   const model = { type: 'class', classes: [], relationships: [], namespaces: [] };
   const classes = new Map();
@@ -341,16 +341,16 @@ function memberSVG(member, x, y) {
   if (member.isStatic) styles.push('text-decoration="underline"');
   const pieces = [];
   if (member.visibility) {
-    pieces.push('<tspan fill="var(--_text-faint)">' + escapeXML(member.visibility) + ' </tspan>');
+    pieces.push('<tspan fill="var(--_text-faint)">' + escapeText(member.visibility) + ' </tspan>');
   }
   pieces.push(
     '<tspan fill="var(--_text-sec)">' +
-    escapeXML(member.isMethod ? member.name + '(' + (member.params || '') + ')' : member.name) +
+    escapeText(member.isMethod ? member.name + '(' + (member.params || '') + ')' : member.name) +
     '</tspan>'
   );
   if (member.type) {
     pieces.push('<tspan fill="var(--_text-faint)">: </tspan>');
-    pieces.push('<tspan fill="var(--_text-muted)">' + escapeXML(member.type) + '</tspan>');
+    pieces.push('<tspan fill="var(--_text-muted)">' + escapeText(member.type) + '</tspan>');
   }
   return '<text x="' + x + '" y="' + y + '" class="mono" dy="0.35em" font-size="11" font-weight="400"' +
     (styles.length ? ' ' + styles.join(' ') : '') + '>' + pieces.join('') + '</text>';
@@ -401,7 +401,7 @@ export function renderClassLayout(layout, palette, options = {}) {
       values.push(
         '  <text x="' + (cls.x + cls.width / 2) + '" y="' + (cls.y + 12) +
         '" text-anchor="middle" dy="0.35em" font-size="10" font-weight="500" font-style="italic" fill="var(--_text-muted)">&lt;&lt;' +
-        escapeXML(cls.annotation) + '&gt;&gt;</text>'
+        escapeText(cls.annotation) + '&gt;&gt;</text>'
       );
       titleY += 6;
     }
@@ -432,7 +432,10 @@ export function renderClassLayout(layout, palette, options = {}) {
   }
 
   for (const relation of layout.relationships) {
-    if ((!relation.label && !relation.fromCardinality && !relation.toCardinality) || relation.points.length < 2) continue;
+    if ((!relation.label && !relation.fromCardinality && !relation.toCardinality) || relation.points.length < 2) {
+      lines.push('');
+      continue;
+    }
     const labels = [];
     if (relation.label) {
       const position = relation.labelPosition ?? relation.points[Math.floor(relation.points.length / 2)] ?? { x: 0, y: 0 };
