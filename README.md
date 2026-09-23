@@ -4,6 +4,7 @@
 - Posts: `content/posts/`
 - Static assets: `static/`
 - Runtime versions: `.hugo-version`, `.python-version`, `.node-version`
+- Diagrams: Mermaid DSL → project-owned Antigravity 2.15.1-compatible SVG renderer (`elkjs` 0.9.3 compatibility pin)
 
 ## Local
 

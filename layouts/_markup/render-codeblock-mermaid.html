@@ -1,7 +1,7 @@
-{{- .Page.Store.Set "hasMermaid" true -}}
+{{- .Page.Store.Set "hasDiagram" true -}}
 <figure class="diagram">
   <div class="diagram-canvas">
-    <pre class="mermaid">{{ .Inner }}</pre>
+    <pre class="diagram-source">{{ .Inner }}</pre>
   </div>
   <figcaption class="diagram-status" role="status" hidden></figcaption>
 </figure>

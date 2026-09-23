@@ -301,14 +301,21 @@ class SiteTests(unittest.TestCase):
         self.assertEqual(sorted(broken), [])
         self.assertGreater(checked_integrity, 0)
 
-    def test_mermaid_and_slide_embed_are_preserved(self):
+    def test_markdown_diagrams_and_slide_embed_are_preserved(self):
         diagrams = [
             node
             for route in POSTS
-            for node in self.page(route).find("pre", cls="mermaid")
+            for node in self.page(route).find("pre", cls="diagram-source")
         ]
         self.assertTrue(diagrams)
         self.assertTrue(all(node.text.strip() for node in diagrams))
+        diagram_bundles = list((self.output / "assets/js").glob("diagrams*.js"))
+        self.assertEqual(len(diagram_bundles), 1)
+        diagram_bundle = diagram_bundles[0].read_text(encoding="utf-8")
+        self.assertIn("antigravity-direct", diagram_bundle)
+        self.assertNotIn("mermaid.esm", diagram_bundle)
+        self.assertNotIn("registerLayoutLoaders", diagram_bundle)
+        self.assertNotIn("cdn.jsdelivr.net/npm/mermaid", diagram_bundle)
         self.assertFalse(CONFIG["markup"]["goldmark"]["renderer"]["unsafe"])
         alerts = [
             node

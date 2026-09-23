@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import re
@@ -125,13 +126,21 @@ def main() -> int:
         (ROOT / "data/dependencies.toml").read_text(encoding="utf-8")
     )
 
+    elk = dependencies["elkjs"]
+    elk_path = ROOT / "assets" / str(elk["asset"])
+    elk_digest = hashlib.sha256(elk_path.read_bytes()).hexdigest()
+    if elk_digest != str(elk["sha256"]):
+        raise RuntimeError(f"ELK.js asset digest mismatch: {elk_path}")
+    print(
+        f"PINNED   {'ELK.js':12} pinned={elk['version']} "
+        f"target={elk['compatibility']}"
+    )
+
     current: dict[str, str] = {
         "Hugo": (ROOT / ".hugo-version").read_text(encoding="utf-8").strip(),
         "Python": (ROOT / ".python-version").read_text(encoding="utf-8").strip(),
         "Node.js": (ROOT / ".node-version").read_text(encoding="utf-8").strip(),
         "Ruff": local_ruff_version(),
-        "Mermaid": str(dependencies["mermaid"]["version"]),
-        "Mermaid ELK": str(dependencies["mermaid_elk"]["version"]),
         "Fuse.js": str(dependencies["fuse"]["version"]),
         "PaperMod": paper_mod_commit(),
     }
@@ -140,8 +149,6 @@ def main() -> int:
         "Python": latest_python(),
         "Node.js": latest_node(),
         "Ruff": latest_pypi("ruff"),
-        "Mermaid": latest_npm("mermaid"),
-        "Mermaid ELK": latest_npm("@mermaid-js/layout-elk"),
         "Fuse.js": latest_npm("fuse.js"),
         "PaperMod": latest_github_branch_commit(
             "adityatelange/hugo-PaperMod", "master"

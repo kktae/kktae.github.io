@@ -67,13 +67,13 @@ try {
   for (const route of posts) {
     await go(route);
     await page.waitForFunction(() =>
-      [...document.querySelectorAll('pre.mermaid')].every(
+      [...document.querySelectorAll('pre.diagram-source')].every(
         node => node.querySelector('svg') || !node.closest('.diagram')?.querySelector('.diagram-status')?.hidden,
       ),
     );
     const result = await page.evaluate(() => ({
-      source: document.querySelectorAll('pre.mermaid').length,
-      rendered: document.querySelectorAll('pre.mermaid svg').length,
+      source: document.querySelectorAll('pre.diagram-source').length,
+      rendered: document.querySelectorAll('pre.diagram-source svg').length,
       alerts: document.querySelectorAll('blockquote.alert').length,
       overflow: document.documentElement.scrollWidth > innerWidth,
       errors: window.__blogErrors,
@@ -87,37 +87,76 @@ try {
   assert.ok(alerts > 0);
   check('article and Markdown smoke', { articles: posts.length, diagrams, alerts });
 
+  await page.evaluate(() => localStorage.setItem('pref-theme', 'light'));
   await go('/posts/google-cloud/gemini-cli-ip-access/');
   await page.waitForFunction(() =>
-    document.querySelectorAll('pre.mermaid').length > 0 &&
-    [...document.querySelectorAll('pre.mermaid')].every(node => node.querySelector('svg')),
+    document.querySelectorAll('pre.diagram-source').length > 0 &&
+    [...document.querySelectorAll('pre.diagram-source')].every(
+      node => node.querySelector('svg[data-renderer="antigravity-direct"]'),
+    ),
   );
-  const mermaidUX = await page.evaluate(() => {
-    const svg = document.querySelector('pre.mermaid svg');
-    const headers = [...svg.querySelectorAll('.mermaid-group-header')];
-    const edges = [...svg.querySelectorAll('.flowchart-link')];
-    const labels = [...svg.querySelectorAll('.nodeLabel')].filter(label => !label.closest('.cluster-label'));
-    const clippedLabels = labels.filter(label => {
-      const viewport = label.closest('foreignObject')?.getBoundingClientRect();
-      if (!viewport) return false;
-      const range = document.createRange();
-      range.selectNodeContents(label);
-      return [...range.getClientRects()].some(
-        rect => rect.right > viewport.right + 0.6 || rect.left < viewport.left - 0.6,
-      );
+  const diagramUX = await page.evaluate(() => {
+    const svg = document.querySelector('pre.diagram-source svg');
+    const groups = [...svg.querySelectorAll('g.subgraph')];
+    const edges = [...svg.querySelectorAll('.edge')];
+    const nodes = [...svg.querySelectorAll('g.node')];
+    const headers = groups.filter(group => {
+      const rects = [...group.querySelectorAll(':scope > rect')];
+      return rects.length === 2 && Number(rects[1].getAttribute('height')) === 28;
+    });
+    const nonOrthogonal = edges.filter(edge => {
+      const points = (edge.getAttribute('points') ?? '').trim().split(/\s+/).map(pair => {
+        const [x, y] = pair.split(',').map(Number);
+        return { x, y };
+      });
+      return points.slice(1).some((point, index) => {
+        const previous = points[index];
+        return Math.abs(point.x - previous.x) > 0.01 && Math.abs(point.y - previous.y) > 0.01;
+      });
+    });
+    const clippedLabels = nodes.filter(node => {
+      const shape = node.querySelector(':scope > rect, :scope > polygon, :scope > circle, :scope > ellipse');
+      const text = node.querySelector(':scope > text');
+      if (!shape || !text || !text.textContent.trim()) return false;
+      const shapeBox = shape.getBBox();
+      const textBox = text.getBBox();
+      return textBox.x < shapeBox.x - 1 || textBox.y < shapeBox.y - 1 ||
+        textBox.x + textBox.width > shapeBox.x + shapeBox.width + 1 ||
+        textBox.y + textBox.height > shapeBox.y + shapeBox.height + 1;
     });
     return {
+      renderer: svg.dataset.renderer,
+      type: svg.dataset.diagramType,
+      groups: groups.length,
       headers: headers.length,
       toolbars: document.querySelectorAll('.diagram-toolbar').length,
-      diagrams: document.querySelectorAll('pre.mermaid').length,
-      curvedEdges: edges.filter(edge => /[CQ]/.test(edge.getAttribute('d') ?? '')).length,
+      diagrams: document.querySelectorAll('pre.diagram-source').length,
+      nonOrthogonalEdges: nonOrthogonal.length,
       clippedLabels: clippedLabels.length,
     };
   });
-  assert.ok(mermaidUX.headers > 0);
-  assert.equal(mermaidUX.toolbars, mermaidUX.diagrams);
-  assert.equal(mermaidUX.curvedEdges, 0);
-  assert.equal(mermaidUX.clippedLabels, 0);
+  assert.equal(diagramUX.renderer, 'antigravity-direct');
+  assert.equal(diagramUX.type, 'flowchart');
+  assert.ok(diagramUX.groups > 0);
+  assert.equal(diagramUX.headers, diagramUX.groups);
+  assert.equal(diagramUX.toolbars, diagramUX.diagrams);
+  assert.equal(diagramUX.nonOrthogonalEdges, 0);
+  assert.equal(diagramUX.clippedLabels, 0);
+
+  await page.evaluate(() => {
+    window.__copiedDiagramSource = '';
+    Object.defineProperty(navigator, 'clipboard', {
+      configurable: true,
+      value: {
+        writeText: async text => { window.__copiedDiagramSource = text; },
+      },
+    });
+  });
+  await page.click('.diagram-copy');
+  await page.waitForFunction(() => document.querySelector('.diagram-copy')?.textContent === '복사됨');
+  const copiedDiagram = await page.evaluate(() => window.__copiedDiagramSource);
+  assert.match(copiedDiagram, /^flowchart LR/);
+  assert.match(copiedDiagram, /subgraph Allowed/);
 
   await page.click('.diagram-expand');
   await page.waitForSelector('dialog.diagram-zoom[open]');
@@ -129,13 +168,14 @@ try {
   const downloading = page.waitForEvent('download', { timeout: 10000 });
   await page.click('.diagram-download');
   const download = await downloading;
-  const downloadPath = path.join(options.outputDirectory, 'mermaid-download.svg');
+  const downloadPath = path.join(options.outputDirectory, 'diagram-download.svg');
   await download.saveAs(downloadPath);
   const downloadedSVG = await fs.readFile(downloadPath, 'utf8');
   assert.match(downloadedSVG, /<svg\b/);
-  assert.match(downloadedSVG, /--diagram-surface/);
-  assert.match(downloadedSVG, /mermaid-group-header/);
-  check('Mermaid UX smoke', mermaidUX);
+  assert.match(downloadedSVG, /data-renderer="antigravity-direct"/);
+  assert.match(downloadedSVG, /--bg:#FFFFFF/);
+  assert.match(downloadedSVG, /class="subgraph"/);
+  check('direct diagram UX smoke', diagramUX);
 
   await go(posts[6]);
   await page.evaluate(() => localStorage.setItem('pref-theme', 'light'));
