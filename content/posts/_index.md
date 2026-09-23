@@ -1,5 +1,5 @@
 ---
 title: "글"
-description: "Google Cloud 인프라와 네트워킹, Vertex AI, Gemini, AI Agent 관련 기록입니다."
+description: "배우고 경험한 것들을 정리하고 공유하는 기록입니다."
 aliases: ["/categories/", "/categories/gcp-deep-dive/"]
 ---

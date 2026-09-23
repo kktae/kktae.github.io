@@ -27,8 +27,8 @@ ignoreFiles = ['(^|/)references(/|$)']
 
 [params]
   defaultTheme = "light"
-  description = "Google Cloud 인프라와 네트워킹, Private Service Access/Connect, Vertex AI, Gemini, AI Agent를 설계·운영하며 얻은 경험과 문제 해결 과정을 기록합니다."
-  seoTitle = "kktae.io | Google Cloud, Networking & AI Engineering Notes"
+  description = "배우고 경험한 것들을 오래 기억하기 위해 정리하고 공유합니다. 일하며 발견한 생각과 문제 해결 과정, 시행착오, 다시 참고하고 싶은 내용과 시간이 지나도 가치가 남는 기록을 차분히 모아둡니다. 필요할 때 다시 꺼내볼 수 있는 개인 기록 공간입니다."
+  seoTitle = "kktae.io | Notes, Ideas & Things Worth Remembering"
   socialImage = "images/social-preview.jpg"
   socialImageAlt = "Wind-swept corgi illustration used as the kktae.io social preview"
   githubRepo = "kktae/kktae.github.io"
